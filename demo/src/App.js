@@ -1,6 +1,6 @@
 import "./styles.css";
-import SketchField from './_third-parts/react-sketch/src/SketchField'
-import Tools from './_third-parts/react-sketch/src/tools'
+import SketchField from './third-parts/react-sketch/src/SketchField'
+import Tools from './third-parts/react-sketch/src/tools'
 import React, { useEffect, useRef, useState } from "react";
 
 export default function App() {
