@@ -2,8 +2,7 @@ import "./styles/styles.css";
 import Canvas from "./components/Canvas";
 import Editor from "./components/Editor/Editor";
 import { useAnnotation } from "./hooks/useAnnotation";
-import { useEffect } from "react";
-
+import { LiveProvider, LivePreview } from "react-live";
 export default function App() {
   const { updateAnnotationHandler, annotation } = useAnnotation();
   return (
