@@ -1,8 +1,7 @@
 import React, { useEffect, useRef, useState, useCallback } from "react";
 import SketchField from "../third-parts/react-sketch/src/SketchField";
 import Tools from "../third-parts/react-sketch/src/tools";
-import { Button } from "baseui/button";
-function Canvas({ updateAnnotationHandler }) {
+function Canvas({ updateAnnotationHandler, contentLoaderState, children }) {
   const [tool, setTool] = useState(Tools.Select);
   const [coordsActiveItem, setCordState] = useState({});
   const numberFixed = (num) => Number(Number(num).toFixed());
@@ -44,9 +43,6 @@ function Canvas({ updateAnnotationHandler }) {
     });
   }, []);
 
-  useEffect(() => {
-    console.log("cordeActiveItem=", coordsActiveItem);
-  }, [coordsActiveItem]);
   useEffect(() => {
     sketchProperty.current._fc.on({
       "after:render": () => {
@@ -153,11 +149,10 @@ function Canvas({ updateAnnotationHandler }) {
       }));
     }
   };
-  //   console.log(sketchProperty.current);
   return (
     <>
-      <div>
-        <div className="app-canvas" key="canvas">
+      <div className="canvas-sketch">
+        <div key="canvas">
           {
             <SketchField
               width={contentLoaderState.width}
@@ -169,6 +164,7 @@ function Canvas({ updateAnnotationHandler }) {
               ref={sketchProperty}
             />
           }
+          {children}
         </div>
         <div className="app-handlers" key="handlers">
           <Button
@@ -213,10 +209,6 @@ function Canvas({ updateAnnotationHandler }) {
           </Button>
         </div>
       </div>
-      <br />
-      <br />
-      <br />
-      <br />
       {hasItemSelected && (
         <div className="app-editor_item-editor">
           <p className="app-config_caption">Size & position of active item</p>

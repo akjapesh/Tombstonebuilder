@@ -1,22 +1,35 @@
 export const annotationsToCode = (annotationArray) => {
+  if (annotationArray.length === 0) {
+    return `
+    const MyLoader = (props) => (
+      <ContentLoader 
+        speed={2}
+        width={400}
+        height={160}
+        viewBox="0 0 400 160"
+        backgroundColor="#f3f3f3"
+        foregroundColor="#ecebeb"
+        {...props}
+      >
+        
+      </ContentLoader>
+    )
+    
+    `;
+  }
   let code = `
-  import React from "react"
-  import ContentLoader from "react-content-loader"
-  
-  const MyLoader = (props) => (
-    <ContentLoader 
-      rtl
-      speed={2}
-      width={398}
-      height={330}
-      viewBox="0 0 398 330"
-      backgroundColor="#f3f3f3"
-      foregroundColor="#ecebeb"
-      {...props}
-    >
+const MyLoader = (props) => {
+  return (
+  <ContentLoader 
+    speed={2}
+    width={300}
+    height={400}
+    viewBox="0 0 300 400"
+ 
+    {...props} 
+  >
   `;
   annotationArray.forEach((a) => {
-    console.log(a);
     const height = a.height;
     const width = a.width;
     if ((height === 0 && width === 0) || a.radius === 1) {
@@ -24,7 +37,6 @@ export const annotationsToCode = (annotationArray) => {
     }
 
     if (a.type === "rect") {
-      console.log("box", a);
       code += `   <rect x="${a.left}" y="${a.top}"    width="${width}" height="${height}"/> \n`;
     } else if (a.type === "circle") {
       code += `    <circle cx="${a.left + a.radius}" cy="${
@@ -35,8 +47,9 @@ export const annotationsToCode = (annotationArray) => {
   code += `
   </ContentLoader>
   )
+}
   
-  export default MyLoader
+render(<MyLoader />)
   `;
   return code.trimRight();
 };
