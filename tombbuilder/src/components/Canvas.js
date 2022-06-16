@@ -24,9 +24,9 @@ function Canvas({ updateAnnotationHandler }) {
   const setCoords = useCallback((target) => {
     const { type, width, height, left, top, radius, rx } = target;
     if (type === "circle") {
-      setCordState({ coordsActiveItem: { radius, left, top, type } });
+      return setCordState({ coordsActiveItem: { radius, left, top, type } });
     }
-    setCordState({
+    return setCordState({
       coordsActiveItem: { width, height, left, top, boxRadius: rx, type },
     });
   }, []);
@@ -42,7 +42,20 @@ function Canvas({ updateAnnotationHandler }) {
       "selection:updated": setCoords,
       "selection:cleared": () => setCordState({ coordsActiveItem: {} }),
     });
-  }, [setCoords, updateAnnotationHandler]);
+  });
+
+  const removeItemFromKeyboard = event => {
+    const hasItemSelected = Object.keys(coordsActiveItem.coordsActiveItem).length > 0
+
+    if (hasItemSelected) {
+      event.preventDefault()
+        if (sketchProperty.current) {
+          sketchProperty.current.removeSelected()
+        }
+
+    }
+  }
+
   const SideMovement = (event) => {
     const hasItemSelected = coordsActiveItem.coordsActiveItem;
     if (hasItemSelected) {
@@ -62,18 +75,26 @@ function Canvas({ updateAnnotationHandler }) {
       else console.log(event);
     }
   };
+  const cloneItem = () => {
+    if (sketchProperty.current) {
+      sketchProperty.current.copy()
+      sketchProperty.current.paste()
+    }
+  }
+
   const handleKeyDown = (event) => {
-    // const DELETE = 8
+    const DELETE = 8;
     const LEFT_SIDE = 37;
     const UPSIDE = 38;
     const RIGHT_SIDE = 39;
     const DOWNSIDE = 40;
+    
     let charCode = String.fromCharCode(event.which).toLowerCase();
     if ((event.metaKey || event.ctrlKey) && charCode === "c") {
-      this.cloneItem();
+      cloneItem();
     }
     const actionsByKeyCode = {
-      // [DELETE]: this.removeItemFromKeyboard,
+      [DELETE]: removeItemFromKeyboard,
       [RIGHT_SIDE]: SideMovement,
       [LEFT_SIDE]: SideMovement,
       [UPSIDE]: SideMovement,
