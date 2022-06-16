@@ -1,7 +1,7 @@
 import React, { useEffect, useRef, useState, useCallback } from "react";
 import SketchField from "../third-parts/react-sketch/src/SketchField";
 import Tools from "../third-parts/react-sketch/src/tools";
-function Canvas({ updateAnnotationHandler }) {
+function Canvas({ updateAnnotationHandler, contentLoaderState }) {
   const [tool, setTool] = useState(Tools.Select);
   const [coordsActiveItem, setCordState] = useState({});
   const numberFixed = (num) => Number(Number(num).toFixed());
@@ -18,6 +18,13 @@ function Canvas({ updateAnnotationHandler }) {
       newTarget.lockRotation = true;
       newTarget.angle = 0;
       newTarget.originY = "top";
+    } else if (
+      newTarget &&
+      newTarget.type === "activeSelection" &&
+      newTarget._objects.some((o) => o.type === "rectangle")
+    ) {
+      newTarget.lockRotation = true;
+      newTarget.angle = 0;
     }
     return newTarget;
   };
@@ -30,6 +37,10 @@ function Canvas({ updateAnnotationHandler }) {
       coordsActiveItem: { width, height, left, top, boxRadius: rx, type },
     });
   }, []);
+
+  useEffect(() => {
+    console.log("cordeActiveItem=", coordsActiveItem);
+  }, [coordsActiveItem]);
   useEffect(() => {
     sketchProperty.current._fc.on({
       "after:render": () => {
@@ -39,22 +50,30 @@ function Canvas({ updateAnnotationHandler }) {
         setCoords(item.selected[0]);
         item.target = canvasAddedProp(item.target);
       },
-      "selection:updated": setCoords,
+      "selection:updated": (item) => {
+        setCoords(item.selected[0]);
+      },
       "selection:cleared": () => setCordState({ coordsActiveItem: {} }),
+      "object:modified": (item) => {
+        setCoords(item.target);
+        console.log("active item=", item);
+      },
+      "object:added": (item) => (item.target = canvasAddedProp(item.target)),
+      "object:moving": (item) => (item.target = canvasAddedProp(item.target)),
     });
-  });
+  }, [setCoords, updateAnnotationHandler, coordsActiveItem]);
 
-  const removeItemFromKeyboard = event => {
-    const hasItemSelected = Object.keys(coordsActiveItem.coordsActiveItem).length > 0
+  const removeItemFromKeyboard = (event) => {
+    const hasItemSelected =
+      Object.keys(coordsActiveItem.coordsActiveItem).length > 0;
 
     if (hasItemSelected) {
-      event.preventDefault()
-        if (sketchProperty.current) {
-          sketchProperty.current.removeSelected()
-        }
-
+      event.preventDefault();
+      if (sketchProperty.current) {
+        sketchProperty.current.removeSelected();
+      }
     }
-  }
+  };
 
   const SideMovement = (event) => {
     const hasItemSelected = coordsActiveItem.coordsActiveItem;
@@ -72,15 +91,14 @@ function Canvas({ updateAnnotationHandler }) {
       else if (event.keyCode === 40)
         //down
         moveItem("top", coordsActiveItem.coordsActiveItem.top + 4);
-      else console.log(event);
     }
   };
   const cloneItem = () => {
     if (sketchProperty.current) {
-      sketchProperty.current.copy()
-      sketchProperty.current.paste()
+      sketchProperty.current.copy();
+      sketchProperty.current.paste();
     }
-  }
+  };
 
   const handleKeyDown = (event) => {
     const DELETE = 8;
@@ -88,7 +106,7 @@ function Canvas({ updateAnnotationHandler }) {
     const UPSIDE = 38;
     const RIGHT_SIDE = 39;
     const DOWNSIDE = 40;
-    
+
     let charCode = String.fromCharCode(event.which).toLowerCase();
     if ((event.metaKey || event.ctrlKey) && charCode === "c") {
       cloneItem();
@@ -129,14 +147,16 @@ function Canvas({ updateAnnotationHandler }) {
       }));
     }
   };
+  //   console.log(sketchProperty.current);
   return (
     <>
       <div>
         <div className="app-canvas" key="canvas">
           {
             <SketchField
-              width={400}
-              height={300}
+              width={contentLoaderState.width}
+              height={contentLoaderState.height}
+              backgroundColor={contentLoaderState.backgroundColor}
               tool={tool}
               lineWidth={3}
               color="black"
@@ -198,7 +218,9 @@ function Canvas({ updateAnnotationHandler }) {
             {Object.keys(coordsActiveItem.coordsActiveItem)
               .filter((e) => e !== "type")
               .map((item) => {
-                const value = coordsActiveItem.coordsActiveItem[item];
+                const value = numberFixed(
+                  coordsActiveItem.coordsActiveItem[item]
+                );
                 const onChange = (e) => {
                   moveItem(item, numberFixed(e.target.value));
                 };
