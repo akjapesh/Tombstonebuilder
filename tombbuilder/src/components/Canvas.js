@@ -2,6 +2,9 @@ import React, { useEffect, useRef, useState, useCallback } from "react";
 import SketchField from "../third-parts/react-sketch/src/SketchField";
 import Tools from "../third-parts/react-sketch/src/tools";
 import classnames from "classnames";
+
+import { Button } from "baseui/button";
+import { Input } from "baseui/input";
 function Canvas(props) {
   const [tool, setTool] = useState(Tools.Select);
   const [coordsActiveItem, setCordState] = useState({});
@@ -19,6 +22,13 @@ function Canvas(props) {
       newTarget.lockRotation = true;
       newTarget.angle = 0;
       newTarget.originY = "top";
+    } else if (
+      newTarget &&
+      newTarget.type === "activeSelection" &&
+      newTarget._objects.some((o) => o.type === "rectangle")
+    ) {
+      newTarget.lockRotation = true;
+      newTarget.angle = 0;
     } else if (
       newTarget &&
       newTarget.type === "activeSelection" &&
@@ -45,6 +55,7 @@ function Canvas(props) {
         props.updateAnnotationHandler([...sketchProperty.current._fc._objects]);
       },
       "selection:created": (item) => {
+        console.log("iteeeem: ", item.selected[0]);
         setCoords(item.selected[0]);
         item.target = canvasAddedProp(item.target);
       },
@@ -59,7 +70,7 @@ function Canvas(props) {
       "object:added": (item) => (item.target = canvasAddedProp(item.target)),
       "object:moving": (item) => (item.target = canvasAddedProp(item.target)),
     });
-  }, [setCoords, props.updateAnnotationHandler, coordsActiveItem]);
+  }, [setCoords, props]);
 
   const removeItemFromKeyboard = useCallback(
     (event) => {
@@ -84,7 +95,10 @@ function Canvas(props) {
         if (event.keyCode === 37 && coordsActiveItem.coordsActiveItem.left >= 4)
           //left
           moveItem("left", coordsActiveItem.coordsActiveItem.left - 4);
-        else if (event.keyCode === 38)
+        else if (
+          event.keyCode === 38 &&
+          coordsActiveItem.coordsActiveItem.top >= 4
+        )
           //up
           moveItem("top", coordsActiveItem.coordsActiveItem.top - 4);
         else if (event.keyCode === 39)
@@ -104,6 +118,24 @@ function Canvas(props) {
     }
   };
 
+  const TabAnotherShape = () => {
+    console.log("current item: ", coordsActiveItem.coordsActiveItem);
+    console.log("all items: ", sketchProperty.current._fc._objects);
+    let cnt = 0;
+    sketchProperty.current._fc._objects.map((value) => {
+      if (cnt) {
+        setCoords(value);
+        cnt = 0;
+      }
+      if (
+        value.left === coordsActiveItem.coordsActiveItem.left &&
+        value.top === coordsActiveItem.coordsActiveItem.top
+      ) {
+        cnt = 1;
+      }
+      return null;
+    });
+  };
   const handleKeyDown = useCallback(
     (event) => {
       const DELETE = 8;
@@ -111,6 +143,7 @@ function Canvas(props) {
       const UPSIDE = 38;
       const RIGHT_SIDE = 39;
       const DOWNSIDE = 40;
+      const TAB_KEY = 9;
 
       let charCode = String.fromCharCode(event.which).toLowerCase();
       if ((event.metaKey || event.ctrlKey) && charCode === "c") {
@@ -122,6 +155,7 @@ function Canvas(props) {
         [LEFT_SIDE]: SideMovement,
         [UPSIDE]: SideMovement,
         [DOWNSIDE]: SideMovement,
+        // [TAB_KEY]: TabAnotherShape,
       };
       /* eslint-disable */
       actionsByKeyCode[event.keyCode]?.(event);
@@ -129,13 +163,16 @@ function Canvas(props) {
     },
     [SideMovement, removeItemFromKeyboard]
   );
+
   useEffect(() => {
     document.addEventListener("keydown", handleKeyDown, false);
     return () => {
       document.removeEventListener("keydown", handleKeyDown, false);
     };
   }, [handleKeyDown]);
-  const hasItemSelected = Object.keys(coordsActiveItem).length > 0;
+  const hasItemSelected =
+    coordsActiveItem.coordsActiveItem &&
+    Object.keys(coordsActiveItem.coordsActiveItem).length > 0;
   const moveItem = (key, value) => {
     const canvas = sketchProperty.current && sketchProperty.current._fc;
     if (canvas && canvas.getActiveObject()) {
@@ -154,6 +191,7 @@ function Canvas(props) {
       }));
     }
   };
+  //   console.log(sketchProperty.current);
   return (
     <>
       <div>
@@ -218,6 +256,13 @@ function Canvas(props) {
         <div className="app-editor_item-editor">
           <p className="app-config_caption">Size & position of active item</p>
           <div className="row">
+            {/* <button disabled={!coordsActiveItem.coordsActiveItem} onClick={removeItemFromKeyboard}>DELETE</button> */}
+            {hasItemSelected && (
+              <span>
+                <Button onClick={removeItemFromKeyboard}>Delete</Button>
+                <Button onClick={cloneItem}>copy</Button>
+              </span>
+            )}
             {Object.keys(coordsActiveItem.coordsActiveItem)
               .filter((e) => e !== "type")
               .map((item) => {
@@ -234,7 +279,7 @@ function Canvas(props) {
                       className="app-config_inline"
                       key={item}
                     >
-                      <input
+                      <Input
                         type="range"
                         min={0}
                         max={100}
@@ -242,7 +287,7 @@ function Canvas(props) {
                         onChange={onChange}
                         style={{ flex: 1 }}
                       />
-                      <input
+                      <Input
                         id="radius"
                         style={{
                           textAlign: "center",
@@ -260,7 +305,7 @@ function Canvas(props) {
                 return (
                   <p className="app-config_inline" key={item}>
                     <label>{item}</label>
-                    <input type="number" onChange={onChange} value={value} />
+                    <Input type="number" onChange={onChange} value={value} />
                   </p>
                 );
               })}
