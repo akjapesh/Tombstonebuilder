@@ -1,6 +1,7 @@
 import React, { useEffect, useRef, useState, useCallback } from "react";
 import SketchField from "../third-parts/react-sketch/src/SketchField";
 import Tools from "../third-parts/react-sketch/src/tools";
+import { Button } from "baseui/button";
 function Canvas({ updateAnnotationHandler }) {
   const [tool, setTool] = useState(Tools.Select);
   const [coordsActiveItem, setCordState] = useState({});
@@ -42,7 +43,7 @@ function Canvas({ updateAnnotationHandler }) {
       "selection:updated": setCoords,
       "selection:cleared": () => setCordState({ coordsActiveItem: {} }),
     });
-  });
+  },[setCoords,updateAnnotationHandler]);
 
   const removeItemFromKeyboard = event => {
     const hasItemSelected = Object.keys(coordsActiveItem.coordsActiveItem).length > 0
@@ -145,46 +146,46 @@ function Canvas({ updateAnnotationHandler }) {
           }
         </div>
         <div className="app-handlers" key="handlers">
-          <button
+          <Button
             className=" app-handlers__tool"
             onClick={() => {
               setTool(Tools.Select);
             }}
           >
             Select
-          </button>
-          <button
+          </Button>
+          <Button
             className="app-handlers__tool"
             onClick={() => {
               setTool(Tools.Rectangle);
             }}
           >
             Rectangle
-          </button>
-          <button
+          </Button>
+          <Button
             className="app-handlers__tool"
             onClick={() => {
               setTool(Tools.Circle);
             }}
           >
             Circle
-          </button>
-          <button
+          </Button>
+          <Button
             className="app-handlers__tool"
             onClick={() => {
               sketchProperty.current.undo();
             }}
           >
             UNDO
-          </button>
-          <button
+          </Button>
+          <Button
             className="app-handlers__tool"
             onClick={() => {
               sketchProperty.current.redo();
             }}
           >
             REDO
-          </button>
+          </Button>
         </div>
       </div>
       <br />
@@ -202,7 +203,7 @@ function Canvas({ updateAnnotationHandler }) {
                 const onChange = (e) => {
                   moveItem(item, numberFixed(e.target.value));
                 };
-                if (item === "boxRadius") {
+                if (item === "boxRaadius") {
                   return (
                     <p
                       style={{ width: "62.5%", display: "flex" }}
