@@ -1,12 +1,12 @@
 import AceEditor from "react-ace";
 import "ace-builds/src-noconflict/mode-javascript";
-import "ace-builds/src-noconflict/theme-solarized_dark";
+import "ace-builds/src-noconflict/theme-monokai";
 import "ace-builds/src-noconflict/ext-language_tools";
 import "ace-builds/src-noconflict/mode-json";
 import { useState, useEffect } from "react";
 import { codeToAnnotations } from "./utils/codeToAnnotations";
 import { formatCode } from "./utils/formatCode";
-import { annotationsToCode } from "./utils/annotationsToCode";
+import { annotationsToCode } from "../../../utils/annotationsToCode";
 function ReactCodeEditor({ annotation }) {
   // console.log(annotation);
   const [code, setCode] = useState("");
@@ -25,9 +25,9 @@ function ReactCodeEditor({ annotation }) {
       <AceEditor
         placeholder="Placeholder Text"
         mode="javascript"
-        theme="solarized_dark"
+        theme="monokai"
         name="blah2"
-        fontSize={13}
+        fontSize={15}
         showPrintMargin={true}
         showGutter={true}
         highlightActiveLine={true}

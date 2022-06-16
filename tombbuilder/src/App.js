@@ -5,9 +5,14 @@ import { useAnnotation } from "./hooks/useAnnotation";
 import { useEffect } from "react";
 import { useContentLoader } from "./hooks/useContentLoader";
 import Config from "./components/Config";
+import { annotationsToCode } from "./utils/annotationsToCode";
+import ContentLoader from "react-content-loader";
+
+import { LiveProvider, LivePreview } from "react-live";
 export default function App() {
   const { updateAnnotationHandler, annotation } = useAnnotation();
   const {updateContentLoader,contentLoaderState}=useContentLoader();
+  const code=annotationsToCode(annotation);
   return (
     <div className="App">
       <div className="container">
@@ -34,7 +39,28 @@ export default function App() {
           </div>
         </div>
         <div>
-          <Canvas updateAnnotationHandler={updateAnnotationHandler} contentLoaderState={contentLoaderState}/>
+        <LiveProvider noInline={true} scope={{ ContentLoader }} code={code}>
+            
+
+              <Canvas
+                
+                updateAnnotationHandler={updateAnnotationHandler}
+                contentLoaderState={contentLoaderState}
+              >
+                <div className="wrapper_div">
+                <LivePreview
+              style={{
+                width: `${contentLoaderState.width}px`,
+                height: `${contentLoaderState.height}px`,
+                
+
+              }}
+            />
+            </div>
+            </Canvas>
+            
+          </LiveProvider>
+          {/* <Canvas updateAnnotationHandler={updateAnnotationHandler} contentLoaderState={contentLoaderState}/> */}
           <Config updateContentLoader={updateContentLoader} contentLoaderState={contentLoaderState}/>
         </div>
       </div>

@@ -1,18 +1,18 @@
 import React from "react";
-import { debounce } from 'throttle-debounce'
 function Config({
   updateContentLoader,contentLoaderState
 }) {
 
-    const handleInput=({target:{value,name}})=>{
-        updateContentLoader(name,Number(value));
+    const handleInput=({target:{value,name,max}})=>{
+        updateContentLoader(name,Number(value<=max?value:max));
     }
     const handleColor=e=>{
-        debounceHandlecolor(e.target.name,e.target.value)
+        // debounceHandlecolor(e.target.name,e.target.value)
+        updateContentLoader(e.target.name,e.target.value);
     }
-    const debounceHandlecolor=debounce(250,(name,value)=>{
-        updateContentLoader(name,value);
-    })
+    // const debounceHandlecolor=debounce(250,(name,value)=>{
+    //     updateContentLoader(name,value);
+    // })
     const resetColors=()=>{
         updateContentLoader("backgroundColor",'#f3f3f3');
         updateContentLoader("foregroundColor",'#ecebeb');
@@ -33,7 +33,7 @@ function Config({
             name="width"
             value={contentLoaderState.width}
             onChange={handleInput}
-            max="1000"
+            max="600"
           />
           <label htmlFor="width">width (in px)</label>
         </p>
@@ -89,6 +89,7 @@ function Config({
           id="speed"
           name="speed"
           value={contentLoaderState.speed}
+          max="20"
           onChange={handleInput}
         />
         <label htmlFor="speed">speed (in s)</label>

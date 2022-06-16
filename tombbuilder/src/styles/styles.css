@@ -242,9 +242,9 @@ body {
 .app-handlers button {
   background: none;
   border: 0;
-  margin: 3em;
+  margin: 0 3em 0  3em;
   cursor: pointer;
-  color: yellow;
+  color: rgb(28, 47, 221);
 
   text-decoration: none;
   padding-bottom: 0.5em;
@@ -580,4 +580,8 @@ input[type="number"] {
 
 .app-header__aside > * {
   margin-left: 1.4em;
+}
+
+.wrapper_div{
+  position:absolute;
 }
