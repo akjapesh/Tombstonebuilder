@@ -7,7 +7,11 @@
     "@testing-library/react": "^13.3.0",
     "@testing-library/user-event": "^13.5.0",
     "ace-builds": "^1.6.0",
+<<<<<<< HEAD
     "baseui": "^11.1.0",
+=======
+    "classnames": "^2.3.1",
+>>>>>>> 1a6d9f9 (livepreview added, handler tools inside canvas, height/width upper limit fixed)
     "fabric": "^5.2.1",
     "prettier": "^2.7.1",
     "react": "^17.0.2",

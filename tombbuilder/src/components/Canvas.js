@@ -1,7 +1,8 @@
 import React, { useEffect, useRef, useState, useCallback } from "react";
 import SketchField from "../third-parts/react-sketch/src/SketchField";
 import Tools from "../third-parts/react-sketch/src/tools";
-function Canvas({ updateAnnotationHandler, contentLoaderState, children }) {
+import classnames from "classnames";
+function Canvas(props) {
   const [tool, setTool] = useState(Tools.Select);
   const [coordsActiveItem, setCordState] = useState({});
   const numberFixed = (num) => Number(Number(num).toFixed());
@@ -46,7 +47,7 @@ function Canvas({ updateAnnotationHandler, contentLoaderState, children }) {
   useEffect(() => {
     sketchProperty.current._fc.on({
       "after:render": () => {
-        updateAnnotationHandler([...sketchProperty.current._fc._objects]);
+        props.updateAnnotationHandler([...sketchProperty.current._fc._objects]);
       },
       "selection:created": (item) => {
         setCoords(item.selected[0]);
@@ -63,7 +64,7 @@ function Canvas({ updateAnnotationHandler, contentLoaderState, children }) {
       "object:added": (item) => (item.target = canvasAddedProp(item.target)),
       "object:moving": (item) => (item.target = canvasAddedProp(item.target)),
     });
-  },[setCoords,updateAnnotationHandler]);
+  },[setCoords,props.updateAnnotationHandler,coordsActiveItem]);
 
   const removeItemFromKeyboard = (event) => {
     const hasItemSelected =
@@ -151,21 +152,20 @@ function Canvas({ updateAnnotationHandler, contentLoaderState, children }) {
   };
   return (
     <>
-      <div className="canvas-sketch">
-        <div key="canvas">
+      <div>
+        <div className="app-canvas" key="canvas">
+        {props.children}
           {
             <SketchField
-              width={contentLoaderState.width}
-              height={contentLoaderState.height}
-              backgroundColor={contentLoaderState.backgroundColor}
+              width={props.contentLoaderState.width}
+              height={props.contentLoaderState.height}
               tool={tool}
-              lineWidth={3}
+              lineWidth={0}
               color="black"
               ref={sketchProperty}
             />
           }
-          {children}
-        </div>
+        
         <div className="app-handlers" key="handlers">
           <Button
             className=" app-handlers__tool"
@@ -208,6 +208,7 @@ function Canvas({ updateAnnotationHandler, contentLoaderState, children }) {
             REDO
           </Button>
         </div>
+      </div>
       </div>
       {hasItemSelected && (
         <div className="app-editor_item-editor">

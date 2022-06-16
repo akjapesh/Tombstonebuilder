@@ -32,9 +32,15 @@ const MyLoader = (props) => {
   annotationArray.forEach((a) => {
     const height = a.height;
     const width = a.width;
+<<<<<<< HEAD
     if ((height === 0 && width === 0) || a.radius === 1) {
       return null;
     }
+=======
+    // if ((height === 0 && width === 0) || a.r === 1) {
+    //   return null;
+    // }
+>>>>>>> 1a6d9f9 (livepreview added, handler tools inside canvas, height/width upper limit fixed)
 
     if (a.type === "rect") {
       code += `   <rect x="${a.left}" y="${a.top}"    width="${width}" height="${height}"/> \n`;
