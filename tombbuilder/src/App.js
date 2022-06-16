@@ -3,9 +3,11 @@ import Canvas from "./components/Canvas";
 import Editor from "./components/Editor/Editor";
 import { useAnnotation } from "./hooks/useAnnotation";
 import { useEffect } from "react";
-
+import { useContentLoader } from "./hooks/useContentLoader";
+import Config from "./components/Config";
 export default function App() {
   const { updateAnnotationHandler, annotation } = useAnnotation();
+  const {updateContentLoader,contentLoaderState}=useContentLoader();
   return (
     <div className="App">
       <div className="container">
@@ -32,7 +34,8 @@ export default function App() {
           </div>
         </div>
         <div>
-          <Canvas updateAnnotationHandler={updateAnnotationHandler} />
+          <Canvas updateAnnotationHandler={updateAnnotationHandler} contentLoaderState={contentLoaderState}/>
+          <Config updateContentLoader={updateContentLoader} contentLoaderState={contentLoaderState}/>
         </div>
       </div>
     </div>
