@@ -23,7 +23,6 @@ export const formatCode = (code) => {
     vueIndentScriptAndStyle: false,
     printWidth: 300,
   });
-  console.log("pop");
-  console.log(newCode);
+
   return newCode;
 };

@@ -179,10 +179,11 @@ body {
   padding: 1.5em;
   border-radius: var(--border-radius);
   border: 1px solid var(--color-silver);
+  height: 600px;
+  width: 600px;
 }
 
 .app-canvas__guideline {
-  position: absolute;
   top: 1.5em;
   left: 1.5em;
   right: 1.5em;
@@ -209,8 +210,6 @@ body {
 
 .react-live-preview {
   transition: all 0.3s ease;
-  position: relative;
-  z-index: 1;
 }
 
 .app-canvas:hover .react-live-preview {
@@ -580,4 +579,43 @@ input[type="number"] {
 
 .app-header__aside > * {
   margin-left: 1.4em;
+}
+.container {
+  position: absolute;
+}
+.app-canvas {
+  position: absolute;
+  z-index: 1;
+}
+.canvas-container {
+  max-height: 400px;
+  max-width: 300px;
+  margin-right: 0px;
+  width: 300px;
+  height: 400px;
+}
+
+.container {
+  position: relative;
+  display: gird;
+}
+
+.box {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 180px;
+  left: 720px;
+}
+.canvas-sketch {
+  max-width: 300px;
+  max-height: 400px;
+  position: absolute;
+}
+.content,
+.canvas-sketch {
+  grid-area: 1/1;
+}
+.config-container {
+  display: block;
 }
