@@ -47,9 +47,7 @@ function Canvas(props) {
   useEffect(() => {
     sketchProperty.current._fc.on({
       "after:render": () => {
-        setTimeout((id) => {
-          updateAnnotationHandler([...sketchProperty.current._fc._objects]);
-        }, 500);
+        props.updateAnnotationHandler([...sketchProperty.current._fc._objects]);
       },
       "selection:created": (item) => {
         setCoords(item.selected[0]);
@@ -66,7 +64,7 @@ function Canvas(props) {
       "object:added": (item) => (item.target = canvasAddedProp(item.target)),
       "object:moving": (item) => (item.target = canvasAddedProp(item.target)),
     });
-  },[setCoords,props.updateAnnotationHandler,coordsActiveItem]);
+  }, [setCoords, props.updateAnnotationHandler, coordsActiveItem]);
 
   const removeItemFromKeyboard = useCallback(
     (event) => {
@@ -165,7 +163,7 @@ function Canvas(props) {
     <>
       <div>
         <div className="app-canvas" key="canvas">
-        {props.children}
+          {props.children}
           {
             <SketchField
               width={props.contentLoaderState.width}
@@ -176,50 +174,50 @@ function Canvas(props) {
               ref={sketchProperty}
             />
           }
-        
-        <div className="app-handlers" key="handlers">
-          <Button
-            className=" app-handlers__tool"
-            onClick={() => {
-              setTool(Tools.Select);
-            }}
-          >
-            Select
-          </Button>
-          <Button
-            className="app-handlers__tool"
-            onClick={() => {
-              setTool(Tools.Rectangle);
-            }}
-          >
-            Rectangle
-          </Button>
-          <Button
-            className="app-handlers__tool"
-            onClick={() => {
-              setTool(Tools.Circle);
-            }}
-          >
-            Circle
-          </Button>
-          <Button
-            className="app-handlers__tool"
-            onClick={() => {
-              sketchProperty.current.undo();
-            }}
-          >
-            UNDO
-          </Button>
-          <Button
-            className="app-handlers__tool"
-            onClick={() => {
-              sketchProperty.current.redo();
-            }}
-          >
-            REDO
-          </Button>
+
+          <div className="app-handlers" key="handlers">
+            <button
+              className=" app-handlers__tool"
+              onClick={() => {
+                setTool(Tools.Select);
+              }}
+            >
+              Select
+            </button>
+            <button
+              className="app-handlers__tool"
+              onClick={() => {
+                setTool(Tools.Rectangle);
+              }}
+            >
+              Rectangle
+            </button>
+            <button
+              className="app-handlers__tool"
+              onClick={() => {
+                setTool(Tools.Circle);
+              }}
+            >
+              Circle
+            </button>
+            <button
+              className="app-handlers__tool"
+              onClick={() => {
+                sketchProperty.current.undo();
+              }}
+            >
+              UNDO
+            </button>
+            <button
+              className="app-handlers__tool"
+              onClick={() => {
+                sketchProperty.current.redo();
+              }}
+            >
+              REDO
+            </button>
+          </div>
         </div>
-      </div>
       </div>
       {hasItemSelected && (
         <div className="app-editor_item-editor">
