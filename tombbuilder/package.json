@@ -7,6 +7,7 @@
     "@testing-library/react": "^13.3.0",
     "@testing-library/user-event": "^13.5.0",
     "ace-builds": "^1.6.0",
+    "baseui": "^11.1.1",
     "classnames": "^2.3.1",
     "fabric": "^5.2.1",
     "prettier": "^2.7.1",

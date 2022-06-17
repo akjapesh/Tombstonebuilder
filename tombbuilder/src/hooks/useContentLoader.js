@@ -1,9 +1,9 @@
 import { useState, useCallback } from "react";
 export const useContentLoader = () => {
   const [contentLoaderState, setContentLoader] = useState({
-    width: 300,
-    height: 400,
-    backgroundColor: "#ffffff",
+    width: 600,
+    height: 500,
+    backgroundColor: "#f3f3f3",
     foregroundColor: "#ecebeb",
     gridVisibility: true,
     speed: 2,

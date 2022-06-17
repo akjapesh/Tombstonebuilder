@@ -14,6 +14,7 @@ export const formatCode = (code) => {
     jsxSingleQuote: false,
     proseWrap: "preserve",
     quoteProps: "as-needed",
+    printWidth: 80,
     requirePragma: false,
     semi: true,
     singleQuote: false,
@@ -21,7 +22,6 @@ export const formatCode = (code) => {
     trailingComma: "es5",
     useTabs: false,
     vueIndentScriptAndStyle: false,
-    printWidth: 300,
   });
 
   return newCode;

@@ -3,7 +3,6 @@ const createNode = (html) =>
 export function codeToAnnotations(code) {
   if (!code) return [];
   const codeArray = code.split("\n");
-
   const annotationArray = codeArray.map((element) => {
     const annotationObject = {};
     const item = createNode(element);
