@@ -128,11 +128,15 @@ function Canvas({ updateAnnotationHandler,contentLoaderState }) {
     const RIGHT_SIDE = 39;
     const DOWNSIDE = 40;
     const TAB_KEY = 9;
+    const COPY = 67; 
+    const UNDO = 90; 
     
-    let charCode = String.fromCharCode(event.which).toLowerCase();
-    if ((event.metaKey || event.ctrlKey) && charCode === "c") {
-      cloneItem();
+    if((event.metaKey || event.ctrlKey) && (event.shiftKey) && event.key ==="z" )
+    {
+      Redo();
     }
+    else if((event.metaKey || event.ctrlKey) && (!event.shiftKey) )
+    {
     const actionsByKeyCode = {
       [DELETE]: removeItemFromKeyboard,
       [RIGHT_SIDE]: SideMovement,
@@ -140,11 +144,21 @@ function Canvas({ updateAnnotationHandler,contentLoaderState }) {
       [UPSIDE]: SideMovement,
       [DOWNSIDE] : SideMovement,
       [TAB_KEY]: TabAnotherShape,
+      [COPY] : cloneItem,
+      [UNDO] : Undo,
     };
-    /* eslint-disable */
     actionsByKeyCode[event.keyCode]?.(event);
-    /* eslint-enable */
+  }
   };
+
+  const Undo = () =>{
+    sketchProperty.current.undo();
+  }
+
+  const Redo = () =>{
+    sketchProperty.current.redo();
+  }
+  
   useEffect(() => {
     document.addEventListener("keydown", handleKeyDown, false);
     return () => {
@@ -214,17 +228,13 @@ function Canvas({ updateAnnotationHandler,contentLoaderState }) {
           </Button>
           <Button
             className="app-handlers__tool"
-            onClick={() => {
-              sketchProperty.current.undo();
-            }}
+            onClick={Undo}
           >
             UNDO
           </Button>
           <Button
             className="app-handlers__tool"
-            onClick={() => {
-              sketchProperty.current.redo();
-            }}
+            onClick={Redo}
           >
             REDO
           </Button>
@@ -260,36 +270,36 @@ function Canvas({ updateAnnotationHandler,contentLoaderState }) {
                 const onChange = (e) => {
                   moveItem(item, numberFixed(e.target.value));
                 };
-                if (item === "boxRadius") {
-                  return (
-                    <p
-                      style={{ width: "62.5%", display: "flex" }}
-                      className="app-config_inline"
-                      key={item}
-                    >
-                      <Input
-                        type="range"
-                        min={0}
-                        max={100}
-                        value={value}
-                        onChange={onChange}
-                        style={{ flex: 1 }}
-                      />
-                      <Input
-                        id="radius"
-                        style={{
-                          textAlign: "center",
-                          flex: 1,
-                          marginRight: "34px",
-                        }}
-                        type="number"
-                        onChange={onChange}
-                        value={value}
-                      />
-                      <label htmlFor="radius">radius</label>
-                    </p>
-                  );
-                }
+                // if (item === "boxRadius") {
+                //   return (
+                //     <p
+                //       style={{ width: "62.5%", display: "flex" }}
+                //       className="app-config_inline"
+                //       key={item}
+                //     >
+                //       <Input
+                //         type="range"
+                //         min={0}
+                //         max={100}
+                //         value={value}
+                //         onChange={onChange}
+                //         style={{ flex: 1 }}
+                //       />
+                //       <Input
+                //         id="radius"
+                //         style={{
+                //           textAlign: "center",
+                //           flex: 1,
+                //           marginRight: "34px",
+                //         }}
+                //         type="number"
+                //         onChange={onChange}
+                //         value={value}
+                //       />
+                //       <label htmlFor="radius">radius</label>
+                //     </p>
+                //   );
+                // }
                 return (
                   <p className="app-config_inline" key={item}>
                     <label>{item}</label>
