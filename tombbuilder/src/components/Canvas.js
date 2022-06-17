@@ -18,36 +18,32 @@ function Canvas(props) {
         (newTarget.type === "activeSelection" &&
           newTarget._objects.some((o) => o.type === "circle")));
     if (hasCircle) {
-      newTarget.lockUniScaling = true;
       newTarget.lockRotation = true;
       newTarget.angle = 0;
       newTarget.originY = "top";
     } else if (
       newTarget &&
-      newTarget.type === "activeSelection" &&
-      newTarget._objects.some((o) => o.type === "rectangle")
-    ) {
-      newTarget.lockRotation = true;
-      newTarget.angle = 0;
-    } else if (
-      newTarget &&
-      newTarget.type === "activeSelection" &&
-      newTarget._objects.some((o) => o.type === "rectangle")
+      (newTarget.type === "rect" ||
+        (newTarget.type === "activeSelection" &&
+          newTarget._objects.some((o) => o.type === "rect")))
     ) {
       newTarget.lockRotation = true;
       newTarget.angle = 0;
     }
     return newTarget;
   };
-  const setCoords = useCallback((target) => {
-    const { type, width, height, left, top, radius, rx } = target;
-    if (type === "circle") {
-      return setCordState({ coordsActiveItem: { radius, left, top, type } });
-    }
-    return setCordState({
-      coordsActiveItem: { width, height, left, top, boxRadius: rx, type },
-    });
-  }, []);
+  const setCoords = useCallback(
+    (target) => {
+      const { type, width, height, left, top, radius, rx } = target;
+      if (type === "circle") {
+        return setCordState({ coordsActiveItem: { radius, left, top, type } });
+      }
+      return setCordState({
+        coordsActiveItem: { width, height, left, top, boxRadius: rx, type },
+      });
+    },
+    [setCordState]
+  );
 
   useEffect(() => {
     sketchProperty.current._fc.on({
@@ -118,13 +114,14 @@ function Canvas(props) {
     }
   };
 
-  const TabAnotherShape = () => {
+  const TabAnotherShape = useCallback(() => {
     console.log("current item: ", coordsActiveItem.coordsActiveItem);
     console.log("all items: ", sketchProperty.current._fc._objects);
     let cnt = 0;
     sketchProperty.current._fc._objects.map((value) => {
       if (cnt) {
         setCoords(value);
+        coordsActiveItem.focus();
         cnt = 0;
       }
       if (
@@ -135,7 +132,7 @@ function Canvas(props) {
       }
       return null;
     });
-  };
+  }, [coordsActiveItem, setCoords]);
   const handleKeyDown = useCallback(
     (event) => {
       const DELETE = 8;
@@ -155,15 +152,14 @@ function Canvas(props) {
         [LEFT_SIDE]: SideMovement,
         [UPSIDE]: SideMovement,
         [DOWNSIDE]: SideMovement,
-        // [TAB_KEY]: TabAnotherShape,
+        [TAB_KEY]: TabAnotherShape,
       };
       /* eslint-disable */
       actionsByKeyCode[event.keyCode]?.(event);
       /* eslint-enable */
     },
-    [SideMovement, removeItemFromKeyboard]
+    [SideMovement, TabAnotherShape, removeItemFromKeyboard]
   );
-
   useEffect(() => {
     document.addEventListener("keydown", handleKeyDown, false);
     return () => {
