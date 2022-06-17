@@ -21,7 +21,7 @@ export default function App() {
         <div className="app-header">
           <div className="app-header__logo">
             <h1>
-              <strong>TombStone builder</strong>
+              <strong>Tombstone builder</strong>
             </h1>
             <h2>Build your custom content loader</h2>
           </div>

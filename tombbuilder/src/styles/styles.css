@@ -241,11 +241,7 @@ body {
 .app-handlers button {
   background: none;
   border: 0;
-<<<<<<< HEAD
-  margin: 0 3em 0  3em;
-=======
   margin: 0 3em 0 3em;
->>>>>>> 10be296 (refactor(src):resolving conflicts)
   cursor: pointer;
   color: rgb(28, 47, 221);
 
@@ -584,31 +580,7 @@ input[type="number"] {
 .app-header__aside > * {
   margin-left: 1.4em;
 }
-<<<<<<< HEAD
-<<<<<<< HEAD
-.container {
-  position: absolute;
-}
-.app-canvas {
-  position: absolute;
-  z-index: 1;
-}
-.canvas-container {
-  max-height: 400px;
-  max-width: 300px;
-  margin-right: 0px;
-  width: 300px;
-  height: 400px;
-}
-=======
->>>>>>> 10be296 (refactor(src):resolving conflicts)
 
 .wrapper_div {
   position: absolute;
 }
-=======
-
-.wrapper_div{
-  position:absolute;
-}
->>>>>>> 1a6d9f9 (livepreview added, handler tools inside canvas, height/width upper limit fixed)

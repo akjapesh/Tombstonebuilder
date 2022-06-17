@@ -15,6 +15,7 @@ export const formatCode = (code) => {
     printWidth: 80,
     proseWrap: "preserve",
     quoteProps: "as-needed",
+    printWidth: 80,
     requirePragma: false,
     semi: true,
     singleQuote: false,

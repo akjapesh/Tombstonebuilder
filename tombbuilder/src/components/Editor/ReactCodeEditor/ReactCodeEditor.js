@@ -22,7 +22,10 @@ function ReactCodeEditor({ annotation, contentLoaderState }) {
         annotationsToCode(annotation, contentLoaderState)
       );
       setCode(newCode);
+<<<<<<< HEAD
       console.log(newCode);
+=======
+>>>>>>> d5c9b76 (conflicts merged with branch sanyam)
     },
     [annotation, formatCode],
     200

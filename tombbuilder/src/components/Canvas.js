@@ -23,27 +23,6 @@ function Canvas({ children, updateAnnotationHandler, contentLoaderState }) {
       newTarget.originY = "top";
     } else if (
       newTarget &&
-      newTarget.type === "activeSelection" &&
-      newTarget._objects.some((o) => o.type === "rectangle")
-    ) {
-      newTarget.lockRotation = true;
-      newTarget.angle = 0;
-    } else if (
-      newTarget &&
-      newTarget.type === "activeSelection" &&
-      newTarget._objects.some((o) => o.type === "rectangle")
-    ) {
-      newTarget.lockRotation = true;
-      newTarget.angle = 0;
-    } else if (
-      newTarget &&
-      newTarget.type === "activeSelection" &&
-      newTarget._objects.some((o) => o.type === "rectangle")
-    ) {
-      newTarget.lockRotation = true;
-      newTarget.angle = 0;
-    } else if (
-      newTarget &&
       (newTarget.type === "rect" ||
         (newTarget.type === "activeSelection" &&
           newTarget._objects.some((o) => o.type === "rect")))
@@ -102,24 +81,30 @@ function Canvas({ children, updateAnnotationHandler, contentLoaderState }) {
     [coordsActiveItem]
   );
 
-  const SideMovement = (event) => {
-    const hasItemSelected = coordsActiveItem.coordsActiveItem;
-    if (hasItemSelected) {
-      event.preventDefault();
-      if (event.keyCode === 37 && coordsActiveItem.coordsActiveItem.left >= 4)
-        //left
-        moveItem("left", coordsActiveItem.coordsActiveItem.left - 4);
-      else if (event.keyCode === 38)
-        //up
-        moveItem("top", coordsActiveItem.coordsActiveItem.top - 4);
-      else if (event.keyCode === 39)
-        //right
-        moveItem("left", coordsActiveItem.coordsActiveItem.left + 4);
-      else if (event.keyCode === 40)
-        //down
-        moveItem("top", coordsActiveItem.coordsActiveItem.top + 4);
-    }
-  };
+  const SideMovement = useCallback(
+    (event) => {
+      const hasItemSelected = coordsActiveItem.coordsActiveItem;
+      if (hasItemSelected) {
+        event.preventDefault();
+        if (event.keyCode === 37 && coordsActiveItem.coordsActiveItem.left >= 4)
+          //left
+          moveItem("left", coordsActiveItem.coordsActiveItem.left - 4);
+        else if (
+          event.keyCode === 38 &&
+          coordsActiveItem.coordsActiveItem.top >= 4
+        )
+          //up
+          moveItem("top", coordsActiveItem.coordsActiveItem.top - 4);
+        else if (event.keyCode === 39)
+          //right
+          moveItem("left", coordsActiveItem.coordsActiveItem.left + 4);
+        else if (event.keyCode === 40)
+          //down
+          moveItem("top", coordsActiveItem.coordsActiveItem.top + 4);
+      }
+    },
+    [coordsActiveItem]
+  );
   const cloneItem = () => {
     if (sketchProperty.current) {
       sketchProperty.current.copy();
@@ -192,7 +177,7 @@ function Canvas({ children, updateAnnotationHandler, contentLoaderState }) {
     return () => {
       document.removeEventListener("keydown", handleKeyDown, false);
     };
-  });
+  }, [handleKeyDown]);
   const hasItemSelected =
     coordsActiveItem.coordsActiveItem &&
     Object.keys(coordsActiveItem.coordsActiveItem).length > 0;
