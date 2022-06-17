@@ -1,141 +1,125 @@
 import React, { useEffect, useRef, useState, useCallback } from "react";
-import SketchField from "../third-parts/react-sketch/src/SketchField";
-import Tools from "../third-parts/react-sketch/src/tools";
 import classnames from "classnames";
-
 import { Button } from "baseui/button";
 import { Input } from "baseui/input";
+import SketchField from "../third-parts/react-sketch/src/SketchField";
+import Tools from "../third-parts/react-sketch/src/tools";
+
 function Canvas({ children, updateAnnotationHandler, contentLoaderState }) {
   const [tool, setTool] = useState(Tools.Select);
-  const [coordsActiveItem, setCordState] = useState({});
+  const DEFAULT_COORDS = {};
+  const [activeItemCoords, setActiveItemCoords] = useState(DEFAULT_COORDS);
+  const sketchRef = useRef(null);
+
+
   const numberFixed = (num) => Number(Number(num).toFixed());
-  const sketchProperty = useRef(null);
-  const canvasAddedProp = useCallback((target) => {
+
+  const handleAddItemInCanvas = useCallback((target) => {
     const newTarget = target;
-    const hasCircle =
-      newTarget &&
-      (newTarget.type === "circle" ||
-        (newTarget.type === "activeSelection" &&
-          newTarget._objects.some((o) => o.type === "circle")));
-    if (hasCircle) {
+    const hasCircle = newTarget && (newTarget.type === "circle" || (newTarget.type === "activeSelection" && newTarget._objects.some((o) => o.type === "circle")));
+    const hasRect = newTarget && (newTarget.type === "rect" || (newTarget.type === "activeSelection" && newTarget._objects.some((o) => o.type === "rect")));
+    if (hasCircle || hasRect) {
       newTarget.lockRotation = true;
       newTarget.angle = 0;
       newTarget.originY = "top";
-    } else if (
-      newTarget &&
-      (newTarget.type === "rect" ||
-        (newTarget.type === "activeSelection" &&
-          newTarget._objects.some((o) => o.type === "rect")))
-    ) {
-      newTarget.lockRotation = true;
-      newTarget.angle = 0;
-    }
-    else if(newTarget&&(newTarget.type === "rect" || (newTarget.type === "activeSelection" &&
-    newTarget._objects.some((o) => o.type === "rect"))))
-    {
-        newTarget.lockRotation = true;
-        newTarget.angle=0;
-    }
+    } 
     return newTarget;
   }, []);
+
   const setCoords = useCallback(
     (target) => {
       const { type, width, height, left, top, radius, rx } = target;
       if (type === "circle") {
-        return setCordState({ coordsActiveItem: { radius, left, top, type } });
+        return setActiveItemCoords({ activeItemCoords: { radius, left, top, type } });
       }
-      return setCordState({
-        coordsActiveItem: { width, height, left, top, boxRadius: rx, type },
+      return setActiveItemCoords({
+        activeItemCoords: { width, height, left, top, boxRadius: rx, type },
       });
     },
-    [setCordState]
+    [setActiveItemCoords]
   );
 
   useEffect(() => {
-    sketchProperty.current._fc.on({
+    sketchRef.current._fc.on({
       "after:render": () => {
-        updateAnnotationHandler([...sketchProperty.current._fc._objects]);
+        updateAnnotationHandler([...sketchRef.current._fc._objects]);
       },
       "selection:created": (item) => {
         console.log("iteeeem: ",item.selected[0]);
         setCoords(item.selected[0]);
-        item.target = canvasAddedProp(item.target);
+        item.target = handleAddItemInCanvas(item.target);
       },
       "selection:updated": (item) => {
         setCoords(item.selected[0]);
       },
-      "selection:cleared": () => setCordState({ coordsActiveItem: {} }),
+      "selection:cleared": () => setActiveItemCoords({ activeItemCoords: {} }),
       "object:modified": (item) => {
         setCoords(item.target);
       },
-      "object:added": (item) => (item.target = canvasAddedProp(item.target)),
-      "object:moving": (item) => (item.target = canvasAddedProp(item.target)),
+      "object:added": (item) => (item.target = handleAddItemInCanvas(item.target)),
+      "object:moving": (item) => (item.target = handleAddItemInCanvas(item.target)),
     });
   }, []);
 
   const removeItemFromKeyboard = useCallback(
     (event) => {
-      const hasItemSelected =
-        Object.keys(coordsActiveItem.coordsActiveItem).length > 0;
+      const isItemSelected =
+        Object.keys(activeItemCoords.activeItemCoords).length > 0;
 
-      if (hasItemSelected) {
+      if (isItemSelected) {
         event.preventDefault();
-        if (sketchProperty.current) {
-          sketchProperty.current.removeSelected();
+        if (sketchRef.current) {
+          sketchRef.current.removeSelected();
         }
       }
     },
-    [coordsActiveItem]
+    [activeItemCoords]
   );
 
-  const SideMovement = useCallback(
+  const handleArrowKeysNavigation = useCallback(
     (event) => {
-      const hasItemSelected = coordsActiveItem.coordsActiveItem;
-      if (hasItemSelected) {
+      const isItemSelected = activeItemCoords.activeItemCoords;
+      const shiftingByOffset = 4;
+      const rightSideBoundary = contentLoaderState.width - activeItemCoords.activeItemCoords.width;
+      const bottoomSideBoundary = contentLoaderState.height - activeItemCoords.activeItemCoords.height;
+      if (isItemSelected) {
         event.preventDefault();
-        if (event.keyCode === 37 && coordsActiveItem.coordsActiveItem.left >= 4)
-          //left
-          moveItem("left", coordsActiveItem.coordsActiveItem.left - 4);
-        else if (
-          event.keyCode === 38 &&
-          coordsActiveItem.coordsActiveItem.top >= 4
-        )
-          //up
-          moveItem("top", coordsActiveItem.coordsActiveItem.top - 4);
+        if (event.keyCode === 37)
+          moveItem("left", Math.max(0,activeItemCoords.activeItemCoords.left - shiftingByOffset));
+        else if (event.keyCode === 38)
+          moveItem("top", Math.max(0,activeItemCoords.activeItemCoords.top - shiftingByOffset));
         else if (event.keyCode === 39)
-          //right
-          moveItem("left", coordsActiveItem.coordsActiveItem.left + 4);
+          moveItem("left", Math.min(rightSideBoundary,activeItemCoords.activeItemCoords.left + shiftingByOffset));
         else if (event.keyCode === 40)
-          //down
-          moveItem("top", coordsActiveItem.coordsActiveItem.top + 4);
+          moveItem("top", Math.min(bottoomSideBoundary,activeItemCoords.activeItemCoords.top + shiftingByOffset));
       }
     },
-    [coordsActiveItem]
+    [activeItemCoords.activeItemCoords, contentLoaderState.height, contentLoaderState.width]
   );
+
   const cloneItem = () => {
-    if (sketchProperty.current) {
-      sketchProperty.current.copy();
-      sketchProperty.current.paste();
+    if (sketchRef.current) {
+      sketchRef.current.copy();
+      sketchRef.current.paste();
     }
   };
 
-  const TabAnotherShape = useCallback(() => {
+  const handleTabKeyPress = useCallback(() => {
     let cnt = 0;
-    sketchProperty.current._fc._objects.map((value) => {
+    sketchRef.current._fc._objects.map((value) => {
       if (cnt) {
         setCoords(value);
-        coordsActiveItem.focus();
         cnt = 0;
       }
       if (
-        value.left === coordsActiveItem.coordsActiveItem.left &&
-        value.top === coordsActiveItem.coordsActiveItem.top
+        value.left === activeItemCoords.activeItemCoords.left &&
+        value.top === activeItemCoords.activeItemCoords.top
       ) {
         cnt = 1;
       }
       return null;
     });
-  }, [coordsActiveItem, setCoords]);
+  }, [activeItemCoords, setCoords]);
 
   const handleKeyDown = useCallback(
     (event) => {
@@ -148,35 +132,32 @@ function Canvas({ children, updateAnnotationHandler, contentLoaderState }) {
       const COPY = 67;
       const UNDO = 90;
 
-      if (
-        (event.metaKey || event.ctrlKey) &&
-        event.shiftKey &&
-        event.key === "z"
-      ) {
-        Redo();
-      } else if ((event.metaKey || event.ctrlKey) && !event.shiftKey) {
+      if ((event.metaKey || event.ctrlKey) && event.shiftKey && event.key === "z") {
+        handleRedo();
+      }
+      else if ((event.metaKey || event.ctrlKey) && !event.shiftKey) {
         const actionsByKeyCode = {
           [DELETE]: removeItemFromKeyboard,
-          [RIGHT_SIDE]: SideMovement,
-          [LEFT_SIDE]: SideMovement,
-          [UPSIDE]: SideMovement,
-          [DOWNSIDE]: SideMovement,
-          [TAB_KEY]: TabAnotherShape,
+          [RIGHT_SIDE]: handleArrowKeysNavigation,
+          [LEFT_SIDE]: handleArrowKeysNavigation,
+          [UPSIDE]: handleArrowKeysNavigation,
+          [DOWNSIDE]: handleArrowKeysNavigation,
+          [TAB_KEY]: handleTabKeyPress,
           [COPY]: cloneItem,
-          [UNDO]: Undo,
+          [UNDO]: handleUndo,
         };
         actionsByKeyCode[event.keyCode]?.(event);
       }
     },
-    [SideMovement, TabAnotherShape, removeItemFromKeyboard]
+    [handleArrowKeysNavigation, handleTabKeyPress, removeItemFromKeyboard]
   );
 
-  const Undo = () => {
-    sketchProperty.current.undo();
+  const handleUndo = () => {
+    sketchRef.current.undo();
   };
 
-  const Redo = () => {
-    sketchProperty.current.redo();
+  const handleRedo = () => {
+    sketchRef.current.redo();
   };
 
   useEffect(() => {
@@ -185,11 +166,11 @@ function Canvas({ children, updateAnnotationHandler, contentLoaderState }) {
       document.removeEventListener("keydown", handleKeyDown, false);
     };
   }, [handleKeyDown]);
-  const hasItemSelected =
-    coordsActiveItem.coordsActiveItem &&
-    Object.keys(coordsActiveItem.coordsActiveItem).length > 0;
+  
+  const isItemSelected = activeItemCoords.activeItemCoords && Object.keys(activeItemCoords.activeItemCoords).length > 0;
+
   const moveItem = (key, value) => {
-    const canvas = sketchProperty.current && sketchProperty.current._fc;
+    const canvas = sketchRef.current && sketchRef.current._fc;
     if (canvas && canvas.getActiveObject()) {
       const selection = canvas.getActiveObject();
       if (key === "boxRadius") {
@@ -200,13 +181,13 @@ function Canvas({ children, updateAnnotationHandler, contentLoaderState }) {
       }
       selection.setCoords();
       canvas.requestRenderAll();
-      setCordState((prevState) => ({
+      setActiveItemCoords((prevState) => ({
         ...prevState,
-        coordsActiveItem: { ...prevState.coordsActiveItem, [key]: value },
+        activeItemCoords: { ...prevState.activeItemCoords, [key]: value },
       }));
     }
   };
-  //
+  
   return (
     <>
       <div>
@@ -219,7 +200,7 @@ function Canvas({ children, updateAnnotationHandler, contentLoaderState }) {
               tool={tool}
               lineWidth={0}
               color="black"
-              ref={sketchProperty}
+              ref={sketchRef}
             />
           }
 
@@ -254,31 +235,31 @@ function Canvas({ children, updateAnnotationHandler, contentLoaderState }) {
             >
               Circle
             </Button>
-            <Button className="app-handlers__tool" onClick={Undo}>
+            <Button className="app-handlers__tool" onClick={handleUndo}>
               UNDO
             </Button>
-            <Button className="app-handlers__tool" onClick={Redo}>
+            <Button className="app-handlers__tool" onClick={handleRedo}>
               REDO
             </Button>
           </div>
         </div>
       </div>
-      {hasItemSelected && (
+      {isItemSelected && (
         <div className="app-editor_item-editor">
           <p className="app-config_caption">Size & position of active item</p>
           <div className="row">
-            {/* <button disabled={!coordsActiveItem.coordsActiveItem} onClick={removeItemFromKeyboard}>DELETE</button> */}
-            {hasItemSelected && (
+            {/* <button disabled={!activeItemCoords.activeItemCoords} onClick={removeItemFromKeyboard}>DELETE</button> */}
+            {isItemSelected && (
               <span>
                 <Button onClick={removeItemFromKeyboard}>Delete</Button>
                 <Button onClick={cloneItem}>copy</Button>
               </span>
             )}
-            {Object.keys(coordsActiveItem.coordsActiveItem)
+            {Object.keys(activeItemCoords.activeItemCoords)
               .filter((e) => e !== "type")
               .map((item) => {
                 const value = numberFixed(
-                  coordsActiveItem.coordsActiveItem[item]
+                  activeItemCoords.activeItemCoords[item]
                 );
                 const onChange = (e) => {
                   moveItem(item, numberFixed(e.target.value));
