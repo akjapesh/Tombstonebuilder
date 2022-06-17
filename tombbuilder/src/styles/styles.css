@@ -179,10 +179,11 @@ body {
   padding: 1.5em;
   border-radius: var(--border-radius);
   border: 1px solid var(--color-silver);
+  height: 600px;
+  width: 600px;
 }
 
 .app-canvas__guideline {
-  position: absolute;
   top: 1.5em;
   left: 1.5em;
   right: 1.5em;
@@ -209,8 +210,6 @@ body {
 
 .react-live-preview {
   transition: all 0.3s ease;
-  position: relative;
-  z-index: 1;
 }
 
 .app-canvas:hover .react-live-preview {
@@ -242,9 +241,9 @@ body {
 .app-handlers button {
   background: none;
   border: 0;
-  margin: 3em;
+  margin: 0 3em 0 3em;
   cursor: pointer;
-  color: yellow;
+  color: rgb(28, 47, 221);
 
   text-decoration: none;
   padding-bottom: 0.5em;
@@ -580,4 +579,8 @@ input[type="number"] {
 
 .app-header__aside > * {
   margin-left: 1.4em;
+}
+
+.wrapper_div {
+  position: absolute;
 }

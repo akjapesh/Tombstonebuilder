@@ -1,9 +1,12 @@
 import React from "react";
 import ReactCodeEditor from "./ReactCodeEditor/ReactCodeEditor";
-function Editor({ annotation }) {
+function Editor({ annotation, contentLoaderState }) {
   return (
     <div>
-      <ReactCodeEditor annotation={annotation} />
+      <ReactCodeEditor
+        annotation={annotation}
+        contentLoaderState={contentLoaderState}
+      />
     </div>
   );
 }
