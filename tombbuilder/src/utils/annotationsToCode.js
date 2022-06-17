@@ -1,14 +1,15 @@
-export const annotationsToCode = (annotationArray) => {
+export const annotationsToCode = (annotationArray, contentLoaderState) => {
+  const numberFixed = (num) => Number(Number(num).toFixed());
   if (annotationArray.length === 0) {
     return `
     const MyLoader = (props) => (
       <ContentLoader 
-        speed={2}
-        width={400}
-        height={160}
-        viewBox="0 0 400 160"
-        backgroundColor="#f3f3f3"
-        foregroundColor="#ecebeb"
+        speed={${contentLoaderState.speed}}
+        width={${contentLoaderState.width}}
+        height={${contentLoaderState.height}}
+        viewBox="0 0 ${contentLoaderState.width} ${contentLoaderState.height}"
+        backgroundColor="${contentLoaderState.backgroundColor}"
+        foregroundColor="${contentLoaderState.foregroundColor}"
         {...props}
       >
         
@@ -21,39 +22,32 @@ export const annotationsToCode = (annotationArray) => {
 const MyLoader = (props) => {
   return (
   <ContentLoader 
-    speed={2}
-    width={300}
-    height={400}
-    viewBox="0 0 300 400"
- 
+    speed={${contentLoaderState.speed}}
+    width={${contentLoaderState.width}}
+    height={${contentLoaderState.height}}
+    viewBox="0 0 ${contentLoaderState.width} ${contentLoaderState.height}"
+    backgroundColor="${contentLoaderState.backgroundColor}"
+    foregroundColor="${contentLoaderState.foregroundColor}"
     {...props} 
   >
   `;
   annotationArray.forEach((a) => {
-    const height = a.height;
-    const width = a.width;
-<<<<<<< HEAD
-<<<<<<< HEAD
-    if ((height === 0 && width === 0) || a.radius === 1) {
-      return null;
-    }
-=======
+    const height = numberFixed(a.height);
+    const width = numberFixed(a.width);
     // if ((height === 0 && width === 0) || a.r === 1) {
     //   return null;
     // }
->>>>>>> 1a6d9f9 (livepreview added, handler tools inside canvas, height/width upper limit fixed)
-=======
-    // if ((height === 0 && width === 0) || a.r === 1) {
-    //   return null;
-    // }
->>>>>>> 10be296 (refactor(src):resolving conflicts)
 
     if (a.type === "rect") {
-      code += `   <rect x="${a.left}" y="${a.top}"    width="${width}" height="${height}"/> \n`;
+      code += `   <rect x="${numberFixed(a.left)}" y="${numberFixed(
+        a.top
+      )}"    width="${width}" height="${height}"/> \n`;
     } else if (a.type === "circle") {
-      code += `    <circle cx="${a.left + a.radius}" cy="${
-        a.top + a.radius
-      }" r="${a.radius}" /> \n`;
+      code += `    <circle cx="${
+        numberFixed(a.left) + numberFixed(a.radius)
+      }" cy="${numberFixed(a.top) + numberFixed(a.radius)}" r="${numberFixed(
+        a.radius
+      )}" /> \n`;
     }
   });
   code += `

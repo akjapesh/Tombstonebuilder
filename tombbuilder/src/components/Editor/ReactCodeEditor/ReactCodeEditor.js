@@ -8,7 +8,7 @@ import { codeToAnnotations } from "./utils/codeToAnnotations";
 import { formatCode } from "./utils/formatCode";
 import { annotationsToCode } from "../../../utils/annotationsToCode";
 import { useDebouncedEffect } from "../../../hooks/useDebouncedEffect";
-function ReactCodeEditor({ annotation }) {
+function ReactCodeEditor({ annotation, contentLoaderState }) {
   const [code, setCode] = useState("");
   const onChangeHandler = (newValue) => {
     const formattedValue = formatCode(newValue);
@@ -18,7 +18,9 @@ function ReactCodeEditor({ annotation }) {
   };
   useDebouncedEffect(
     () => {
-      const newCode = formatCode(annotationsToCode(annotation));
+      const newCode = formatCode(
+        annotationsToCode(annotation, contentLoaderState)
+      );
       setCode(newCode);
     },
     [annotation, formatCode],
