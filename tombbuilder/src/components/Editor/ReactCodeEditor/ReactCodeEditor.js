@@ -1,13 +1,14 @@
+import { useState } from "react";
 import AceEditor from "react-ace";
 import "ace-builds/src-noconflict/mode-javascript";
 import "ace-builds/src-noconflict/theme-monokai";
 import "ace-builds/src-noconflict/ext-language_tools";
-import "ace-builds/src-noconflict/mode-json";
-import { useState, useEffect } from "react";
+import "ace-builds/src-noconflict/mode-json"; 
 import { codeToAnnotations } from "./utils/codeToAnnotations";
 import { formatCode } from "./utils/formatCode";
 import { annotationsToCode } from "../../../utils/annotationsToCode";
 import { useDebouncedEffect } from "../../../hooks/useDebouncedEffect";
+
 function ReactCodeEditor({ annotation, contentLoaderState }) {
   const [code, setCode] = useState("");
   const onChangeHandler = (newValue) => {
@@ -27,6 +28,7 @@ function ReactCodeEditor({ annotation, contentLoaderState }) {
     [annotation, formatCode],
     200
   );
+  
   return (
     <div>
       <AceEditor
