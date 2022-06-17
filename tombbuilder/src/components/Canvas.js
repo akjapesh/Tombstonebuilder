@@ -18,13 +18,13 @@ function Canvas({ updateAnnotationHandler,contentLoaderState }) {
         (newTarget.type === "activeSelection" &&
           newTarget._objects.some((o) => o.type === "circle")));
     if (hasCircle) {
-      newTarget.lockUniScaling = true;
       newTarget.lockRotation = true;
       newTarget.angle = 0;
       newTarget.originY = "top";
     }
-    else if(newTarget&&(newTarget.type === "activeSelection" &&
-    newTarget._objects.some((o) => o.type === "rectangle"))){
+    else if(newTarget&&(newTarget.type === "rect" || (newTarget.type === "activeSelection" &&
+    newTarget._objects.some((o) => o.type === "rect"))))
+    {
         newTarget.lockRotation = true;
         newTarget.angle=0;
     }
@@ -38,7 +38,7 @@ function Canvas({ updateAnnotationHandler,contentLoaderState }) {
     return setCordState({
       coordsActiveItem: { width, height, left, top, boxRadius: rx, type },
     });
-  }, []);
+  }, [setCordState]);
 
   useEffect(() => {
     sketchProperty.current._fc.on({
@@ -61,7 +61,7 @@ function Canvas({ updateAnnotationHandler,contentLoaderState }) {
       'object:added': item => (item.target = canvasAddedProp(item.target)),
       'object:moving': item => (item.target = canvasAddedProp(item.target)),
     });
-  },[setCoords,updateAnnotationHandler,coordsActiveItem]);
+  },[setCoords,updateAnnotationHandler]);
 
   const removeItemFromKeyboard = event => {
     const hasItemSelected = Object.keys(coordsActiveItem.coordsActiveItem).length > 0
@@ -110,6 +110,7 @@ function Canvas({ updateAnnotationHandler,contentLoaderState }) {
         if(cnt)
         {
           setCoords(value);
+          coordsActiveItem.focus();
           cnt=0;
         }
         if(value.left===coordsActiveItem.coordsActiveItem.left && value.top===coordsActiveItem.coordsActiveItem.top)
@@ -138,7 +139,7 @@ function Canvas({ updateAnnotationHandler,contentLoaderState }) {
       [LEFT_SIDE]: SideMovement,
       [UPSIDE]: SideMovement,
       [DOWNSIDE] : SideMovement,
-      // [TAB_KEY]: TabAnotherShape,
+      [TAB_KEY]: TabAnotherShape,
     };
     /* eslint-disable */
     actionsByKeyCode[event.keyCode]?.(event);
