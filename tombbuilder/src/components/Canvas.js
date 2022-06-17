@@ -54,6 +54,7 @@ function Canvas({ children, updateAnnotationHandler, contentLoaderState }) {
         updateAnnotationHandler([...sketchRef.current._fc._objects]);
       },
       "selection:created": (item) => {
+        console.log("iteeeem: ", item.selected[0]);
         setCoords(item.selected[0]);
         item.target = handleAddItemInCanvas(item.target);
       },
