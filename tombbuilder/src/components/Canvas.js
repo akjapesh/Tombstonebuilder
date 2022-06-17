@@ -5,12 +5,12 @@ import classnames from "classnames";
 
 import { Button } from "baseui/button";
 import { Input } from "baseui/input";
-function Canvas(props) {
+function Canvas({ children, updateAnnotationHandler, contentLoaderState }) {
   const [tool, setTool] = useState(Tools.Select);
   const [coordsActiveItem, setCordState] = useState({});
   const numberFixed = (num) => Number(Number(num).toFixed());
   const sketchProperty = useRef(null);
-  const canvasAddedProp = (target) => {
+  const canvasAddedProp = useCallback((target) => {
     const newTarget = target;
     const hasCircle =
       newTarget &&
@@ -31,7 +31,7 @@ function Canvas(props) {
       newTarget.angle = 0;
     }
     return newTarget;
-  };
+  }, []);
   const setCoords = useCallback(
     (target) => {
       const { type, width, height, left, top, radius, rx } = target;
@@ -48,10 +48,9 @@ function Canvas(props) {
   useEffect(() => {
     sketchProperty.current._fc.on({
       "after:render": () => {
-        props.updateAnnotationHandler([...sketchProperty.current._fc._objects]);
+        updateAnnotationHandler([...sketchProperty.current._fc._objects]);
       },
       "selection:created": (item) => {
-        console.log("iteeeem: ", item.selected[0]);
         setCoords(item.selected[0]);
         item.target = canvasAddedProp(item.target);
       },
@@ -61,12 +60,11 @@ function Canvas(props) {
       "selection:cleared": () => setCordState({ coordsActiveItem: {} }),
       "object:modified": (item) => {
         setCoords(item.target);
-        console.log("active item=", item);
       },
       "object:added": (item) => (item.target = canvasAddedProp(item.target)),
       "object:moving": (item) => (item.target = canvasAddedProp(item.target)),
     });
-  }, [setCoords, props]);
+  }, []);
 
   const removeItemFromKeyboard = useCallback(
     (event) => {
@@ -115,8 +113,6 @@ function Canvas(props) {
   };
 
   const TabAnotherShape = useCallback(() => {
-    console.log("current item: ", coordsActiveItem.coordsActiveItem);
-    console.log("all items: ", sketchProperty.current._fc._objects);
     let cnt = 0;
     sketchProperty.current._fc._objects.map((value) => {
       if (cnt) {
@@ -133,6 +129,7 @@ function Canvas(props) {
       return null;
     });
   }, [coordsActiveItem, setCoords]);
+
   const handleKeyDown = useCallback(
     (event) => {
       const DELETE = 8;
@@ -141,25 +138,40 @@ function Canvas(props) {
       const RIGHT_SIDE = 39;
       const DOWNSIDE = 40;
       const TAB_KEY = 9;
+      const COPY = 67;
+      const UNDO = 90;
 
-      let charCode = String.fromCharCode(event.which).toLowerCase();
-      if ((event.metaKey || event.ctrlKey) && charCode === "c") {
-        cloneItem();
+      if (
+        (event.metaKey || event.ctrlKey) &&
+        event.shiftKey &&
+        event.key === "z"
+      ) {
+        Redo();
+      } else if ((event.metaKey || event.ctrlKey) && !event.shiftKey) {
+        const actionsByKeyCode = {
+          [DELETE]: removeItemFromKeyboard,
+          [RIGHT_SIDE]: SideMovement,
+          [LEFT_SIDE]: SideMovement,
+          [UPSIDE]: SideMovement,
+          [DOWNSIDE]: SideMovement,
+          [TAB_KEY]: TabAnotherShape,
+          [COPY]: cloneItem,
+          [UNDO]: Undo,
+        };
+        actionsByKeyCode[event.keyCode]?.(event);
       }
-      const actionsByKeyCode = {
-        [DELETE]: removeItemFromKeyboard,
-        [RIGHT_SIDE]: SideMovement,
-        [LEFT_SIDE]: SideMovement,
-        [UPSIDE]: SideMovement,
-        [DOWNSIDE]: SideMovement,
-        [TAB_KEY]: TabAnotherShape,
-      };
-      /* eslint-disable */
-      actionsByKeyCode[event.keyCode]?.(event);
-      /* eslint-enable */
     },
     [SideMovement, TabAnotherShape, removeItemFromKeyboard]
   );
+
+  const Undo = () => {
+    sketchProperty.current.undo();
+  };
+
+  const Redo = () => {
+    sketchProperty.current.redo();
+  };
+
   useEffect(() => {
     document.addEventListener("keydown", handleKeyDown, false);
     return () => {
@@ -187,16 +199,16 @@ function Canvas(props) {
       }));
     }
   };
-  //   console.log(sketchProperty.current);
+  //
   return (
     <>
       <div>
         <div className="app-canvas" key="canvas">
-          {props.children}
+          {children}
           {
             <SketchField
-              width={props.contentLoaderState.width}
-              height={props.contentLoaderState.height}
+              width={contentLoaderState.width}
+              height={contentLoaderState.height}
               tool={tool}
               lineWidth={0}
               color="black"
@@ -205,46 +217,36 @@ function Canvas(props) {
           }
 
           <div className="app-handlers" key="handlers">
-            <button
+            <Button
               className=" app-handlers__tool"
               onClick={() => {
                 setTool(Tools.Select);
               }}
             >
               Select
-            </button>
-            <button
+            </Button>
+            <Button
               className="app-handlers__tool"
               onClick={() => {
                 setTool(Tools.Rectangle);
               }}
             >
               Rectangle
-            </button>
-            <button
+            </Button>
+            <Button
               className="app-handlers__tool"
               onClick={() => {
                 setTool(Tools.Circle);
               }}
             >
               Circle
-            </button>
-            <button
-              className="app-handlers__tool"
-              onClick={() => {
-                sketchProperty.current.undo();
-              }}
-            >
+            </Button>
+            <Button className="app-handlers__tool" onClick={Undo}>
               UNDO
-            </button>
-            <button
-              className="app-handlers__tool"
-              onClick={() => {
-                sketchProperty.current.redo();
-              }}
-            >
+            </Button>
+            <Button className="app-handlers__tool" onClick={Redo}>
               REDO
-            </button>
+            </Button>
           </div>
         </div>
       </div>
@@ -268,36 +270,6 @@ function Canvas(props) {
                 const onChange = (e) => {
                   moveItem(item, numberFixed(e.target.value));
                 };
-                if (item === "boxRadius") {
-                  return (
-                    <p
-                      style={{ width: "62.5%", display: "flex" }}
-                      className="app-config_inline"
-                      key={item}
-                    >
-                      <Input
-                        type="range"
-                        min={0}
-                        max={100}
-                        value={value}
-                        onChange={onChange}
-                        style={{ flex: 1 }}
-                      />
-                      <Input
-                        id="radius"
-                        style={{
-                          textAlign: "center",
-                          flex: 1,
-                          marginRight: "34px",
-                        }}
-                        type="number"
-                        onChange={onChange}
-                        value={value}
-                      />
-                      <label htmlFor="radius">radius</label>
-                    </p>
-                  );
-                }
                 return (
                   <p className="app-config_inline" key={item}>
                     <label>{item}</label>

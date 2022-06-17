@@ -1,7 +1,11 @@
 import React from "react";
+import { Input } from "baseui/input";
 function Config({ updateContentLoader, contentLoaderState }) {
   const handleInput = ({ target: { value, name, max } }) => {
-    updateContentLoader(name, Number(value <= max ? value : max));
+    updateContentLoader(
+      name,
+      Number(Number(value) <= Number(max) ? Number(value) : Number(max))
+    );
   };
   const handleColor = (e) => {
     // debounceHandlecolor(e.target.name,e.target.value)
@@ -22,7 +26,6 @@ function Config({ updateContentLoader, contentLoaderState }) {
     <div className="app-config">
       <div className="row">
         <p className="app-config_caption">Canvas size</p>
-
         <p className="app-config_inline">
           <input
             type="number"
@@ -42,7 +45,7 @@ function Config({ updateContentLoader, contentLoaderState }) {
             name="height"
             value={contentLoaderState.height}
             onChange={handleInput}
-            max="1000"
+            max="500"
           />
           <label htmlFor="height">height (in px)</label>
         </p>

@@ -7,10 +7,14 @@ import { useContentLoader } from "./hooks/useContentLoader";
 import Config from "./components/Config";
 import { annotationsToCode } from "./utils/annotationsToCode";
 import { LiveProvider, LivePreview } from "react-live";
+import { useEffect, useState } from "react";
 export default function App() {
   const { updateAnnotationHandler, annotation } = useAnnotation();
   const { updateContentLoader, contentLoaderState } = useContentLoader();
-  const code = annotationsToCode(annotation);
+  const [code, setCode] = useState("");
+  useEffect(() => {
+    setCode(annotationsToCode(annotation, contentLoaderState));
+  }, [annotation, contentLoaderState]);
   return (
     <div className="App">
       <div className="container">
@@ -28,7 +32,10 @@ export default function App() {
             <div className="app-mode">
               <button className="active">Editor</button>
             </div>
-            <Editor annotation={annotation} />
+            <Editor
+              annotation={annotation}
+              contentLoaderState={contentLoaderState}
+            />
             <div className="app-editor__language-selector">
               <button className="app-editor__language-button current">
                 <span>React</span>
