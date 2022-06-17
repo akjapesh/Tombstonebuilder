@@ -41,7 +41,9 @@ function Canvas({ updateAnnotationHandler, contentLoaderState, children }) {
   useEffect(() => {
     sketchProperty.current._fc.on({
       "after:render": () => {
-        updateAnnotationHandler([...sketchProperty.current._fc._objects]);
+        setTimeout((id) => {
+          updateAnnotationHandler([...sketchProperty.current._fc._objects]);
+        }, 500);
       },
       "selection:created": (item) => {
         setCoords(item.selected[0]);
@@ -60,36 +62,42 @@ function Canvas({ updateAnnotationHandler, contentLoaderState, children }) {
     });
   }, [setCoords, updateAnnotationHandler, coordsActiveItem]);
 
-  const removeItemFromKeyboard = (event) => {
-    const hasItemSelected =
-      Object.keys(coordsActiveItem.coordsActiveItem).length > 0;
+  const removeItemFromKeyboard = useCallback(
+    (event) => {
+      const hasItemSelected =
+        Object.keys(coordsActiveItem.coordsActiveItem).length > 0;
 
-    if (hasItemSelected) {
-      event.preventDefault();
-      if (sketchProperty.current) {
-        sketchProperty.current.removeSelected();
+      if (hasItemSelected) {
+        event.preventDefault();
+        if (sketchProperty.current) {
+          sketchProperty.current.removeSelected();
+        }
       }
-    }
-  };
+    },
+    [coordsActiveItem]
+  );
 
-  const SideMovement = (event) => {
-    const hasItemSelected = coordsActiveItem.coordsActiveItem;
-    if (hasItemSelected) {
-      event.preventDefault();
-      if (event.keyCode === 37 && coordsActiveItem.coordsActiveItem.left >= 4)
-        //left
-        moveItem("left", coordsActiveItem.coordsActiveItem.left - 4);
-      else if (event.keyCode === 38)
-        //up
-        moveItem("top", coordsActiveItem.coordsActiveItem.top - 4);
-      else if (event.keyCode === 39)
-        //right
-        moveItem("left", coordsActiveItem.coordsActiveItem.left + 4);
-      else if (event.keyCode === 40)
-        //down
-        moveItem("top", coordsActiveItem.coordsActiveItem.top + 4);
-    }
-  };
+  const SideMovement = useCallback(
+    (event) => {
+      const hasItemSelected = coordsActiveItem.coordsActiveItem;
+      if (hasItemSelected) {
+        event.preventDefault();
+        if (event.keyCode === 37 && coordsActiveItem.coordsActiveItem.left >= 4)
+          //left
+          moveItem("left", coordsActiveItem.coordsActiveItem.left - 4);
+        else if (event.keyCode === 38)
+          //up
+          moveItem("top", coordsActiveItem.coordsActiveItem.top - 4);
+        else if (event.keyCode === 39)
+          //right
+          moveItem("left", coordsActiveItem.coordsActiveItem.left + 4);
+        else if (event.keyCode === 40)
+          //down
+          moveItem("top", coordsActiveItem.coordsActiveItem.top + 4);
+      }
+    },
+    [coordsActiveItem]
+  );
   const cloneItem = () => {
     if (sketchProperty.current) {
       sketchProperty.current.copy();
@@ -97,34 +105,37 @@ function Canvas({ updateAnnotationHandler, contentLoaderState, children }) {
     }
   };
 
-  const handleKeyDown = (event) => {
-    const DELETE = 8;
-    const LEFT_SIDE = 37;
-    const UPSIDE = 38;
-    const RIGHT_SIDE = 39;
-    const DOWNSIDE = 40;
+  const handleKeyDown = useCallback(
+    (event) => {
+      const DELETE = 8;
+      const LEFT_SIDE = 37;
+      const UPSIDE = 38;
+      const RIGHT_SIDE = 39;
+      const DOWNSIDE = 40;
 
-    let charCode = String.fromCharCode(event.which).toLowerCase();
-    if ((event.metaKey || event.ctrlKey) && charCode === "c") {
-      cloneItem();
-    }
-    const actionsByKeyCode = {
-      [DELETE]: removeItemFromKeyboard,
-      [RIGHT_SIDE]: SideMovement,
-      [LEFT_SIDE]: SideMovement,
-      [UPSIDE]: SideMovement,
-      [DOWNSIDE]: SideMovement,
-    };
-    /* eslint-disable */
-    actionsByKeyCode[event.keyCode]?.(event);
-    /* eslint-enable */
-  };
+      let charCode = String.fromCharCode(event.which).toLowerCase();
+      if ((event.metaKey || event.ctrlKey) && charCode === "c") {
+        cloneItem();
+      }
+      const actionsByKeyCode = {
+        [DELETE]: removeItemFromKeyboard,
+        [RIGHT_SIDE]: SideMovement,
+        [LEFT_SIDE]: SideMovement,
+        [UPSIDE]: SideMovement,
+        [DOWNSIDE]: SideMovement,
+      };
+      /* eslint-disable */
+      actionsByKeyCode[event.keyCode]?.(event);
+      /* eslint-enable */
+    },
+    [SideMovement, removeItemFromKeyboard]
+  );
   useEffect(() => {
     document.addEventListener("keydown", handleKeyDown, false);
     return () => {
       document.removeEventListener("keydown", handleKeyDown, false);
     };
-  });
+  }, [handleKeyDown]);
   const hasItemSelected = Object.keys(coordsActiveItem).length > 0;
   const moveItem = (key, value) => {
     const canvas = sketchProperty.current && sketchProperty.current._fc;
