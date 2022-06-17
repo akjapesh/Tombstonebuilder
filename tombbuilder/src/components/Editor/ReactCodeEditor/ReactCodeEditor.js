@@ -22,6 +22,7 @@ function ReactCodeEditor({ annotation, contentLoaderState }) {
         annotationsToCode(annotation, contentLoaderState)
       );
       setCode(newCode);
+      console.log(newCode);
     },
     [annotation, formatCode],
     200

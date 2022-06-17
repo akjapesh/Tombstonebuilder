@@ -12,6 +12,7 @@ export const formatCode = (code) => {
     htmlWhitespaceSensitivity: "css",
     insertPragma: false,
     jsxSingleQuote: false,
+    printWidth: 80,
     proseWrap: "preserve",
     quoteProps: "as-needed",
     requirePragma: false,
@@ -21,7 +22,6 @@ export const formatCode = (code) => {
     trailingComma: "es5",
     useTabs: false,
     vueIndentScriptAndStyle: false,
-    printWidth: 300,
   });
 
   return newCode;
