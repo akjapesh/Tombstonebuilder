@@ -4,11 +4,9 @@ import { LiveProvider, LivePreview } from "react-live";
 import { annotationsToCode } from "./utils/annotationsToCode";
 import { useAnnotation } from "./hooks/useAnnotation";
 import { useContentLoader } from "./hooks/useContentLoader";
-import Canvas from "./components/canvas/Canvas";
-import CanvasConfiguration from "./components/canvasConfiguration/canvasConfiguration";
-import Editor from "./components/editor/Editor";
-
-//styles
+import Canvas from "./components/Canvas";
+import Config from "./components/Config";
+import Editor from "./components/Editor/Editor";
 import "./styles/styles.css";
 
 export default function App() {

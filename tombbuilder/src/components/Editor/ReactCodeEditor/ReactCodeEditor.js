@@ -1,5 +1,4 @@
-//libraries
-
+import { useState } from "react";
 import AceEditor from "react-ace";
 
 //utils
@@ -23,12 +22,12 @@ import "ace-builds/src-noconflict/mode-javascript";
 import "ace-builds/src-noconflict/theme-monokai";
 import "ace-builds/src-noconflict/ext-language_tools";
 import "ace-builds/src-noconflict/mode-json";
+import { codeToAnnotations } from "./utils/codeToAnnotations";
+import { formatCode } from "./utils/formatCode";
+import { annotationsToCode } from "../../../utils/annotationsToCode";
+import { useDebouncedEffect } from "../../../hooks/useDebouncedEffect";
 
-function ReactCodeEditor({
-  annotation,
-  contentLoaderState,
-  updateAnnotationHandler,
-}) {
+function ReactCodeEditor({ annotation, contentLoaderState }) {
   const [code, setCode] = useState("");
 
   const handleOnChange = (newValue) => {
