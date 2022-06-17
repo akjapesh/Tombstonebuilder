@@ -233,7 +233,9 @@ function Canvas({ children, updateAnnotationHandler, contentLoaderState }) {
 
           <div className="app-handlers" key="handlers">
             <Button
-              className=" app-handlers__tool"
+              className={classnames("app-handlers__tool", {
+                "app-handlers__active": tool === "select",
+              })}
               onClick={() => {
                 setTool(Tools.Select);
               }}
@@ -241,7 +243,9 @@ function Canvas({ children, updateAnnotationHandler, contentLoaderState }) {
               Select
             </Button>
             <Button
-              className="app-handlers__tool"
+              className={classnames("app-handlers__tool", {
+                "app-handlers__active": tool === "rectangle",
+              })}
               onClick={() => {
                 setTool(Tools.Rectangle);
               }}
@@ -249,7 +253,9 @@ function Canvas({ children, updateAnnotationHandler, contentLoaderState }) {
               Rectangle
             </Button>
             <Button
-              className="app-handlers__tool"
+              className={classnames("app-handlers__tool", {
+                "app-handlers__active": tool === "circle",
+              })}
               onClick={() => {
                 setTool(Tools.Circle);
               }}
