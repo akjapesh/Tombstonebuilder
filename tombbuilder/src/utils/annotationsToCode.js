@@ -25,17 +25,16 @@ const MyLoader = (props) => {
     width={300}
     height={400}
     viewBox="0 0 300 400"
-    backgroundColor="#f3f3f3"
-    foregroundColor="#ecebeb"
+ 
     {...props} 
   >
   `;
   annotationArray.forEach((a) => {
     const height = a.height;
     const width = a.width;
-    if ((height === 0 && width === 0) || a.radius === 1) {
-      return null;
-    }
+    // if ((height === 0 && width === 0) || a.r === 1) {
+    //   return null;
+    // }
 
     if (a.type === "rect") {
       code += `   <rect x="${a.left}" y="${a.top}"    width="${width}" height="${height}"/> \n`;

@@ -1,7 +1,8 @@
 import React, { useEffect, useRef, useState, useCallback } from "react";
 import SketchField from "../third-parts/react-sketch/src/SketchField";
 import Tools from "../third-parts/react-sketch/src/tools";
-function Canvas({ updateAnnotationHandler, contentLoaderState, children }) {
+import classnames from "classnames";
+function Canvas(props) {
   const [tool, setTool] = useState(Tools.Select);
   const [coordsActiveItem, setCordState] = useState({});
   const numberFixed = (num) => Number(Number(num).toFixed());
@@ -41,9 +42,7 @@ function Canvas({ updateAnnotationHandler, contentLoaderState, children }) {
   useEffect(() => {
     sketchProperty.current._fc.on({
       "after:render": () => {
-        setTimeout((id) => {
-          updateAnnotationHandler([...sketchProperty.current._fc._objects]);
-        }, 500);
+        props.updateAnnotationHandler([...sketchProperty.current._fc._objects]);
       },
       "selection:created": (item) => {
         setCoords(item.selected[0]);
@@ -60,7 +59,7 @@ function Canvas({ updateAnnotationHandler, contentLoaderState, children }) {
       "object:added": (item) => (item.target = canvasAddedProp(item.target)),
       "object:moving": (item) => (item.target = canvasAddedProp(item.target)),
     });
-  }, [setCoords, updateAnnotationHandler, coordsActiveItem]);
+  }, [setCoords, props.updateAnnotationHandler, coordsActiveItem]);
 
   const removeItemFromKeyboard = useCallback(
     (event) => {
@@ -157,62 +156,62 @@ function Canvas({ updateAnnotationHandler, contentLoaderState, children }) {
   };
   return (
     <>
-      <div className="canvas-sketch">
-        <div key="canvas">
+      <div>
+        <div className="app-canvas" key="canvas">
+          {props.children}
           {
             <SketchField
-              width={contentLoaderState.width}
-              height={contentLoaderState.height}
-              backgroundColor={contentLoaderState.backgroundColor}
+              width={props.contentLoaderState.width}
+              height={props.contentLoaderState.height}
               tool={tool}
-              lineWidth={3}
+              lineWidth={0}
               color="black"
               ref={sketchProperty}
             />
           }
-          {children}
-        </div>
-        <div className="app-handlers" key="handlers">
-          <button
-            className=" app-handlers__tool"
-            onClick={() => {
-              setTool(Tools.Select);
-            }}
-          >
-            Select
-          </button>
-          <button
-            className="app-handlers__tool"
-            onClick={() => {
-              setTool(Tools.Rectangle);
-            }}
-          >
-            Rectangle
-          </button>
-          <button
-            className="app-handlers__tool"
-            onClick={() => {
-              setTool(Tools.Circle);
-            }}
-          >
-            Circle
-          </button>
-          <button
-            className="app-handlers__tool"
-            onClick={() => {
-              sketchProperty.current.undo();
-            }}
-          >
-            UNDO
-          </button>
-          <button
-            className="app-handlers__tool"
-            onClick={() => {
-              sketchProperty.current.redo();
-            }}
-          >
-            REDO
-          </button>
+
+          <div className="app-handlers" key="handlers">
+            <button
+              className=" app-handlers__tool"
+              onClick={() => {
+                setTool(Tools.Select);
+              }}
+            >
+              Select
+            </button>
+            <button
+              className="app-handlers__tool"
+              onClick={() => {
+                setTool(Tools.Rectangle);
+              }}
+            >
+              Rectangle
+            </button>
+            <button
+              className="app-handlers__tool"
+              onClick={() => {
+                setTool(Tools.Circle);
+              }}
+            >
+              Circle
+            </button>
+            <button
+              className="app-handlers__tool"
+              onClick={() => {
+                sketchProperty.current.undo();
+              }}
+            >
+              UNDO
+            </button>
+            <button
+              className="app-handlers__tool"
+              onClick={() => {
+                sketchProperty.current.redo();
+              }}
+            >
+              REDO
+            </button>
+          </div>
         </div>
       </div>
       {hasItemSelected && (

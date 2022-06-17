@@ -2,11 +2,11 @@ import "./styles/styles.css";
 import Canvas from "./components/Canvas";
 import Editor from "./components/Editor/Editor";
 import { useAnnotation } from "./hooks/useAnnotation";
-import { LiveProvider, LivePreview } from "react-live";
 import ContentLoader from "react-content-loader";
 import { useContentLoader } from "./hooks/useContentLoader";
 import Config from "./components/Config";
 import { annotationsToCode } from "./utils/annotationsToCode";
+import { LiveProvider, LivePreview } from "react-live";
 export default function App() {
   const { updateAnnotationHandler, annotation } = useAnnotation();
   const { updateContentLoader, contentLoaderState } = useContentLoader();
@@ -38,25 +38,24 @@ export default function App() {
         </div>
         <div>
           <LiveProvider noInline={true} scope={{ ContentLoader }} code={code}>
-            <div className="canvas-container">
-              <LivePreview
-                className="box"
-                style={{
-                  width: `${contentLoaderState.width}px`,
-                  height: `${contentLoaderState.height}px`,
-                }}
-              />
-              <Canvas
-                className="content "
-                updateAnnotationHandler={updateAnnotationHandler}
-                contentLoaderState={contentLoaderState}
-              ></Canvas>
-            </div>
+            <Canvas
+              updateAnnotationHandler={updateAnnotationHandler}
+              contentLoaderState={contentLoaderState}
+            >
+              <div className="wrapper_div">
+                <LivePreview
+                  style={{
+                    width: `${contentLoaderState.width}px`,
+                    height: `${contentLoaderState.height}px`,
+                  }}
+                />
+              </div>
+            </Canvas>
           </LiveProvider>
+          {/* <Canvas updateAnnotationHandler={updateAnnotationHandler} contentLoaderState={contentLoaderState}/> */}
           <Config
             updateContentLoader={updateContentLoader}
             contentLoaderState={contentLoaderState}
-            className="config-container"
           />
         </div>
       </div>
