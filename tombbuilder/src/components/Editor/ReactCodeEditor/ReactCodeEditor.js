@@ -7,6 +7,7 @@ import { useState, useEffect } from "react";
 import { codeToAnnotations } from "./utils/codeToAnnotations";
 import { formatCode } from "./utils/formatCode";
 import { annotationsToCode } from "../../../utils/annotationsToCode";
+import { useDebouncedEffect } from "../../../hooks/useDebouncedEffect";
 function ReactCodeEditor({ annotation }) {
   const [code, setCode] = useState("");
   const onChangeHandler = (newValue) => {
@@ -15,10 +16,14 @@ function ReactCodeEditor({ annotation }) {
     const newAnnotationArray = codeToAnnotations(formattedValue);
     console.log(newAnnotationArray);
   };
-  useEffect(() => {
-    const newCode = formatCode(annotationsToCode(annotation));
-    setCode(newCode);
-  }, [annotation]);
+  useDebouncedEffect(
+    () => {
+      const newCode = formatCode(annotationsToCode(annotation));
+      setCode(newCode);
+    },
+    [annotation, formatCode],
+    200
+  );
   return (
     <div>
       <AceEditor
