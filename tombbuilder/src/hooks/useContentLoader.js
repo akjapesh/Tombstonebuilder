@@ -1,4 +1,5 @@
 import { useState, useCallback } from "react";
+
 export const useContentLoader = () => {
   const [contentLoaderState, setContentLoader] = useState({
     width: 600,
@@ -11,6 +12,7 @@ export const useContentLoader = () => {
   const updateContentLoader = useCallback((item, value) => {
     setContentLoader((prevState) => ({ ...prevState, [item]: value }));
   }, []);
+  
   return {
     updateContentLoader,
     contentLoaderState,
