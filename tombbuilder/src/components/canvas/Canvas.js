@@ -55,8 +55,8 @@ function Canvas({ children, updateAnnotationHandler, contentLoaderState }) {
   );
 
   const isItemSelected =
-    activeItemCoords.activeItemCoords &&
-    Object.keys(activeItemCoords.activeItemCoords).length > 0;
+    activeItemCoords &&
+    Object.keys(activeItemCoords).length > 0;
 
   return (
     <>
