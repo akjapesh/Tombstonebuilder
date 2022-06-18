@@ -9,8 +9,8 @@ export const useTabKeyEvent = (sketchRef, setCoords, activeItemCoords) => {
         cnt = 0;
       }
       if (
-        value.left === activeItemCoords.activeItemCoords.left &&
-        value.top === activeItemCoords.activeItemCoords.top
+        value.left === activeItemCoords.left &&
+        value.top === activeItemCoords.top
       ) {
         cnt = 1;
       }

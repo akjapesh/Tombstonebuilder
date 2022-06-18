@@ -1,6 +1,6 @@
 //libraries
 import React from "react";
-import ReactCodeEditor from "./reactCodeEditor/ReactCodeEditor";
+import ReactCodeEditor from "./ReactCodeEditor/ReactCodeEditor";
 
 function Editor({ annotation, contentLoaderState, updateAnnotationHandler }) {
   return (

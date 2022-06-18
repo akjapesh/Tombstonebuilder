@@ -5,8 +5,8 @@ import { annotationsToCode } from "./utils/annotationsToCode";
 import { useAnnotation } from "./hooks/useAnnotation";
 import { useContentLoader } from "./hooks/useContentLoader";
 import Canvas from "./components/canvas/Canvas";
-import Config from "./components/Config";
-import Editor from "./components/editor/Editor";
+import CanvasConfiguration from "./components/canvasConfiguration/canvasConfiguration";
+import Editor from "./components/Editor/Editor";
 import "./styles/styles.css";
 
 export default function App() {
@@ -23,7 +23,7 @@ export default function App() {
         <div className="app-header">
           <div className="app-header__logo">
             <h1>
-              <strong>Tombstone builder</strong>
+              <strong>TombStone builder</strong>
             </h1>
             <h2>Build your custom content loader</h2>
           </div>
