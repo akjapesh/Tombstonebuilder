@@ -16,7 +16,7 @@ export const useTabKeyEvent = (sketchRef, setCoords, activeItemCoords) => {
       }
       return null;
     });
-  }, [activeItemCoords, setCoords]);
+  }, [activeItemCoords.left, activeItemCoords.top, setCoords, sketchRef]);
   return {
     handleTabKeyPress,
   };

@@ -16,7 +16,7 @@ export const useArrowKeysNavigation = (
       const rightSideBoundary =
         contentLoaderState.width - activeItemCoords.width;
 
-      const bottoomSideBoundary =
+      const bottomSideBoundary =
         contentLoaderState.height - activeItemCoords.height;
 
       if (isItemSelected) {
@@ -49,17 +49,13 @@ export const useArrowKeysNavigation = (
           handleMoveItem(
             "top",
             Math.min(
-              bottoomSideBoundary,
+              bottomSideBoundary,
               activeItemCoords.top + SHIFTING_BY_OFFSET
             )
           );
       }
     },
-    [
-      activeItemCoords,
-      contentLoaderState.height,
-      contentLoaderState.width,
-    ]
+    [activeItemCoords, contentLoaderState.height, contentLoaderState.width, handleMoveItem]
   );
   return { handleArrowKeysNavigation };
 };
