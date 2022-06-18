@@ -35,6 +35,7 @@ export default function App() {
               <button className="active">Editor</button>
             </div>
             <Editor
+              updateAnnotationHandler={updateAnnotationHandler}
               annotation={annotation}
               contentLoaderState={contentLoaderState}
             />
