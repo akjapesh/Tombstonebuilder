@@ -5,7 +5,7 @@ import { annotationsToCode } from "./utils/annotationsToCode";
 import { useAnnotation } from "./hooks/useAnnotation";
 import { useContentLoader } from "./hooks/useContentLoader";
 import Canvas from "./components/canvas/Canvas";
-import Config from "./components/Config";
+import CanvasConfiguration from "./components/canvasConfiguration/canvasConfiguration";
 import Editor from "./components/editor/Editor";
 import "./styles/styles.css";
 
@@ -62,7 +62,7 @@ export default function App() {
             </Canvas>
           </LiveProvider>
           {/* <Canvas updateAnnotationHandler={updateAnnotationHandler} contentLoaderState={contentLoaderState}/> */}
-          <Config
+          <CanvasConfiguration
             updateContentLoader={updateContentLoader}
             contentLoaderState={contentLoaderState}
           />
