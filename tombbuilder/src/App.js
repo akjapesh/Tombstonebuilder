@@ -5,7 +5,7 @@ import { annotationsToCode } from "./utils/annotationsToCode";
 import { useAnnotation } from "./hooks/useAnnotation";
 import { useContentLoader } from "./hooks/useContentLoader";
 import Canvas from "./components/canvas/Canvas";
-import CanvasConfiguration from "./components/canvasConfiguration/canvasConfiguration";
+import Config from "./components/Config";
 import Editor from "./components/editor/Editor";
 import "./styles/styles.css";
 
