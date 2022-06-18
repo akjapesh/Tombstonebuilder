@@ -4,9 +4,9 @@ import { LiveProvider, LivePreview } from "react-live";
 import { annotationsToCode } from "./utils/annotationsToCode";
 import { useAnnotation } from "./hooks/useAnnotation";
 import { useContentLoader } from "./hooks/useContentLoader";
-import Canvas from "./components/Canvas";
+import Canvas from "./components/canvas/Canvas";
 import Config from "./components/Config";
-import Editor from "./components/Editor/Editor";
+import Editor from "./components/editor/Editor";
 import "./styles/styles.css";
 
 export default function App() {
@@ -16,7 +16,7 @@ export default function App() {
   useEffect(() => {
     setCode(annotationsToCode(annotation, contentLoaderState));
   }, [annotation, contentLoaderState]);
-  
+
   return (
     <div className="App">
       <div className="container">

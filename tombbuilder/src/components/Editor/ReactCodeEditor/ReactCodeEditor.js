@@ -3,7 +3,7 @@ import AceEditor from "react-ace";
 import "ace-builds/src-noconflict/mode-javascript";
 import "ace-builds/src-noconflict/theme-monokai";
 import "ace-builds/src-noconflict/ext-language_tools";
-import "ace-builds/src-noconflict/mode-json"; 
+import "ace-builds/src-noconflict/mode-json";
 import { codeToAnnotations } from "./utils/codeToAnnotations";
 import { formatCode } from "./utils/formatCode";
 import { annotationsToCode } from "../../../utils/annotationsToCode";
@@ -23,12 +23,11 @@ function ReactCodeEditor({ annotation, contentLoaderState }) {
         annotationsToCode(annotation, contentLoaderState)
       );
       setCode(newCode);
-      console.log(newCode);
     },
     [annotation, formatCode],
     200
   );
-  
+
   return (
     <div>
       <AceEditor
