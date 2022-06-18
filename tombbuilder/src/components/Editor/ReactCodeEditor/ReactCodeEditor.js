@@ -1,29 +1,40 @@
-import { useState } from "react";
+//libraries
+
 import AceEditor from "react-ace";
+
+//utils
+
+import { codeToAnnotations } from "./utils/codeToAnnotations";
+import { formatCode } from "./utils/formatCode";
+import { annotationsToCode } from "../../../utils/annotationsToCode";
+
+//hooks
+
+import { useState } from "react";
+import { useDebouncedEffect } from "../../../hooks/useDebouncedEffect";
+
+//constatnts
+
+import CODE_EDITOR_PROPERTIES from "./utils/codeEditorProperties";
+
+//styles
+
 import "ace-builds/src-noconflict/mode-javascript";
 import "ace-builds/src-noconflict/theme-monokai";
 import "ace-builds/src-noconflict/ext-language_tools";
 import "ace-builds/src-noconflict/mode-json";
-import { codeToAnnotations } from "./utils/codeToAnnotations";
-import { formatCode } from "./utils/formatCode";
-import { annotationsToCode } from "../../../utils/annotationsToCode";
-import { useDebouncedEffect } from "../../../hooks/useDebouncedEffect";
 
-function ReactCodeEditor({
-  annotation,
-  contentLoaderState,
-  updateAnnotationHandler,
-}) {
+function ReactCodeEditor({ annotation, contentLoaderState }) {
   const [code, setCode] = useState("");
 
-  const handleOnChange = (newValue) => {
-    setCode(newValue);
-  };
-  const handleOnBlur = () => {
-    const formattedValue = formatCode(code);
+  const onChangeHandler = (newValue) => {
+    const formattedValue = formatCode(newValue);
+    setCode(formattedValue);
     const newAnnotationArray = codeToAnnotations(formattedValue);
+    // eslint-disable-next-line no-undef
     updateAnnotationHandler(newAnnotationArray);
   };
+
   useDebouncedEffect(
     () => {
       const newCode = formatCode(
@@ -38,17 +49,9 @@ function ReactCodeEditor({
   return (
     <div>
       <AceEditor
-        placeholder="Placeholder Text"
-        mode="javascript"
-        theme="monokai"
-        name="blah2"
-        fontSize={15}
-        showPrintMargin={true}
-        showGutter={true}
-        highlightActiveLine={true}
+        {...CODE_EDITOR_PROPERTIES}
         value={code}
-        onBlur={handleOnBlur}
-        onChange={handleOnChange}
+        onChange={onChangeHandler}
       />
     </div>
   );
