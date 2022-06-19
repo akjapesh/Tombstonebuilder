@@ -15,18 +15,12 @@ function ReactCodeEditor({
   updateAnnotationHandler,
 }) {
   const [code, setCode] = useState("");
-<<<<<<< HEAD
-  const onChangeHandler = (newValue) => {
-    const formattedValue = formatCode(newValue);
-    setCode(formattedValue);
-=======
 
   const handleOnChange = (newValue) => {
     setCode(newValue);
   };
   const handleOnBlur = () => {
     const formattedValue = formatCode(code);
->>>>>>> 6f39a65 (feat(ReactCodeEditor):Code to AnnotationsArray)
     const newAnnotationArray = codeToAnnotations(formattedValue);
     updateAnnotationHandler(newAnnotationArray);
   };
@@ -53,22 +47,8 @@ function ReactCodeEditor({
         showGutter={true}
         highlightActiveLine={true}
         value={code}
-<<<<<<< HEAD
-        height="400px"
-        width="600px"
-        onChange={onChangeHandler}
-        setOptions={{
-          enableBasicAutocompletion: true,
-          enableLiveAutocompletion: true,
-          enableSnippets: false,
-          showLineNumbers: true,
-          tabSize: 2,
-          useWorker: false,
-        }}
-=======
         onBlur={handleOnBlur}
         onChange={handleOnChange}
->>>>>>> 6f39a65 (feat(ReactCodeEditor):Code to AnnotationsArray)
       />
     </div>
   );
