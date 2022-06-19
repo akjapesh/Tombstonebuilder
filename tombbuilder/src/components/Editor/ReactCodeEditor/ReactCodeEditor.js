@@ -27,7 +27,7 @@ import "ace-builds/src-noconflict/mode-json";
 function ReactCodeEditor({
   annotation,
   contentLoaderState,
-  updateAnnotationHandler,
+  handleAnnotationToCanvas,
 }) {
   const [code, setCode] = useState("");
 
@@ -35,9 +35,10 @@ function ReactCodeEditor({
     setCode(newValue);
   };
   const handleOnBlur = () => {
+    console.log(code);
     const formattedValue = formatCode(code);
     const newAnnotationArray = codeToAnnotations(formattedValue);
-    updateAnnotationHandler(newAnnotationArray);
+    handleAnnotationToCanvas(newAnnotationArray);
   };
 
   useDebouncedEffect(

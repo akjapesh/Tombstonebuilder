@@ -4,11 +4,11 @@ import React from "react";
 //component
 import ReactCodeEditor from "./reactCodeEditor/ReactCodeEditor";
 
-function Editor({ annotation, contentLoaderState, updateAnnotationHandler }) {
+function Editor({ annotation, contentLoaderState, handleAnnotationToCanvas }) {
   return (
     <div>
       <ReactCodeEditor
-        updateAnnotationHandler={updateAnnotationHandler}
+        handleAnnotationToCanvas={handleAnnotationToCanvas}
         annotation={annotation}
         contentLoaderState={contentLoaderState}
       />

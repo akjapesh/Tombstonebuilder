@@ -1,5 +1,5 @@
 // Libraries
-import React, { useRef } from "react";
+import React, { useEffect, useRef } from "react";
 
 //utils
 import { handleActions } from "./utils/handleActions";
@@ -15,17 +15,24 @@ import { useToolState } from "./hooks/useToolState/useToolState";
 import CanvasSketchField from "./CanvasSketchField/CanvasSketchField";
 import CanvasItemConfiguration from "./canvasItemConfiguration/CanvasItemConfiguration";
 import CanvasButtons from "./canvasButtons/CanvasButtons";
-function Canvas({ children, updateAnnotationHandler, contentLoaderState }) {
-  const { tool, handleToolChange } = useToolState();
 
+function Canvas({
+  children,
+  updateAnnotationHandler,
+  contentLoaderState,
+  handleUpdateSketchRef,
+}) {
+  const { tool, handleToolChange } = useToolState();
+  const sketchRef = useRef(null);
+  useEffect(() => {
+    handleUpdateSketchRef(sketchRef);
+  }, [sketchRef, handleUpdateSketchRef]);
   const {
     setCoords,
     activeItemCoords,
     handleResetActiveItem,
     handleMoveActiveItem,
   } = useActiveItem();
-
-  const sketchRef = useRef(null);
 
   const {
     handleMoveItem,

@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef, useCallback } from "react";
 import ContentLoader from "react-content-loader";
 import { LiveProvider, LivePreview } from "react-live";
 import { annotationsToCode } from "./utils/annotationsToCode";
@@ -8,6 +8,7 @@ import Canvas from "./components/canvas/Canvas";
 import CanvasConfiguration from "./components/canvasConfiguration/canvasConfiguration";
 import Editor from "./components/editor/Editor";
 import "./styles/styles.css";
+import { useAnnotaionToCanvas } from "./components/canvas/hooks/useAnnotationToCanvas/useAnnotationToCanvas";
 
 export default function App() {
   const { updateAnnotationHandler, annotation } = useAnnotation();
@@ -17,6 +18,12 @@ export default function App() {
     setCode(annotationsToCode(annotation, contentLoaderState));
   }, [annotation, contentLoaderState]);
 
+  const [sketchRef, setSketchRef] = useState(null);
+  const handleUpdateSketchRef = useCallback((newRef) => {
+    setSketchRef(newRef);
+  }, []);
+
+  const { handleAnnotationToCanvas } = useAnnotaionToCanvas(sketchRef);
   return (
     <div className="App">
       <div className="container">
@@ -35,7 +42,7 @@ export default function App() {
               <button className="active">Editor</button>
             </div>
             <Editor
-              updateAnnotationHandler={updateAnnotationHandler}
+              handleAnnotationToCanvas={handleAnnotationToCanvas}
               annotation={annotation}
               contentLoaderState={contentLoaderState}
             />
@@ -51,6 +58,7 @@ export default function App() {
             <Canvas
               updateAnnotationHandler={updateAnnotationHandler}
               contentLoaderState={contentLoaderState}
+              handleUpdateSketchRef={handleUpdateSketchRef}
             >
               <div className="wrapper_div">
                 <LivePreview
