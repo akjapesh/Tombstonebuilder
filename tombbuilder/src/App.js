@@ -1,29 +1,43 @@
-import { useEffect, useState, useRef, useCallback } from "react";
+//library
 import ContentLoader from "react-content-loader";
 import { LiveProvider, LivePreview } from "react-live";
+
+//utils
 import { annotationsToCode } from "./utils/annotationsToCode";
+
+//hoooks
+import { useEffect, useState, useCallback } from "react";
 import { useAnnotation } from "./hooks/useAnnotation";
 import { useContentLoader } from "./hooks/useContentLoader";
+import { useAnnotaionToCanvas } from "./components/canvas/hooks/useAnnotationToCanvas/useAnnotationToCanvas";
+
+//Components
 import Canvas from "./components/canvas/Canvas";
 import CanvasConfiguration from "./components/canvasConfiguration/canvasConfiguration";
 import Editor from "./components/editor/Editor";
+
+//styles
 import "./styles/styles.css";
-import { useAnnotaionToCanvas } from "./components/canvas/hooks/useAnnotationToCanvas/useAnnotationToCanvas";
 
 export default function App() {
   const { updateAnnotationHandler, annotation } = useAnnotation();
+
   const { updateContentLoader, contentLoaderState } = useContentLoader();
+
   const [code, setCode] = useState("");
+
   useEffect(() => {
     setCode(annotationsToCode(annotation, contentLoaderState));
   }, [annotation, contentLoaderState]);
 
   const [sketchRef, setSketchRef] = useState(null);
+
   const handleUpdateSketchRef = useCallback((newRef) => {
     setSketchRef(newRef);
   }, []);
 
   const { handleAnnotationToCanvas } = useAnnotaionToCanvas(sketchRef);
+
   return (
     <div className="App">
       <div className="container">

@@ -12,9 +12,8 @@ import { useSetKeyEvents } from "./hooks/useSetKeyEvents/useSetKeyEvents";
 import { useToolState } from "./hooks/useToolState/useToolState";
 
 //components
-import CanvasSketchField from "./CanvasSketchField/CanvasSketchField";
 import CanvasItemConfiguration from "./canvasItemConfiguration/CanvasItemConfiguration";
-import CanvasButtons from "./canvasButtons/CanvasButtons";
+import CanvasSketchPad from "./canvasSketchPad/canvasSketchPad";
 
 function Canvas({
   children,
@@ -23,10 +22,13 @@ function Canvas({
   handleUpdateSketchRef,
 }) {
   const { tool, handleToolChange } = useToolState();
+
   const sketchRef = useRef(null);
+
   useEffect(() => {
     handleUpdateSketchRef(sketchRef);
   }, [sketchRef, handleUpdateSketchRef]);
+
   const {
     setCoords,
     activeItemCoords,
@@ -67,24 +69,16 @@ function Canvas({
 
   return (
     <>
-      <div>
-        <div className="app-canvas" key="canvas">
-          {children}
+      <CanvasSketchPad
+        children={children}
+        contentLoaderState={contentLoaderState}
+        sketchRef={sketchRef}
+        tool={tool}
+        handleRedo={handleRedo}
+        handleUndo={handleUndo}
+        handleToolChange={handleToolChange}
+      />
 
-          <CanvasSketchField
-            contentLoaderState={contentLoaderState}
-            tool={tool}
-            sketchRef={sketchRef}
-          />
-          <CanvasButtons
-            tool={tool}
-            sketchRef={sketchRef}
-            handleUndo={handleUndo}
-            handleRedo={handleRedo}
-            handleToolChange={handleToolChange}
-          />
-        </div>
-      </div>
       {isItemSelected && (
         <CanvasItemConfiguration
           handleRemoveItemFromKeyboard={handleRemoveItemFromKeyboard}
