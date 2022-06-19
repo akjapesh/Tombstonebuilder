@@ -28,13 +28,11 @@ function Canvas({ children, updateAnnotationHandler, contentLoaderState }) {
 
   const setCoords = useCallback(
     (target) => {
-      const { type, width, height, left, top, radius, rx } = target;
+      const { type, width, height, left, top, radius, rx, ry } = target;
       if (type === "circle") {
-        return setActiveItemCoords({ activeItemCoords: { radius, left, top, type } });
+        return setActiveItemCoords({radius, left, top, type});
       }
-      return setActiveItemCoords({
-        activeItemCoords: { width, height, left, top, boxRadius: rx, type },
-      });
+      return setActiveItemCoords({width, height, left, top, rx , ry, type});
     },
     [setActiveItemCoords]
   );
@@ -52,19 +50,19 @@ function Canvas({ children, updateAnnotationHandler, contentLoaderState }) {
       "selection:updated": (item) => {
         setCoords(item.selected[0]);
       },
-      "selection:cleared": () => setActiveItemCoords({ activeItemCoords: {} }),
+      "selection:cleared": () => setActiveItemCoords({}),        
       "object:modified": (item) => {
         setCoords(item.target);
       },
       "object:added": (item) => (item.target = handleAddItemInCanvas(item.target)),
       "object:moving": (item) => (item.target = handleAddItemInCanvas(item.target)),
     });
-  }, []);
+  },[]);
 
   const removeItemFromKeyboard = useCallback(
     (event) => {
       const isItemSelected =
-        Object.keys(activeItemCoords.activeItemCoords).length > 0;
+        Object.keys(activeItemCoords).length > 0;
 
       if (isItemSelected) {
         event.preventDefault();
@@ -76,25 +74,36 @@ function Canvas({ children, updateAnnotationHandler, contentLoaderState }) {
     [activeItemCoords]
   );
 
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  const moveItem = useCallback((key, value) => {
+    const canvas = sketchRef.current && sketchRef.current._fc;
+    if (canvas && canvas.getActiveObject()) {
+      const selection = canvas.getActiveObject();
+        selection.set(key, value);
+      selection.setCoords();
+      canvas.requestRenderAll();
+      setActiveItemCoords({...activeItemCoords,[key]:value});
+    }
+  });
   const handleArrowKeysNavigation = useCallback(
     (event) => {
-      const isItemSelected = activeItemCoords.activeItemCoords;
+      const isItemSelected = activeItemCoords;
       const shiftingByOffset = 4;
-      const rightSideBoundary = contentLoaderState.width - activeItemCoords.activeItemCoords.width;
-      const bottoomSideBoundary = contentLoaderState.height - activeItemCoords.activeItemCoords.height;
+      const rightSideBoundary = contentLoaderState.width - activeItemCoords.width;
+      const bottoomSideBoundary = contentLoaderState.height - activeItemCoords.height;
       if (isItemSelected) {
         event.preventDefault();
         if (event.keyCode === 37)
-          moveItem("left", Math.max(0,activeItemCoords.activeItemCoords.left - shiftingByOffset));
-        else if (event.keyCode === 38)
-          moveItem("top", Math.max(0,activeItemCoords.activeItemCoords.top - shiftingByOffset));
+          moveItem("left", Math.max(0,activeItemCoords.left - shiftingByOffset));
+        else if (event.keyCode === 38) 
+          moveItem("top", Math.max(0,activeItemCoords.top - shiftingByOffset));
         else if (event.keyCode === 39)
-          moveItem("left", Math.min(rightSideBoundary,activeItemCoords.activeItemCoords.left + shiftingByOffset));
+          moveItem("left", Math.min(rightSideBoundary,activeItemCoords.left + shiftingByOffset));
         else if (event.keyCode === 40)
-          moveItem("top", Math.min(bottoomSideBoundary,activeItemCoords.activeItemCoords.top + shiftingByOffset));
+          moveItem("top", Math.min(bottoomSideBoundary,activeItemCoords.top + shiftingByOffset));
       }
     },
-    [activeItemCoords.activeItemCoords, contentLoaderState.height, contentLoaderState.width]
+    [activeItemCoords, contentLoaderState.height, contentLoaderState.width, moveItem]
   );
 
   const cloneItem = () => {
@@ -104,22 +113,23 @@ function Canvas({ children, updateAnnotationHandler, contentLoaderState }) {
     }
   };
 
-  const handleTabKeyPress = useCallback(() => {
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  const handleTabKeyPress =() => {
     let cnt = 0;
     sketchRef.current._fc._objects.map((value) => {
       if (cnt) {
         setCoords(value);
         cnt = 0;
       }
-      if (
-        value.left === activeItemCoords.activeItemCoords.left &&
-        value.top === activeItemCoords.activeItemCoords.top
+      else if (
+        value.left === activeItemCoords.left &&
+        value.top === activeItemCoords.top
       ) {
         cnt = 1;
       }
       return null;
     });
-  }, [activeItemCoords, setCoords]);
+  };
 
   const handleKeyDown = useCallback(
     (event) => {
@@ -131,6 +141,8 @@ function Canvas({ children, updateAnnotationHandler, contentLoaderState }) {
       const TAB_KEY = 9;
       const COPY = 67;
       const UNDO = 90;
+      const PASTE = 86;
+      const CUT = 88;
 
       if ((event.metaKey || event.ctrlKey) && event.shiftKey && event.key === "z") {
         handleRedo();
@@ -143,7 +155,9 @@ function Canvas({ children, updateAnnotationHandler, contentLoaderState }) {
           [UPSIDE]: handleArrowKeysNavigation,
           [DOWNSIDE]: handleArrowKeysNavigation,
           [TAB_KEY]: handleTabKeyPress,
-          [COPY]: cloneItem,
+          [CUT] : handleCut,
+          [COPY]: handleCopy,
+          [PASTE] : handlePaste,
           [UNDO]: handleUndo,
         };
         actionsByKeyCode[event.keyCode]?.(event);
@@ -160,6 +174,22 @@ function Canvas({ children, updateAnnotationHandler, contentLoaderState }) {
     sketchRef.current.redo();
   };
 
+  const handleCut = () =>{
+    if (sketchRef.current) 
+      sketchRef.current.copy();
+    sketchRef.current.removeSelected();
+}
+
+  const handleCopy = () =>{
+      if (sketchRef.current) 
+        sketchRef.current.copy();
+  }
+
+  const handlePaste = () =>{
+    if (sketchRef.current) 
+      sketchRef.current.paste();
+}
+
   useEffect(() => {
     document.addEventListener("keydown", handleKeyDown, false);
     return () => {
@@ -167,26 +197,7 @@ function Canvas({ children, updateAnnotationHandler, contentLoaderState }) {
     };
   }, [handleKeyDown]);
   
-  const isItemSelected = activeItemCoords.activeItemCoords && Object.keys(activeItemCoords.activeItemCoords).length > 0;
-
-  const moveItem = (key, value) => {
-    const canvas = sketchRef.current && sketchRef.current._fc;
-    if (canvas && canvas.getActiveObject()) {
-      const selection = canvas.getActiveObject();
-      if (key === "boxRadius") {
-        selection.set("rx", value);
-        selection.set("ry", value); 
-      } else {
-        selection.set(key, value);
-      }
-      selection.setCoords();
-      canvas.requestRenderAll();
-      setActiveItemCoords((prevState) => ({
-        ...prevState,
-        activeItemCoords: { ...prevState.activeItemCoords, [key]: value },
-      }));
-    }
-  };
+  const isItemSelected = activeItemCoords && Object.keys(activeItemCoords).length > 0;
   
   return (
     <>
@@ -248,18 +259,18 @@ function Canvas({ children, updateAnnotationHandler, contentLoaderState }) {
         <div className="app-editor_item-editor">
           <p className="app-config_caption">Size & position of active item</p>
           <div className="row">
-            {/* <button disabled={!activeItemCoords.activeItemCoords} onClick={removeItemFromKeyboard}>DELETE</button> */}
             {isItemSelected && (
               <span>
                 <Button onClick={removeItemFromKeyboard}>Delete</Button>
                 <Button onClick={cloneItem}>copy</Button>
+                <Button onClick={()=>{console.log(activeItemCoords)}}>INFO</Button>
               </span>
             )}
-            {Object.keys(activeItemCoords.activeItemCoords)
+            {Object.keys(activeItemCoords)                                 
               .filter((e) => e !== "type")
               .map((item) => {
                 const value = numberFixed(
-                  activeItemCoords.activeItemCoords[item]
+                  activeItemCoords[item]                   
                 );
                 const onChange = (e) => {
                   moveItem(item, numberFixed(e.target.value));

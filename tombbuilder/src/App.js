@@ -16,14 +16,14 @@ export default function App() {
   useEffect(() => {
     setCode(annotationsToCode(annotation, contentLoaderState));
   }, [annotation, contentLoaderState]);
-  
+
   return (
     <div className="App">
       <div className="container">
         <div className="app-header">
           <div className="app-header__logo">
             <h1>
-              <strong>Tomb stone builder</strong>
+              <strong>Tombstone builder</strong>
             </h1>
             <h2>Build your custom content loader</h2>
           </div>

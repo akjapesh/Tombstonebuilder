@@ -39,7 +39,7 @@ const MyLoader = (props) => {
     // }
 
     if (a.type === "rect") {
-      code += `   <rect x="${numberFixed(a.left)}" y="${numberFixed(
+      code += `   <rect x="${numberFixed(a.left)}" rx="${numberFixed(a.rx)}" ry="${numberFixed(a.ry)}"    y="${numberFixed(
         a.top
       )}" width="${width}" height="${height}"/> \n`;
     } else if (a.type === "circle") {
