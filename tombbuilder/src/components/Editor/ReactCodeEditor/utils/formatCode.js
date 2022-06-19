@@ -3,7 +3,25 @@ import PRETTIER_CODE_FORMATTER_PROPERTIES from "./PrettierCodeFormatterPropertie
 
 export const formatCode = (code) => {
   const newCode = prettier.format(code, {
-    ...PRETTIER_CODE_FORMATTER_PROPERTIES,
+    parser: "babel",
+    plugins: [parserBabel, parserHtml],
+    arrowParens: "always",
+    bracketSameLine: false,
+    bracketSpacing: true,
+    embeddedLanguageFormatting: "auto",
+    htmlWhitespaceSensitivity: "css",
+    insertPragma: false,
+    jsxSingleQuote: false,
+    printWidth: 80,
+    proseWrap: "preserve",
+    quoteProps: "as-needed",
+    requirePragma: false,
+    semi: true,
+    singleQuote: false,
+    tabWidth: 2,
+    trailingComma: "es5",
+    useTabs: false,
+    vueIndentScriptAndStyle: false,
   });
 
   return newCode;
