@@ -18,8 +18,8 @@ function CanvasConfiguration({ updateContentLoader, contentLoaderState }) {
     updateContentLoader("backgroundColor", "#f3f3f3");
     updateContentLoader("foregroundColor", "#ecebeb");
   };
-  const handleCheckbox = ({ target: { value, name } }) => {
-    updateContentLoader(name, value);
+  const handleCheckbox = ({ target: { checked, name } }) => {
+    updateContentLoader(name, checked);
   };
 
   return (

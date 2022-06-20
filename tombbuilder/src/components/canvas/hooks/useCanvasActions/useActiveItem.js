@@ -1,8 +1,7 @@
-import { Grid } from "baseui/layout-grid";
 import { useCallback, useState } from "react";
 
 const DEFAULT_COORDS = {};
-const GRID_STEP=4;
+
 export const useActiveItem = () => {
   const [activeItemCoords, setActiveItemCoords] = useState(DEFAULT_COORDS);
   const setCoords = useCallback(
@@ -14,17 +13,9 @@ export const useActiveItem = () => {
       top = top - (top % 4);
       height = height - (height % 4);
       if (type === "circle") {
-        const newRadius=Math.floor(radius/GRID_STEP)*GRID_STEP;
-        return setActiveItemCoords({
-          activeItemCoords: { radius:newRadius, left:newLeft, top:newTop, type },
-        });
+        return setActiveItemCoords({ radius, left, top, type });
       }
-      // const newWidth=Math.floor(width/GRID_STEP)*GRID_STEP;
-      // const newHeight=Math.floor(height/GRID_STEP)*GRID_STEP;
-      // console.log(newHeight,newHeight);
-      return setActiveItemCoords({
-        activeItemCoords: { width, height, left:newLeft, top:newTop, boxRadius: rx, type },
-      });
+      return setActiveItemCoords({ width, height, left, top, rx, ry, type });
     },
     [setActiveItemCoords]
   );
