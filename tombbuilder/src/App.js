@@ -7,6 +7,8 @@ import { useContentLoader } from "./hooks/useContentLoader";
 import Canvas from "./components/canvas/Canvas";
 import CanvasConfiguration from "./components/canvasConfiguration/canvasConfiguration";
 import Editor from "./components/Editor/Editor";
+
+//styles
 import "./styles/styles.css";
 
 export default function App() {
