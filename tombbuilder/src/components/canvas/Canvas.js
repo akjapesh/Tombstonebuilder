@@ -12,8 +12,8 @@ import { useSetKeyEvents } from "./hooks/useSetKeyEvents/useSetKeyEevnts";
 import { useToolState } from "./hooks/useToolState/useToolState";
 
 //components
-import CanvasItemConfiguration from "./canvasItemConfiguration/canvasItemConfiguration";
-import CanvasSketchPad from "./canvasSketchPad/canvasSketchPad";
+import CanvasItemConfiguration from "./canvasItemConfiguration/CanvasItemConfiguration";
+import CanvasSketchPad from "./canvasSketchPad/CanvasSketchPad";
 
 function Canvas({
   children,
