@@ -1,7 +1,10 @@
-import { Button } from "baseui/button";
-import classnames from "classnames";
+// libraries
 import React from "react";
+import classnames from "classnames";
+// utils
 import Tools from "../../../third-parts/react-sketch/src/tools";
+// Component
+import { Button } from "baseui/button";
 
 function CanvasButtons({
   tool,
@@ -16,9 +19,7 @@ function CanvasButtons({
         className={classnames("app-handlers__tool", {
           "app-handlers__active": tool === "select",
         })}
-        onClick={() => {
-          handleToolChange(Tools.Select);
-        }}
+        disabled={true}
       >
         Select
       </Button>
