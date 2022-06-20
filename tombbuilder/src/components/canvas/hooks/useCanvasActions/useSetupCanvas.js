@@ -1,14 +1,20 @@
 import { useEffect } from "react";
+import tools from "../../../../third-parts/react-sketch/src/tools";
 export const useSetupCanvas = (
   sketchRef,
   updateAnnotationHandler,
   setCoords,
   handleAddItemInCanvas,
   resetActiveItemhandler,
-  handleKeyDown
+  handleKeyDown,
+  handleToolChange
 ) => {
   useEffect(() => {
+    console.log(sketchRef.current._fc);
     sketchRef.current._fc.on({
+      "mouse:up": () => {
+        handleToolChange(tools.Select);
+      },
       "after:render": () => {
         updateAnnotationHandler([...sketchRef.current._fc._objects]);
       },
@@ -25,8 +31,9 @@ export const useSetupCanvas = (
       "object:modified": (item) => {
         setCoords(item.target);
       },
-      "object:added": (item) =>
-        (item.target = handleAddItemInCanvas(item.target)),
+      "object:added": (item) => {
+        item.target = handleAddItemInCanvas(item.target);
+      },
       "object:moving": (item) =>
         (item.target = handleAddItemInCanvas(item.target)),
     });
