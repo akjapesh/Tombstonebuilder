@@ -1,5 +1,5 @@
 // Libraries
-import React, { useRef } from "react";
+import React, { useRef, useEffect } from "react";
 
 //utils
 import { handleActions } from "./utils/handleActions";
@@ -13,7 +13,7 @@ import { useToolState } from "./hooks/useToolState/useToolState";
 
 //components
 import CanvasItemConfiguration from "./canvasItemConfiguration/CanvasItemConfiguration";
-import CanvasSketchPad from "./canvasSketchPad/CanvasSketchPad";
+import CanvasSketchPad from "./canvasSketchPad/canvasSketchPad";
 
 function Canvas({
   children,
