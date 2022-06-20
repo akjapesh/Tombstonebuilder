@@ -1,5 +1,5 @@
 // Libraries
-import React, { useEffect, useRef } from "react";
+import React, { useRef, useEffect } from "react";
 
 //utils
 import { handleActions } from "./utils/handleActions";
@@ -65,8 +65,7 @@ function Canvas({
   );
 
   const isItemSelected =
-    activeItemCoords.activeItemCoords &&
-    Object.keys(activeItemCoords.activeItemCoords).length > 0;
+    activeItemCoords && Object.keys(activeItemCoords).length > 0;
 
   return (
     <>

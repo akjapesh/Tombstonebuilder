@@ -10,6 +10,25 @@ export const handleActions = (sketchRef) => {
     }
   };
 
+  const handleCopyItem = () => {
+    if (sketchRef.current) {
+      sketchRef.current.copy();
+    }
+  };
+
+  const handleCutItem = () => {
+    if (sketchRef.current) {
+      sketchRef.current.copy();
+    }
+    sketchRef.current.removeSelected();
+  };
+
+  const handlePasteItem = () => {
+    if (sketchRef.current) {
+      sketchRef.current.paste();
+    }
+  };
+
   const handleRedo = () => {
     sketchRef.current.redo();
   };
@@ -17,5 +36,8 @@ export const handleActions = (sketchRef) => {
     handleRedo,
     handleUndo,
     handleCloneItem,
+    handleCutItem,
+    handleCopyItem,
+    handlePasteItem,
   };
 };

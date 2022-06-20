@@ -24,8 +24,7 @@ export const useItemActions = (
 
   const handleRemoveItemFromKeyboard = useCallback(
     (event) => {
-      const isItemSelected =
-        Object.keys(activeItemCoords.activeItemCoords).length > 0;
+      const isItemSelected = Object.keys(activeItemCoords).length > 0;
 
       if (isItemSelected) {
         event.preventDefault();

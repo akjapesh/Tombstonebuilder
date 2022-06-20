@@ -19,10 +19,10 @@ function CanvasItemConfiguration({
           <Button onClick={handleCloneItem}>copy</Button>
         </span>
 
-        {Object.keys(activeItemCoords.activeItemCoords)
+        {Object.keys(activeItemCoords)
           .filter((e) => e !== "type" && e !== undefined)
           .map((item) => {
-            const value = numberFixed(activeItemCoords.activeItemCoords[item]);
+            const value = numberFixed(activeItemCoords[item]);
             const onChange = (e) => {
               handleMoveItem(item, numberFixed(Number(e.target.value)));
             };
