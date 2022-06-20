@@ -27,7 +27,13 @@ export const useSetKeyEvents = (
     handleMoveItem
   );
 
-  const { handleRedo, handleUndo, handleCutItem, handleCopyItem,handlePasteItem } = handleActions(sketchRef);
+  const {
+    handleRedo,
+    handleUndo,
+    handleCutItem,
+    handleCopyItem,
+    handlePasteItem,
+  } = handleActions(sketchRef);
 
   const handleKeyDown = useCallback(
     (event) => {
@@ -53,7 +59,16 @@ export const useSetKeyEvents = (
         actionsByKeyCode[event.keyCode]?.(event);
       }
     },
-    [handleRedo, handleRemoveItemFromKeyboard, handleArrowKeysNavigation, handleTabKeyPress, handleCutItem, handleCopyItem, handlePasteItem, handleUndo]
+    [
+      handleRedo,
+      handleRemoveItemFromKeyboard,
+      handleArrowKeysNavigation,
+      handleTabKeyPress,
+      handleCutItem,
+      handleCopyItem,
+      handlePasteItem,
+      handleUndo,
+    ]
   );
   return { handleKeyDown };
 };

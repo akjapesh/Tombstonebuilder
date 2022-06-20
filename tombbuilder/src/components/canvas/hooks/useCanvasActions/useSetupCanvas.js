@@ -31,9 +31,8 @@ export const useSetupCanvas = (
       "object:modified": (item) => {
         setCoords(item.target);
       },
-      "object:added": (item) => {
-        item.target = handleAddItemInCanvas(item.target);
-      },
+      "object:added": (item) =>
+        (item.target = handleAddItemInCanvas(item.target)),
       "object:moving": (item) =>
         (item.target = handleAddItemInCanvas(item.target)),
     });

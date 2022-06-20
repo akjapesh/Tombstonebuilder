@@ -10,7 +10,7 @@ export const useActiveItem = () => {
       if (type === "circle") {
         return setActiveItemCoords({ radius, left, top, type });
       }
-      return setActiveItemCoords({width, height, left, top, rx, ry , type });
+      return setActiveItemCoords({ width, height, left, top, rx, ry, type });
     },
     [setActiveItemCoords]
   );
@@ -18,7 +18,7 @@ export const useActiveItem = () => {
     setActiveItemCoords({});
   };
   const handleMoveActiveItem = (key, value) => {
-    setActiveItemCoords({...activeItemCoords,[key]:value});
+    setActiveItemCoords({ ...activeItemCoords, [key]: value });
   };
   return {
     setCoords,

@@ -39,7 +39,8 @@ export const annotationsToCode = (annotationArray, contentLoaderState) => {
         a.rx
       )}" ry="${numberFixed(a.ry)}"    y="${numberFixed(
         a.top
-      )}" width="${width}" height="${height}"/> \n`;
+      )}"  width="${width}" height="${height}"/> 
+      \n`;
     } else if (a.type === "circle") {
       code += `    <circle cx="${
         numberFixed(a.left) + numberFixed(a.radius)

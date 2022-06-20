@@ -1,5 +1,5 @@
 // Libraries
-import React, { useRef } from "react";
+import React, { useRef, useEffect } from "react";
 
 //utils
 import { handleActions } from "./utils/handleActions";
