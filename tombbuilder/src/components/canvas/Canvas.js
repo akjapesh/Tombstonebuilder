@@ -8,7 +8,7 @@ import { handleActions } from "./utils/handleActions";
 import { useActiveItem } from "./hooks/useCanvasActions/useActiveItem";
 import { useItemActions } from "./hooks/useCanvasActions/useItemActions";
 import { useSetupCanvas } from "./hooks/useCanvasActions/useSetupCanvas";
-import { useSetKeyEvents } from "./hooks/useSetKeyEvents/useSetKeyEevnts";
+import { useSetKeyEvents } from "./hooks/useSetKeyEvents/useSetKeyEvents";
 import { useToolState } from "./hooks/useToolState/useToolState";
 
 //components
@@ -45,11 +45,9 @@ function Canvas({
     setCoords,
     sketchRef,
     contentLoaderState,
-    handleMoveActiveItem,
     handleRemoveItemFromKeyboard,
     handleMoveItem
   );
-
   useSetupCanvas(
     sketchRef,
     updateAnnotationHandler,
@@ -89,6 +87,7 @@ function Canvas({
           handleCloneItem={handleCloneItem}
           activeItemCoords={activeItemCoords}
           handleMoveItem={handleMoveItem}
+          handleKeyDown={handleKeyDown}
         />
       )}
     </>
