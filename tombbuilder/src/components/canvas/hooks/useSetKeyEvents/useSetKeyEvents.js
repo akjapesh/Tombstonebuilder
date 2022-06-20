@@ -12,7 +12,6 @@ export const useSetKeyEvents = (
   setCoords,
   sketchRef,
   contentLoaderState,
-  handleMoveActiveItem,
   handleRemoveItemFromKeyboard,
   handleMoveItem
 ) => {
@@ -46,16 +45,20 @@ export const useSetKeyEvents = (
         handleRedo();
       } else if ((event.metaKey || event.ctrlKey) && !event.shiftKey) {
         const actionsByKeyCode = {
+          [KEY_CODES.CUT]: handleCutItem,
+          [KEY_CODES.COPY]: handleCopyItem,
+          [KEY_CODES.PASTE]: handlePasteItem,
+          [KEY_CODES.UNDO]: handleUndo,
+        };
+        actionsByKeyCode[event.keyCode]?.(event);
+      } else {
+        const actionsByKeyCode = {
           [KEY_CODES.DELETE]: handleRemoveItemFromKeyboard,
           [KEY_CODES.RIGHT_SIDE]: handleArrowKeysNavigation,
           [KEY_CODES.LEFT_SIDE]: handleArrowKeysNavigation,
           [KEY_CODES.UPSIDE]: handleArrowKeysNavigation,
           [KEY_CODES.DOWNSIDE]: handleArrowKeysNavigation,
           [KEY_CODES.TAB_KEY]: handleTabKeyPress,
-          [KEY_CODES.CUT]: handleCutItem,
-          [KEY_CODES.COPY]: handleCopyItem,
-          [KEY_CODES.PASTE]: handlePasteItem,
-          [KEY_CODES.UNDO]: handleUndo,
         };
         actionsByKeyCode[event.keyCode]?.(event);
       }

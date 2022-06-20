@@ -6,6 +6,9 @@ export const useTabKeyEvent = (sketchRef, setCoords, activeItemCoords) => {
     sketchRef.current._fc._objects.map((value) => {
       if (cnt) {
         setCoords(value);
+        // sketchRef.current._fc._objects=value;
+        // sketchRef.current=value;
+        // return null;
         cnt = 0;
       }
       if (
