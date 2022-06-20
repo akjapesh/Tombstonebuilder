@@ -45,11 +45,9 @@ function Canvas({
     setCoords,
     sketchRef,
     contentLoaderState,
-    handleMoveActiveItem,
     handleRemoveItemFromKeyboard,
     handleMoveItem
-  );
-
+  );  
   useSetupCanvas(
     sketchRef,
     updateAnnotationHandler,
@@ -89,6 +87,7 @@ function Canvas({
           handleCloneItem={handleCloneItem}
           activeItemCoords={activeItemCoords}
           handleMoveItem={handleMoveItem}
+          handleKeyDown={handleKeyDown}
         />
       )}
     </>
