@@ -60,7 +60,8 @@ function Canvas({
     setCoords,
     handleAddItemInCanvas,
     handleResetActiveItem,
-    handleKeyDown
+    handleKeyDown,
+    handleToolChange
   );
 
   const isItemSelected =
