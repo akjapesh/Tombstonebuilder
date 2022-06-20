@@ -6,7 +6,7 @@ import { useAnnotation } from "./hooks/useAnnotation";
 import { useContentLoader } from "./hooks/useContentLoader";
 import Canvas from "./components/canvas/Canvas";
 import CanvasConfiguration from "./components/canvasConfiguration/canvasConfiguration";
-import Editor from "./components/Editor/Editor";
+import Editor from "./components/editor/Editor";
 
 //styles
 import "./styles/styles.css";

@@ -2,7 +2,7 @@
 import React from "react";
 
 //component
-import ReactCodeEditor from "./ReactCodeEditor/ReactCodeEditor";
+import ReactCodeEditor from "./reactCodeEditor/ReactCodeEditor";
 
 function Editor({ annotation, contentLoaderState, updateAnnotationHandler }) {
   return (
