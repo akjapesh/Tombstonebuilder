@@ -1,4 +1,4 @@
-import CanvasButtons from "../canvasButtons/canvasButtons";
+import CanvasButtons from "../canvasButtons/CanvasButtons";
 import CanvasSketchField from "../CanvasSketchField/CanvasSketchField";
 
 function CanvasSketchPad({

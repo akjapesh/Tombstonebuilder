@@ -1,5 +1,5 @@
 // Libraries
-import React, { useEffect, useRef } from "react";
+import React, { useRef, useEffect } from "react";
 
 //utils
 import { handleActions } from "./utils/handleActions";
@@ -12,7 +12,7 @@ import { useSetKeyEvents } from "./hooks/useSetKeyEvents/useSetKeyEevnts";
 import { useToolState } from "./hooks/useToolState/useToolState";
 
 //components
-import CanvasItemConfiguration from "./canvasItemConfiguration/canvasItemConfiguration";
+import CanvasItemConfiguration from "./canvasItemConfiguration/CanvasItemConfiguration";
 import CanvasSketchPad from "./canvasSketchPad/canvasSketchPad";
 
 function Canvas({
@@ -65,8 +65,7 @@ function Canvas({
   );
 
   const isItemSelected =
-    activeItemCoords.activeItemCoords &&
-    Object.keys(activeItemCoords.activeItemCoords).length > 0;
+    activeItemCoords && Object.keys(activeItemCoords).length > 0;
 
   return (
     <>

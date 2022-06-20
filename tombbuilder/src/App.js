@@ -13,9 +13,8 @@ import { useAnnotaionToCanvas } from "./components/canvas/hooks/useAnnotationToC
 
 //Components
 import Canvas from "./components/canvas/Canvas";
-import CanvasConfiguration from "./components/canvasConfiguration/canvasConfiguration";
+import CanvasConfiguration from "./components/canvasConfiguration/CanvasConfiguration";
 import Editor from "./components/Editor/Editor";
-
 
 //styles
 import "./styles/styles.css";

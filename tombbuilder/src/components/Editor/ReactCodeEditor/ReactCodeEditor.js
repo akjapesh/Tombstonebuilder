@@ -32,6 +32,7 @@ function ReactCodeEditor({
   const [code, setCode] = useState("");
 
   const handleOnChange = (newValue) => {
+    // eslint-disable-next-line no-undef
     setCode(newValue);
   };
   const handleOnBlur = () => {
