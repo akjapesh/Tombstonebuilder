@@ -40,11 +40,9 @@ function Canvas({ children, updateAnnotationHandler, contentLoaderState }) {
     setCoords,
     sketchRef,
     contentLoaderState,
-    handleMoveActiveItem,
     handleRemoveItemFromKeyboard,
     handleMoveItem
-  );
-
+  );  
   useSetupCanvas(
     sketchRef,
     updateAnnotationHandler,
@@ -84,6 +82,7 @@ function Canvas({ children, updateAnnotationHandler, contentLoaderState }) {
           handleCloneItem={handleCloneItem}
           activeItemCoords={activeItemCoords}
           handleMoveItem={handleMoveItem}
+          handleKeyDown={handleKeyDown}
         />
       )}
     </>
