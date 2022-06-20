@@ -51,7 +51,8 @@ function Canvas({ children, updateAnnotationHandler, contentLoaderState }) {
     setCoords,
     handleAddItemInCanvas,
     handleResetActiveItem,
-    handleKeyDown
+    handleKeyDown,
+    handleToolChange
   );
 
   const isItemSelected =

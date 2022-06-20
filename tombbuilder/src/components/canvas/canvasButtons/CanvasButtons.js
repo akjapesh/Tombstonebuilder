@@ -16,9 +16,7 @@ function CanvasButtons({
         className={classnames("app-handlers__tool", {
           "app-handlers__active": tool === "select",
         })}
-        onClick={() => {
-          handleToolChange(Tools.Select);
-        }}
+        disabled={true}
       >
         Select
       </Button>
