@@ -12,7 +12,6 @@ export const useSetKeyEvents = (
   setCoords,
   sketchRef,
   contentLoaderState,
-  handleMoveActiveItem,
   handleRemoveItemFromKeyboard,
   handleMoveItem
 ) => {
