@@ -1,0 +1,20 @@
+export default {
+    placeholder: "Placeholder Text",
+    mode: "javascript",
+    theme: "monokai",
+    name: "blah2",
+    fontSize: 15,
+    showPrintMargin: true,
+    showGutter: true,
+    highlightActiveLine: true,
+    height: "400px",
+    width: "600px",
+    setOptions: {
+      enableBasicAutocompletion: true,
+      enableLiveAutocompletion: true,
+      enableSnippets: false,
+      showLineNumbers: true,
+      tabSize: 2,
+      useWorker: false,
+    },
+  };

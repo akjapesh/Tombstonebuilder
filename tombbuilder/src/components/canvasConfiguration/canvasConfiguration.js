@@ -1,6 +1,6 @@
 import React from "react";
-import { Input } from "baseui/input";
-function Config({ updateContentLoader, contentLoaderState }) {
+
+function CanvasConfiguration({ updateContentLoader, contentLoaderState }) {
   const handleInput = ({ target: { value, name, max } }) => {
     updateContentLoader(
       name,
@@ -117,4 +117,4 @@ function Config({ updateContentLoader, contentLoaderState }) {
   );
 }
 
-export default Config;
+export default CanvasConfiguration;

@@ -1,27 +1,51 @@
-import "./styles/styles.css";
-import Canvas from "./components/Canvas";
-import Editor from "./components/Editor/Editor";
-import { useAnnotation } from "./hooks/useAnnotation";
+//library
 import ContentLoader from "react-content-loader";
-import { useContentLoader } from "./hooks/useContentLoader";
-import Config from "./components/Config";
-import { annotationsToCode } from "./utils/annotationsToCode";
 import { LiveProvider, LivePreview } from "react-live";
-import { useEffect, useState } from "react";
+
+//utils
+import { annotationsToCode } from "./utils/annotationsToCode";
+
+//hoooks
+import { useEffect, useState, useCallback } from "react";
+import { useAnnotation } from "./hooks/useAnnotation";
+import { useContentLoader } from "./hooks/useContentLoader";
+import { useAnnotaionToCanvas } from "./components/canvas/hooks/useAnnotationToCanvas/useAnnotationToCanvas";
+
+//Components
+import Canvas from "./components/canvas/Canvas";
+import CanvasConfiguration from "./components/canvasConfiguration/canvasConfiguration";
+import Editor from "./components/Editor/Editor";
+
+
+//styles
+import "./styles/styles.css";
+
 export default function App() {
   const { updateAnnotationHandler, annotation } = useAnnotation();
+
   const { updateContentLoader, contentLoaderState } = useContentLoader();
+
   const [code, setCode] = useState("");
+
   useEffect(() => {
     setCode(annotationsToCode(annotation, contentLoaderState));
   }, [annotation, contentLoaderState]);
+
+  const [sketchRef, setSketchRef] = useState(null);
+
+  const handleUpdateSketchRef = useCallback((newRef) => {
+    setSketchRef(newRef);
+  }, []);
+
+  const { handleAnnotationToCanvas } = useAnnotaionToCanvas(sketchRef);
+
   return (
     <div className="App">
       <div className="container">
         <div className="app-header">
           <div className="app-header__logo">
             <h1>
-              <strong>Tombstone builder</strong>
+              <strong>TombStone builder</strong>
             </h1>
             <h2>Build your custom content loader</h2>
           </div>
@@ -33,6 +57,7 @@ export default function App() {
               <button className="active">Editor</button>
             </div>
             <Editor
+              handleAnnotationToCanvas={handleAnnotationToCanvas}
               annotation={annotation}
               contentLoaderState={contentLoaderState}
             />
@@ -48,6 +73,7 @@ export default function App() {
             <Canvas
               updateAnnotationHandler={updateAnnotationHandler}
               contentLoaderState={contentLoaderState}
+              handleUpdateSketchRef={handleUpdateSketchRef}
             >
               <div className="wrapper_div">
                 <LivePreview
@@ -60,7 +86,7 @@ export default function App() {
             </Canvas>
           </LiveProvider>
           {/* <Canvas updateAnnotationHandler={updateAnnotationHandler} contentLoaderState={contentLoaderState}/> */}
-          <Config
+          <CanvasConfiguration
             updateContentLoader={updateContentLoader}
             contentLoaderState={contentLoaderState}
           />
