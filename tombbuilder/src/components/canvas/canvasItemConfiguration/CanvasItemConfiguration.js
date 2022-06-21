@@ -65,7 +65,8 @@ function CanvasItemConfiguration({
                   type="number"
                   onChange={onChange}
                   value={value}
-                  onKeyDown={disableKeyEvents}
+                  // onKeyDown={disableKeyEvents}
+                  onFocus={disableKeyEvents}
                 />
               </p>
             );
