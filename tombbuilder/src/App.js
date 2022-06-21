@@ -60,9 +60,7 @@ export default function App() {
                   alert("Code Copied");
                 }}
               >
-                <span className="app-editor__language-button">
-                  Copy to clipboard
-                </span>
+                <span className="copy-to-clipboard">Copy to clipboard</span>
               </CopyToClipboard>
             </div>
           </div>
