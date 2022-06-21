@@ -6,7 +6,7 @@ function CanvasSketchField({ contentLoaderState, tool, sketchRef }) {
       width={contentLoaderState.width}
       height={contentLoaderState.height}
       tool={tool}
-      lineWidth={0}
+      lineWidth={3}
       color="black"
       ref={sketchRef}
     />
