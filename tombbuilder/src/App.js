@@ -1,6 +1,9 @@
 import { useEffect, useState } from "react";
 import ContentLoader from "react-content-loader";
 import { LiveProvider, LivePreview } from "react-live";
+import { CopyToClipboard } from "react-copy-to-clipboard";
+
+//utils
 import { annotationsToCode } from "./utils/annotationsToCode";
 import { useAnnotation } from "./hooks/useAnnotation";
 import { useContentLoader } from "./hooks/useContentLoader";
@@ -48,6 +51,16 @@ export default function App() {
               <button className="app-editor__language-button current">
                 <span>React</span>
               </button>
+              <CopyToClipboard
+                text={code}
+                onCopy={() => {
+                  alert("Code Copied");
+                }}
+              >
+                <span className="app-editor__language-button">
+                  Copy to clipboard
+                </span>
+              </CopyToClipboard>
             </div>
           </div>
         </div>
