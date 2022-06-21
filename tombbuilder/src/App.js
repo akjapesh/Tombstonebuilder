@@ -1,4 +1,7 @@
 import { useEffect, useState } from "react";
+/* eslint-disable react/no-direct-mutation-state */
+
+//library
 import ContentLoader from "react-content-loader";
 import { LiveProvider, LivePreview } from "react-live";
 import { annotationsToCode } from "./utils/annotationsToCode";
