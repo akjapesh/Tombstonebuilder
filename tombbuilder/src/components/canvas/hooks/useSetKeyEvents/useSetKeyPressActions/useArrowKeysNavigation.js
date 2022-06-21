@@ -12,12 +12,11 @@ export const useArrowKeysNavigation = (
   const handleArrowKeysNavigation = useCallback(
     (event) => {
       const isItemSelected = activeItemCoords;
-      // const rightSideBoundary =
-      //   contentLoaderState.width - Number(activeItemCoords.width);
-      // console.log(typeof(rightSideBoundary));
-      // const bottomSideBoundary =
-      //   contentLoaderState.height - Number(activeItemCoords.height);
-      // console.log(typeof(bottomSideBoundary));
+
+      const rightSideBoundary =
+        contentLoaderState.width - Number(activeItemCoords.width?activeItemCoords.width:2*activeItemCoords.radius);
+      const bottomSideBoundary =
+        contentLoaderState.height - Number(activeItemCoords.height?activeItemCoords.height:2*activeItemCoords.radius);
 
       if (isItemSelected) {
         event.preventDefault();
@@ -34,18 +33,18 @@ export const useArrowKeysNavigation = (
         else if (event.keyCode === KEY_CODES.RIGHT_SIDE)
           handleMoveItem(
             "left",
-            // Math.min(
-            //   rightSideBoundary,
+            Math.min(
+              rightSideBoundary,
             Number(activeItemCoords.left) + SHIFTING_BY_OFFSET
-            // )
+            )
           );
         else if (event.keyCode === KEY_CODES.DOWNSIDE)
           handleMoveItem(
             "top",
-            // Math.min(
-            //   bottomSideBoundary,
+            Math.min(
+              bottomSideBoundary,
             Number(activeItemCoords.top) + SHIFTING_BY_OFFSET
-            // )
+            )
           );
       }
     },
