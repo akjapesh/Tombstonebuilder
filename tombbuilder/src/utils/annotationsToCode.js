@@ -26,26 +26,29 @@ export const annotationsToCode = (annotationArray, contentLoaderState) => {
   }
 
   annotationArray.forEach((a) => {
-    const height = numberFixed(a.height);
+    const height = numberFixed(a.height * a.scaleY);
 
-    const width = numberFixed(a.width);
+    const width = numberFixed(a.width * a.scaleX);
 
     if ((height === 0 && width === 0) || a.r === 1) {
       return null;
     }
 
     if (a.type === "rect") {
-      code += `   <rect x="${numberFixed(a.left)}" rx="${numberFixed(
-        a.rx
-      )}" ry="${numberFixed(a.ry)}"    y="${numberFixed(
-        a.top
-      )}"  width="${width}" height="${height}"/> 
+      code += `   <rect x="${
+        numberFixed(a.left) - (numberFixed(a.left) % 4)
+      }" rx="${numberFixed(a.rx)}" ry="${numberFixed(a.ry)}"    y="${
+        numberFixed(a.top) - (numberFixed(a.top) % 4)
+      }"  width="${width - (width % 4)}" height="${height - (height % 4)}"/> 
       \n`;
     } else if (a.type === "circle") {
+      const cx = numberFixed(a.left) + numberFixed(a.radius * a.scaleY);
+      const cy = numberFixed(a.top) + numberFixed(a.radius * a.scaleY);
+      const radius = numberFixed(a.radius * a.scaleX);
       code += `   
-       <circle cx="${numberFixed(a.left) + numberFixed(a.radius)}" cy="${
-        numberFixed(a.top) + numberFixed(a.radius)
-      }" r="${numberFixed(a.radius)}" /> 
+       <circle cx="${cx - (cx % 4)}" cy="${cy - (cy % 4)}" r="${
+        radius - (radius % 4)
+      }" /> 
       \n
       `;
     }

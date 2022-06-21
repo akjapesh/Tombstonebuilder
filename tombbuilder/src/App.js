@@ -1,7 +1,9 @@
+/* eslint-disable react/no-direct-mutation-state */
+
 //library
 import ContentLoader from "react-content-loader";
 import { LiveProvider, LivePreview } from "react-live";
-import {CopyToClipboard} from 'react-copy-to-clipboard';
+import { CopyToClipboard } from "react-copy-to-clipboard";
 
 //utils
 import { annotationsToCode } from "./utils/annotationsToCode";

@@ -184,7 +184,7 @@ body {
 }
 
 .app-canvas:before {
-  content: '';
+  content: "";
   position: absolute;
   top: 0;
   left: 0;
@@ -410,7 +410,7 @@ body {
   border-radius: 2px;
 }
 
-.app-config input[type='checkbox'] {
+.app-config input[type="checkbox"] {
   height: auto;
   width: auto;
   margin-right: 1em;
@@ -437,7 +437,7 @@ body {
 }
 
 .app-config .toggle-check:before {
-  content: '';
+  content: "";
   display: block;
   position: relative;
   width: 2.2rem;
@@ -450,7 +450,7 @@ body {
 }
 
 .app-config .toggle-check:after {
-  content: '';
+  content: "";
   display: block;
   background: #fff;
   box-shadow: 0 2px 6px 0 rgba(0, 0, 0, 0.02);
@@ -495,7 +495,6 @@ body {
   right: 0;
   cursor: pointer;
 }
-
 
 /**
    * Lear mores
