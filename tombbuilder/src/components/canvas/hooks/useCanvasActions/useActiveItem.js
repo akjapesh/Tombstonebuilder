@@ -1,5 +1,5 @@
 import { useCallback, useState } from "react";
-
+import { SHIFTING_BY_OFFSET } from "../useSetKeyEvents/useSetKeyPressActions/useArrowKeysNavigation";
 const DEFAULT_COORDS = {};
 
 export const useActiveItem = () => {
@@ -7,11 +7,11 @@ export const useActiveItem = () => {
   const setCoords = useCallback(
     (target) => {
       let { type, width, height, left, top, radius, rx, ry } = target;
-      width = width - (width % 4);
-      radius = radius - (radius % 4);
-      left = left - (left % 4);
-      top = top - (top % 4);
-      height = height - (height % 4);
+      width = width - (width % SHIFTING_BY_OFFSET);
+      radius = radius - (radius % SHIFTING_BY_OFFSET);
+      left = left - (left % SHIFTING_BY_OFFSET);
+      top = top - (top % SHIFTING_BY_OFFSET);
+      height = height - (height % SHIFTING_BY_OFFSET);
       if (type === "circle") {
         return setActiveItemCoords({ radius, left, top, type });
       }
