@@ -2,7 +2,10 @@
 import React from "react";
 import ReactCodeEditor from "./ReactCodeEditor/ReactCodeEditor";
 
-function Editor({ annotation, contentLoaderState }) {
+//component
+import ReactCodeEditor from "./ReactCodeEditor/ReactCodeEditor";
+
+function Editor({ annotation, contentLoaderState, handleAnnotationToCanvas }) {
   return (
     <div>
       <ReactCodeEditor
