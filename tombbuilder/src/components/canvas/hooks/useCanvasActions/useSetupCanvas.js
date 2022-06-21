@@ -29,7 +29,6 @@ export const useSetupCanvas = (
       },
       "object:modified": (item) => {
         setCoords(item.target);
-        console.log(sketchRef.current._fc._objects);
         updateAnnotationHandler([...sketchRef.current._fc._objects]);
       },
       "object:added": (item) =>
