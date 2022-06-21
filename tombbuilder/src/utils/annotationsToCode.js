@@ -26,9 +26,9 @@ export const annotationsToCode = (annotationArray, contentLoaderState) => {
   }
 
   annotationArray.forEach((a) => {
-    const height = numberFixed(a.height);
+    const height = numberFixed(a.height*a.scaleY);
 
-    const width = numberFixed(a.width);
+    const width = numberFixed(a.width*a.scaleX);
 
     if ((height === 0 && width === 0) || a.r === 1) {
       return null;
@@ -43,9 +43,9 @@ export const annotationsToCode = (annotationArray, contentLoaderState) => {
       \n`;
     } else if (a.type === "circle") {
       code += `   
-       <circle cx="${numberFixed(a.left) + numberFixed(a.radius)}" cy="${
-        numberFixed(a.top) + numberFixed(a.radius)
-      }" r="${numberFixed(a.radius)}" /> 
+       <circle cx="${numberFixed(a.left) + numberFixed(a.radius*a.scaleY)}" cy="${
+        numberFixed(a.top) + numberFixed(a.radius*a.scaleY)
+      }" r="${numberFixed(a.radius*a.scaleX)}" /> 
       \n
       `;
     }
