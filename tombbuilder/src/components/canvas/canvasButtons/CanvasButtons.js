@@ -17,7 +17,7 @@ function CanvasButtons({
   handleToolChange,
 }) {
   return (
-    <div className="app-handlers" key="handlers">
+    <div className="app-handlers button-group align-center" key="handlers">
       <Button
         className={classnames("app-handlers__tool", {
           "app-handlers__active": tool === "select",
