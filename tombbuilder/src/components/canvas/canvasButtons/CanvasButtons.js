@@ -9,13 +9,27 @@ import { Button } from "baseui/button";
 import selectIcon from "../../../assets/select.svg";
 import rectIcon from "../../../assets/rect.svg";
 import circleIcon from "../../../assets/circle.svg";
+import ModalExample from "../modalExample/ModalExample"; 
+import CanvasItemConfiguration from "../canvasItemConfiguration/CanvasItemConfiguration";
+
+
 function CanvasButtons({
   tool,
   sketchRef,
   handleUndo,
   handleRedo,
   handleToolChange,
+  handleRemoveItemFromKeyboard,
+  handleCloneItem,
+  activeItemCoords,
+  handleMoveItem,
+  handleKeyDown,
 }) {
+
+
+  const isItemSelected =
+    activeItemCoords && Object.keys(activeItemCoords).length > 0;
+    
   return (
     <div className="app-handlers button-group align-center" key="handlers">
       <Button
@@ -46,7 +60,17 @@ function CanvasButtons({
       >
         <img src={circleIcon} alt="circle tool" />
       </Button>
-      
+      {isItemSelected && (
+          <ModalExample>
+          <CanvasItemConfiguration
+          handleRemoveItemFromKeyboard={handleRemoveItemFromKeyboard}
+          handleCloneItem={handleCloneItem}
+          activeItemCoords={activeItemCoords}
+          handleMoveItem={handleMoveItem}
+          handleKeyDown={handleKeyDown}
+          />
+          </ModalExample>)
+      }
     </div>
   );
 }
