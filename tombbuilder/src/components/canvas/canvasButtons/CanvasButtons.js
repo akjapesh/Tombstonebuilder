@@ -9,6 +9,7 @@ import { Button } from "baseui/button";
 import selectIcon from "../../../assets/select.svg";
 import rectIcon from "../../../assets/rect.svg";
 import circleIcon from "../../../assets/circle.svg";
+
 function CanvasButtons({
   tool,
   sketchRef,
