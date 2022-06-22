@@ -6,7 +6,7 @@ import AceEditor from "react-ace";
 
 import { codeToAnnotations } from "./utils/codeToAnnotations";
 import { formatCode } from "./utils/formatCode";
-import { annotationsToCode } from "../../../utils/annotationsToCode";
+import { annotationsToCode } from "./utils/annotationsToCode";
 
 //hooks
 
