@@ -186,17 +186,19 @@ body {
 .app-canvas:before {
   content: "";
   position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
+  top: 1.5em;
+  left: 1.5em;
+  right: 1.5em;
   bottom: 5em;
-  background-image: -webkit-repeating-radial-gradient(
+  /* background-image: -webkit-repeating-radial-gradient(
     top center,
     rgba(0, 0, 0, 0.9),
     rgba(0, 0, 0, 0.9) 1px,
     transparent 1px,
     transparent 100%
-  );
+  ); */
+  background-image: linear-gradient(to right, grey 1px, transparent 1px),
+  linear-gradient(to bottom, grey 1px, transparent 1px);
   background-size: 16px 16px;
   transition: all 0.3s ease;
 }
@@ -251,7 +253,7 @@ body {
   border-top: 1px solid #e1e1e1;
   margin-top: 3em;
   padding-top: 1em;
-  margin-bottom: -0.5em;
+  /* margin-bottom: -0.5em; */
   height: 30px;
 }
 
@@ -262,7 +264,7 @@ body {
 .app-handlers button {
   background: none;
   border: 0;
-  margin: 0 3em 0 3em;
+  /* margin: 0 3em 0 3em; */
   cursor: pointer;
   color: rgb(28, 47, 221);
 
@@ -274,12 +276,19 @@ body {
   transition: opacity 0.3s ease;
 }
 
-.app-handler__clone,
-.app-handler__trash,
+
 .app-handlers__tool {
   vertical-align: middle;
-  width: 20px;
-  height: 20px;
+  /* width: 20px;
+  height: 20px; */
+  cursor: pointer;
+  opacity: 0.4;
+  transition: opacity 0.3s ease;
+}
+.app-handler__clone,
+.app-handler__trash{
+  width: 30px;
+  height: 30px;
   cursor: pointer;
   opacity: 0.4;
   transition: opacity 0.3s ease;
@@ -354,6 +363,7 @@ body {
   padding: 0;
   color: #fff;
   outline: 0;
+  margin :0;
 }
 
 .app-config_inline label {

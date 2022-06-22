@@ -2,7 +2,7 @@ import { useCallback } from "react";
 
 import KEY_CODES from "../../../utils/keyCodes";
 
-const SHIFTING_BY_OFFSET = 4;
+export const SHIFTING_BY_OFFSET = 16;
 
 export const useArrowKeysNavigation = (
   activeItemCoords,
