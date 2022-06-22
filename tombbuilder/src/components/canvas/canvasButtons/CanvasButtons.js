@@ -1,3 +1,4 @@
+/* eslint-disable react/no-direct-mutation-state */
 // libraries
 import React from "react";
 import classnames from "classnames";

@@ -1,6 +1,9 @@
+/* eslint-disable react/no-direct-mutation-state */
+
 //library
 import ContentLoader from "react-content-loader";
 import { LiveProvider, LivePreview } from "react-live";
+import { CopyToClipboard } from "react-copy-to-clipboard";
 
 //utils
 import { annotationsToCode } from "./utils/annotationsToCode";
@@ -14,7 +17,7 @@ import { useAnnotaionToCanvas } from "./components/canvas/hooks/useAnnotationToC
 //Components
 import Canvas from "./components/canvas/Canvas";
 import CanvasConfiguration from "./components/canvasConfiguration/CanvasConfiguration";
-import Editor from "./components/Editor/Editor";
+import Editor from "./components/editor/Editor";
 
 //styles
 import "./styles/styles.css";
@@ -64,6 +67,10 @@ export default function App() {
               <button className="app-editor__language-button current">
                 <span>React</span>
               </button>
+              <CopyToClipboard text={code}
+                onCopy={()=>{alert("Code Copied")}}>
+                  <span className="copy-to-clipboard">Copy to clipboard</span>
+              </CopyToClipboard>
             </div>
           </div>
         </div>

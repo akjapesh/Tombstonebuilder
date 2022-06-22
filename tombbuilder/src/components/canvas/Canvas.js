@@ -13,7 +13,7 @@ import { useToolState } from "./hooks/useToolState/useToolState";
 
 //components
 import CanvasItemConfiguration from "./canvasItemConfiguration/CanvasItemConfiguration";
-import CanvasSketchPad from "./canvasSketchPad/canvasSketchPad";
+import CanvasSketchPad from "./canvasSketchPad/CanvasSketchPad";
 
 function Canvas({
   children,
@@ -64,7 +64,7 @@ function Canvas({
 
   const isItemSelected =
     activeItemCoords && Object.keys(activeItemCoords).length > 0;
-
+  console.log(sketchRef.current);
   return (
     <>
       <CanvasSketchPad
