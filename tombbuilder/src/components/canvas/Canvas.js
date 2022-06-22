@@ -14,6 +14,7 @@ import { useToolState } from "./hooks/useToolState/useToolState";
 //components
 import CanvasItemConfiguration from "./canvasItemConfiguration/CanvasItemConfiguration";
 import CanvasSketchPad from "./canvasSketchPad/CanvasSketchPad";
+import ModalExample from "./modalExample/ModalExample";
 
 function Canvas({
   children,
@@ -78,13 +79,17 @@ function Canvas({
       />
 
       {isItemSelected && (
-        <CanvasItemConfiguration
-          handleRemoveItemFromKeyboard={handleRemoveItemFromKeyboard}
-          handleCloneItem={handleCloneItem}
-          activeItemCoords={activeItemCoords}
-          handleMoveItem={handleMoveItem}
-          handleKeyDown={handleKeyDown}
-        />
+        <>
+          <ModalExample>
+            <CanvasItemConfiguration
+              handleRemoveItemFromKeyboard={handleRemoveItemFromKeyboard}
+              handleCloneItem={handleCloneItem}
+              activeItemCoords={activeItemCoords}
+              handleMoveItem={handleMoveItem}
+              handleKeyDown={handleKeyDown}
+            />
+          </ModalExample>
+        </>
       )}
     </>
   );
