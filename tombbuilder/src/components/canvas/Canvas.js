@@ -60,30 +60,27 @@ function Canvas({
     handleToolChange
   );
 
-  const isItemSelected =
-    activeItemCoords && Object.keys(activeItemCoords).length > 0;
+  // const isItemSelected =
+  //   activeItemCoords && Object.keys(activeItemCoords).length > 0;
   console.log(sketchRef.current);
   return (
     <>
-      <div>
-        <div className="app-canvas" key="canvas">
-          {children}
+      <CanvasSketchPad
+        children={children}
+        contentLoaderState={contentLoaderState}
+        sketchRef={sketchRef}
+        tool={tool}
+        handleRedo={handleRedo}
+        handleUndo={handleUndo}
+        handleToolChange={handleToolChange}
+        handleRemoveItemFromKeyboard={handleRemoveItemFromKeyboard}
+        handleCloneItem={handleCloneItem}
+        activeItemCoords={activeItemCoords}
+        handleMoveItem={handleMoveItem}
+        handleKeyDown={handleKeyDown}
+      />
 
-          <CanvasSketchField
-            contentLoaderState={contentLoaderState}
-            tool={tool}
-            sketchRef={sketchRef}
-          />
-          <CanvasButtons
-            tool={tool}
-            sketchRef={sketchRef}
-            handleUndo={handleUndo}
-            handleRedo={handleRedo}
-            handleToolChange={handleToolChange}
-          />
-        </div>
-      </div>
-      {isItemSelected && (
+      {/* {isItemSelected && (
         <>
           <ModalExample>
             <CanvasItemConfiguration
@@ -95,7 +92,7 @@ function Canvas({
             />
           </ModalExample>
         </>
-      )}
+      )} */}
     </>
   );
 }
