@@ -5,7 +5,9 @@ import classnames from "classnames";
 import Tools from "../../../third-parts/react-sketch/src/tools";
 // Component
 import { Button } from "baseui/button";
-
+import selectIcon from "../../../assets/select.svg";
+import rectIcon from "../../../assets/rect.svg";
+import circleIcon from "../../../assets/circle.svg";
 function CanvasButtons({
   tool,
   sketchRef,
@@ -21,7 +23,7 @@ function CanvasButtons({
         })}
         disabled={true}
       >
-        Select
+        <img src={selectIcon} alt="select tool" />
       </Button>
       <Button
         className={classnames("app-handlers__tool", {
@@ -31,7 +33,7 @@ function CanvasButtons({
           handleToolChange(Tools.Rectangle);
         }}
       >
-        Rectangle
+        <img src={rectIcon} alt="rect tool" />
       </Button>
       <Button
         className={classnames("app-handlers__tool", {
@@ -41,20 +43,9 @@ function CanvasButtons({
           handleToolChange(Tools.Circle);
         }}
       >
-        Circle
+        <img src={circleIcon} alt="circle tool" />
       </Button>
-      <Button
-        className="app-handlers__tool"
-        onClick={() => {
-          console.log(sketchRef.current);
-          handleUndo();
-        }}
-      >
-        UNDO
-      </Button>
-      <Button className="app-handlers__tool" onClick={handleRedo}>
-        REDO
-      </Button>
+      
     </div>
   );
 }
