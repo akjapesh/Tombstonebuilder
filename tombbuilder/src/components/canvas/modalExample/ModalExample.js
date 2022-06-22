@@ -21,7 +21,7 @@ export default function ModalExample({ children, header }) {
         Size & position of active item
       </Button>
       <Modal onClose={close} isOpen={isOpen}>
-        <ModalHeader>{header}</ModalHeader>
+        <ModalHeader>CONFIGURATIONS</ModalHeader>
         <ModalBody>{children}</ModalBody>
         <ModalFooter>
           <ModalButton kind="tertiary" onClick={close}>
