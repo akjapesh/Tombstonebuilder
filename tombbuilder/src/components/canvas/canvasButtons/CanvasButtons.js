@@ -29,7 +29,7 @@ function CanvasButtons({
 
   const isItemSelected =
     activeItemCoords && Object.keys(activeItemCoords).length > 0;
-    
+
   return (
     <div className="app-handlers button-group align-center" key="handlers">
       <Button
@@ -69,7 +69,8 @@ function CanvasButtons({
           handleMoveItem={handleMoveItem}
           handleKeyDown={handleKeyDown}
           />
-          </ModalExample>)
+          </ModalExample>
+        )
       }
     </div>
   );
