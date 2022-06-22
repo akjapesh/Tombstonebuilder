@@ -13,7 +13,7 @@ import { useToolState } from "./hooks/useToolState/useToolState";
 
 //components
 import CanvasItemConfiguration from "./canvasItemConfiguration/CanvasItemConfiguration";
-import CanvasSketchPad from "./canvasSketchPad/CanvasSketchPad";
+import CanvasSketchPad from "./canvasSketchPad/canvasSketchPad";
 
 function Canvas({
   children,
@@ -50,7 +50,8 @@ function Canvas({
     sketchRef,
     contentLoaderState,
     handleRemoveItemFromKeyboard,
-    handleMoveItem
+    handleMoveItem,
+    handleToolChange
   );
   useSetupCanvas(
     sketchRef,

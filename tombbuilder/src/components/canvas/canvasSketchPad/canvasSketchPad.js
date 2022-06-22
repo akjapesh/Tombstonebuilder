@@ -1,5 +1,5 @@
 import CanvasButtons from "../canvasButtons/CanvasButtons";
-import CanvasSketchField from "../canvasSketchField/CanvasSketchField";
+import CanvasSketchField from "../CanvasSketchField/CanvasSketchField";
 import classnames from "classnames";
 
 function CanvasSketchPad({

@@ -5,6 +5,7 @@ import { Button } from "baseui/button";
 import { numberFixed } from "../../../utils/handleFixingNumbers";
 import trashIcon from "../../../assets/trash.svg";
 import cloneIcon from "../../../assets/clone.svg";
+
 function CanvasItemConfiguration({
   handleRemoveItemFromKeyboard,
   handleCloneItem,
@@ -64,13 +65,11 @@ function CanvasItemConfiguration({
             return (
               <p className="app-config_inline" key={item}>
                 <label>{item}</label>
-                {/* eslint-disable react/no-direct-mutation-state */}
                 <input
                   type="number"
                   onChange={onChange}
                   value={value}
-                  // onKeyDown={disableKeyEvents}
-                  onFocus={disableKeyEvents}
+                  onKeyDown={disableKeyEvents}
                 />
               </p>
             );
