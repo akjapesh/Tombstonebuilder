@@ -1,5 +1,6 @@
 import React from "react";
-import { Input } from "baseui/input";
+// import { Input } from "baseui/input";
+
 import { numberFixed } from "../../../utils/handleFixingNumbers";
 function CanvasItemConfiguration({
   handleRemoveItemFromKeyboard,
@@ -26,7 +27,7 @@ function CanvasItemConfiguration({
             return (
               <>
                 <label>{item} (in px)</label>
-                <Input
+                <input
                   type="number"
                   onChange={onChange}
                   value={value}

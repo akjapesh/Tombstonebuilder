@@ -17,11 +17,12 @@ export default function ModalExample({ children, header }) {
 
   return (
     <React.Fragment>
-      <Button onClick={() => setIsOpen(true)}>
+      <button>
         Size & position of active item
-      </Button>
+        <Button onClick={() => setIsOpen(true)}>^</Button>
+      </button>
       <Modal onClose={close} isOpen={isOpen}>
-        <ModalHeader>{header}</ModalHeader>
+        <ModalHeader>CONFIGURATIONS</ModalHeader>
         <ModalBody>{children}</ModalBody>
         <ModalFooter>
           <ModalButton kind="tertiary" onClick={close}>
