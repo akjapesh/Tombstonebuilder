@@ -63,8 +63,8 @@ function Canvas({
     handleToolChange
   );
 
-  const isItemSelected =
-    activeItemCoords && Object.keys(activeItemCoords).length > 0;
+  // const isItemSelected =
+  //   activeItemCoords && Object.keys(activeItemCoords).length > 0;
   console.log(sketchRef.current);
   return (
     <>
@@ -76,9 +76,14 @@ function Canvas({
         handleRedo={handleRedo}
         handleUndo={handleUndo}
         handleToolChange={handleToolChange}
+        handleRemoveItemFromKeyboard={handleRemoveItemFromKeyboard}
+        handleCloneItem={handleCloneItem}
+        activeItemCoords={activeItemCoords}
+        handleMoveItem={handleMoveItem}
+        handleKeyDown={handleKeyDown}
       />
 
-      {isItemSelected && (
+      {/* {isItemSelected && (
         <>
           <ModalExample>
             <CanvasItemConfiguration
@@ -90,7 +95,7 @@ function Canvas({
             />
           </ModalExample>
         </>
-      )}
+      )} */}
     </>
   );
 }
