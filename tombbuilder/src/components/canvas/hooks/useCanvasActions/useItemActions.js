@@ -47,6 +47,7 @@ export const useItemActions = (
       newTarget.lockRotation = true;
       newTarget.angle = 0;
       newTarget.originY = "top";
+    newTarget.lockUniScaling = true;
     }
     return newTarget;
   }, []);

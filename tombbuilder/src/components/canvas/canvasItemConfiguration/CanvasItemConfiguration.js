@@ -5,6 +5,7 @@ import { Button } from "baseui/button";
 import { numberFixed } from "../../../utils/handleFixingNumbers";
 import trashIcon from "../../../assets/trash.svg";
 import cloneIcon from "../../../assets/clone.svg";
+
 function CanvasItemConfiguration({
   handleRemoveItemFromKeyboard,
   handleCloneItem,
@@ -20,24 +21,12 @@ function CanvasItemConfiguration({
   return (
     <div className="app-editor_item-editor">
       <p className="app-config_caption">Size & position of active item</p>
-<<<<<<< HEAD
-      <div className="row">
-        {/* eslint-disable react/no-direct-mutation-state */}
-        {/* <button disabled={!activeItemCoords.activeItemCoords} onClick={handleRemoveItemFromKeyboard}>DELETE</button> */}
-
-        <span>
-          <Button onClick={handleRemoveItemFromKeyboard}>Delete</Button>
-          {/* eslint-disable react/no-direct-mutation-state */}
-          <Button onClick={handleCloneItem}>copy</Button>
-          {/* eslint-disable react/no-direct-mutation-state */}
-=======
       <div className="row ">
         {/* <button disabled={!activeItemCoords.activeItemCoords} onClick={handleRemoveItemFromKeyboard}>DELETE</button> */}
 
         <span>
           <Button className="app-handler__trash" onClick={handleRemoveItemFromKeyboard}><img src={trashIcon} alt="remove item" /></Button>
           <Button className="app-handler__clone" onClick={handleCloneItem}><img src={cloneIcon} alt="clone tool" /></Button>
->>>>>>> origin/abhinav
         </span>
         {Object.keys(activeItemCoords)
           .filter((e) => e!== 'type' && e !== undefined)
@@ -76,13 +65,11 @@ function CanvasItemConfiguration({
             return (
               <p className="app-config_inline" key={item}>
                 <label>{item}</label>
-                {/* eslint-disable react/no-direct-mutation-state */}
                 <input
                   type="number"
                   onChange={onChange}
                   value={value}
-                  // onKeyDown={disableKeyEvents}
-                  onFocus={disableKeyEvents}
+                  onKeyDown={disableKeyEvents}
                 />
               </p>
             );

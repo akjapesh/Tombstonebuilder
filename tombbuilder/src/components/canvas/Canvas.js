@@ -50,7 +50,8 @@ function Canvas({
     sketchRef,
     contentLoaderState,
     handleRemoveItemFromKeyboard,
-    handleMoveItem
+    handleMoveItem,
+    handleToolChange
   );
   useSetupCanvas(
     sketchRef,
