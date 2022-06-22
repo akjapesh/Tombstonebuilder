@@ -21,7 +21,6 @@ function CanvasItemConfiguration({
     <div className="app-editor_item-editor">
       <p className="app-config_caption">Size & position of active item</p>
       <div className="row ">
-        {/* <button disabled={!activeItemCoords.activeItemCoords} onClick={handleRemoveItemFromKeyboard}>DELETE</button> */}
 
         <span>
           <Button
