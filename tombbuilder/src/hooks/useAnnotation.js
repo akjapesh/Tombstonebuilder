@@ -8,7 +8,7 @@ export const useAnnotation = () => {
   const onAnnotationChangeHandler = useCallback((onAnnotationChange) => {
     onAnnotationChange();
   }, []);
-  
+
   return {
     updateAnnotationHandler,
     annotation,

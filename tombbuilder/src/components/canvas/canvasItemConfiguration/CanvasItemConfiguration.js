@@ -4,7 +4,6 @@ import { Button } from "baseui/button";
 import { numberFixed } from "../../../utils/handleFixingNumbers";
 import trashIcon from "../../../assets/trash.svg";
 import cloneIcon from "../../../assets/clone.svg";
-
 function CanvasItemConfiguration({
   handleRemoveItemFromKeyboard,
   handleCloneItem,
