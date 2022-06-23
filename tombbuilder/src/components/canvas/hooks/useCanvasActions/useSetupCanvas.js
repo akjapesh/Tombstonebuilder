@@ -18,12 +18,12 @@ export const useSetupCanvas = (
         updateAnnotationHandler([...sketchRef.current._fc.toJSON().objects]);
       },
       "selection:created": (item) => {
-        console.log("item: ",item);
+        // console.log("item: ",item);
         setCoords(item.selected[0]);
         item.target = handleAddItemInCanvas(item.target);
       },
       "selection:updated": (item) => {
-        console.log("item: ",item);
+        // console.log("item: ",item);
         setCoords(item.selected[0]);
       },
       "selection:cleared": () => {

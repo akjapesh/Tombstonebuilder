@@ -3,6 +3,7 @@ import React from "react";
 import { numberFixed } from "../../../utils/handleFixingNumbers";
 import trashIcon from "../../../assets/trash.svg";
 import cloneIcon from "../../../assets/clone.svg";
+import { Annotation } from "@syncfusion/ej2-react-diagrams";
 
 function CanvasItemConfiguration({
   handleRemoveItemFromKeyboard,
@@ -20,21 +21,23 @@ function CanvasItemConfiguration({
     <div className="app-editor_item-editor">
       <div className="row ">
         <span>
-          <button
+          <Button
             className="app-handler__trash"
             onClick={handleRemoveItemFromKeyboard}
           >
             <img src={trashIcon} alt="remove item" />
-          </button>
-          <button className="app-handler__clone" onClick={handleCloneItem}>
+          </Button>
+          <Button className="app-handler__clone" onClick={handleCloneItem}>
             <img src={cloneIcon} alt="clone tool" />
-          </button>
+          </Button>
         </span>
 
         {Object.keys(activeItemCoords)
           .filter((e) => e !== "type" && e !== undefined)
           .map((item) => {
-            const value = numberFixed(activeItemCoords[item]);
+            let value = numberFixed(activeItemCoords[item]);
+            if (isNaN(value)) value = 0;
+            // console.log("activeItemCoords: ",item,value);
             const onChange = (e) => {
               handleMoveItem(item, numberFixed(Number(e.target.value)));
             };

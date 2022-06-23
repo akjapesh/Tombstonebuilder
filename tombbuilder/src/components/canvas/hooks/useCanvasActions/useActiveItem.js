@@ -23,6 +23,8 @@ export const useActiveItem = () => {
     setActiveItemCoords({});
   };
   const handleMoveActiveItem = (key, value) => {
+    console.log(typeof(value),value);
+
     setActiveItemCoords({ ...activeItemCoords, [key]: value });
   };
   return {

@@ -60,9 +60,9 @@ function Canvas({
     handleToolChange
   );
 
-  // const isItemSelected =
-  //   activeItemCoords && Object.keys(activeItemCoords).length > 0;
-  console.log(sketchRef.current);
+  const isItemSelected =
+    activeItemCoords && Object.keys(activeItemCoords).length > 0;
+  // console.log(sketchRef.current);
   return (
     <>
       <CanvasSketchPad

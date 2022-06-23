@@ -26,6 +26,13 @@ export const annotationsToCode = (annotationArray, contentLoaderState) => {
     `;
   }
 
+  // const sharedCode = atob(window.location.href.substring(22));
+  // console.log(code);
+  // if(sharedCode.length)
+  // {
+  //   code = code + sharedCode.substring(257,sharedCode.length - 95);
+  // }
+
   annotationArray.forEach((a) => {
     const height = numberFixed(a.height * a.scaleY);
 
@@ -54,7 +61,6 @@ export const annotationsToCode = (annotationArray, contentLoaderState) => {
       `;
     }
   });
-
   code += `
           </ContentLoader>
           
