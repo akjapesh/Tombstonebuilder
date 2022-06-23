@@ -15,7 +15,7 @@ export const useSetupCanvas = (
         handleToolChange(tools.Select);
       },
       "after:render": () => {
-        updateAnnotationHandler([...sketchRef.current._fc._objects]);
+        updateAnnotationHandler([...sketchRef.current._fc.toJSON().objects]);
       },
       "selection:created": (item) => {
         setCoords(item.selected[0]);
@@ -29,7 +29,6 @@ export const useSetupCanvas = (
       },
       "object:modified": (item) => {
         setCoords(item.target);
-        updateAnnotationHandler([...sketchRef.current._fc._objects]);
       },
       "object:added": (item) =>
         (item.target = handleAddItemInCanvas(item.target)),
