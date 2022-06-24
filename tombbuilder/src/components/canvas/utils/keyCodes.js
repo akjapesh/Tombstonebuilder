@@ -10,4 +10,7 @@ export default {
   COPY: 67,
   PASTE: 86,
   UNDO: 90,
+  SELECT: 49,
+  RECTANGLE: 50,
+  CIRCLE: 51,
 };

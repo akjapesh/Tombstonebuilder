@@ -7,12 +7,11 @@ export const SHIFTING_BY_OFFSET = 16;
 export const useArrowKeysNavigation = (
   activeItemCoords,
   contentLoaderState,
-  handleMoveItem
+  handleMoveItem,
 ) => {
   const handleArrowKeysNavigation = useCallback(
     (event) => {
       const isItemSelected = activeItemCoords;
-
       const rightSideBoundary =
         contentLoaderState.width - Number(activeItemCoords.width?activeItemCoords.width:2*activeItemCoords.radius);
       const bottomSideBoundary =
