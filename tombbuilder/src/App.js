@@ -8,8 +8,8 @@ import { CopyToClipboard } from "react-copy-to-clipboard";
 //utils
 import { annotationsToCode } from "./utils/annotationsToCode";
 
-//hoooks
-import { useEffect, useState, useCallback, useRef } from "react";
+//hooks
+import { useEffect, useState, useCallback } from "react";
 import { useAnnotation } from "./hooks/useAnnotation";
 import { useContentLoader } from "./hooks/useContentLoader";
 import { useAnnotaionToCanvas } from "./components/canvas/hooks/useAnnotationToCanvas/useAnnotationToCanvas";
