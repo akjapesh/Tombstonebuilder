@@ -1,5 +1,5 @@
 import CanvasButtons from "../canvasButtons/CanvasButtons";
-import CanvasSketchField from "../CanvasSketchField/CanvasSketchField";
+import CanvasSketchField from "../canvasSketchField/CanvasSketchField";
 import classnames from "classnames";
 
 function CanvasSketchPad({
@@ -33,9 +33,6 @@ function CanvasSketchPad({
       />
       <CanvasButtons
         tool={tool}
-        sketchRef={sketchRef}
-        handleUndo={handleUndo}
-        handleRedo={handleRedo}
         handleToolChange={handleToolChange}
         handleRemoveItemFromKeyboard={handleRemoveItemFromKeyboard}
         handleCloneItem={handleCloneItem}

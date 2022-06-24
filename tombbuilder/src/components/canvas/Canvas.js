@@ -12,10 +12,9 @@ import { useSetKeyEvents } from "./hooks/useSetKeyEvents/useSetKeyEvents";
 import { useToolState } from "./hooks/useToolState/useToolState";
 
 //components
-import CanvasItemConfiguration from "./canvasItemConfiguration/CanvasItemConfiguration";
-
+// import CanvasItemConfiguration from "./canvasItemConfiguration/CanvasItemConfiguration";
 import CanvasSketchPad from "./canvasSketchPad/CanvasSketchPad";
-import ModalExample from "./modalExample/ModalExample";
+// import ModalExample from "./modalExample/ModalExample";
 
 function Canvas({
   children,
@@ -25,14 +24,18 @@ function Canvas({
 }) {
   const { tool, handleToolChange } = useToolState();
 
+  const sketchRef = useRef(null);
+
+  useEffect(() => {
+    handleUpdateSketchRef(sketchRef);
+  }, [sketchRef, handleUpdateSketchRef]);
+
   const {
     setCoords,
     activeItemCoords,
     handleResetActiveItem,
     handleMoveActiveItem,
   } = useActiveItem();
-
-  const sketchRef = useRef(null);
 
   const {
     handleMoveItem,
@@ -60,7 +63,6 @@ function Canvas({
     handleKeyDown,
     handleToolChange
   );
-
 
   // const isItemSelected =
   //   activeItemCoords && Object.keys(activeItemCoords).length > 0;
