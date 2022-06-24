@@ -24,6 +24,7 @@ function CanvasSketchPad({
       })}
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
       key="canvas"
 =======
       key="canvas" style={{"::before":{width:contentLoaderState.width,height:contentLoaderState.height}}}
@@ -31,6 +32,9 @@ function CanvasSketchPad({
 =======
       key="canvas" style={{"::before":{width:contentLoaderState.width,height:contentLoaderState.height}}}
 >>>>>>> 15f690f (Merge branch 'abhinav' of https://github.com/akjapesh/Tombstonebuilder into abhinav)
+=======
+      key="canvas" style={{"::before":{width:contentLoaderState.width,height:contentLoaderState.height}}}
+>>>>>>> 0bb0fab (merged soham(shapes clipping to grid) with abhinav(center alignment))
     >
       {children}
 

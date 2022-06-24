@@ -27,6 +27,7 @@ function CanvasItemConfiguration({
 <<<<<<< HEAD
       <div className="row ">
         <span>
+<<<<<<< HEAD
           <Button
             className="app-handler__trash"
             onClick={handleRemoveItemFromKeyboard}
@@ -48,6 +49,10 @@ function CanvasItemConfiguration({
 >>>>>>> 15f690f (Merge branch 'abhinav' of https://github.com/akjapesh/Tombstonebuilder into abhinav)
 =======
 >>>>>>> 15f690f (Merge branch 'abhinav' of https://github.com/akjapesh/Tombstonebuilder into abhinav)
+=======
+          <Button className="app-handler__trash" onClick={handleRemoveItemFromKeyboard}><img src={trashIcon} alt="remove item" /></Button>
+          <Button className="app-handler__clone" onClick={handleCloneItem}><img src={cloneIcon} alt="clone tool" /></Button>
+>>>>>>> 0bb0fab (merged soham(shapes clipping to grid) with abhinav(center alignment))
         </span>
 
         {Object.keys(activeItemCoords)
@@ -56,12 +61,15 @@ function CanvasItemConfiguration({
             let value = numberFixed(activeItemCoords[item]);
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
             if (isNaN(value)) value = 0;
             // console.log("activeItemCoords: ",item,value);
 =======
 >>>>>>> 15f690f (Merge branch 'abhinav' of https://github.com/akjapesh/Tombstonebuilder into abhinav)
 =======
 >>>>>>> 15f690f (Merge branch 'abhinav' of https://github.com/akjapesh/Tombstonebuilder into abhinav)
+=======
+>>>>>>> 0bb0fab (merged soham(shapes clipping to grid) with abhinav(center alignment))
             const onChange = (e) => {
               handleMoveItem(item, numberFixed(Number(e.target.value)));
             };

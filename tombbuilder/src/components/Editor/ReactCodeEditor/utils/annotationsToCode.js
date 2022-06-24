@@ -86,6 +86,7 @@ export const annotationsToCode = (annotationArray, contentLoaderState) => {
   return code.trimRight();
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 };
 =======
 };
@@ -93,3 +94,6 @@ export const annotationsToCode = (annotationArray, contentLoaderState) => {
 =======
 };
 >>>>>>> 15f690f (Merge branch 'abhinav' of https://github.com/akjapesh/Tombstonebuilder into abhinav)
+=======
+};
+>>>>>>> 0bb0fab (merged soham(shapes clipping to grid) with abhinav(center alignment))

@@ -188,6 +188,7 @@ body {
   position: absolute;
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
   top: 1.5em;
   left: 1.5em;
   right: 1.5em;
@@ -205,6 +206,14 @@ body {
 >>>>>>> 15f690f (Merge branch 'abhinav' of https://github.com/akjapesh/Tombstonebuilder into abhinav)
 =======
 >>>>>>> 15f690f (Merge branch 'abhinav' of https://github.com/akjapesh/Tombstonebuilder into abhinav)
+=======
+  /* top: 1.5em;
+  left: 1.5em;
+  right: 1.5em;
+  bottom: 5em; */
+  width: 600px;
+  height : 500px;
+>>>>>>> 0bb0fab (merged soham(shapes clipping to grid) with abhinav(center alignment))
   /* background-image: -webkit-repeating-radial-gradient(
     top center,
     rgba(0, 0, 0, 0.9),
