@@ -9,10 +9,11 @@ export function codeToAnnotations(code) {
     if (item !== null) {
       if (element.includes("<rect ")) {
         annotationObject.type = "rect";
-        annotationObject.x = item.getAttribute("x");
-        annotationObject.y = item.getAttribute("y");
-        annotationObject.width = item.getAttribute("width");
-        annotationObject.height = item.getAttribute("height");
+        annotationObject.left = numberFixed(item.getAttribute("x"));
+        annotationObject.top = numberFixed(item.getAttribute("y"));
+        annotationObject.width = numberFixed(item.getAttribute("width"));
+        annotationObject.height = numberFixed(item.getAttribute("height"));
+        annotationObject.fill = "transparent";
         annotationObject.ry = item.getAttribute("ry");
         annotationObject.rx = item.getAttribute("rx");
       } else if (element.includes("<circle ")) {
@@ -36,6 +37,6 @@ export function codeToAnnotations(code) {
     }
     return null;
   });
-  
+
   return annotationArray.filter((e) => e !== undefined && e);
 }

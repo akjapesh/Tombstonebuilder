@@ -1,5 +1,5 @@
 import CanvasButtons from "../canvasButtons/CanvasButtons";
-import CanvasSketchField from "../CanvasSketchField/CanvasSketchField";
+import CanvasSketchField from "../canvasSketchField/CanvasSketchField";
 import classnames from "classnames";
 
 function CanvasSketchPad({
@@ -12,27 +12,28 @@ function CanvasSketchPad({
   handleToolChange,
 }) {
   return (
-    
-      <div className={classnames('app-canvas', {
-            'app-canvas__draw': tool === 'rectangle' || tool === 'circle',
-            'app-canvas__grid-visibility-off': !contentLoaderState.gridVisibility,
-          })} key="canvas">
-        {children}
+    <div
+      className={classnames("app-canvas", {
+        "app-canvas__draw": tool === "rectangle" || tool === "circle",
+        "app-canvas__grid-visibility-off": !contentLoaderState.gridVisibility,
+      })}
+      key="canvas"
+    >
+      {children}
 
-        <CanvasSketchField
-          contentLoaderState={contentLoaderState}
-          tool={tool}
-          sketchRef={sketchRef}
-        />
-        <CanvasButtons
-          tool={tool}
-          sketchRef={sketchRef}
-          handleUndo={handleUndo}
-          handleRedo={handleRedo}
-          handleToolChange={handleToolChange}
-        />
-      </div>
-    
+      <CanvasSketchField
+        contentLoaderState={contentLoaderState}
+        tool={tool}
+        sketchRef={sketchRef}
+      />
+      <CanvasButtons
+        tool={tool}
+        sketchRef={sketchRef}
+        handleUndo={handleUndo}
+        handleRedo={handleRedo}
+        handleToolChange={handleToolChange}
+      />
+    </div>
   );
 }
 
