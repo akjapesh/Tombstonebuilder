@@ -23,26 +23,18 @@ function CanvasItemConfiguration({
       <div className="row ">
 
         <span>
-          <Button
-            className="app-handler__trash"
-            onClick={handleRemoveItemFromKeyboard}
-          >
-            <img src={trashIcon} alt="remove item" />
-          </Button>
-          <Button className="app-handler__clone" onClick={handleCloneItem}>
-            <img src={cloneIcon} alt="clone tool" />
-          </Button>
+          <Button className="app-handler__trash" onClick={handleRemoveItemFromKeyboard}><img src={trashIcon} alt="remove item" /></Button>
+          <Button className="app-handler__clone" onClick={handleCloneItem}><img src={cloneIcon} alt="clone tool" /></Button>
         </span>
         {Object.keys(activeItemCoords)
           .filter((e) => e !== "type" && e !== undefined)
           .map((item) => {
             let value = numberFixed(activeItemCoords[item]);
-            if(isNaN(value))
-              value = 0 ;
-    // console.log("activeItemCoords: ",item,value);
             const onChange = (e) => {
               handleMoveItem(item, numberFixed(Number(e.target.value)));
             };
+            if(isNaN(value))
+              value = 0 ;
             return (
               <p className="app-config_inline" key={item}>
                 <label>{item}</label>

@@ -1,5 +1,7 @@
 import { useEffect } from "react";
 import tools from "../../../../third-parts/react-sketch/src/tools";
+import {centerAllign} from "../../utils/centerAllign";
+
 export const useSetupCanvas = (
   sketchRef,
   updateAnnotationHandler,
@@ -9,6 +11,8 @@ export const useSetupCanvas = (
   handleKeyDown,
   handleToolChange
 ) => {
+  const {clearCenterAllignLines,connectCenterAllignLine}=centerAllign(sketchRef);
+
   useEffect(() => {
     sketchRef.current._fc.on({
       "mouse:up": () => {
@@ -28,14 +32,18 @@ export const useSetupCanvas = (
       },
       "selection:cleared": () => {
         resetActiveItemhandler();
+        clearCenterAllignLines();
       },
       "object:modified": (item) => {
         setCoords(item.target);
       },
       "object:added": (item) =>
         (item.target = handleAddItemInCanvas(item.target)),
-      "object:moving": (item) =>
-        (item.target = handleAddItemInCanvas(item.target)),
+      "object:moving": (item) =>{
+        (item.target = handleAddItemInCanvas(item.target));
+        connectCenterAllignLine(item.target);
+        
+      },
     });
   }, []);
 

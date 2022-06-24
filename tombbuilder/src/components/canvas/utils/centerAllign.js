@@ -16,9 +16,9 @@ const calculateCenter=(target)=>{
       const newWidth=numberFixed(target.width)-numberFixed(target.width)%SHIFTING_BY_OFFSET;
       center.centerY=newTop+newHeight/2;
       center.centerX=newLeft+newWidth/2;
-      center.centerX=numberFixed(center.centerX)-numberFixed(center.centerX)%SHIFTING_BY_OFFSET;
+      center.centerX=numberFixed(center.centerX);
 
-      center.centerY=numberFixed(center.centerY)-numberFixed(center.centerY)%SHIFTING_BY_OFFSET;
+      center.centerY=numberFixed(center.centerY);
     
     return center;
   }
