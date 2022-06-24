@@ -1,8 +1,10 @@
+//libraries
 import React from "react";
-import ReactCodeEditor from "./ReactCodeEditor/ReactCodeEditor";
+
+//component
+import ReactCodeEditor from "./reactCodeEditor/ReactCodeEditor";
 
 function Editor({ annotation, contentLoaderState }) {
-  
   return (
     <div>
       <ReactCodeEditor
