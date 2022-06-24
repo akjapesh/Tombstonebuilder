@@ -5,19 +5,17 @@ import classnames from "classnames";
 // utils
 import Tools from "../../../third-parts/react-sketch/src/tools";
 // Component
-import { Button } from "baseui/button";
 import selectIcon from "../../../assets/select.svg";
 import rectIcon from "../../../assets/rect.svg";
 import circleIcon from "../../../assets/circle.svg";
 import ModalExample from "../modalExample/ModalExample"; 
 import CanvasItemConfiguration from "../canvasItemConfiguration/CanvasItemConfiguration";
+import trashIcon from "../../../assets/trash.svg";
+import cloneIcon from "../../../assets/clone.svg";
 
 
 function CanvasButtons({
   tool,
-  sketchRef,
-  handleUndo,
-  handleRedo,
   handleToolChange,
   handleRemoveItemFromKeyboard,
   handleCloneItem,
@@ -32,15 +30,15 @@ function CanvasButtons({
 
   return (
     <div className="app-handlers button-group align-center" key="handlers">
-      <Button
+      <button
         className={classnames("app-handlers__tool", {
           "app-handlers__active": tool === "select",
         })}
         disabled={true}
       >
         <img src={selectIcon} alt="select tool" />
-      </Button>
-      <Button
+      </button>
+      <button
         className={classnames("app-handlers__tool", {
           "app-handlers__active": tool === "rectangle",
         })}
@@ -49,8 +47,8 @@ function CanvasButtons({
         }}
       >
         <img src={rectIcon} alt="rect tool" />
-      </Button>
-      <Button
+      </button>
+      <button
         className={classnames("app-handlers__tool", {
           "app-handlers__active": tool === "circle",
         })}
@@ -59,17 +57,28 @@ function CanvasButtons({
         }}
       >
         <img src={circleIcon} alt="circle tool" />
-      </Button>
+      </button>
+          
+
+
       {isItemSelected && (
+      <>
+      <button
+        className="app-handlers__tool app-handler__trash"
+        onClick={handleRemoveItemFromKeyboard}>
+        <img src={trashIcon} alt="remove item" />
+      </button>
+      <button className="app-handler__clone" onClick={handleCloneItem}>
+        <img src={cloneIcon} alt="clone tool" />
+      </button>
           <ModalExample>
           <CanvasItemConfiguration
-          handleRemoveItemFromKeyboard={handleRemoveItemFromKeyboard}
-          handleCloneItem={handleCloneItem}
           activeItemCoords={activeItemCoords}
           handleMoveItem={handleMoveItem}
           handleKeyDown={handleKeyDown}
           />
           </ModalExample>
+          </>
         )
       }
     </div>

@@ -12,9 +12,9 @@ import { useSetKeyEvents } from "./hooks/useSetKeyEvents/useSetKeyEvents";
 import { useToolState } from "./hooks/useToolState/useToolState";
 
 //components
-import CanvasItemConfiguration from "./canvasItemConfiguration/CanvasItemConfiguration";
+// import CanvasItemConfiguration from "./canvasItemConfiguration/CanvasItemConfiguration";
 import CanvasSketchPad from "./canvasSketchPad/CanvasSketchPad";
-import ModalExample from "./modalExample/ModalExample";
+// import ModalExample from "./modalExample/ModalExample";
 
 function Canvas({
   children,
