@@ -12,17 +12,17 @@ function CanvasItemConfiguration({
     <div className="app-editor_item-editor">
       <p className="app-config_caption">Size & position of active item</p>
       <div className="row">
-        {/* <button disabled={!activeItemCoords} onClick={handleRemoveItemFromKeyboard}>DELETE</button> */}
+        {/* <button disabled={!activeItemCoords.activeItemCoords} onClick={handleRemoveItemFromKeyboard}>DELETE</button> */}
 
         <span>
           <Button onClick={handleRemoveItemFromKeyboard}>Delete</Button>
           <Button onClick={handleCloneItem}>copy</Button>
         </span>
 
-        {Object.keys(activeItemCoords)
+        {Object.keys(activeItemCoords.activeItemCoords)
           .filter((e) => e !== "type" && e !== undefined)
           .map((item) => {
-            const value = numberFixed(activeItemCoords[item]);
+            const value = numberFixed(activeItemCoords.activeItemCoords[item]);
             const onChange = (e) => {
               handleMoveItem(item, numberFixed(Number(e.target.value)));
             };

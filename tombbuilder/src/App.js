@@ -4,9 +4,12 @@ import { LiveProvider, LivePreview } from "react-live";
 import { annotationsToCode } from "./utils/annotationsToCode";
 import { useAnnotation } from "./hooks/useAnnotation";
 import { useContentLoader } from "./hooks/useContentLoader";
+import { useAnnotaionToCanvas } from "./components/canvas/hooks/useAnnotationToCanvas/useAnnotationToCanvas";
+
+//Components
 import Canvas from "./components/canvas/Canvas";
-import CanvasConfiguration from "./components/canvasConfiguration/canvasConfiguration";
-import Editor from "./components/Editor/Editor";
+import CanvasConfiguration from "./components/canvasConfiguration/CanvasConfiguration";
+import Editor from "./components/editor/Editor";
 
 //styles
 import "./styles/styles.css";
