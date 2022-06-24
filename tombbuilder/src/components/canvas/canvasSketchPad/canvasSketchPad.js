@@ -10,6 +10,11 @@ function CanvasSketchPad({
   handleRedo,
   handleUndo,
   handleToolChange,
+  handleRemoveItemFromKeyboard,
+  handleCloneItem,
+  activeItemCoords,
+  handleMoveItem,
+  handleKeyDown,
 }) {
   return (
     <div
@@ -28,10 +33,12 @@ function CanvasSketchPad({
       />
       <CanvasButtons
         tool={tool}
-        sketchRef={sketchRef}
-        handleUndo={handleUndo}
-        handleRedo={handleRedo}
         handleToolChange={handleToolChange}
+        handleRemoveItemFromKeyboard={handleRemoveItemFromKeyboard}
+        handleCloneItem={handleCloneItem}
+        activeItemCoords={activeItemCoords}
+        handleMoveItem={handleMoveItem}
+        handleKeyDown={handleKeyDown}
       />
     </div>
   );

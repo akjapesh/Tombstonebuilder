@@ -12,8 +12,9 @@ import { useSetKeyEvents } from "./hooks/useSetKeyEvents/useSetKeyEvents";
 import { useToolState } from "./hooks/useToolState/useToolState";
 
 //components
-import CanvasItemConfiguration from "./canvasItemConfiguration/CanvasItemConfiguration";
+// import CanvasItemConfiguration from "./canvasItemConfiguration/CanvasItemConfiguration";
 import CanvasSketchPad from "./canvasSketchPad/CanvasSketchPad";
+// import ModalExample from "./modalExample/ModalExample";
 
 function Canvas({
   children,
@@ -63,9 +64,9 @@ function Canvas({
     handleToolChange
   );
 
-  const isItemSelected =
-    activeItemCoords && Object.keys(activeItemCoords).length > 0;
-  
+  // const isItemSelected =
+  //   activeItemCoords && Object.keys(activeItemCoords).length > 0;
+  console.log(sketchRef.current);
   return (
     <>
       <CanvasSketchPad
@@ -76,17 +77,26 @@ function Canvas({
         handleRedo={handleRedo}
         handleUndo={handleUndo}
         handleToolChange={handleToolChange}
+        handleRemoveItemFromKeyboard={handleRemoveItemFromKeyboard}
+        handleCloneItem={handleCloneItem}
+        activeItemCoords={activeItemCoords}
+        handleMoveItem={handleMoveItem}
+        handleKeyDown={handleKeyDown}
       />
 
-      {isItemSelected && (
-        <CanvasItemConfiguration
-          handleRemoveItemFromKeyboard={handleRemoveItemFromKeyboard}
-          handleCloneItem={handleCloneItem}
-          activeItemCoords={activeItemCoords}
-          handleMoveItem={handleMoveItem}
-          handleKeyDown={handleKeyDown}
-        />
-      )}
+      {/* {isItemSelected && (
+        <>
+          <ModalExample>
+            <CanvasItemConfiguration
+              handleRemoveItemFromKeyboard={handleRemoveItemFromKeyboard}
+              handleCloneItem={handleCloneItem}
+              activeItemCoords={activeItemCoords}
+              handleMoveItem={handleMoveItem}
+              handleKeyDown={handleKeyDown}
+            />
+          </ModalExample>
+        </>
+      )} */}
     </>
   );
 }
