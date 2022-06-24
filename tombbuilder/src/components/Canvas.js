@@ -5,7 +5,8 @@ import classnames from "classnames";
 
 import { Button } from "baseui/button";
 import { Input } from "baseui/input";
-function Canvas(props) {
+
+function Canvas({ updateAnnotationHandler, contentLoaderState }) {
   const [tool, setTool] = useState(Tools.Select);
   const [coordsActiveItem, setCordState] = useState({});
   const numberFixed = (num) => Number(Number(num).toFixed());
@@ -18,7 +19,6 @@ function Canvas(props) {
         (newTarget.type === "activeSelection" &&
           newTarget._objects.some((o) => o.type === "circle")));
     if (hasCircle) {
-      newTarget.lockUniScaling = true;
       newTarget.lockRotation = true;
       newTarget.angle = 0;
       newTarget.originY = "top";
@@ -36,23 +36,36 @@ function Canvas(props) {
     ) {
       newTarget.lockRotation = true;
       newTarget.angle = 0;
-    }
-    else if(newTarget&&(newTarget.type === "activeSelection" &&
-    newTarget._objects.some((o) => o.type === "rectangle"))){
-        newTarget.lockRotation = true;
-        newTarget.angle=0;
+    } else if (
+      newTarget &&
+      newTarget.type === "activeSelection" &&
+      newTarget._objects.some((o) => o.type === "rectangle")
+    ) {
+      newTarget.lockRotation = true;
+      newTarget.angle = 0;
+    } else if (
+      newTarget &&
+      (newTarget.type === "rect" ||
+        (newTarget.type === "activeSelection" &&
+          newTarget._objects.some((o) => o.type === "rect")))
+    ) {
+      newTarget.lockRotation = true;
+      newTarget.angle = 0;
     }
     return newTarget;
   };
-  const setCoords = useCallback((target) => {
-    const { type, width, height, left, top, radius, rx } = target;
-    if (type === "circle") {
-      return setCordState({ coordsActiveItem: { radius, left, top, type } });
-    }
-    return setCordState({
-      coordsActiveItem: { width, height, left, top, boxRadius: rx, type },
-    });
-  }, []);
+  const setCoords = useCallback(
+    (target) => {
+      const { type, width, height, left, top, radius, rx } = target;
+      if (type === "circle") {
+        return setCordState({ coordsActiveItem: { radius, left, top, type } });
+      }
+      return setCordState({
+        coordsActiveItem: { width, height, left, top, boxRadius: rx, type },
+      });
+    },
+    [setCordState]
+  );
 
   useEffect(() => {
     sketchProperty.current._fc.on({
@@ -92,30 +105,24 @@ function Canvas(props) {
     [coordsActiveItem]
   );
 
-  const SideMovement = useCallback(
-    (event) => {
-      const hasItemSelected = coordsActiveItem.coordsActiveItem;
-      if (hasItemSelected) {
-        event.preventDefault();
-        if (event.keyCode === 37 && coordsActiveItem.coordsActiveItem.left >= 4)
-          //left
-          moveItem("left", coordsActiveItem.coordsActiveItem.left - 4);
-        else if (
-          event.keyCode === 38 &&
-          coordsActiveItem.coordsActiveItem.top >= 4
-        )
-          //up
-          moveItem("top", coordsActiveItem.coordsActiveItem.top - 4);
-        else if (event.keyCode === 39)
-          //right
-          moveItem("left", coordsActiveItem.coordsActiveItem.left + 4);
-        else if (event.keyCode === 40)
-          //down
-          moveItem("top", coordsActiveItem.coordsActiveItem.top + 4);
-      }
-    },
-    [coordsActiveItem]
-  );
+  const SideMovement = (event) => {
+    const hasItemSelected = coordsActiveItem.coordsActiveItem;
+    if (hasItemSelected) {
+      event.preventDefault();
+      if (event.keyCode === 37 && coordsActiveItem.coordsActiveItem.left >= 4)
+        //left
+        moveItem("left", coordsActiveItem.coordsActiveItem.left - 4);
+      else if (event.keyCode === 38)
+        //up
+        moveItem("top", coordsActiveItem.coordsActiveItem.top - 4);
+      else if (event.keyCode === 39)
+        //right
+        moveItem("left", coordsActiveItem.coordsActiveItem.left + 4);
+      else if (event.keyCode === 40)
+        //down
+        moveItem("top", coordsActiveItem.coordsActiveItem.top + 4);
+    }
+  };
   const cloneItem = () => {
     if (sketchProperty.current) {
       sketchProperty.current.copy();
@@ -130,6 +137,7 @@ function Canvas(props) {
     sketchProperty.current._fc._objects.map((value) => {
       if (cnt) {
         setCoords(value);
+        coordsActiveItem.focus();
         cnt = 0;
       }
       if (
@@ -141,40 +149,51 @@ function Canvas(props) {
       return null;
     });
   };
-  const handleKeyDown = useCallback(
-    (event) => {
-      const DELETE = 8;
-      const LEFT_SIDE = 37;
-      const UPSIDE = 38;
-      const RIGHT_SIDE = 39;
-      const DOWNSIDE = 40;
-      const TAB_KEY = 9;
+  const handleKeyDown = (event) => {
+    const DELETE = 8;
+    const LEFT_SIDE = 37;
+    const UPSIDE = 38;
+    const RIGHT_SIDE = 39;
+    const DOWNSIDE = 40;
+    const TAB_KEY = 9;
+    const COPY = 67;
+    const UNDO = 90;
 
-      let charCode = String.fromCharCode(event.which).toLowerCase();
-      if ((event.metaKey || event.ctrlKey) && charCode === "c") {
-        cloneItem();
-      }
+    if (
+      (event.metaKey || event.ctrlKey) &&
+      event.shiftKey &&
+      event.key === "z"
+    ) {
+      Redo();
+    } else if ((event.metaKey || event.ctrlKey) && !event.shiftKey) {
       const actionsByKeyCode = {
         [DELETE]: removeItemFromKeyboard,
         [RIGHT_SIDE]: SideMovement,
         [LEFT_SIDE]: SideMovement,
         [UPSIDE]: SideMovement,
         [DOWNSIDE]: SideMovement,
-        // [TAB_KEY]: TabAnotherShape,
+        [TAB_KEY]: TabAnotherShape,
+        [COPY]: cloneItem,
+        [UNDO]: Undo,
       };
-      /* eslint-disable */
       actionsByKeyCode[event.keyCode]?.(event);
-      /* eslint-enable */
-    },
-    [SideMovement, removeItemFromKeyboard]
-  );
+    }
+  };
+
+  const Undo = () => {
+    sketchProperty.current.undo();
+  };
+
+  const Redo = () => {
+    sketchProperty.current.redo();
+  };
 
   useEffect(() => {
     document.addEventListener("keydown", handleKeyDown, false);
     return () => {
       document.removeEventListener("keydown", handleKeyDown, false);
     };
-  }, [handleKeyDown]);
+  });
   const hasItemSelected =
     coordsActiveItem.coordsActiveItem &&
     Object.keys(coordsActiveItem.coordsActiveItem).length > 0;
@@ -204,57 +223,47 @@ function Canvas(props) {
           {props.children}
           {
             <SketchField
-              width={props.contentLoaderState.width}
-              height={props.contentLoaderState.height}
+              width={500}
+              height={500}
+              // backgroundColor={black}
               tool={tool}
               lineWidth={0}
               color="black"
               ref={sketchProperty}
             />
           }
-
-          <div className="app-handlers" key="handlers">
-            <button
-              className=" app-handlers__tool"
-              onClick={() => {
-                setTool(Tools.Select);
-              }}
-            >
-              Select
-            </button>
-            <button
-              className="app-handlers__tool"
-              onClick={() => {
-                setTool(Tools.Rectangle);
-              }}
-            >
-              Rectangle
-            </button>
-            <button
-              className="app-handlers__tool"
-              onClick={() => {
-                setTool(Tools.Circle);
-              }}
-            >
-              Circle
-            </button>
-            <button
-              className="app-handlers__tool"
-              onClick={() => {
-                sketchProperty.current.undo();
-              }}
-            >
-              UNDO
-            </button>
-            <button
-              className="app-handlers__tool"
-              onClick={() => {
-                sketchProperty.current.redo();
-              }}
-            >
-              REDO
-            </button>
-          </div>
+        </div>
+        <div className="app-handlers" key="handlers">
+          <Button
+            className=" app-handlers__tool"
+            onClick={() => {
+              setTool(Tools.Select);
+            }}
+          >
+            Select
+          </Button>
+          <Button
+            className="app-handlers__tool"
+            onClick={() => {
+              setTool(Tools.Rectangle);
+            }}
+          >
+            Rectangle
+          </Button>
+          <Button
+            className="app-handlers__tool"
+            onClick={() => {
+              setTool(Tools.Circle);
+            }}
+          >
+            Circle
+          </Button>
+          <Button className="app-handlers__tool" onClick={Undo}>
+            UNDO
+          </Button>
+          <Button className="app-handlers__tool" onClick={Redo}>
+            REDO
+          </Button>
         </div>
       </div>
       {hasItemSelected && (
@@ -277,36 +286,36 @@ function Canvas(props) {
                 const onChange = (e) => {
                   moveItem(item, numberFixed(e.target.value));
                 };
-                if (item === "boxRaadius") {
-                  return (
-                    <p
-                      style={{ width: "62.5%", display: "flex" }}
-                      className="app-config_inline"
-                      key={item}
-                    >
-                      <Input
-                        type="range"
-                        min={0}
-                        max={100}
-                        value={value}
-                        onChange={onChange}
-                        style={{ flex: 1 }}
-                      />
-                      <Input
-                        id="radius"
-                        style={{
-                          textAlign: "center",
-                          flex: 1,
-                          marginRight: "34px",
-                        }}
-                        type="number"
-                        onChange={onChange}
-                        value={value}
-                      />
-                      <label htmlFor="radius">radius</label>
-                    </p>
-                  );
-                }
+                // if (item === "boxRadius") {
+                //   return (
+                //     <p
+                //       style={{ width: "62.5%", display: "flex" }}
+                //       className="app-config_inline"
+                //       key={item}
+                //     >
+                //       <Input
+                //         type="range"
+                //         min={0}
+                //         max={100}
+                //         value={value}
+                //         onChange={onChange}
+                //         style={{ flex: 1 }}
+                //       />
+                //       <Input
+                //         id="radius"
+                //         style={{
+                //           textAlign: "center",
+                //           flex: 1,
+                //           marginRight: "34px",
+                //         }}
+                //         type="number"
+                //         onChange={onChange}
+                //         value={value}
+                //       />
+                //       <label htmlFor="radius">radius</label>
+                //     </p>
+                //   );
+                // }
                 return (
                   <p className="app-config_inline" key={item}>
                     <label>{item}</label>
