@@ -31,6 +31,7 @@ function ReactCodeEditor({ annotation, contentLoaderState }) {
   const [code, setCode] = useState("");
 
   const handleOnChange = (newValue) => {
+    // eslint-disable-next-line no-undef
     setCode(newValue);
   };
   const handleOnBlur = () => {
@@ -38,7 +39,7 @@ function ReactCodeEditor({ annotation, contentLoaderState }) {
     const newAnnotationArray = codeToAnnotations(formattedValue);
     // eslint-disable-next-line no-undef
     updateAnnotationHandler(newAnnotationArray);
-  };
+  };  
 
   useDebouncedEffect(
     () => {

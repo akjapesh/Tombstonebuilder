@@ -27,7 +27,13 @@ export const useSetKeyEvents = (
     handleMoveItem
   );
 
-  const { handleRedo, handleUndo, handleCutItem, handleCopyItem,handlePasteItem } = handleActions(sketchRef);
+  const {
+    handleRedo,
+    handleUndo,
+    handleCutItem,
+    handleCopyItem,
+    handlePasteItem,
+  } = handleActions(sketchRef);
 
   const handleKeyDown = useCallback(
     (event) => {
@@ -39,21 +45,34 @@ export const useSetKeyEvents = (
         handleRedo();
       } else if ((event.metaKey || event.ctrlKey) && !event.shiftKey) {
         const actionsByKeyCode = {
-          [KEY_CODES.DELETE]: handleRemoveItemFromKeyboard,
-          [KEY_CODES.RIGHT_SIDE]: handleArrowKeysNavigation,
-          [KEY_CODES.LEFT_SIDE]: handleArrowKeysNavigation,
-          [KEY_CODES.UPSIDE]: handleArrowKeysNavigation,
-          [KEY_CODES.DOWNSIDE]: handleArrowKeysNavigation,
-          [KEY_CODES.TAB_KEY]: handleTabKeyPress,
           [KEY_CODES.CUT]: handleCutItem,
           [KEY_CODES.COPY]: handleCopyItem,
           [KEY_CODES.PASTE]: handlePasteItem,
           [KEY_CODES.UNDO]: handleUndo,
         };
         actionsByKeyCode[event.keyCode]?.(event);
+      } else {
+        const actionsByKeyCode = {
+          [KEY_CODES.DELETE]: handleRemoveItemFromKeyboard,
+          [KEY_CODES.RIGHT_SIDE]: handleArrowKeysNavigation,
+          [KEY_CODES.LEFT_SIDE]: handleArrowKeysNavigation,
+          [KEY_CODES.UPSIDE]: handleArrowKeysNavigation,
+          [KEY_CODES.DOWNSIDE]: handleArrowKeysNavigation,
+          [KEY_CODES.TAB_KEY]: handleTabKeyPress,
+        };
+        actionsByKeyCode[event.keyCode]?.(event);
       }
     },
-    [handleRedo, handleRemoveItemFromKeyboard, handleArrowKeysNavigation, handleTabKeyPress, handleCutItem, handleCopyItem, handlePasteItem, handleUndo]
+    [
+      handleRedo,
+      handleRemoveItemFromKeyboard,
+      handleArrowKeysNavigation,
+      handleTabKeyPress,
+      handleCutItem,
+      handleCopyItem,
+      handlePasteItem,
+      handleUndo,
+    ]
   );
   return { handleKeyDown };
 };

@@ -10,24 +10,24 @@ export const handleActions = (sketchRef) => {
     }
   };
 
-  const handleCopyItem  = () => {
+  const handleCopyItem = () => {
     if (sketchRef.current) {
       sketchRef.current.copy();
     }
-  }
+  };
 
-  const handleCutItem  = () => {
+  const handleCutItem = () => {
     if (sketchRef.current) {
       sketchRef.current.copy();
     }
     sketchRef.current.removeSelected();
-  }
-  
-  const handlePasteItem  = () => {
+  };
+
+  const handlePasteItem = () => {
     if (sketchRef.current) {
       sketchRef.current.paste();
     }
-  }
+  };
 
   const handleRedo = () => {
     sketchRef.current.redo();

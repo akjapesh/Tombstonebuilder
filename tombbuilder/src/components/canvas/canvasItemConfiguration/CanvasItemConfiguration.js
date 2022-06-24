@@ -7,29 +7,38 @@ function CanvasItemConfiguration({
   handleCloneItem,
   activeItemCoords,
   handleMoveItem,
+  handleKeyDown,
 }) {
+  const disableKeyEvents = () => {
+    document.removeEventListener("keydown", handleKeyDown, false);
+    console.log(activeItemCoords);
+  };
+
   return (
     <div className="app-editor_item-editor">
       <p className="app-config_caption">Size & position of active item</p>
       <div className="row">
-        {/* <button disabled={!activeItemCoords.activeItemCoords} onClick={handleRemoveItemFromKeyboard}>DELETE</button> */}
-
         <span>
           <Button onClick={handleRemoveItemFromKeyboard}>Delete</Button>
           <Button onClick={handleCloneItem}>copy</Button>
         </span>
 
-        {Object.keys(activeItemCoords.activeItemCoords)
+        {Object.keys(activeItemCoords)
           .filter((e) => e !== "type" && e !== undefined)
           .map((item) => {
-            const value = numberFixed(activeItemCoords.activeItemCoords[item]);
+            const value = numberFixed(activeItemCoords[item]);
             const onChange = (e) => {
               handleMoveItem(item, numberFixed(Number(e.target.value)));
             };
             return (
               <p className="app-config_inline" key={item}>
                 <label>{item}</label>
-                <input type="number" onChange={onChange} value={value} />
+                <input
+                  type="number"
+                  onChange={onChange}
+                  value={value}
+                  onKeyDown={disableKeyEvents}
+                />
               </p>
             );
           })}

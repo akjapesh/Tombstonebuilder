@@ -10,12 +10,7 @@ export const useItemActions = (
 
     if (canvas && canvas.getActiveObject()) {
       const selection = canvas.getActiveObject();
-      if (key === "boxRadius") {
-        selection.set("rx", value);
-        selection.set("ry", value);
-      } else {
-        selection.set(key, value);
-      }
+      selection.set(key, value);
       selection.setCoords();
       canvas.requestRenderAll();
       handleMoveActiveItem(key, value);
@@ -24,8 +19,7 @@ export const useItemActions = (
 
   const handleRemoveItemFromKeyboard = useCallback(
     (event) => {
-      const isItemSelected =
-        Object.keys(activeItemCoords).length > 0;
+      const isItemSelected = Object.keys(activeItemCoords).length > 0;
 
       if (isItemSelected) {
         event.preventDefault();
