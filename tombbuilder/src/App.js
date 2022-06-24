@@ -1,8 +1,11 @@
-
 import "./styles/styles.css";
 import Canvas from "./components/Canvas";
+import Editor from "./components/Editor/Editor";
+import { useAnnotation } from "./hooks/useAnnotation";
+import { useEffect } from "react";
 
 export default function App() {
+  const { updateAnnotationHandler, annotation } = useAnnotation();
   return (
     <div className="App">
       <div className="container">
@@ -20,6 +23,7 @@ export default function App() {
             <div className="app-mode">
               <button className="active">Editor</button>
             </div>
+            <Editor annotation={annotation} />
             <div className="app-editor__language-selector">
               <button className="app-editor__language-button current">
                 <span>React</span>
@@ -28,7 +32,7 @@ export default function App() {
           </div>
         </div>
         <div>
-          <Canvas />
+          <Canvas updateAnnotationHandler={updateAnnotationHandler} />
         </div>
       </div>
     </div>
