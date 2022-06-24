@@ -37,6 +37,7 @@ function ReactCodeEditor({
   const handleOnBlur = () => {
     const formattedValue = formatCode(code);
     const newAnnotationArray = codeToAnnotations(formattedValue);
+    // eslint-disable-next-line no-undef
     updateAnnotationHandler(newAnnotationArray);
   };
 

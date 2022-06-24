@@ -11,13 +11,13 @@ export const useArrowKeysNavigation = (
 ) => {
   const handleArrowKeysNavigation = useCallback(
     (event) => {
-      const isItemSelected = activeItemCoords.activeItemCoords;
+      const isItemSelected = activeItemCoords;
 
       const rightSideBoundary =
-        contentLoaderState.width - activeItemCoords.activeItemCoords.width;
+        contentLoaderState.width - activeItemCoords.width;
 
-      const bottoomSideBoundary =
-        contentLoaderState.height - activeItemCoords.activeItemCoords.height;
+      const bottomSideBoundary =
+        contentLoaderState.height - activeItemCoords.height;
 
       if (isItemSelected) {
         event.preventDefault();
@@ -26,7 +26,7 @@ export const useArrowKeysNavigation = (
             "left",
             Math.max(
               0,
-              activeItemCoords.activeItemCoords.left - SHIFTING_BY_OFFSET
+              activeItemCoords.left - SHIFTING_BY_OFFSET
             )
           );
         else if (event.keyCode === KEY_CODES.UPSIDE)
@@ -34,7 +34,7 @@ export const useArrowKeysNavigation = (
             "top",
             Math.max(
               0,
-              activeItemCoords.activeItemCoords.top - SHIFTING_BY_OFFSET
+              activeItemCoords.top - SHIFTING_BY_OFFSET
             )
           );
         else if (event.keyCode === KEY_CODES.RIGHT_SIDE)
@@ -42,24 +42,20 @@ export const useArrowKeysNavigation = (
             "left",
             Math.min(
               rightSideBoundary,
-              activeItemCoords.activeItemCoords.left + SHIFTING_BY_OFFSET
+              activeItemCoords.left + SHIFTING_BY_OFFSET
             )
           );
         else if (event.keyCode === KEY_CODES.DOWNSIDE)
           handleMoveItem(
             "top",
             Math.min(
-              bottoomSideBoundary,
-              activeItemCoords.activeItemCoords.top + SHIFTING_BY_OFFSET
+              bottomSideBoundary,
+              activeItemCoords.top + SHIFTING_BY_OFFSET
             )
           );
       }
     },
-    [
-      activeItemCoords.activeItemCoords,
-      contentLoaderState.height,
-      contentLoaderState.width,
-    ]
+    [activeItemCoords, contentLoaderState.height, contentLoaderState.width, handleMoveItem]
   );
   return { handleArrowKeysNavigation };
 };
