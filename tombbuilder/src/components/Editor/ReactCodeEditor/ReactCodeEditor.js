@@ -8,16 +8,15 @@ import { codeToAnnotations } from "./utils/codeToAnnotations";
 import { formatCode } from "./utils/formatCode";
 import { annotationsToCode } from "./utils/annotationsToCode";
 function ReactCodeEditor({ annotation }) {
-  // console.log(annotation);
   const [code, setCode] = useState("");
   const onChangeHandler = (newValue) => {
     const formattedValue = formatCode(newValue);
     setCode(formattedValue);
+    const newAnnotationArray = codeToAnnotations(formattedValue);
+    console.log(newAnnotationArray);
   };
   useEffect(() => {
-    const newCode = annotationsToCode(annotation);
-    // const formattedValue = formatCode(newCode);
-    // setCode(formattedValue);
+    const newCode = formatCode(annotationsToCode(annotation));
     setCode(newCode);
   }, [annotation]);
   return (
@@ -34,7 +33,7 @@ function ReactCodeEditor({ annotation }) {
         value={code}
         height="400px"
         width="600px"
-        // onChange={onChangeHandler}
+        onChange={onChangeHandler}
         setOptions={{
           enableBasicAutocompletion: true,
           enableLiveAutocompletion: true,
