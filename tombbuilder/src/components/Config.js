@@ -1,5 +1,5 @@
 import React from "react";
-import { Input } from "baseui/input";
+
 function Config({ updateContentLoader, contentLoaderState }) {
   const handleInput = ({ target: { value, name, max } }) => {
     updateContentLoader(

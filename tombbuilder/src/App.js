@@ -1,13 +1,14 @@
-import "./styles/styles.css";
-import Canvas from "./components/Canvas";
-import Editor from "./components/Editor/Editor";
-import { useAnnotation } from "./hooks/useAnnotation";
-import ContentLoader from "react-content-loader";
-import { useContentLoader } from "./hooks/useContentLoader";
-import Config from "./components/Config";
-import { annotationsToCode } from "./utils/annotationsToCode";
-import { LiveProvider, LivePreview } from "react-live";
 import { useEffect, useState } from "react";
+import ContentLoader from "react-content-loader";
+import { LiveProvider, LivePreview } from "react-live";
+import { annotationsToCode } from "./utils/annotationsToCode";
+import { useAnnotation } from "./hooks/useAnnotation";
+import { useContentLoader } from "./hooks/useContentLoader";
+import Canvas from "./components/Canvas";
+import Config from "./components/Config";
+import Editor from "./components/Editor/Editor";
+import "./styles/styles.css";
+
 export default function App() {
   const { updateAnnotationHandler, annotation } = useAnnotation();
   const { updateContentLoader, contentLoaderState } = useContentLoader();
@@ -15,13 +16,14 @@ export default function App() {
   useEffect(() => {
     setCode(annotationsToCode(annotation, contentLoaderState));
   }, [annotation, contentLoaderState]);
+  
   return (
     <div className="App">
       <div className="container">
         <div className="app-header">
           <div className="app-header__logo">
             <h1>
-              <strong>Tomb stone builder</strong>
+              <strong>Tombstone builder</strong>
             </h1>
             <h2>Build your custom content loader</h2>
           </div>

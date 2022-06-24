@@ -36,5 +36,6 @@ export function codeToAnnotations(code) {
     }
     return null;
   });
+  
   return annotationArray.filter((e) => e !== undefined && e);
 }

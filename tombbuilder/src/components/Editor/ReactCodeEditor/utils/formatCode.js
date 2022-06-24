@@ -1,6 +1,7 @@
 import prettier from "prettier/esm/standalone.mjs";
 import parserBabel from "prettier/esm/parser-babel.mjs";
 import parserHtml from "prettier/esm/parser-html.mjs";
+
 export const formatCode = (code) => {
   const newCode = prettier.format(code, {
     parser: "babel",
@@ -12,8 +13,10 @@ export const formatCode = (code) => {
     htmlWhitespaceSensitivity: "css",
     insertPragma: false,
     jsxSingleQuote: false,
+    printWidth: 80,
     proseWrap: "preserve",
     quoteProps: "as-needed",
+    printWidth: 80,
     requirePragma: false,
     semi: true,
     singleQuote: false,
@@ -21,7 +24,6 @@ export const formatCode = (code) => {
     trailingComma: "es5",
     useTabs: false,
     vueIndentScriptAndStyle: false,
-    printWidth: 300,
   });
 
   return newCode;
