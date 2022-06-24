@@ -22,7 +22,11 @@ function CanvasSketchPad({
         "app-canvas__draw": tool === "rectangle" || tool === "circle",
         "app-canvas__grid-visibility-off": !contentLoaderState.gridVisibility,
       })}
+<<<<<<< HEAD
       key="canvas"
+=======
+      key="canvas" style={{"::before":{width:contentLoaderState.width,height:contentLoaderState.height}}}
+>>>>>>> 15f690f (Merge branch 'abhinav' of https://github.com/akjapesh/Tombstonebuilder into abhinav)
     >
       {children}
 
@@ -37,11 +41,14 @@ function CanvasSketchPad({
         handleUndo={handleUndo}
         handleRedo={handleRedo}
         handleToolChange={handleToolChange}
+<<<<<<< HEAD
         handleRemoveItemFromKeyboard={handleRemoveItemFromKeyboard}
         handleCloneItem={handleCloneItem}
         activeItemCoords={activeItemCoords}
         handleMoveItem={handleMoveItem}
         handleKeyDown={handleKeyDown}
+=======
+>>>>>>> 15f690f (Merge branch 'abhinav' of https://github.com/akjapesh/Tombstonebuilder into abhinav)
       />
     </div>
   );

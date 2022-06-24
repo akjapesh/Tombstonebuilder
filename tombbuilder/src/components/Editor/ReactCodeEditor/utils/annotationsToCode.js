@@ -26,6 +26,7 @@ export const annotationsToCode = (annotationArray, contentLoaderState) => {
     `;
   }
 
+<<<<<<< HEAD
   // const sharedCode = atob(window.location.href.substring(22));
   // console.log(code);
   // if(sharedCode.length)
@@ -33,6 +34,8 @@ export const annotationsToCode = (annotationArray, contentLoaderState) => {
   //   code = code + sharedCode.substring(257,sharedCode.length - 95);
   // }
 
+=======
+>>>>>>> 15f690f (Merge branch 'abhinav' of https://github.com/akjapesh/Tombstonebuilder into abhinav)
   annotationArray.forEach((a) => {
     const height = numberFixed(a.height * a.scaleY);
 
@@ -61,6 +64,10 @@ export const annotationsToCode = (annotationArray, contentLoaderState) => {
       `;
     }
   });
+<<<<<<< HEAD
+=======
+
+>>>>>>> 15f690f (Merge branch 'abhinav' of https://github.com/akjapesh/Tombstonebuilder into abhinav)
   code += `
           </ContentLoader>
           
@@ -70,4 +77,8 @@ export const annotationsToCode = (annotationArray, contentLoaderState) => {
         `;
 
   return code.trimRight();
+<<<<<<< HEAD
 };
+=======
+};
+>>>>>>> 15f690f (Merge branch 'abhinav' of https://github.com/akjapesh/Tombstonebuilder into abhinav)

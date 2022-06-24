@@ -12,7 +12,10 @@ export const useActiveItem = () => {
       left = left - (left % SHIFTING_BY_OFFSET);
       top = top - (top % SHIFTING_BY_OFFSET);
       height = height - (height % SHIFTING_BY_OFFSET);
+<<<<<<< HEAD
 
+=======
+>>>>>>> 15f690f (Merge branch 'abhinav' of https://github.com/akjapesh/Tombstonebuilder into abhinav)
       if (type === "circle") {
         // handleMoveActiveItem('radius',radius);
         // handleMoveActiveItem('top',top);

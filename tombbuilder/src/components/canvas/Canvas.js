@@ -62,7 +62,11 @@ function Canvas({
 
   const isItemSelected =
     activeItemCoords && Object.keys(activeItemCoords).length > 0;
+<<<<<<< HEAD
   // console.log(sketchRef.current);
+=======
+  
+>>>>>>> 15f690f (Merge branch 'abhinav' of https://github.com/akjapesh/Tombstonebuilder into abhinav)
   return (
     <>
       <CanvasSketchPad
