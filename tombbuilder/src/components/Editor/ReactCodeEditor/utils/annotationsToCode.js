@@ -27,6 +27,7 @@ export const annotationsToCode = (annotationArray, contentLoaderState) => {
   }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
   // const sharedCode = atob(window.location.href.substring(22));
   // console.log(code);
   // if(sharedCode.length)
@@ -34,6 +35,8 @@ export const annotationsToCode = (annotationArray, contentLoaderState) => {
   //   code = code + sharedCode.substring(257,sharedCode.length - 95);
   // }
 
+=======
+>>>>>>> 15f690f (Merge branch 'abhinav' of https://github.com/akjapesh/Tombstonebuilder into abhinav)
 =======
 >>>>>>> 15f690f (Merge branch 'abhinav' of https://github.com/akjapesh/Tombstonebuilder into abhinav)
   annotationArray.forEach((a) => {
@@ -65,6 +68,10 @@ export const annotationsToCode = (annotationArray, contentLoaderState) => {
     }
   });
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+
+>>>>>>> 15f690f (Merge branch 'abhinav' of https://github.com/akjapesh/Tombstonebuilder into abhinav)
 =======
 
 >>>>>>> 15f690f (Merge branch 'abhinav' of https://github.com/akjapesh/Tombstonebuilder into abhinav)
@@ -78,7 +85,11 @@ export const annotationsToCode = (annotationArray, contentLoaderState) => {
 
   return code.trimRight();
 <<<<<<< HEAD
+<<<<<<< HEAD
 };
+=======
+};
+>>>>>>> 15f690f (Merge branch 'abhinav' of https://github.com/akjapesh/Tombstonebuilder into abhinav)
 =======
 };
 >>>>>>> 15f690f (Merge branch 'abhinav' of https://github.com/akjapesh/Tombstonebuilder into abhinav)

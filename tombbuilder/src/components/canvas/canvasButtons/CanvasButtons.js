@@ -10,9 +10,12 @@ import selectIcon from "../../../assets/select.svg";
 import rectIcon from "../../../assets/rect.svg";
 import circleIcon from "../../../assets/circle.svg";
 <<<<<<< HEAD
+<<<<<<< HEAD
 import ModalExample from "../modalExample/ModalExample";
 import CanvasItemConfiguration from "../canvasItemConfiguration/CanvasItemConfiguration";
 
+=======
+>>>>>>> 15f690f (Merge branch 'abhinav' of https://github.com/akjapesh/Tombstonebuilder into abhinav)
 =======
 >>>>>>> 15f690f (Merge branch 'abhinav' of https://github.com/akjapesh/Tombstonebuilder into abhinav)
 function CanvasButtons({
@@ -61,6 +64,7 @@ function CanvasButtons({
         <img src={circleIcon} alt="circle tool" />
       </Button>
 <<<<<<< HEAD
+<<<<<<< HEAD
       {isItemSelected && (
         <ModalExample>
           <CanvasItemConfiguration
@@ -72,6 +76,9 @@ function CanvasButtons({
           />
         </ModalExample>
       )}
+=======
+      
+>>>>>>> 15f690f (Merge branch 'abhinav' of https://github.com/akjapesh/Tombstonebuilder into abhinav)
 =======
       
 >>>>>>> 15f690f (Merge branch 'abhinav' of https://github.com/akjapesh/Tombstonebuilder into abhinav)

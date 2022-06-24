@@ -13,7 +13,10 @@ export const useActiveItem = () => {
       top = top - (top % SHIFTING_BY_OFFSET);
       height = height - (height % SHIFTING_BY_OFFSET);
 <<<<<<< HEAD
+<<<<<<< HEAD
 
+=======
+>>>>>>> 15f690f (Merge branch 'abhinav' of https://github.com/akjapesh/Tombstonebuilder into abhinav)
 =======
 >>>>>>> 15f690f (Merge branch 'abhinav' of https://github.com/akjapesh/Tombstonebuilder into abhinav)
       if (type === "circle") {

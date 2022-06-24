@@ -4,7 +4,10 @@ import { numberFixed } from "../../../utils/handleFixingNumbers";
 import trashIcon from "../../../assets/trash.svg";
 import cloneIcon from "../../../assets/clone.svg";
 <<<<<<< HEAD
+<<<<<<< HEAD
 
+=======
+>>>>>>> 15f690f (Merge branch 'abhinav' of https://github.com/akjapesh/Tombstonebuilder into abhinav)
 =======
 >>>>>>> 15f690f (Merge branch 'abhinav' of https://github.com/akjapesh/Tombstonebuilder into abhinav)
 function CanvasItemConfiguration({
@@ -41,6 +44,9 @@ function CanvasItemConfiguration({
         <span>
           <Button className="app-handler__trash" onClick={handleRemoveItemFromKeyboard}><img src={trashIcon} alt="remove item" /></Button>
           <Button className="app-handler__clone" onClick={handleCloneItem}><img src={cloneIcon} alt="clone tool" /></Button>
+<<<<<<< HEAD
+>>>>>>> 15f690f (Merge branch 'abhinav' of https://github.com/akjapesh/Tombstonebuilder into abhinav)
+=======
 >>>>>>> 15f690f (Merge branch 'abhinav' of https://github.com/akjapesh/Tombstonebuilder into abhinav)
         </span>
 
@@ -49,8 +55,11 @@ function CanvasItemConfiguration({
           .map((item) => {
             let value = numberFixed(activeItemCoords[item]);
 <<<<<<< HEAD
+<<<<<<< HEAD
             if (isNaN(value)) value = 0;
             // console.log("activeItemCoords: ",item,value);
+=======
+>>>>>>> 15f690f (Merge branch 'abhinav' of https://github.com/akjapesh/Tombstonebuilder into abhinav)
 =======
 >>>>>>> 15f690f (Merge branch 'abhinav' of https://github.com/akjapesh/Tombstonebuilder into abhinav)
             const onChange = (e) => {
