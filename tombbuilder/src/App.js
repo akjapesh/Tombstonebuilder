@@ -1,6 +1,9 @@
+/* eslint-disable react/no-direct-mutation-state */
+
 //library
 import ContentLoader from "react-content-loader";
 import { LiveProvider, LivePreview } from "react-live";
+import { CopyToClipboard } from "react-copy-to-clipboard";
 
 //utils
 import { annotationsToCode } from "./utils/annotationsToCode";
@@ -61,9 +64,14 @@ export default function App() {
               contentLoaderState={contentLoaderState}
             />
             <div className="app-editor__language-selector">
-              <button className="app-editor__language-button current">
-                <span>React</span>
-              </button>
+              <CopyToClipboard
+                text={code}
+                onCopy={() => {
+                  alert("Code Copied");
+                }}
+              >
+                <span className="copy-to-clipboard">Copy to clipboard</span>
+              </CopyToClipboard>
             </div>
           </div>
         </div>

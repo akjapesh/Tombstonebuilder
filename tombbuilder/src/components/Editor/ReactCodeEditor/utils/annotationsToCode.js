@@ -1,5 +1,5 @@
-import { SHIFTING_BY_OFFSET } from "../components/canvas/hooks/useSetKeyEvents/useSetKeyPressActions/useArrowKeysNavigation";
-import { numberFixed } from "./handleFixingNumbers";
+import { numberFixed } from "../../../../utils/handleFixingNumbers";
+
 export const annotationsToCode = (annotationArray, contentLoaderState) => {
   const { speed, width, height, backgroundColor, foregroundColor } =
     contentLoaderState;
@@ -22,6 +22,7 @@ export const annotationsToCode = (annotationArray, contentLoaderState) => {
     return `
       ${code}
         </ContentLoader>)}
+        export default MyLoader
     `;
   }
 
@@ -36,21 +37,19 @@ export const annotationsToCode = (annotationArray, contentLoaderState) => {
 
     if (a.type === "rect") {
       code += `   <rect x="${
-        numberFixed(a.left) - (numberFixed(a.left) % SHIFTING_BY_OFFSET)
+        numberFixed(a.left) - (numberFixed(a.left) % 4)
       }" rx="${numberFixed(a.rx)}" ry="${numberFixed(a.ry)}"    y="${
-        numberFixed(a.top) - (numberFixed(a.top) % SHIFTING_BY_OFFSET)
-      }"  width="${width - (width % SHIFTING_BY_OFFSET)}" height="${
-        height - (height % SHIFTING_BY_OFFSET)
-      }"/> 
+        numberFixed(a.top) - (numberFixed(a.top) % 4)
+      }"  width="${width - (width % 4)}" height="${height - (height % 4)}"/> 
       \n`;
     } else if (a.type === "circle") {
       const cx = numberFixed(a.left) + numberFixed(a.radius * a.scaleY);
       const cy = numberFixed(a.top) + numberFixed(a.radius * a.scaleY);
       const radius = numberFixed(a.radius * a.scaleX);
       code += `   
-       <circle cx="${cx - (cx % SHIFTING_BY_OFFSET)}" cy="${
-        cy - (cy % SHIFTING_BY_OFFSET)
-      }" r="${radius - (radius % SHIFTING_BY_OFFSET)}" /> 
+       <circle cx="${cx - (cx % 4)}" cy="${cy - (cy % 4)}" r="${
+        radius - (radius % 4)
+      }" /> 
       \n
       `;
     }
@@ -61,7 +60,7 @@ export const annotationsToCode = (annotationArray, contentLoaderState) => {
           
           )
         }
-       render(<MyLoader />)
+        export default MyLoader
         `;
 
   return code.trimRight();

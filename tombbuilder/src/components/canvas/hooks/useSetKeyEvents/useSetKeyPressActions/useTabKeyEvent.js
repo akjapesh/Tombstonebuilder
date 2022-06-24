@@ -3,7 +3,7 @@ import { useCallback } from "react";
 export const useTabKeyEvent = (sketchRef, setCoords, activeItemCoords) => {
   const handleTabKeyPress = useCallback(() => {
     let cnt = 0;
-    sketchRef.current._fc._objects.map((value) => {
+    sketchRef.current._fc.toJSON().objects.map((value) => {
       if (cnt) {
         setCoords(value);
         // sketchRef.current._fc._objects=value;

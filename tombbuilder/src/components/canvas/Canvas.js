@@ -50,7 +50,8 @@ function Canvas({
     sketchRef,
     contentLoaderState,
     handleRemoveItemFromKeyboard,
-    handleMoveItem
+    handleMoveItem,
+    handleToolChange
   );
   useSetupCanvas(
     sketchRef,
@@ -64,7 +65,7 @@ function Canvas({
 
   const isItemSelected =
     activeItemCoords && Object.keys(activeItemCoords).length > 0;
-
+  
   return (
     <>
       <CanvasSketchPad

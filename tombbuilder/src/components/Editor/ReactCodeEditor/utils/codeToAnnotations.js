@@ -16,8 +16,8 @@ export function codeToAnnotations(code) {
         annotationObject.width = numberFixed(item.getAttribute("width"));
         annotationObject.height = numberFixed(item.getAttribute("height"));
         annotationObject.fill = "transparent";
-        // annotationObject.ry = item.getAttribute("ry");
-        // annotationObject.rx = item.getAttribute("rx");
+        annotationObject.ry = item.getAttribute("ry");
+        annotationObject.rx = item.getAttribute("rx");
       } else if (element.includes("<circle ")) {
         annotationObject.type = "circle";
         annotationObject.left =

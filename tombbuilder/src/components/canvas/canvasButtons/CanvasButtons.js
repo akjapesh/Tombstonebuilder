@@ -1,3 +1,4 @@
+/* eslint-disable react/no-direct-mutation-state */
 // libraries
 import React from "react";
 import classnames from "classnames";
@@ -5,7 +6,9 @@ import classnames from "classnames";
 import Tools from "../../../third-parts/react-sketch/src/tools";
 // Component
 import { Button } from "baseui/button";
-
+import selectIcon from "../../../assets/select.svg";
+import rectIcon from "../../../assets/rect.svg";
+import circleIcon from "../../../assets/circle.svg";
 function CanvasButtons({
   tool,
   sketchRef,
@@ -14,14 +17,14 @@ function CanvasButtons({
   handleToolChange,
 }) {
   return (
-    <div className="app-handlers" key="handlers">
+    <div className="app-handlers button-group align-center" key="handlers">
       <Button
         className={classnames("app-handlers__tool", {
           "app-handlers__active": tool === "select",
         })}
         disabled={true}
       >
-        Select
+        <img src={selectIcon} alt="select tool" />
       </Button>
       <Button
         className={classnames("app-handlers__tool", {
@@ -31,7 +34,7 @@ function CanvasButtons({
           handleToolChange(Tools.Rectangle);
         }}
       >
-        Rectangle
+        <img src={rectIcon} alt="rect tool" />
       </Button>
       <Button
         className={classnames("app-handlers__tool", {
@@ -41,20 +44,9 @@ function CanvasButtons({
           handleToolChange(Tools.Circle);
         }}
       >
-        Circle
+        <img src={circleIcon} alt="circle tool" />
       </Button>
-      <Button
-        className="app-handlers__tool"
-        onClick={() => {
-          console.log(sketchRef.current);
-          handleUndo();
-        }}
-      >
-        UNDO
-      </Button>
-      <Button className="app-handlers__tool" onClick={handleRedo}>
-        REDO
-      </Button>
+      
     </div>
   );
 }
