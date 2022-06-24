@@ -5,6 +5,9 @@ import { useAnnotation } from "./hooks/useAnnotation";
 import { useEffect } from "react";
 import { useContentLoader } from "./hooks/useContentLoader";
 import Config from "./components/Config";
+
+import { LiveProvider, LivePreview } from "react-live";
+
 export default function App() {
   const { updateAnnotationHandler, annotation } = useAnnotation();
   const {updateContentLoader,contentLoaderState}=useContentLoader();
