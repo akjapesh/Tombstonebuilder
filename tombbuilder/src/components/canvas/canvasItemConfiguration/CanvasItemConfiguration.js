@@ -3,6 +3,8 @@ import React from "react";
 import { Button } from "baseui/button";
 // import { Input } from "baseui/input";
 import { numberFixed } from "../../../utils/handleFixingNumbers";
+import trashIcon from "../../../assets/trash.svg";
+import cloneIcon from "../../../assets/clone.svg";
 function CanvasItemConfiguration({
   handleRemoveItemFromKeyboard,
   handleCloneItem,
@@ -18,6 +20,7 @@ function CanvasItemConfiguration({
   return (
     <div className="app-editor_item-editor">
       <p className="app-config_caption">Size & position of active item</p>
+<<<<<<< HEAD
       <div className="row">
         {/* eslint-disable react/no-direct-mutation-state */}
         {/* <button disabled={!activeItemCoords.activeItemCoords} onClick={handleRemoveItemFromKeyboard}>DELETE</button> */}
@@ -27,6 +30,14 @@ function CanvasItemConfiguration({
           {/* eslint-disable react/no-direct-mutation-state */}
           <Button onClick={handleCloneItem}>copy</Button>
           {/* eslint-disable react/no-direct-mutation-state */}
+=======
+      <div className="row ">
+        {/* <button disabled={!activeItemCoords.activeItemCoords} onClick={handleRemoveItemFromKeyboard}>DELETE</button> */}
+
+        <span>
+          <Button className="app-handler__trash" onClick={handleRemoveItemFromKeyboard}><img src={trashIcon} alt="remove item" /></Button>
+          <Button className="app-handler__clone" onClick={handleCloneItem}><img src={cloneIcon} alt="clone tool" /></Button>
+>>>>>>> fb197e5 (canvasButtons icons added)
         </span>
         {Object.keys(activeItemCoords)
           .filter((e) => e!== 'type' && e !== undefined)
