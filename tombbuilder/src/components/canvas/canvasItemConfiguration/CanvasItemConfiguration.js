@@ -3,7 +3,6 @@ import React from "react";
 import { numberFixed } from "../../../utils/handleFixingNumbers";
 import trashIcon from "../../../assets/trash.svg";
 import cloneIcon from "../../../assets/clone.svg";
-
 function CanvasItemConfiguration({
   handleRemoveItemFromKeyboard,
   handleCloneItem,
@@ -34,10 +33,12 @@ function CanvasItemConfiguration({
         {Object.keys(activeItemCoords)
           .filter((e) => e !== "type" && e !== undefined)
           .map((item) => {
-            const value = numberFixed(activeItemCoords[item]);
+            let value = numberFixed(activeItemCoords[item]);
             const onChange = (e) => {
               handleMoveItem(item, numberFixed(Number(e.target.value)));
             };
+            if(isNaN(value))
+              value = 0 ;
             return (
               <p className="app-config_inline" key={item}>
                 <label>{item}</label>

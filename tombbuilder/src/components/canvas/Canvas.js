@@ -13,6 +13,7 @@ import { useToolState } from "./hooks/useToolState/useToolState";
 
 //components
 import CanvasItemConfiguration from "./canvasItemConfiguration/CanvasItemConfiguration";
+
 import CanvasSketchPad from "./canvasSketchPad/CanvasSketchPad";
 import ModalExample from "./modalExample/ModalExample";
 
@@ -59,6 +60,7 @@ function Canvas({
     handleKeyDown,
     handleToolChange
   );
+
 
   // const isItemSelected =
   //   activeItemCoords && Object.keys(activeItemCoords).length > 0;
