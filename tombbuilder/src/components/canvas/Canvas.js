@@ -8,14 +8,19 @@ import { handleActions } from "./utils/handleActions";
 import { useActiveItem } from "./hooks/useCanvasActions/useActiveItem";
 import { useItemActions } from "./hooks/useCanvasActions/useItemActions";
 import { useSetupCanvas } from "./hooks/useCanvasActions/useSetupCanvas";
-import { useSetKeyEvents } from "./hooks/useSetKeyEvents/useSetKeyEvents";
+import { useSetKeyEvents } from "./hooks/useSetKeyEvents/useSetKeyEevnts";
 import { useToolState } from "./hooks/useToolState/useToolState";
 
 //components
-import CanvasSketchField from "./CanvasSketchField/CanvasSketchField";
-import CanvasItemConfiguration from "./canvasItemConfiguration/CanvasItemConfiguration";
-import CanvasButtons from "./canvasButtons/CanvasButtons";
-function Canvas({ children, updateAnnotationHandler, contentLoaderState }) {
+import CanvasItemConfiguration from "./canvasItemConfiguration/canvasItemConfiguration";
+import CanvasSketchPad from "./canvasSketchPad/canvasSketchPad";
+
+function Canvas({
+  children,
+  updateAnnotationHandler,
+  contentLoaderState,
+  handleUpdateSketchRef,
+}) {
   const { tool, handleToolChange } = useToolState();
 
   const {
@@ -51,12 +56,12 @@ function Canvas({ children, updateAnnotationHandler, contentLoaderState }) {
     setCoords,
     handleAddItemInCanvas,
     handleResetActiveItem,
-    handleKeyDown
+    handleKeyDown,
+    handleToolChange
   );
 
   const isItemSelected =
-    activeItemCoords &&
-    Object.keys(activeItemCoords).length > 0;
+    activeItemCoords && Object.keys(activeItemCoords).length > 0;
 
   return (
     <>
