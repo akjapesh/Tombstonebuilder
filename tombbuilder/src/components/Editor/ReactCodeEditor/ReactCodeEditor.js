@@ -39,7 +39,7 @@ function ReactCodeEditor({ annotation, contentLoaderState }) {
     const newAnnotationArray = codeToAnnotations(formattedValue);
     // eslint-disable-next-line no-undef
     updateAnnotationHandler(newAnnotationArray);
-  };
+  };  
 
   useDebouncedEffect(
     () => {
