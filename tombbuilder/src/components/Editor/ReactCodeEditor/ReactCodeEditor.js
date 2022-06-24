@@ -24,12 +24,18 @@ import "ace-builds/src-noconflict/theme-monokai";
 import "ace-builds/src-noconflict/ext-language_tools";
 import "ace-builds/src-noconflict/mode-json";
 
-function ReactCodeEditor({ annotation, contentLoaderState }) {
+function ReactCodeEditor({
+  annotation,
+  contentLoaderState,
+  updateAnnotationHandler,
+}) {
   const [code, setCode] = useState("");
 
-  const onChangeHandler = (newValue) => {
-    const formattedValue = formatCode(newValue);
-    setCode(formattedValue);
+  const handleOnChange = (newValue) => {
+    setCode(newValue);
+  };
+  const handleOnBlur = () => {
+    const formattedValue = formatCode(code);
     const newAnnotationArray = codeToAnnotations(formattedValue);
     // eslint-disable-next-line no-undef
     updateAnnotationHandler(newAnnotationArray);
@@ -51,7 +57,8 @@ function ReactCodeEditor({ annotation, contentLoaderState }) {
       <AceEditor
         {...CODE_EDITOR_PROPERTIES}
         value={code}
-        onChange={onChangeHandler}
+        onBlur={handleOnBlur}
+        onChange={handleOnChange}
       />
     </div>
   );
