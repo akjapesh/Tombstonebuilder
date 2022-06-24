@@ -45,9 +45,6 @@ function CanvasSketchPad({
       />
       <CanvasButtons
         tool={tool}
-        sketchRef={sketchRef}
-        handleUndo={handleUndo}
-        handleRedo={handleRedo}
         handleToolChange={handleToolChange}
 <<<<<<< HEAD
 <<<<<<< HEAD

@@ -1,18 +1,7 @@
 import React from "react";
 // import { Input } from "baseui/input";
 import { numberFixed } from "../../../utils/handleFixingNumbers";
-import trashIcon from "../../../assets/trash.svg";
-import cloneIcon from "../../../assets/clone.svg";
-<<<<<<< HEAD
-<<<<<<< HEAD
-
-=======
->>>>>>> 15f690f (Merge branch 'abhinav' of https://github.com/akjapesh/Tombstonebuilder into abhinav)
-=======
->>>>>>> 15f690f (Merge branch 'abhinav' of https://github.com/akjapesh/Tombstonebuilder into abhinav)
 function CanvasItemConfiguration({
-  handleRemoveItemFromKeyboard,
-  handleCloneItem,
   activeItemCoords,
   handleMoveItem,
   handleKeyDown,
@@ -23,60 +12,17 @@ function CanvasItemConfiguration({
   };
 
   return (
-    <div className="app-editor_item-editor">
-<<<<<<< HEAD
+    <div>
       <div className="row ">
-        <span>
-<<<<<<< HEAD
-          <Button
-            className="app-handler__trash"
-            onClick={handleRemoveItemFromKeyboard}
-          >
-            <img src={trashIcon} alt="remove item" />
-          </Button>
-          <Button className="app-handler__clone" onClick={handleCloneItem}>
-            <img src={cloneIcon} alt="clone tool" />
-          </Button>
-=======
-      <p className="app-config_caption">Size & position of active item</p>
-      <div className="row ">
-        {/* <button disabled={!activeItemCoords.activeItemCoords} onClick={handleRemoveItemFromKeyboard}>DELETE</button> */}
-
-        <span>
-          <Button className="app-handler__trash" onClick={handleRemoveItemFromKeyboard}><img src={trashIcon} alt="remove item" /></Button>
-          <Button className="app-handler__clone" onClick={handleCloneItem}><img src={cloneIcon} alt="clone tool" /></Button>
-<<<<<<< HEAD
->>>>>>> 15f690f (Merge branch 'abhinav' of https://github.com/akjapesh/Tombstonebuilder into abhinav)
-=======
->>>>>>> 15f690f (Merge branch 'abhinav' of https://github.com/akjapesh/Tombstonebuilder into abhinav)
-=======
-          <Button className="app-handler__trash" onClick={handleRemoveItemFromKeyboard}><img src={trashIcon} alt="remove item" /></Button>
-          <Button className="app-handler__clone" onClick={handleCloneItem}><img src={cloneIcon} alt="clone tool" /></Button>
->>>>>>> 0bb0fab (merged soham(shapes clipping to grid) with abhinav(center alignment))
-        </span>
-
         {Object.keys(activeItemCoords)
           .filter((e) => e !== "type" && e !== undefined)
           .map((item) => {
-            let value = numberFixed(activeItemCoords[item]);
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-            if (isNaN(value)) value = 0;
-            // console.log("activeItemCoords: ",item,value);
-=======
->>>>>>> 15f690f (Merge branch 'abhinav' of https://github.com/akjapesh/Tombstonebuilder into abhinav)
-=======
->>>>>>> 15f690f (Merge branch 'abhinav' of https://github.com/akjapesh/Tombstonebuilder into abhinav)
-=======
->>>>>>> 0bb0fab (merged soham(shapes clipping to grid) with abhinav(center alignment))
+            const value = numberFixed(activeItemCoords[item]);
             const onChange = (e) => {
               handleMoveItem(item, numberFixed(Number(e.target.value)));
             };
-            if(isNaN(value))
-              value = 0 ;
             return (
-              <p className="app-config_inline" key={item}>
+              <p key={item}>
                 <label>{item}</label>
                 <input
                   type="number"
