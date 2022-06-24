@@ -78,7 +78,6 @@ export default function App() {
               </div>
             </Canvas>
           </LiveProvider>
-          {/* <Canvas updateAnnotationHandler={updateAnnotationHandler} contentLoaderState={contentLoaderState}/> */}
           <CanvasConfiguration
             updateContentLoader={updateContentLoader}
             contentLoaderState={contentLoaderState}

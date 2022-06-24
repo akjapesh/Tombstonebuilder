@@ -1,5 +1,5 @@
+import { SHIFTING_BY_OFFSET } from "../components/canvas/hooks/useSetKeyEvents/useSetKeyPressActions/useArrowKeysNavigation";
 import { numberFixed } from "./handleFixingNumbers";
-
 export const annotationsToCode = (annotationArray, contentLoaderState) => {
   const { speed, width, height, backgroundColor, foregroundColor } =
     contentLoaderState;
@@ -30,25 +30,27 @@ export const annotationsToCode = (annotationArray, contentLoaderState) => {
 
     const width = numberFixed(a.width * a.scaleX);
 
-    if ((height === 0 && width === 0) || a.r === 1) {
+    if ((height === 0 && width === 0) || a.r > 1) {
       return null;
     }
 
     if (a.type === "rect") {
       code += `   <rect x="${
-        numberFixed(a.left) - (numberFixed(a.left) % 4)
+        numberFixed(a.left) - (numberFixed(a.left) % SHIFTING_BY_OFFSET)
       }" rx="${numberFixed(a.rx)}" ry="${numberFixed(a.ry)}"    y="${
-        numberFixed(a.top) - (numberFixed(a.top) % 4)
-      }"  width="${width - (width % 4)}" height="${height - (height % 4)}"/> 
+        numberFixed(a.top) - (numberFixed(a.top) % SHIFTING_BY_OFFSET)
+      }"  width="${width - (width % SHIFTING_BY_OFFSET)}" height="${
+        height - (height % SHIFTING_BY_OFFSET)
+      }"/> 
       \n`;
     } else if (a.type === "circle") {
       const cx = numberFixed(a.left) + numberFixed(a.radius * a.scaleY);
       const cy = numberFixed(a.top) + numberFixed(a.radius * a.scaleY);
       const radius = numberFixed(a.radius * a.scaleX);
       code += `   
-       <circle cx="${cx - (cx % 4)}" cy="${cy - (cy % 4)}" r="${
-        radius - (radius % 4)
-      }" /> 
+       <circle cx="${cx - (cx % SHIFTING_BY_OFFSET)}" cy="${
+        cy - (cy % SHIFTING_BY_OFFSET)
+      }" r="${radius - (radius % SHIFTING_BY_OFFSET)}" /> 
       \n
       `;
     }
