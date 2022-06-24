@@ -22,19 +22,13 @@ function CanvasSketchPad({
         "app-canvas__draw": tool === "rectangle" || tool === "circle",
         "app-canvas__grid-visibility-off": !contentLoaderState.gridVisibility,
       })}
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
       key="canvas"
-=======
-      key="canvas" style={{"::before":{width:contentLoaderState.width,height:contentLoaderState.height}}}
->>>>>>> 15f690f (Merge branch 'abhinav' of https://github.com/akjapesh/Tombstonebuilder into abhinav)
-=======
-      key="canvas" style={{"::before":{width:contentLoaderState.width,height:contentLoaderState.height}}}
->>>>>>> 15f690f (Merge branch 'abhinav' of https://github.com/akjapesh/Tombstonebuilder into abhinav)
-=======
-      key="canvas" style={{"::before":{width:contentLoaderState.width,height:contentLoaderState.height}}}
->>>>>>> 0bb0fab (merged soham(shapes clipping to grid) with abhinav(center alignment))
+      style={{
+        "::before": {
+          width: contentLoaderState.width,
+          height: contentLoaderState.height,
+        },
+      }}
     >
       {children}
 
@@ -46,17 +40,11 @@ function CanvasSketchPad({
       <CanvasButtons
         tool={tool}
         handleToolChange={handleToolChange}
-<<<<<<< HEAD
-<<<<<<< HEAD
         handleRemoveItemFromKeyboard={handleRemoveItemFromKeyboard}
         handleCloneItem={handleCloneItem}
         activeItemCoords={activeItemCoords}
         handleMoveItem={handleMoveItem}
         handleKeyDown={handleKeyDown}
-=======
->>>>>>> 15f690f (Merge branch 'abhinav' of https://github.com/akjapesh/Tombstonebuilder into abhinav)
-=======
->>>>>>> 15f690f (Merge branch 'abhinav' of https://github.com/akjapesh/Tombstonebuilder into abhinav)
       />
     </div>
   );

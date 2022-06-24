@@ -8,7 +8,7 @@ function CanvasItemConfiguration({
 }) {
   const disableKeyEvents = () => {
     document.removeEventListener("keydown", handleKeyDown, false);
-    console.log(activeItemCoords);
+    // console.log(activeItemCoords);
   };
 
   return (
@@ -17,10 +17,11 @@ function CanvasItemConfiguration({
         {Object.keys(activeItemCoords)
           .filter((e) => e !== "type" && e !== undefined)
           .map((item) => {
-            const value = numberFixed(activeItemCoords[item]);
+            let value = numberFixed(activeItemCoords[item]);
             const onChange = (e) => {
               handleMoveItem(item, numberFixed(Number(e.target.value)));
             };
+            if (isNaN(value)) value = 0;
             return (
               <p key={item}>
                 <label>{item}</label>
