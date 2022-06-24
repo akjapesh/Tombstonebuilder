@@ -2,6 +2,10 @@ import "./styles/styles.css";
 import Canvas from "./components/Canvas";
 import Editor from "./components/Editor/Editor";
 import { useAnnotation } from "./hooks/useAnnotation";
+import { useEffect } from "react";
+import { useContentLoader } from "./hooks/useContentLoader";
+import Config from "./components/Config";
+
 import { LiveProvider, LivePreview } from "react-live";
 import { useEffect } from "react";
 import { useContentLoader } from "./hooks/useContentLoader";
@@ -43,6 +47,7 @@ export default function App() {
             updateContentLoader={updateContentLoader}
             contentLoaderState={contentLoaderState}
           />
+
         </div>
       </div>
     </div>

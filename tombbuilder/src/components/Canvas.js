@@ -26,6 +26,11 @@ function Canvas({ updateAnnotationHandler, contentLoaderState }) {
       newTarget.lockRotation = true;
       newTarget.angle = 0;
     }
+    else if(newTarget&&(newTarget.type === "activeSelection" &&
+    newTarget._objects.some((o) => o.type === "rectangle"))){
+        newTarget.lockRotation = true;
+        newTarget.angle=0;
+    }
     return newTarget;
   };
   const setCoords = useCallback((target) => {
