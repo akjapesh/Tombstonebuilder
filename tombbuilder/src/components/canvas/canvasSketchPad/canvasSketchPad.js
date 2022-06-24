@@ -22,13 +22,7 @@ function CanvasSketchPad({
         "app-canvas__draw": tool === "rectangle" || tool === "circle",
         "app-canvas__grid-visibility-off": !contentLoaderState.gridVisibility,
       })}
-      key="canvas"
-      style={{
-        "::before": {
-          width: contentLoaderState.width,
-          height: contentLoaderState.height,
-        },
-      }}
+      key="canvas" style={{"::before":{width:contentLoaderState.width,height:contentLoaderState.height}}}
     >
       {children}
 

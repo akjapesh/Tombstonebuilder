@@ -12,7 +12,7 @@ function CanvasItemConfiguration({
   };
 
   return (
-    <div>
+    <div >
       <div className="row ">
         {Object.keys(activeItemCoords)
           .filter((e) => e !== "type" && e !== undefined)
@@ -21,7 +21,8 @@ function CanvasItemConfiguration({
             const onChange = (e) => {
               handleMoveItem(item, numberFixed(Number(e.target.value)));
             };
-            if (isNaN(value)) value = 0;
+            if(isNaN(value))
+              value = 0 ;
             return (
               <p key={item}>
                 <label>{item}</label>

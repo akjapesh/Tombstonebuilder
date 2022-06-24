@@ -8,6 +8,7 @@ import Tools from "../../../third-parts/react-sketch/src/tools";
 import selectIcon from "../../../assets/select.svg";
 import rectIcon from "../../../assets/rect.svg";
 import circleIcon from "../../../assets/circle.svg";
+
 import ModalExample from "../modalExample/ModalExample";
 import CanvasItemConfiguration from "../canvasItemConfiguration/CanvasItemConfiguration";
 import trashIcon from "../../../assets/trash.svg";

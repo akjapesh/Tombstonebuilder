@@ -24,14 +24,18 @@ function Canvas({
 }) {
   const { tool, handleToolChange } = useToolState();
 
+  const sketchRef = useRef(null);
+
+  useEffect(() => {
+    handleUpdateSketchRef(sketchRef);
+  }, [sketchRef, handleUpdateSketchRef]);
+
   const {
     setCoords,
     activeItemCoords,
     handleResetActiveItem,
     handleMoveActiveItem,
   } = useActiveItem();
-
-  const sketchRef = useRef(null);
 
   const {
     handleMoveItem,
