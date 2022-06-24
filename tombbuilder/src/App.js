@@ -51,9 +51,6 @@ export default function App() {
               contentLoaderState={contentLoaderState}
             />
             <div className="app-editor__language-selector">
-              <button className="app-editor__language-button current">
-                <span>React</span>
-              </button>
               <CopyToClipboard
                 text={code}
                 onCopy={() => {
