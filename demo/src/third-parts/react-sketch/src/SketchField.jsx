@@ -587,7 +587,6 @@ class SketchField extends PureComponent {
 
     // Initialize History, with maximum number of undo steps
     this._history = new History(undoSteps)
-
     // Events binding
     canvas.on('object:added', this._onObjectAdded)
     canvas.on('object:modified', this._onObjectModified)

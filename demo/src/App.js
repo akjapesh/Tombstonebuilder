@@ -7,7 +7,7 @@ export default function App() {
   const [tool, setTool] = useState(Tools.Rectangle);
   const sketch = useRef();
   useEffect(() => {
-    console.log(sketch.current._fc);
+    // console.log(sketch.current._fc);
   });
   return (
     <div className="App">
