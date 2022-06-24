@@ -1,5 +1,4 @@
 import { useCallback, useState } from "react";
-import SketchField from "../../../../third-parts/react-sketch/src/SketchField";
 
 const DEFAULT_COORDS = {};
 
