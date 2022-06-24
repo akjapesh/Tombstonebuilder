@@ -3,7 +3,6 @@ import React from "react";
 import { numberFixed } from "../../../utils/handleFixingNumbers";
 import trashIcon from "../../../assets/trash.svg";
 import cloneIcon from "../../../assets/clone.svg";
-import { Annotation } from "@syncfusion/ej2-react-diagrams";
 
 function CanvasItemConfiguration({
   handleRemoveItemFromKeyboard,

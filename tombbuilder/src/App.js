@@ -1,4 +1,3 @@
-import { useEffect, useState } from "react";
 /* eslint-disable react/no-direct-mutation-state */
 
 //library
@@ -22,8 +21,6 @@ import Editor from "./components/editor/Editor";
 
 //styles
 import "./styles/styles.css";
-import { codeToAnnotations } from "./components/editor/reactCodeEditor/utils/codeToAnnotations";
-import { formatCode } from "./components/editor/reactCodeEditor/utils/formatCode";
 
 export default function App() {
   const { updateAnnotationHandler, annotation } = useAnnotation([]);
@@ -61,7 +58,9 @@ export default function App() {
 
   const handleShareCode = (event) => {
     event.preventDefault();
-    const nextUrl = `http://localhost:3000/${btoa(JSON.stringify(annotation))}`;
+    const nextUrl = `http://localhost:3000/?data=${btoa(
+      JSON.stringify(annotation)
+    )}`;
     window.history.replaceState({}, "", nextUrl);
   };
 

@@ -1,5 +1,5 @@
 import { useState, useCallback } from "react";
-import useSharedAnotation from "./useSharedAnotation";
+// import useSharedAnotation from "./useSharedAnotation";
 
 export const useAnnotation = (initialValue) => {
 
@@ -8,9 +8,11 @@ export const useAnnotation = (initialValue) => {
 
   const updateAnnotationHandler = useCallback((item) => {
     setAnnotation(item);
+    console.log("hii");
   }, []);
   const onAnnotationChangeHandler = useCallback((onAnnotationChange) => {
     onAnnotationChange();
+    console.log("hii");
   }, []);
 
   return {
