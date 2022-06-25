@@ -1,5 +1,3 @@
-// import tools from "../../../third-parts/react-sketch/src/tools";
-
 export const handleActions = (sketchRef) => {
   const handleUndo = () => {
     sketchRef.current.undo();

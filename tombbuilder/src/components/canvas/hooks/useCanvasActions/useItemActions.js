@@ -8,8 +8,7 @@ export const useItemActions = (
   const handleMoveItem = (key, value) => {
     const canvas = sketchRef.current && sketchRef.current._fc;
     // console.log(typeof(value),value);
-    if(isNaN(value))
-    value = 0;
+    if (isNaN(value)) value = 0;
     if (canvas && canvas.getActiveObject()) {
       const selection = canvas.getActiveObject();
       selection.set(key, value);
@@ -49,7 +48,7 @@ export const useItemActions = (
       newTarget.lockRotation = true;
       newTarget.angle = 0;
       newTarget.originY = "top";
-    newTarget.lockUniScaling = true;
+      newTarget.lockUniScaling = true;
     }
     return newTarget;
   }, []);

@@ -7,15 +7,25 @@ export const SHIFTING_BY_OFFSET = 16;
 export const useArrowKeysNavigation = (
   activeItemCoords,
   contentLoaderState,
-  handleMoveItem,
+  handleMoveItem
 ) => {
   const handleArrowKeysNavigation = useCallback(
     (event) => {
       const isItemSelected = activeItemCoords;
       const rightSideBoundary =
-        contentLoaderState.width - Number(activeItemCoords.width?activeItemCoords.width:2*activeItemCoords.radius);
+        contentLoaderState.width -
+        Number(
+          activeItemCoords.width
+            ? activeItemCoords.width
+            : 2 * activeItemCoords.radius
+        );
       const bottomSideBoundary =
-        contentLoaderState.height - Number(activeItemCoords.height?activeItemCoords.height:2*activeItemCoords.radius);
+        contentLoaderState.height -
+        Number(
+          activeItemCoords.height
+            ? activeItemCoords.height
+            : 2 * activeItemCoords.radius
+        );
 
       if (isItemSelected) {
         event.preventDefault();
@@ -34,7 +44,7 @@ export const useArrowKeysNavigation = (
             "left",
             Math.min(
               rightSideBoundary,
-            Number(activeItemCoords.left) + SHIFTING_BY_OFFSET
+              Number(activeItemCoords.left) + SHIFTING_BY_OFFSET
             )
           );
         else if (event.keyCode === KEY_CODES.DOWNSIDE)
@@ -42,7 +52,7 @@ export const useArrowKeysNavigation = (
             "top",
             Math.min(
               bottomSideBoundary,
-            Number(activeItemCoords.top) + SHIFTING_BY_OFFSET
+              Number(activeItemCoords.top) + SHIFTING_BY_OFFSET
             )
           );
       }
