@@ -26,7 +26,7 @@ export const useSetKeyEvents = (
   const { handleArrowKeysNavigation } = useArrowKeysNavigation(
     activeItemCoords,
     contentLoaderState,
-    handleMoveItem,
+    handleMoveItem
   );
 
   const {
@@ -38,7 +38,6 @@ export const useSetKeyEvents = (
   } = handleActions(sketchRef);
 
   const handleKeyDown = useCallback(
-
     (event) => {
       if (
         (event.metaKey || event.ctrlKey) &&
@@ -55,10 +54,15 @@ export const useSetKeyEvents = (
         };
         actionsByKeyCode[event.keyCode]?.(event);
       } else {
-
-        const handleSelect = () => {handleToolChange(Tools.Select)};
-        const handleRectangle = () => {handleToolChange(Tools.Rectangle)};
-        const handleCircle = () => {handleToolChange(Tools.Circle)};
+        const handleSelect = () => {
+          handleToolChange(Tools.Select);
+        };
+        const handleRectangle = () => {
+          handleToolChange(Tools.Rectangle);
+        };
+        const handleCircle = () => {
+          handleToolChange(Tools.Circle);
+        };
         const actionsByKeyCode = {
           [KEY_CODES.DELETE]: handleRemoveItemFromKeyboard,
           [KEY_CODES.RIGHT_SIDE]: handleArrowKeysNavigation,
@@ -73,7 +77,17 @@ export const useSetKeyEvents = (
         actionsByKeyCode[event.keyCode]?.(event);
       }
     },
-    [handleRedo, handleCutItem, handleCopyItem, handlePasteItem, handleUndo, handleRemoveItemFromKeyboard, handleArrowKeysNavigation, handleTabKeyPress, handleToolChange]
+    [
+      handleRedo,
+      handleCutItem,
+      handleCopyItem,
+      handlePasteItem,
+      handleUndo,
+      handleRemoveItemFromKeyboard,
+      handleArrowKeysNavigation,
+      handleTabKeyPress,
+      handleToolChange,
+    ]
   );
   return { handleKeyDown };
 };
