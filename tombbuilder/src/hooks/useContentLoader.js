@@ -12,7 +12,7 @@ export const useContentLoader = () => {
   const updateContentLoader = useCallback((item, value) => {
     setContentLoader((prevState) => ({ ...prevState, [item]: value }));
   }, []);
-  
+
   return {
     updateContentLoader,
     contentLoaderState,

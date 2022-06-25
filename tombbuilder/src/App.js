@@ -23,28 +23,39 @@ import Editor from "./components/editor/Editor";
 import "./styles/styles.css";
 
 export default function App() {
-  const { updateAnnotationHandler, annotation } = useAnnotation([]);
-
-  const SharedAnotation = () => {
-    // const sharedCode = JSON.parse(atob(window.location.href.substring(22)));
-
+  const { updateAnnotationHandler, annotation } = useAnnotation(() => {
     try {
-      const currentURL = window.location.href.substring(22);
-      console.log("CurrentURL: ", currentURL);
-      if (!currentURL.length) {
-        console.log("hiii");
-        return [];
-      }
+      const urlSearchParams = new URLSearchParams(window.location.search);
+      const base64AnnotationsString = urlSearchParams.get("data");
+      if (!base64AnnotationsString) return [];
 
-      console.log("ookkkkk");
-      const base64toAnnotation = atob(currentURL);
-      console.log(base64toAnnotation);
-      const SharedAnnotation = JSON.parse(base64toAnnotation);
-      return SharedAnnotation;
+      const stringifiedAnnotations = atob(base64AnnotationsString);
+      const parsedAnnotations = JSON.parse(stringifiedAnnotations);
+      console.log("parsedAnnotations: ", parsedAnnotations);
+      return parsedAnnotations;
     } catch (error) {
+      console.error("Got corrupt data");
+    } finally {
       return [];
     }
-  };
+  });
+
+  // const getAnnotationFromUrl = () => {
+  //   try {
+  //     const urlSearchParams = new URLSearchParams(window.location.search);
+  //     const base64AnnotationsString = urlSearchParams.get("data");
+  //     if (!base64AnnotationsString) return [];
+
+  //     const stringifiedAnnotations = atob(base64AnnotationsString);
+  //     const parsedAnnotations = JSON.parse(stringifiedAnnotations);
+
+  //     return parsedAnnotations;
+  //   } catch (error) {
+  //     console.error("Got corrupt data");
+  //   } finally {
+  //     return [];
+  //   }
+  // };
 
   const { updateContentLoader, contentLoaderState } = useContentLoader([]);
 
@@ -54,8 +65,6 @@ export default function App() {
     setCode(annotationsToCode(annotation, contentLoaderState));
   }, [annotation, contentLoaderState]);
 
-  // const sharedCode = JSON.parse(atob(window.location.href.substring(22)));
-
   const handleShareCode = (event) => {
     event.preventDefault();
     const nextUrl = `http://localhost:3000/?data=${btoa(
@@ -63,8 +72,6 @@ export default function App() {
     )}`;
     window.history.replaceState({}, "", nextUrl);
   };
-
-  const currentURL = window.location.href.substring(22);
 
   const [sketchRef, setSketchRef] = useState(null);
 
@@ -74,9 +81,6 @@ export default function App() {
 
   const { handleAnnotationToCanvas } = useAnnotaionToCanvas(sketchRef);
 
-  useEffect(() => {
-    updateAnnotationHandler(SharedAnotation());
-  }, []);
   return (
     <div className="App">
       <div className="container">
@@ -95,18 +99,9 @@ export default function App() {
               <button className="active">Editor</button>
 
               <button onClick={handleShareCode}>SHARE</button>
-              {currentURL.length && (
-                <button
-                  onClick={() => {
-                    updateAnnotationHandler(SharedAnotation);
-                  }}
-                >
-                  Use shared Code
-                </button>
-              )}
             </div>
             <Editor
-              updateAnnotationHandler={updateAnnotationHandler}
+              handleAnnotationToCanvas={handleAnnotationToCanvas}
               annotation={annotation}
               contentLoaderState={contentLoaderState}
             />
@@ -127,6 +122,7 @@ export default function App() {
             <Canvas
               updateAnnotationHandler={updateAnnotationHandler}
               contentLoaderState={contentLoaderState}
+              handleUpdateSketchRef={handleUpdateSketchRef}
             >
               <div className="wrapper_div">
                 <LivePreview
