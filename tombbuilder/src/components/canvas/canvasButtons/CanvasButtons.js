@@ -2,8 +2,10 @@
 // libraries
 import React from "react";
 import classnames from "classnames";
+
 // utils
 import Tools from "../../../third-parts/react-sketch/src/tools";
+
 // Component
 import selectIcon from "../../../assets/select.svg";
 import rectIcon from "../../../assets/rect.svg";
