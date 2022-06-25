@@ -1,3 +1,5 @@
+import { numberFixed } from "../../../../utils/handleFixingNumbers";
+
 const createNode = (html) =>
   new DOMParser().parseFromString(html, "text/html").body.firstChild;
 export function codeToAnnotations(code) {
@@ -18,9 +20,14 @@ export function codeToAnnotations(code) {
         annotationObject.rx = item.getAttribute("rx");
       } else if (element.includes("<circle ")) {
         annotationObject.type = "circle";
-        annotationObject.cx = item.getAttribute("cx");
-        annotationObject.cy = item.getAttribute("r");
-        annotationObject.r = item.getAttribute("r");
+        annotationObject.left =
+          numberFixed(item.getAttribute("cx")) -
+          numberFixed(item.getAttribute("r"));
+        annotationObject.top =
+          numberFixed(item.getAttribute("cy")) -
+          numberFixed(item.getAttribute("r"));
+        annotationObject.radius = numberFixed(item.getAttribute("r"));
+        annotationObject.fill = "transparent";
       }
       // else if (element.includes("<ContentLoader")) {
       //   annotationObject.type = "box";
