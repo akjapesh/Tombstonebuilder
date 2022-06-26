@@ -38,9 +38,7 @@ function ReactCodeEditor({
 
   const handleOnBlur = () => {
     const formattedValue = formatCode({ code });
-
-    const newAnnotationArray = codeToAnnotations({ formattedValue });
-
+    const newAnnotationArray = codeToAnnotations({ code: formattedValue });
     handleAnnotationToCanvas(newAnnotationArray);
   };
 
@@ -48,7 +46,7 @@ function ReactCodeEditor({
     () => {
       const codeGenerated =
         annotationsToCode({ annotation, contentLoaderState }) +
-        ` \n export default Myloader`;
+        ` \n export default MyLoader`;
 
       const newCode = formatCode({
         code: codeGenerated,

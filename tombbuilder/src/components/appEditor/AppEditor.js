@@ -1,6 +1,6 @@
 //Components
 import { CopyToClipboard } from "react-copy-to-clipboard";
-import Editor from "./components/editor/Editor";
+import Editor from "../editor/Editor";
 
 function AppEditor({
   handleShareCode,

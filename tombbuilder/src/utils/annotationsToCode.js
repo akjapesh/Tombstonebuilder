@@ -1,32 +1,31 @@
 import { numberFixed } from "./handleFixingNumbers";
 
-export const annotationsToCode = ({ annotationArray, contentLoaderState }) => {
+export const annotationsToCode = ({ annotation, contentLoaderState }) => {
   const { speed, width, height, backgroundColor, foregroundColor } =
     contentLoaderState;
 
-  let code = `
+  if (annotation.length === 0) {
+    return `
     const MyLoader = (props) => {
       return (
-      <ContentLoader 
-        speed={${speed}}
-        width={${width}}
-        height={${height}}
-        viewBox="0 0 ${width} ${height}"
-        backgroundColor="${backgroundColor}"
-        foregroundColor="${foregroundColor}"
-        {...props} 
-      >
-      `;
-
-  if (annotationArray.length === 0) {
-    return `
-      ${code}
-        </ContentLoader>)}
-        export default MyLoader
+      <div> 
+        </div>)}
     `;
   }
-
-  annotationArray.forEach((a) => {
+  let code = `
+  const MyLoader = (props) => {
+    return (
+    <ContentLoader 
+      speed={${speed}}
+      width={${width}}
+      height={${height}}
+      viewBox="0 0 ${width} ${height}"
+      backgroundColor="${backgroundColor}"
+      foregroundColor="${foregroundColor}"
+      {...props} 
+    >
+    `;
+  annotation.forEach((a) => {
     const height = numberFixed(a.height * a.scaleY);
 
     const width = numberFixed(a.width * a.scaleX);
@@ -36,20 +35,18 @@ export const annotationsToCode = ({ annotationArray, contentLoaderState }) => {
     }
 
     if (a.type === "rect") {
-      code += `   <rect x="${
-        numberFixed(a.left) - (numberFixed(a.left) % 4)
-      }" rx="${numberFixed(a.rx)}" ry="${numberFixed(a.ry)}"    y="${
-        numberFixed(a.top) - (numberFixed(a.top) % 4)
-      }"  width="${width - (width % 4)}" height="${height - (height % 4)}"/> 
+      code += `   <rect x="${numberFixed(a.left)}" rx="${numberFixed(
+        a.rx
+      )}" ry="${numberFixed(a.ry)}"    y="${numberFixed(
+        a.top
+      )}"  width="${width}" height="${height}"/> 
       \n`;
     } else if (a.type === "circle") {
       const cx = numberFixed(a.left) + numberFixed(a.radius * a.scaleY);
       const cy = numberFixed(a.top) + numberFixed(a.radius * a.scaleY);
       const radius = numberFixed(a.radius * a.scaleX);
       code += `   
-       <circle cx="${cx - (cx % 4)}" cy="${cy - (cy % 4)}" r="${
-        radius - (radius % 4)
-      }" /> 
+       <circle cx="${cx}" cy="${cy}" r="${radius}" /> 
       \n
       `;
     }

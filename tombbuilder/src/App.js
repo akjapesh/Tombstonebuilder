@@ -10,12 +10,12 @@ import { useContentLoader } from "./hooks/useContentLoader";
 import { useAnnotaionToCanvas } from "./components/canvas/hooks/useAnnotationToCanvas/useAnnotationToCanvas";
 
 //Components
+import AppEditor from "./components/appEditor/AppEditor";
+import AppCanvas from "./components/appCanvas/AppCanvas";
 import Header from "./components/header/Header";
 
 //styles
 import "./styles/styles.css";
-import AppEditor from "./components/appEditor/AppEditor";
-import AppCanvas from "./components/appCanvas/appCanvas";
 
 export default function App() {
   const { updateAnnotationHandler, annotation } = useAnnotation(() => {
@@ -58,7 +58,8 @@ export default function App() {
 
   useEffect(() => {
     const newLiveCode =
-      annotationsToCode(annotation, contentLoaderState) + `render(<Myloader/>)`;
+      annotationsToCode({ annotation, contentLoaderState }) +
+      `\n render(<MyLoader/>)`;
     setCode(newLiveCode);
   }, [annotation, contentLoaderState]);
 
