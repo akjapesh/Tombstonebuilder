@@ -7,11 +7,11 @@ export const useAnnotation = (initialValue) => {
 
   const updateAnnotationHandler = useCallback((item) => {
     setAnnotation(item);
-    console.log("hii");
+    // console.log("hii");
   }, []);
   const onAnnotationChangeHandler = useCallback((onAnnotationChange) => {
     onAnnotationChange();
-    console.log("hii");
+    // console.log("hii");
   }, []);
 
   return {

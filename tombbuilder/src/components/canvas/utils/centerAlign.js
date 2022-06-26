@@ -19,7 +19,6 @@ export const centerAlign = (sketchRef) => {
     center.centerY = newTop + newHeight / 2;
     center.centerX = newLeft + newWidth / 2;
     center.centerX = numberFixed(center.centerX);
-
     center.centerY = numberFixed(center.centerY);
 
     return center;

@@ -35,18 +35,17 @@ export const annotationsToCode = ({ annotation, contentLoaderState }) => {
     }
 
     if (a.type === "rect") {
-      code += `   <rect x="${numberFixed(a.left)}" rx="${numberFixed(
+      code += `   <rect x="${numberFixed(a.left) - numberFixed(a.left)%16}" rx="${numberFixed(
         a.rx
-      )}" ry="${numberFixed(a.ry)}"    y="${numberFixed(
-        a.top
-      )}"  width="${width}" height="${height}"/> 
+      )}" ry="${numberFixed(a.ry)}"    y="${numberFixed(a.top)  - numberFixed(a.top)%16}"  
+      width="${width- width%16}" height="${height - height%16}"/> 
       \n`;
     } else if (a.type === "circle") {
       const cx = numberFixed(a.left) + numberFixed(a.radius * a.scaleY);
       const cy = numberFixed(a.top) + numberFixed(a.radius * a.scaleY);
       const radius = numberFixed(a.radius * a.scaleX);
       code += `   
-       <circle cx="${cx}" cy="${cy}" r="${radius}" /> 
+       <circle cx="${cx - cx%16}" cy="${cy - cy%16}" r="${radius}" /> 
       \n
       `;
     }

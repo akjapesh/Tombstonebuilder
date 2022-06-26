@@ -13,15 +13,14 @@ export const useActiveItem = () => {
       top = top - (top % SHIFTING_BY_OFFSET);
       height = height - (height % SHIFTING_BY_OFFSET);
 
+      target.set("left", left);
+      target.set("top", top);
+
       if (type === "circle") {
         target.set("radius", radius);
-        target.set("left", left);
-        target.set("top", top);
         return setActiveItemCoords({ radius, left, top, type });
       }
       target.set("width", width);
-      target.set("left", left);
-      target.set("top", top);
       target.set("height", height);
       return setActiveItemCoords({ width, height, left, top, rx, ry, type });
     },
