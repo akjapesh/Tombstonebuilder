@@ -1,15 +1,13 @@
-import { useCallback } from "react";
-
 export const useItemActions = ({
   sketchRef,
-  handleMoveActiveItem,
+  handleActiveItemActions,
   activeItemCoords,
 }) => {
   const handleItemActions = (action) => {
     const { type, payLoad } = action;
     switch (type) {
       case "Move":
-        const { key, value } = payLoad;
+        let { key, value } = payLoad;
         const canvas = sketchRef.current && sketchRef.current._fc;
         if (isNaN(value)) value = 0;
         if (canvas && canvas.getActiveObject()) {
@@ -17,7 +15,7 @@ export const useItemActions = ({
           selection.set(key, value);
           selection.setCoords();
           canvas.requestRenderAll();
-          handleMoveActiveItem(key, value);
+          handleActiveItemActions({ type: "Move", payLoad: { key, value } });
         }
         break;
       case "Remove":

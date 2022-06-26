@@ -8,7 +8,7 @@ function CanvasSketchPad({
   sketchRef,
   tool,
   handleToolChange,
-  handleCloneItem,
+  handleCanvasActions,
   activeItemCoords,
   handleItemActions,
   handleKeyDown,
@@ -38,7 +38,7 @@ function CanvasSketchPad({
         tool={tool}
         handleToolChange={handleToolChange}
         handleItemActions={handleItemActions}
-        handleCloneItem={handleCloneItem}
+        handleCanvasActions={handleCanvasActions}
         activeItemCoords={activeItemCoords}
         handleKeyDown={handleKeyDown}
       />

@@ -20,13 +20,7 @@ export const useSetKeyEvents = ({
     handleItemActions
   );
 
-  const {
-    handleRedo,
-    handleUndo,
-    handleCutItem,
-    handleCopyItem,
-    handlePasteItem,
-  } = handleActions(sketchRef);
+  const { handleCanvasActions } = handleActions(sketchRef);
 
   const handleKeyDown = useCallback(
     (event) => {
@@ -35,13 +29,21 @@ export const useSetKeyEvents = ({
         event.shiftKey &&
         event.key === "z"
       ) {
-        handleRedo();
+        handleCanvasActions({ type: "Redo" });
       } else if ((event.metaKey || event.ctrlKey) && !event.shiftKey) {
         const actionsByKeyCode = {
-          [KEY_CODES.CUT]: handleCutItem,
-          [KEY_CODES.COPY]: handleCopyItem,
-          [KEY_CODES.PASTE]: handlePasteItem,
-          [KEY_CODES.UNDO]: handleUndo,
+          [KEY_CODES.CUT]: () => {
+            handleCanvasActions({ type: "Cut" });
+          },
+          [KEY_CODES.COPY]: () => {
+            handleCanvasActions({ type: "Copy" });
+          },
+          [KEY_CODES.PASTE]: () => {
+            handleCanvasActions({ type: "Paste" });
+          },
+          [KEY_CODES.UNDO]: () => {
+            handleCanvasActions({ type: "Undo" });
+          },
         };
         actionsByKeyCode[event.keyCode]?.(event);
       } else {
@@ -71,11 +73,7 @@ export const useSetKeyEvents = ({
       }
     },
     [
-      handleRedo,
-      handleCutItem,
-      handleCopyItem,
-      handlePasteItem,
-      handleUndo,
+      handleCanvasActions,
       handleItemActions,
       handleArrowKeysNavigation,
       handleToolChange,

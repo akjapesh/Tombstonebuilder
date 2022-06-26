@@ -1,44 +1,37 @@
 export const handleActions = (sketchRef) => {
-  const handleUndo = () => {
-    sketchRef.current.undo();
-  };
-
-  const handleCloneItem = () => {
-    if (sketchRef.current) {
-      sketchRef.current.copy();
-      sketchRef.current.paste();
+  const handleCanvasActions = ({ type }) => {
+    switch (type) {
+      case "Undo":
+        sketchRef.current.undo();
+        break;
+      case "Clone":
+        if (sketchRef.current) {
+          sketchRef.current.copy();
+          sketchRef.current.paste();
+        }
+        break;
+      case "Copy":
+        sketchRef.current.copy();
+        break;
+      case "Cut":
+        if (sketchRef.current) {
+          sketchRef.current.copy();
+        }
+        sketchRef.current.removeSelected();
+        break;
+      case "Paste":
+        if (sketchRef.current) {
+          sketchRef.current.paste();
+        }
+        break;
+      case "Redo":
+        sketchRef.current.redo();
+        break;
+      default:
+        break;
     }
   };
-
-  const handleCopyItem = () => {
-    if (sketchRef.current) {
-      sketchRef.current.copy();
-    }
-  };
-
-  const handleCutItem = () => {
-    if (sketchRef.current) {
-      sketchRef.current.copy();
-    }
-    sketchRef.current.removeSelected();
-  };
-
-  const handlePasteItem = () => {
-    if (sketchRef.current) {
-      sketchRef.current.paste();
-    }
-  };
-
-  const handleRedo = () => {
-    sketchRef.current.redo();
-  };
-
   return {
-    handleRedo,
-    handleUndo,
-    handleCloneItem,
-    handleCutItem,
-    handleCopyItem,
-    handlePasteItem,
+    handleCanvasActions,
   };
 };

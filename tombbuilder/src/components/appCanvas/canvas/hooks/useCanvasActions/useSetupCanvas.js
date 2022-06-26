@@ -5,8 +5,7 @@ import { centerAlign } from "../../utils/centerAlign";
 export const useSetupCanvas = ({
   sketchRef,
   updateAnnotationHandler,
-  setCoords,
-  handleResetActiveItem,
+  handleActiveItemActions,
   handleItemActions,
   handleKeyDown,
   handleToolChange,
@@ -25,7 +24,10 @@ export const useSetupCanvas = ({
       },
 
       "selection:created": (item) => {
-        setCoords(item.selected[0]);
+        handleActiveItemActions({
+          type: "SetCoords",
+          payLoad: { target: item.selected[0] },
+        });
         item.target = handleItemActions({
           type: "Add",
           payLoad: { target: item.target },
@@ -33,16 +35,22 @@ export const useSetupCanvas = ({
       },
 
       "selection:updated": (item) => {
-        setCoords(item.selected[0]);
+        handleActiveItemActions({
+          type: "SetCoords",
+          payLoad: { target: item.selected[0] },
+        });
       },
 
       "selection:cleared": () => {
-        handleResetActiveItem();
+        handleActiveItemActions({ type: "Reset" });
         clearCenterAlignLines();
       },
 
       "object:modified": (item) => {
-        setCoords(item.target);
+        handleActiveItemActions({
+          type: "SetCoords",
+          payLoad: { target: item.target },
+        });
       },
 
       "object:added": (item) =>
