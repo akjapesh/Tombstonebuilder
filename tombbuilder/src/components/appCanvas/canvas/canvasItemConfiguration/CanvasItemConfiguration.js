@@ -1,6 +1,6 @@
 import React from "react";
 // import { Input } from "baseui/input";
-import { numberFixed } from "../../../utils/handleFixingNumbers";
+import { numberFixed } from "utils/handleFixingNumbers";
 function CanvasItemConfiguration({
   activeItemCoords,
   handleMoveItem,

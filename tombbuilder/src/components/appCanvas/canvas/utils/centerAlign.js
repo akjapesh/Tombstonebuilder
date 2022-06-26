@@ -1,5 +1,5 @@
 import { fabric } from "fabric";
-import { numberFixed } from "../../../utils/handleFixingNumbers";
+import { numberFixed } from "utils/handleFixingNumbers";
 import { SHIFTING_BY_OFFSET } from "../hooks/useSetKeyEvents/useSetKeyPressActions/useArrowKeysNavigation";
 
 export const centerAlign = (sketchRef) => {

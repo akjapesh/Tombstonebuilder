@@ -1,4 +1,4 @@
-import { numberFixed } from "../../../../utils/handleFixingNumbers";
+import { numberFixed } from "utils/handleFixingNumbers";
 
 export const annotationsToCode = (annotationArray, contentLoaderState) => {
   const { speed, width, height, backgroundColor, foregroundColor } =

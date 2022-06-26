@@ -7,7 +7,7 @@ import { annotationsToCode } from "./utils/annotationsToCode";
 import { useEffect, useState, useCallback } from "react";
 import { useAnnotation } from "./hooks/useAnnotation";
 import { useContentLoader } from "./hooks/useContentLoader";
-import { useAnnotationToCanvas } from "./components/canvas/hooks/useAnnotationToCanvas/useAnnotationToCanvas";
+import { useAnnotationToCanvas } from "./components/appCanvas/canvas/hooks/useAnnotationToCanvas/useAnnotationToCanvas";
 
 //Components
 import AppEditor from "./components/appEditor/AppEditor";

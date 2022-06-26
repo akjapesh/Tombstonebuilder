@@ -1,5 +1,5 @@
-import { numberFixed } from "../../../../utils/handleFixingNumbers";
-import { shiftValueByOffset } from "../../../../utils/shiftValueByOffset";
+import { numberFixed } from "utils/handleFixingNumbers";
+import { shiftValueByOffset } from "utils/shiftValueByOffset";
 const createNode = (html) =>
   new DOMParser().parseFromString(html, "text/html").body.firstChild;
 export function codeToAnnotations({ code }) {

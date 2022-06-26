@@ -7,7 +7,7 @@ import {
   ModalFooter,
   ModalButton,
 } from "baseui/modal";
-import gearIcon from "../../../assets/gear.svg";
+import gearIcon from "assets/gear.svg";
 import { StatefulTooltip } from "baseui/tooltip";
 
 export default function ModalExample({ children, header }) {

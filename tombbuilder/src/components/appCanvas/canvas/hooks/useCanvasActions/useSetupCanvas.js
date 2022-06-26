@@ -1,5 +1,5 @@
 import { useEffect } from "react";
-import tools from "../../../../third-parts/react-sketch/src/tools";
+import tools from "third-parts/react-sketch/src/tools";
 import { centerAlign } from "../../utils/centerAlign";
 
 export const useSetupCanvas = ({
@@ -9,7 +9,7 @@ export const useSetupCanvas = ({
   handleAddItemInCanvas,
   handleResetActiveItem,
   handleKeyDown,
-  handleToolChange
+  handleToolChange,
 }) => {
   const { clearCenterAlignLines, connectCenterAlignLine } =
     centerAlign(sketchRef);

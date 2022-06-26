@@ -6,12 +6,12 @@ import AceEditor from "react-ace";
 
 import { codeToAnnotations } from "./utils/codeToAnnotations";
 import { formatCode } from "./utils/formatCode";
-import { annotationsToCode } from "../../../utils/annotationsToCode";
+import { annotationsToCode } from "utils/annotationsToCode";
 
 //hooks
 
 import { useState } from "react";
-import { useDebouncedEffect } from "../../../hooks/useDebouncedEffect";
+import { useDebouncedEffect } from "hooks/useDebouncedEffect";
 
 //constants
 

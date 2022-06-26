@@ -4,7 +4,7 @@ import ContentLoader from "react-content-loader";
 import { LiveProvider, LivePreview } from "react-live";
 
 //Components
-import Canvas from "../canvas/Canvas";
+import Canvas from "./canvas/Canvas";
 import CanvasConfiguration from "./canvasConfiguration/CanvasConfiguration";
 
 function AppCanvas({

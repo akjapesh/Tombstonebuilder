@@ -3,7 +3,7 @@ import { useCallback } from "react";
 import { handleActions } from "../../utils/handleActions";
 //hooks
 import { useArrowKeysNavigation } from "./useSetKeyPressActions/useArrowKeysNavigation";
-import Tools from "../../../../third-parts/react-sketch/src/tools";
+import Tools from "third-parts/react-sketch/src/tools";
 
 import KEY_CODES from "../../utils/keyCodes";
 
@@ -13,9 +13,8 @@ export const useSetKeyEvents = ({
   contentLoaderState,
   handleRemoveItemFromKeyboard,
   handleMoveItem,
-  handleToolChange}
-) => {
-
+  handleToolChange,
+}) => {
   const { handleArrowKeysNavigation } = useArrowKeysNavigation(
     activeItemCoords,
     contentLoaderState,

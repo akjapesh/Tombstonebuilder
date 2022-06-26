@@ -1,5 +1,5 @@
 import React from "react";
-import SketchField from "../../../third-parts/react-sketch/src/SketchField";
+import SketchField from "third-parts/react-sketch/src/SketchField";
 
 function CanvasSketchField({ contentLoaderState, tool, sketchRef }) {
   return (
