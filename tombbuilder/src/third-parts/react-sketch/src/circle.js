@@ -46,7 +46,7 @@ class Circle extends FabricCanvasTool {
           { x: pointer.x, y: pointer.y }
         ) / 2,
       angle:
-        (Math.atan2(pointer.y - this.startY, pointer.x - this.startX) * 180) /
+        (Math.atan2(pointer.y - pointer.y, pointer.x - this.startX) * 180) /
         Math.PI,
     })
     this.circle.setCoords()

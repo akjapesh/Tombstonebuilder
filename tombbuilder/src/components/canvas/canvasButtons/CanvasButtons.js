@@ -59,25 +59,25 @@ function CanvasButtons({
       </button>
 
       {isItemSelected && (
-        <>
-          <button
-            className="app-handlers__tool app-handler__trash"
-            onClick={handleRemoveItemFromKeyboard}
-          >
-            <img src={trashIcon} alt="remove item" />
-          </button>
-          <button className="app-handler__clone" onClick={handleCloneItem}>
-            <img src={cloneIcon} alt="clone tool" />
-          </button>
-          <ModalExample>
-            <CanvasItemConfiguration
-              activeItemCoords={activeItemCoords}
-              handleMoveItem={handleMoveItem}
-              handleKeyDown={handleKeyDown}
-            />
-          </ModalExample>
-        </>
-      )}
+      <>
+        <button
+          className="app-handlers__tool"
+          onClick={handleRemoveItemFromKeyboard}>
+          <img src={trashIcon} alt="remove item" />
+        </button>
+        <button className="app-handlers__tool" onClick={handleCloneItem}>
+          <img src={cloneIcon} alt="clone tool" />
+        </button>
+        <ModalExample>
+          <CanvasItemConfiguration
+            activeItemCoords={activeItemCoords}
+            handleMoveItem={handleMoveItem}
+            handleKeyDown={handleKeyDown}
+          />
+        </ModalExample>
+      </>
+      )
+      }
     </div>
   );
 }

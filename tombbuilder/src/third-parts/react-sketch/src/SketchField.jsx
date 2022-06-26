@@ -255,6 +255,7 @@ class SketchField extends PureComponent {
     let prevHeight = canvas.getHeight()
     let wfactor = ((offsetWidth - widthCorrection) / prevWidth).toFixed(2)
     let hfactor = ((clientHeight - heightCorrection) / prevHeight).toFixed(2)
+    // console.log("offset width",offsetWidth);
     canvas.setWidth(offsetWidth - widthCorrection)
     canvas.setHeight(clientHeight - heightCorrection)
     if (canvas.backgroundImage) {

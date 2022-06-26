@@ -35,23 +35,6 @@ export default function App() {
     }
   });
 
-  // const getAnnotationFromUrl = () => {
-  //   try {
-  //     const urlSearchParams = new URLSearchParams(window.location.search);
-  //     const base64AnnotationsString = urlSearchParams.get("data");
-  //     if (!base64AnnotationsString) return [];
-
-  //     const stringifiedAnnotations = atob(base64AnnotationsString);
-  //     const parsedAnnotations = JSON.parse(stringifiedAnnotations);
-
-  //     return parsedAnnotations;
-  //   } catch (error) {
-  //     console.error("Got corrupt data");
-  //   } finally {
-  //     return [];
-  //   }
-  // };
-
   const { updateContentLoader, contentLoaderState } = useContentLoader([]);
 
   const [code, setCode] = useState(" ");

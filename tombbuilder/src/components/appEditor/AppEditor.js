@@ -15,7 +15,7 @@ function AppEditor({
         <div className="app-mode">
           <button className="active">Editor</button>
 
-          <button onClick={handleShareCode}>SHARE</button>
+          <button onClick={handleShareCode}>Share</button>
         </div>
         <Editor
           handleAnnotationToCanvas={handleAnnotationToCanvas}
