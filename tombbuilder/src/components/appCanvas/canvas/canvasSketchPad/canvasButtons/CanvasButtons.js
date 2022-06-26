@@ -18,7 +18,7 @@ import cloneIcon from "assets/clone.svg";
 function CanvasButtons({
   tool,
   handleToolChange,
-  handleCloneItem,
+  handleCanvasActions,
   activeItemCoords,
   handleKeyDown,
   handleItemActions,
@@ -67,7 +67,12 @@ function CanvasButtons({
           >
             <img src={trashIcon} alt="remove item" />
           </button>
-          <button className="app-handler__clone" onClick={handleCloneItem}>
+          <button
+            className="app-handler__clone"
+            onClick={() => {
+              handleCanvasActions({ type: "Clone" });
+            }}
+          >
             <img src={cloneIcon} alt="clone tool" />
           </button>
           <ModalExample>

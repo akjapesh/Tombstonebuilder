@@ -28,20 +28,15 @@ function Canvas({
     handleUpdateSketchRef(sketchRef);
   }, [sketchRef, handleUpdateSketchRef]);
 
-  const {
-    setCoords,
-    activeItemCoords,
-    handleResetActiveItem,
-    handleMoveActiveItem,
-  } = useActiveItem();
+  const { handleActiveItemActions, activeItemCoords } = useActiveItem();
 
   const { handleItemActions } = useItemActions({
     sketchRef,
-    handleMoveActiveItem,
+    handleActiveItemActions,
     activeItemCoords,
   });
 
-  const { handleRedo, handleUndo, handleCloneItem } = handleActions(sketchRef);
+  const { handleCanvasActions } = handleActions(sketchRef);
 
   const { handleKeyDown } = useSetKeyEvents({
     activeItemCoords,
@@ -53,9 +48,8 @@ function Canvas({
   useSetupCanvas({
     sketchRef,
     updateAnnotationHandler,
-    setCoords,
+    handleActiveItemActions,
     handleItemActions,
-    handleResetActiveItem,
     handleKeyDown,
     handleToolChange,
   });
@@ -67,10 +61,8 @@ function Canvas({
         contentLoaderState={contentLoaderState}
         sketchRef={sketchRef}
         tool={tool}
-        handleRedo={handleRedo}
-        handleUndo={handleUndo}
+        handleCanvasActions={handleCanvasActions}
         handleToolChange={handleToolChange}
-        handleCloneItem={handleCloneItem}
         activeItemCoords={activeItemCoords}
         handleItemActions={handleItemActions}
         handleKeyDown={handleKeyDown}
