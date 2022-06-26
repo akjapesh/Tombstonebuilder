@@ -2,11 +2,9 @@ import { fabric } from "fabric";
 import { numberFixed } from "../../../utils/handleFixingNumbers";
 import { SHIFTING_BY_OFFSET } from "../hooks/useSetKeyEvents/useSetKeyPressActions/useArrowKeysNavigation";
 
-export const centerAllign = (sketchRef) => {
+export const centerAlign = (sketchRef) => {
   const calculateCenter = (target) => {
     const center = { centerX: 0, centerY: 0 };
-    // center.centerY=numberFixed(numberFixed(target.top) - (numberFixed(target.top) % SHIFTING_BY_OFFSET)+(numberFixed(target.height) - (numberFixed(target.height) % SHIFTING_BY_OFFSET))/2);
-    // center.centerX=numberFixed(numberFixed(target.left) - (numberFixed(target.left) % SHIFTING_BY_OFFSET)+(numberFixed(target.width) - (numberFixed(target.width) % SHIFTING_BY_OFFSET))/2);
     const newTop =
       numberFixed(target.top) - (numberFixed(target.top) % SHIFTING_BY_OFFSET);
     const newLeft =
@@ -27,7 +25,7 @@ export const centerAllign = (sketchRef) => {
     return center;
   };
 
-  const clearCenterAllignLines = () => {
+  const clearCenterAlignLines = () => {
     sketchRef.current._fc._objects.forEach((o) => {
       if (o.type === "line") {
         sketchRef.current._fc.remove(o);
@@ -35,8 +33,8 @@ export const centerAllign = (sketchRef) => {
     });
   };
 
-  const connectCenterAllignLine = (target) => {
-    clearCenterAllignLines();
+  const connectCenterAlignLine = (target) => {
+    clearCenterAlignLines();
     const targetCenter = calculateCenter(target);
     sketchRef.current._fc._objects.forEach((o) => {
       if (o !== target) {
@@ -73,7 +71,7 @@ export const centerAllign = (sketchRef) => {
   };
 
   return {
-    clearCenterAllignLines,
-    connectCenterAllignLine,
+    clearCenterAlignLines,
+    connectCenterAlignLine,
   };
 };

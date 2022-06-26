@@ -14,9 +14,6 @@ export const useActiveItem = () => {
       height = height - (height % SHIFTING_BY_OFFSET);
 
       if (type === "circle") {
-        // handleMoveActiveItem('radius',radius);
-        // handleMoveActiveItem('top',top);
-        // handleMoveActiveItem('left',left);
         target.set("radius", radius);
         target.set("left", left);
         target.set("top", top);
@@ -34,8 +31,6 @@ export const useActiveItem = () => {
     setActiveItemCoords({});
   };
   const handleMoveActiveItem = (key, value) => {
-    console.log(typeof value, value);
-
     setActiveItemCoords({ ...activeItemCoords, [key]: value });
   };
   return {

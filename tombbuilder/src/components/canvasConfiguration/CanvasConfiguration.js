@@ -1,26 +1,9 @@
 import React from "react";
-
+//utils
+import {handleCanvasConfiguration} from "./utils/handleCanvasConfigurationEvents";
 function CanvasConfiguration({ updateContentLoader, contentLoaderState }) {
-  const handleInput = ({ target: { value, name, max } }) => {
-    updateContentLoader(
-      name,
-      Number(Number(value) <= Number(max) ? Number(value) : Number(max))
-    );
-  };
-  const handleColor = (e) => {
-    // debounceHandlecolor(e.target.name,e.target.value)
-    updateContentLoader(e.target.name, e.target.value);
-  };
-  // const debounceHandlecolor=debounce(250,(name,value)=>{
-  //     updateContentLoader(name,value);
-  // })
-  const resetColors = () => {
-    updateContentLoader("backgroundColor", "#f3f3f3");
-    updateContentLoader("foregroundColor", "#ecebeb");
-  };
-  const handleCheckbox = ({ target: { checked, name } }) => {
-    updateContentLoader(name, checked);
-  };
+  // const {handleInput,handleCheckbox,handleColor,resetColors}=handleCanvasConfiguration({updateContentLoader});
+ 
 
   return (
     <div className="app-config">
@@ -32,7 +15,7 @@ function CanvasConfiguration({ updateContentLoader, contentLoaderState }) {
             id="width"
             name="width"
             value={contentLoaderState.width}
-            onChange={handleInput}
+            onChange={(e)=>handleCanvasConfiguration({updateContentLoader,actionType:e})}
             max="600"
           />
           <label htmlFor="width">width (in px)</label>
@@ -44,7 +27,7 @@ function CanvasConfiguration({ updateContentLoader, contentLoaderState }) {
             id="height"
             name="height"
             value={contentLoaderState.height}
-            onChange={handleInput}
+            onChange={(e)=>handleCanvasConfiguration({updateContentLoader,actionType:e})}
             max="500"
           />
           <label htmlFor="height">height (in px)</label>
@@ -54,7 +37,7 @@ function CanvasConfiguration({ updateContentLoader, contentLoaderState }) {
       <div className="row">
         <p className="app-config_caption">
           Colors{" "}
-          <button className="reset-colors" onClick={resetColors}>
+          <button className="reset-colors" name="reset" onClick={(e)=>handleCanvasConfiguration({updateContentLoader,actionType:e})}>
             Reset
           </button>
         </p>
@@ -65,7 +48,7 @@ function CanvasConfiguration({ updateContentLoader, contentLoaderState }) {
             id="backgroundColor"
             name="backgroundColor"
             value={contentLoaderState.backgroundColor}
-            onChange={handleColor}
+            onChange={(e)=>handleCanvasConfiguration({updateContentLoader,actionType:e})}
           />
           <label htmlFor="backgroundColor">Background color</label>
         </p>
@@ -76,7 +59,7 @@ function CanvasConfiguration({ updateContentLoader, contentLoaderState }) {
             id="foregroundColor"
             name="foregroundColor"
             value={contentLoaderState.foregroundColor}
-            onChange={handleColor}
+            onChange={(e)=>handleCanvasConfiguration({updateContentLoader,actionType:e})}
           />
           <label htmlFor="foregroundColor">Foreground color</label>
         </p>
@@ -90,7 +73,7 @@ function CanvasConfiguration({ updateContentLoader, contentLoaderState }) {
             name="speed"
             value={contentLoaderState.speed}
             max="20"
-            onChange={handleInput}
+            onChange={(e)=>handleCanvasConfiguration({updateContentLoader,actionType:e})}
           />
           <label htmlFor="speed">speed (in s)</label>
         </p>
@@ -103,7 +86,7 @@ function CanvasConfiguration({ updateContentLoader, contentLoaderState }) {
             checked={contentLoaderState.gridVisibility}
             name="gridVisibility"
             id="gridVisibility"
-            onChange={handleCheckbox}
+            onChange={(e)=>handleCanvasConfiguration({updateContentLoader,actionType:e})}
           />
           <span
             className={`toggle-check ${

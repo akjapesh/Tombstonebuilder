@@ -1,13 +1,12 @@
 import { useCallback } from "react";
 
-export const useItemActions = (
+export const useItemActions = ({
   sketchRef,
   handleMoveActiveItem,
-  activeItemCoords
+  activeItemCoords}
 ) => {
   const handleMoveItem = (key, value) => {
     const canvas = sketchRef.current && sketchRef.current._fc;
-    // console.log(typeof(value),value);
     if (isNaN(value)) value = 0;
     if (canvas && canvas.getActiveObject()) {
       const selection = canvas.getActiveObject();

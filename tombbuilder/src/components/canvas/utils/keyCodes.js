@@ -5,7 +5,6 @@ export default {
   UPSIDE: 38,
   RIGHT_SIDE: 39,
   DOWNSIDE: 40,
-  TAB_KEY: 9,
   CUT: 88,
   COPY: 67,
   PASTE: 86,
