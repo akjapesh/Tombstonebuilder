@@ -13,9 +13,9 @@ import { annotationsToCode } from "./utils/annotationsToCode";
 import { useState } from "react";
 import { useDebouncedEffect } from "../../../hooks/useDebouncedEffect";
 
-//constatnts
+//constants
 
-import CODE_EDITOR_PROPERTIES from "./utils/codeEditorProperties";
+import { CODE_EDITOR_PROPERTIES } from "./utils/codeEditorProperties";
 
 //styles
 
@@ -35,18 +35,21 @@ function ReactCodeEditor({
     // eslint-disable-next-line no-undef
     setCode(newValue);
   };
+
   const handleOnBlur = () => {
-    console.log(code);
-    const formattedValue = formatCode(code);
-    const newAnnotationArray = codeToAnnotations(formattedValue);
+    const formattedValue = formatCode({ code });
+
+    const newAnnotationArray = codeToAnnotations({ formattedValue });
+
     handleAnnotationToCanvas(newAnnotationArray);
   };
 
   useDebouncedEffect(
     () => {
-      const newCode = formatCode(
-        annotationsToCode(annotation, contentLoaderState)
-      );
+      const newCode = formatCode({
+        code: annotationsToCode({ annotation, contentLoaderState }),
+      });
+
       setCode(newCode);
     },
     [annotation, formatCode],

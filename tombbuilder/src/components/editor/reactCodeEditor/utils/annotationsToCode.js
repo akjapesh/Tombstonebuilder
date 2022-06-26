@@ -1,6 +1,6 @@
 import { numberFixed } from "../../../../utils/handleFixingNumbers";
 
-export const annotationsToCode = (annotationArray, contentLoaderState) => {
+export const annotationsToCode = ({ annotationArray, contentLoaderState }) => {
   const { speed, width, height, backgroundColor, foregroundColor } =
     contentLoaderState;
 
@@ -25,13 +25,6 @@ export const annotationsToCode = (annotationArray, contentLoaderState) => {
         export default MyLoader
     `;
   }
-
-  // const sharedCode = atob(window.location.href.substring(22));
-  // console.log(code);
-  // if(sharedCode.length)
-  // {
-  //   code = code + sharedCode.substring(257,sharedCode.length - 95);
-  // }
 
   annotationArray.forEach((a) => {
     const height = numberFixed(a.height * a.scaleY);
