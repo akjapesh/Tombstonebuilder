@@ -32,6 +32,7 @@ export const handleActions = (sketchRef) => {
   const handleRedo = () => {
     sketchRef.current.redo();
   };
+  
 
   return {
     handleRedo,

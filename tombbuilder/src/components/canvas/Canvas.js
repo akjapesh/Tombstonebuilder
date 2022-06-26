@@ -54,7 +54,7 @@ function Canvas({
     handleToolChange
   }
   );
-  useSetupCanvas(
+  useSetupCanvas({
     sketchRef,
     updateAnnotationHandler,
     setCoords,
@@ -62,9 +62,8 @@ function Canvas({
     handleResetActiveItem,
     handleKeyDown,
     handleToolChange
-  );
+});
 
-  console.log(sketchRef.current);
   return (
     <>
       <CanvasSketchPad

@@ -12,7 +12,7 @@ import { annotationsToCode } from "./utils/annotationsToCode";
 import { useEffect, useState, useCallback } from "react";
 import { useAnnotation } from "./hooks/useAnnotation";
 import { useContentLoader } from "./hooks/useContentLoader";
-import { useAnnotationToCanvas } from "./components/canvas/hooks/useAnnotationToCanvas/UseAnnotationToCanvas";
+import { useAnnotationToCanvas } from "./components/canvas/hooks/useAnnotationToCanvas/useAnnotationToCanvas";
 
 //Components
 import Canvas from "./components/canvas/Canvas";
