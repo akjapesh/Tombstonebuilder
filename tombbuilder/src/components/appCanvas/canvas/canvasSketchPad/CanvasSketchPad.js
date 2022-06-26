@@ -8,10 +8,9 @@ function CanvasSketchPad({
   sketchRef,
   tool,
   handleToolChange,
-  handleRemoveItemFromKeyboard,
   handleCloneItem,
   activeItemCoords,
-  handleMoveItem,
+  handleItemActions,
   handleKeyDown,
 }) {
   return (
@@ -38,10 +37,9 @@ function CanvasSketchPad({
       <CanvasButtons
         tool={tool}
         handleToolChange={handleToolChange}
-        handleRemoveItemFromKeyboard={handleRemoveItemFromKeyboard}
+        handleItemActions={handleItemActions}
         handleCloneItem={handleCloneItem}
         activeItemCoords={activeItemCoords}
-        handleMoveItem={handleMoveItem}
         handleKeyDown={handleKeyDown}
       />
     </div>

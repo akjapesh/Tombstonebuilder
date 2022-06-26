@@ -18,11 +18,10 @@ import cloneIcon from "assets/clone.svg";
 function CanvasButtons({
   tool,
   handleToolChange,
-  handleRemoveItemFromKeyboard,
   handleCloneItem,
   activeItemCoords,
-  handleMoveItem,
   handleKeyDown,
+  handleItemActions,
 }) {
   const isItemSelected =
     activeItemCoords && Object.keys(activeItemCoords).length > 0;
@@ -62,7 +61,9 @@ function CanvasButtons({
         <>
           <button
             className="app-handlers__tool app-handler__trash"
-            onClick={handleRemoveItemFromKeyboard}
+            onClick={(e) => {
+              handleItemActions({ type: "Remove", payLoad: { event: e } });
+            }}
           >
             <img src={trashIcon} alt="remove item" />
           </button>
@@ -72,7 +73,7 @@ function CanvasButtons({
           <ModalExample>
             <CanvasItemConfiguration
               activeItemCoords={activeItemCoords}
-              handleMoveItem={handleMoveItem}
+              handleItemActions={handleItemActions}
               handleKeyDown={handleKeyDown}
             />
           </ModalExample>

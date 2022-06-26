@@ -7,7 +7,7 @@ export const SHIFTING_BY_OFFSET = 16;
 export const useArrowKeysNavigation = (
   activeItemCoords,
   contentLoaderState,
-  handleMoveItem
+  handleItemActions
 ) => {
   const handleArrowKeysNavigation = useCallback(
     (event) => {
@@ -30,38 +30,56 @@ export const useArrowKeysNavigation = (
       if (isItemSelected) {
         event.preventDefault();
         if (event.keyCode === KEY_CODES.LEFT_SIDE)
-          handleMoveItem(
-            "left",
-            Math.max(0, Number(activeItemCoords.left) - SHIFTING_BY_OFFSET)
-          );
+          handleItemActions({
+            type: "Move",
+            payLoad: {
+              key: "left",
+              value: Math.max(
+                0,
+                Number(activeItemCoords.left) - SHIFTING_BY_OFFSET
+              ),
+            },
+          });
         else if (event.keyCode === KEY_CODES.UPSIDE)
-          handleMoveItem(
-            "top",
-            Math.max(0, Number(activeItemCoords.top) - SHIFTING_BY_OFFSET)
-          );
+          handleItemActions({
+            type: "Move",
+            payLoad: {
+              key: "top",
+              value: Math.max(
+                0,
+                Number(activeItemCoords.top) - SHIFTING_BY_OFFSET
+              ),
+            },
+          });
         else if (event.keyCode === KEY_CODES.RIGHT_SIDE)
-          handleMoveItem(
-            "left",
-            Math.min(
-              rightSideBoundary,
-              Number(activeItemCoords.left) + SHIFTING_BY_OFFSET
-            )
-          );
+          handleItemActions({
+            type: "Move",
+            payLoad: {
+              key: "left",
+              value: Math.min(
+                rightSideBoundary,
+                Number(activeItemCoords.left) + SHIFTING_BY_OFFSET
+              ),
+            },
+          });
         else if (event.keyCode === KEY_CODES.DOWNSIDE)
-          handleMoveItem(
-            "top",
-            Math.min(
-              bottomSideBoundary,
-              Number(activeItemCoords.top) + SHIFTING_BY_OFFSET
-            )
-          );
+          handleItemActions({
+            type: "Move",
+            payLoad: {
+              key: "top",
+              value: Math.min(
+                bottomSideBoundary,
+                Number(activeItemCoords.top) + SHIFTING_BY_OFFSET
+              ),
+            },
+          });
       }
     },
     [
       activeItemCoords,
       contentLoaderState.height,
       contentLoaderState.width,
-      handleMoveItem,
+      handleItemActions,
     ]
   );
   return { handleArrowKeysNavigation };

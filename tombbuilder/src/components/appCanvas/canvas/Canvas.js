@@ -12,9 +12,7 @@ import { useSetKeyEvents } from "./hooks/useSetKeyEvents/useSetKeyEvents";
 import { useToolState } from "./hooks/useToolState/useToolState";
 
 //components
-// import CanvasItemConfiguration from "./canvasItemConfiguration/CanvasItemConfiguration";
 import CanvasSketchPad from "./canvasSketchPad/CanvasSketchPad";
-// import ModalExample from "./modalExample/ModalExample";
 
 function Canvas({
   children,
@@ -37,11 +35,11 @@ function Canvas({
     handleMoveActiveItem,
   } = useActiveItem();
 
-  const {
-    handleMoveItem,
-    handleRemoveItemFromKeyboard,
-    handleAddItemInCanvas,
-  } = useItemActions({sketchRef, handleMoveActiveItem, activeItemCoords});
+  const { handleItemActions } = useItemActions({
+    sketchRef,
+    handleMoveActiveItem,
+    activeItemCoords,
+  });
 
   const { handleRedo, handleUndo, handleCloneItem } = handleActions(sketchRef);
 
@@ -49,20 +47,18 @@ function Canvas({
     activeItemCoords,
     sketchRef,
     contentLoaderState,
-    handleRemoveItemFromKeyboard,
-    handleMoveItem,
-    handleToolChange
-  }
-  );
+    handleToolChange,
+    handleItemActions,
+  });
   useSetupCanvas({
     sketchRef,
     updateAnnotationHandler,
     setCoords,
-    handleAddItemInCanvas,
+    handleItemActions,
     handleResetActiveItem,
     handleKeyDown,
-    handleToolChange
-});
+    handleToolChange,
+  });
 
   return (
     <>
@@ -74,13 +70,11 @@ function Canvas({
         handleRedo={handleRedo}
         handleUndo={handleUndo}
         handleToolChange={handleToolChange}
-        handleRemoveItemFromKeyboard={handleRemoveItemFromKeyboard}
         handleCloneItem={handleCloneItem}
         activeItemCoords={activeItemCoords}
-        handleMoveItem={handleMoveItem}
+        handleItemActions={handleItemActions}
         handleKeyDown={handleKeyDown}
       />
-
     </>
   );
 }

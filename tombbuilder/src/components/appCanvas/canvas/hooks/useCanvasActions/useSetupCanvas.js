@@ -6,8 +6,8 @@ export const useSetupCanvas = ({
   sketchRef,
   updateAnnotationHandler,
   setCoords,
-  handleAddItemInCanvas,
   handleResetActiveItem,
+  handleItemActions,
   handleKeyDown,
   handleToolChange,
 }) => {
@@ -19,29 +19,43 @@ export const useSetupCanvas = ({
       "mouse:up": () => {
         handleToolChange(tools.Select);
       },
+
       "after:render": () => {
         updateAnnotationHandler([...sketchRef.current._fc.toJSON().objects]);
       },
+
       "selection:created": (item) => {
-        // console.log("item: ",item);
         setCoords(item.selected[0]);
-        item.target = handleAddItemInCanvas(item.target);
+        item.target = handleItemActions({
+          type: "Add",
+          payLoad: { target: item.target },
+        });
       },
+
       "selection:updated": (item) => {
-        // console.log("item: ",item);
         setCoords(item.selected[0]);
       },
+
       "selection:cleared": () => {
         handleResetActiveItem();
         clearCenterAlignLines();
       },
+
       "object:modified": (item) => {
         setCoords(item.target);
       },
+
       "object:added": (item) =>
-        (item.target = handleAddItemInCanvas(item.target)),
+        (item.target = handleItemActions({
+          type: "Add",
+          payLoad: { target: item.target },
+        })),
+
       "object:moving": (item) => {
-        item.target = handleAddItemInCanvas(item.target);
+        item.target = handleItemActions({
+          type: "Add",
+          payLoad: { target: item.target },
+        });
         connectCenterAlignLine(item.target);
       },
     });

@@ -3,12 +3,11 @@ import React from "react";
 import { numberFixed } from "utils/handleFixingNumbers";
 function CanvasItemConfiguration({
   activeItemCoords,
-  handleMoveItem,
+  handleItemActions,
   handleKeyDown,
 }) {
   const disableKeyEvents = () => {
     document.removeEventListener("keydown", handleKeyDown, false);
-    // console.log(activeItemCoords);
   };
 
   return (
@@ -20,7 +19,13 @@ function CanvasItemConfiguration({
             let value = numberFixed(activeItemCoords[item]);
             const onChange = (e) => {
               e.target.value = Math.min(e.target.value, 600);
-              handleMoveItem(item, numberFixed(Number(e.target.value)));
+              handleItemActions({
+                type: "Move",
+                payLoad: {
+                  key: item,
+                  value: numberFixed(Number(e.target.value)),
+                },
+              });
             };
             if (isNaN(value)) value = 0;
             return (

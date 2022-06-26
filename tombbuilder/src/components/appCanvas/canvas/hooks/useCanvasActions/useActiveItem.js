@@ -4,6 +4,7 @@ const DEFAULT_COORDS = {};
 
 export const useActiveItem = () => {
   const [activeItemCoords, setActiveItemCoords] = useState(DEFAULT_COORDS);
+
   const setCoords = useCallback(
     (target) => {
       let { type, width, height, left, top, radius, rx, ry } = target;
@@ -27,12 +28,15 @@ export const useActiveItem = () => {
     },
     [setActiveItemCoords]
   );
+
   const handleResetActiveItem = () => {
     setActiveItemCoords({});
   };
+
   const handleMoveActiveItem = (key, value) => {
     setActiveItemCoords({ ...activeItemCoords, [key]: value });
   };
+
   return {
     setCoords,
     activeItemCoords,

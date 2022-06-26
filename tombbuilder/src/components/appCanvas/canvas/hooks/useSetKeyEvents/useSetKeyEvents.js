@@ -11,14 +11,13 @@ export const useSetKeyEvents = ({
   activeItemCoords,
   sketchRef,
   contentLoaderState,
-  handleRemoveItemFromKeyboard,
-  handleMoveItem,
   handleToolChange,
+  handleItemActions,
 }) => {
   const { handleArrowKeysNavigation } = useArrowKeysNavigation(
     activeItemCoords,
     contentLoaderState,
-    handleMoveItem
+    handleItemActions
   );
 
   const {
@@ -56,7 +55,10 @@ export const useSetKeyEvents = ({
           handleToolChange(Tools.Circle);
         };
         const actionsByKeyCode = {
-          [KEY_CODES.DELETE]: handleRemoveItemFromKeyboard,
+          [KEY_CODES.DELETE]: (e) => {
+            const action = { type: "Remove", payLoad: { event: e } };
+            handleItemActions(action);
+          },
           [KEY_CODES.RIGHT_SIDE]: handleArrowKeysNavigation,
           [KEY_CODES.LEFT_SIDE]: handleArrowKeysNavigation,
           [KEY_CODES.UPSIDE]: handleArrowKeysNavigation,
@@ -74,7 +76,7 @@ export const useSetKeyEvents = ({
       handleCopyItem,
       handlePasteItem,
       handleUndo,
-      handleRemoveItemFromKeyboard,
+      handleItemActions,
       handleArrowKeysNavigation,
       handleToolChange,
     ]
