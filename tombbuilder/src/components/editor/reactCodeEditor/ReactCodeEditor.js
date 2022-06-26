@@ -6,7 +6,7 @@ import AceEditor from "react-ace";
 
 import { codeToAnnotations } from "./utils/codeToAnnotations";
 import { formatCode } from "./utils/formatCode";
-import { annotationsToCode } from "./utils/annotationsToCode";
+import { annotationsToCode } from "../../../utils/annotationsToCode";
 
 //hooks
 
@@ -46,8 +46,12 @@ function ReactCodeEditor({
 
   useDebouncedEffect(
     () => {
+      const codeGenerated =
+        annotationsToCode({ annotation, contentLoaderState }) +
+        ` \n export default Myloader`;
+
       const newCode = formatCode({
-        code: annotationsToCode({ annotation, contentLoaderState }),
+        code: codeGenerated,
       });
 
       setCode(newCode);
