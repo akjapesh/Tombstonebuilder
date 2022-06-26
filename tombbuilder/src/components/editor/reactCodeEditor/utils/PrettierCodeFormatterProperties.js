@@ -1,7 +1,7 @@
 import parserBabel from "prettier/esm/parser-babel.mjs";
 import parserHtml from "prettier/esm/parser-html.mjs";
 
-export default {
+export const PRETTIER_CODE_FORMATTER_PROPERTIES = {
   parser: "babel",
   plugins: [parserBabel, parserHtml],
   arrowParens: "always",

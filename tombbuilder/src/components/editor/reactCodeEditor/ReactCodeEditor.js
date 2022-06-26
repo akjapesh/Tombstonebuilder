@@ -6,16 +6,16 @@ import AceEditor from "react-ace";
 
 import { codeToAnnotations } from "./utils/codeToAnnotations";
 import { formatCode } from "./utils/formatCode";
-import { annotationsToCode } from "./utils/annotationsToCode";
+import { annotationsToCode } from "../../../utils/annotationsToCode";
 
 //hooks
 
 import { useState } from "react";
 import { useDebouncedEffect } from "../../../hooks/useDebouncedEffect";
 
-//constatnts
+//constants
 
-import CODE_EDITOR_PROPERTIES from "./utils/codeEditorProperties";
+import { CODE_EDITOR_PROPERTIES } from "./utils/codeEditorProperties";
 
 //styles
 
@@ -35,18 +35,23 @@ function ReactCodeEditor({
     // eslint-disable-next-line no-undef
     setCode(newValue);
   };
+
   const handleOnBlur = () => {
-    console.log(code);
-    const formattedValue = formatCode(code);
-    const newAnnotationArray = codeToAnnotations(formattedValue);
+    const formattedValue = formatCode({ code });
+    const newAnnotationArray = codeToAnnotations({ code: formattedValue });
     handleAnnotationToCanvas(newAnnotationArray);
   };
 
   useDebouncedEffect(
     () => {
-      const newCode = formatCode(
-        annotationsToCode(annotation, contentLoaderState)
-      );
+      const codeGenerated =
+        annotationsToCode({ annotation, contentLoaderState }) +
+        ` \n export default MyLoader`;
+
+      const newCode = formatCode({
+        code: codeGenerated,
+      });
+
       setCode(newCode);
     },
     [annotation, formatCode],

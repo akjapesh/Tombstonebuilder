@@ -1,8 +1,8 @@
 import { numberFixed } from "../../../../utils/handleFixingNumbers";
-
+import { shiftValueByOffset } from "../../../../utils/shiftValueByOffset";
 const createNode = (html) =>
   new DOMParser().parseFromString(html, "text/html").body.firstChild;
-export function codeToAnnotations(code) {
+export function codeToAnnotations({ code }) {
   if (!code) return [];
   const codeArray = code.split("\n");
   const annotationArray = codeArray.map((element) => {
@@ -11,33 +11,48 @@ export function codeToAnnotations(code) {
     if (item !== null) {
       if (element.includes("<rect ")) {
         annotationObject.type = "rect";
-        annotationObject.left = numberFixed(item.getAttribute("x"));
-        annotationObject.top = numberFixed(item.getAttribute("y"));
-        annotationObject.width = numberFixed(item.getAttribute("width"));
-        annotationObject.height = numberFixed(item.getAttribute("height"));
+
+        annotationObject.left = shiftValueByOffset(
+          numberFixed(item.getAttribute("x"))
+        );
+
+        annotationObject.top = shiftValueByOffset(
+          numberFixed(item.getAttribute("y"))
+        );
+
+        annotationObject.width = shiftValueByOffset(
+          numberFixed(item.getAttribute("width"))
+        );
+
+        annotationObject.height = shiftValueByOffset(
+          numberFixed(item.getAttribute("height"))
+        );
+
         annotationObject.fill = "transparent";
+
         annotationObject.ry = item.getAttribute("ry");
+
         annotationObject.rx = item.getAttribute("rx");
+        if (annotationObject.width === 0 || annotationObject.height === 0)
+          return null;
       } else if (element.includes("<circle ")) {
         annotationObject.type = "circle";
-        annotationObject.left =
+
+        annotationObject.left = shiftValueByOffset(
           numberFixed(item.getAttribute("cx")) -
-          numberFixed(item.getAttribute("r"));
-        annotationObject.top =
+            numberFixed(item.getAttribute("r"))
+        );
+        annotationObject.top = shiftValueByOffset(
           numberFixed(item.getAttribute("cy")) -
-          numberFixed(item.getAttribute("r"));
-        annotationObject.radius = numberFixed(item.getAttribute("r"));
+            numberFixed(item.getAttribute("r"))
+        );
+        annotationObject.radius = shiftValueByOffset(
+          numberFixed(item.getAttribute("r"))
+        );
+
         annotationObject.fill = "transparent";
-      }
-      // else if (element.includes("<ContentLoader")) {
-      //   annotationObject.type = "box";
-      //   annotationObject.speed = item.getAttribute("speed");
-      //   annotationObject.width = item.getAttribute("width");
-      //   annotationObject.backgroundColor = item.getAttribute("backgroundColor");
-      //   annotationObject.height = item.getAttribute("height");
-      //   annotationObject.foregroundColor = item.getAttribute("foregroundColor");
-      // }
-      else {
+        if (annotationObject.radius <= 1) return null;
+      } else {
         return null;
       }
       return annotationObject;

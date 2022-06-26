@@ -1,4 +1,4 @@
-export default {
+export const CODE_EDITOR_PROPERTIES = {
   placeholder: "Placeholder Text",
   mode: "javascript",
   theme: "monokai",
@@ -7,8 +7,8 @@ export default {
   showPrintMargin: true,
   showGutter: true,
   highlightActiveLine: true,
-  height: "400px",
-  width: "600px",
+  height: "800px",
+  width: "700px",
   setOptions: {
     enableBasicAutocompletion: true,
     enableLiveAutocompletion: true,
