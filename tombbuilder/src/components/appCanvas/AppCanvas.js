@@ -5,7 +5,7 @@ import { LiveProvider, LivePreview } from "react-live";
 
 //Components
 import Canvas from "../canvas/Canvas";
-import CanvasConfiguration from "../canvasConfiguration/CanvasConfiguration";
+import CanvasConfiguration from "./canvasConfiguration/CanvasConfiguration";
 
 function AppCanvas({
   code,
