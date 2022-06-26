@@ -19,15 +19,15 @@ export default function ModalExample({ children, header }) {
 
   return (
     <React.Fragment>
-      <Button onClick={() => setIsOpen(true)}>
-            <StatefulTooltip
+      <button onClick={() => setIsOpen(true)}>
+            <StatefulTooltip 
               content={() => (  <p>"Click to configure"</p>)}
               returnFocus
               autoFocus>
-                <img src={gearIcon} alt="config of active item"></img>
+                <img className="app-handlers__tool" src={gearIcon} alt="config of active item"></img>
             </StatefulTooltip>
 
-      </Button>
+      </button>
       <Modal onClose={close} isOpen={isOpen}>
         <ModalHeader>CONFIGURATIONS</ModalHeader>
         <ModalBody>{children}</ModalBody>

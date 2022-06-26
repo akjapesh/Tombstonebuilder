@@ -39,14 +39,15 @@ class Circle extends FabricCanvasTool {
     if (!this.isDown) return
     let canvas = this._canvas
     let pointer = canvas.getPointer(o.e)
+    console.log(typeof(pointer.x));
     this.circle.set({
       radius:
         linearDistance(
           { x: this.startX, y: this.startY },
           { x: pointer.x, y: pointer.y }
-        ) / 2,
+        ) / 2 + 8,
       angle:
-        (Math.atan2(pointer.y - this.startY, pointer.x - this.startX) * 180) /
+        (Math.atan2(pointer.y - pointer.y, pointer.x - this.startX) * 180) /
         Math.PI,
     })
     this.circle.setCoords()

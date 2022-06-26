@@ -93,7 +93,7 @@ export default function App() {
         <div className="app-header">
           <div className="app-header__logo">
             <h1>
-              <strong>TombStone builder</strong>
+              <strong>Tombstone Builder</strong>
             </h1>
             <h2>Build your custom content loader</h2>
           </div>
@@ -104,7 +104,7 @@ export default function App() {
             <div className="app-mode">
               <button className="active">Editor</button>
 
-              <button onClick={handleShareCode}>SHARE</button>
+              <button onClick={handleShareCode}>Share</button>
 
             </div>
             <Editor
@@ -113,7 +113,6 @@ export default function App() {
               contentLoaderState={contentLoaderState}
             />
             <div className="app-editor__language-selector">
-
               <CopyToClipboard
                 text={code}
                 onCopy={() => {

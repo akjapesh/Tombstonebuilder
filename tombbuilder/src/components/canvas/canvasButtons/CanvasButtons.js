@@ -58,17 +58,17 @@ function CanvasButtons({
       >
         <img src={circleIcon} alt="circle tool" />
       </button>
-          
-
+      
 
       {isItemSelected && (
       <>
+
       <button
-        className="app-handlers__tool app-handler__trash"
+        className="app-handlers__tool"
         onClick={handleRemoveItemFromKeyboard}>
         <img src={trashIcon} alt="remove item" />
       </button>
-      <button className="app-handler__clone" onClick={handleCloneItem}>
+      <button className="app-handlers__tool" onClick={handleCloneItem}>
         <img src={cloneIcon} alt="clone tool" />
       </button>
           <ModalExample>

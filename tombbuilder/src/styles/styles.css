@@ -83,7 +83,8 @@ body {
 }
 
 .copy-to-clipboard {
-  float: right;
+  /* float: right; */
+  align-items: center;
   font-size: 0.8em;
   color: var(--color-grey-light);
   cursor: pointer;
@@ -133,8 +134,9 @@ body {
 }
 
 .app-editor__language-selector {
+  text-align: center;
   background: var(--color-grey);
-  padding: 0.7em 1em 0 1em;
+  padding: 0.7em 1em 0.7em 1em;
   margin-left: -1.2em;
   margin-right: -1.2em;
   margin-bottom: -1.2em;
@@ -281,16 +283,16 @@ body {
 
 .app-handlers__tool {
   vertical-align: middle;
-  /* width: 20px;
-  height: 20px; */
+  width: 20px;
+  height: 20px;
   cursor: pointer;
   opacity: 0.4;
   transition: opacity 0.3s ease;
 }
 .app-handler__clone,
 .app-handler__trash{
-  width: 30px;
-  height: 30px;
+  width: 20px;
+  height: 20px;
   cursor: pointer;
   opacity: 0.4;
   transition: opacity 0.3s ease;
