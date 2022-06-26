@@ -1,11 +1,10 @@
 import { useCallback } from "react";
 
-export const useAnnotaionToCanvas = (sketchRef) => {
+export const useAnnotationToCanvas = ({sketchRef}) => {
   const handleAnnotationToCanvas = useCallback(
     (newAnnotationArray) => {
       const canvas = sketchRef.current && sketchRef.current._fc;
       sketchRef.current.clear();
-      // console.log("sketchRef", newAnnotationArray);
       if (canvas) {
         newAnnotationArray.forEach((a) => {
           let draw;
@@ -21,7 +20,7 @@ export const useAnnotaionToCanvas = (sketchRef) => {
       }
     },
     [sketchRef]
-  );
+  ); 
 
   return {
     handleAnnotationToCanvas,

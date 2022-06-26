@@ -12,7 +12,7 @@ import { annotationsToCode } from "./utils/annotationsToCode";
 import { useEffect, useState, useCallback } from "react";
 import { useAnnotation } from "./hooks/useAnnotation";
 import { useContentLoader } from "./hooks/useContentLoader";
-import { useAnnotaionToCanvas } from "./components/canvas/hooks/useAnnotationToCanvas/useAnnotationToCanvas";
+import { useAnnotationToCanvas } from "./components/canvas/hooks/useAnnotationToCanvas/UseAnnotationToCanvas";
 
 //Components
 import Canvas from "./components/canvas/Canvas";
@@ -79,7 +79,7 @@ export default function App() {
     setSketchRef(newRef);
   }, []);
 
-  const { handleAnnotationToCanvas } = useAnnotaionToCanvas(sketchRef);
+  const { handleAnnotationToCanvas } = useAnnotationToCanvas({sketchRef});
 
   return (
     <div className="App">
@@ -87,7 +87,7 @@ export default function App() {
         <div className="app-header">
           <div className="app-header__logo">
             <h1>
-              <strong>TombStone builder</strong>
+              <strong>Tombstone Builder</strong>
             </h1>
             <h2>Build your custom content loader</h2>
           </div>
