@@ -3,25 +3,18 @@ import { useCallback } from "react";
 import { handleActions } from "../../utils/handleActions";
 //hooks
 import { useArrowKeysNavigation } from "./useSetKeyPressActions/useArrowKeysNavigation";
-import { useTabKeyEvent } from "./useSetKeyPressActions/useTabKeyEvent";
 import Tools from "../../../../third-parts/react-sketch/src/tools";
 
 import KEY_CODES from "../../utils/keyCodes";
 
-export const useSetKeyEvents = (
+export const useSetKeyEvents = ({
   activeItemCoords,
-  setCoords,
   sketchRef,
   contentLoaderState,
   handleRemoveItemFromKeyboard,
   handleMoveItem,
-  handleToolChange
+  handleToolChange}
 ) => {
-  const { handleTabKeyPress } = useTabKeyEvent(
-    sketchRef,
-    setCoords,
-    activeItemCoords
-  );
 
   const { handleArrowKeysNavigation } = useArrowKeysNavigation(
     activeItemCoords,
@@ -69,7 +62,6 @@ export const useSetKeyEvents = (
           [KEY_CODES.LEFT_SIDE]: handleArrowKeysNavigation,
           [KEY_CODES.UPSIDE]: handleArrowKeysNavigation,
           [KEY_CODES.DOWNSIDE]: handleArrowKeysNavigation,
-          [KEY_CODES.TAB_KEY]: handleTabKeyPress,
           [KEY_CODES.SELECT]: handleSelect,
           [KEY_CODES.RECTANGLE]: handleRectangle,
           [KEY_CODES.CIRCLE]: handleCircle,
@@ -85,7 +77,6 @@ export const useSetKeyEvents = (
       handleUndo,
       handleRemoveItemFromKeyboard,
       handleArrowKeysNavigation,
-      handleTabKeyPress,
       handleToolChange,
     ]
   );

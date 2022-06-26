@@ -41,20 +41,20 @@ function Canvas({
     handleMoveItem,
     handleRemoveItemFromKeyboard,
     handleAddItemInCanvas,
-  } = useItemActions(sketchRef, handleMoveActiveItem, activeItemCoords);
+  } = useItemActions({sketchRef, handleMoveActiveItem, activeItemCoords});
 
   const { handleRedo, handleUndo, handleCloneItem } = handleActions(sketchRef);
 
-  const { handleKeyDown } = useSetKeyEvents(
+  const { handleKeyDown } = useSetKeyEvents({
     activeItemCoords,
-    setCoords,
     sketchRef,
     contentLoaderState,
     handleRemoveItemFromKeyboard,
     handleMoveItem,
     handleToolChange
+  }
   );
-  useSetupCanvas(
+  useSetupCanvas({
     sketchRef,
     updateAnnotationHandler,
     setCoords,
@@ -62,11 +62,8 @@ function Canvas({
     handleResetActiveItem,
     handleKeyDown,
     handleToolChange
-  );
+});
 
-  // const isItemSelected =
-  //   activeItemCoords && Object.keys(activeItemCoords).length > 0;
-  console.log(sketchRef.current);
   return (
     <>
       <CanvasSketchPad
@@ -84,19 +81,6 @@ function Canvas({
         handleKeyDown={handleKeyDown}
       />
 
-      {/* {isItemSelected && (
-        <>
-          <ModalExample>
-            <CanvasItemConfiguration
-              handleRemoveItemFromKeyboard={handleRemoveItemFromKeyboard}
-              handleCloneItem={handleCloneItem}
-              activeItemCoords={activeItemCoords}
-              handleMoveItem={handleMoveItem}
-              handleKeyDown={handleKeyDown}
-            />
-          </ModalExample>
-        </>
-      )} */}
     </>
   );
 }
