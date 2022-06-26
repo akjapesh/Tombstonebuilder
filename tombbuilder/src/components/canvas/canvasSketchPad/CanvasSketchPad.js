@@ -7,8 +7,6 @@ function CanvasSketchPad({
   contentLoaderState,
   sketchRef,
   tool,
-  handleRedo,
-  handleUndo,
   handleToolChange,
   handleRemoveItemFromKeyboard,
   handleCloneItem,

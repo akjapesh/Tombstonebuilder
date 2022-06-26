@@ -19,6 +19,7 @@ function CanvasItemConfiguration({
           .map((item) => {
             let value = numberFixed(activeItemCoords[item]);
             const onChange = (e) => {
+              e.target.value = Math.min(e.target.value, 600);
               handleMoveItem(item, numberFixed(Number(e.target.value)));
             };
             if (isNaN(value)) value = 0;
