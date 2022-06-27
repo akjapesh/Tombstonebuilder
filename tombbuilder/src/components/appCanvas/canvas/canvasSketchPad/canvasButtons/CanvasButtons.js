@@ -34,7 +34,8 @@ function CanvasButtons({
         })}
         disabled={true}
       >
-        <img src={selectIcon} alt="select tool" />
+        <img src={selectIcon} alt="select tool" 
+            title = "click 1 for selection"/>
       </button>
       <button
         className={classnames("app-handlers__tool", {
@@ -44,7 +45,8 @@ function CanvasButtons({
           handleToolChange(Tools.Rectangle);
         }}
       >
-        <img src={rectIcon} alt="rect tool" />
+        <img src={rectIcon} alt="rect tool" 
+            title = "click 2 to draw rectangle"/>
       </button>
       <button
         className={classnames("app-handlers__tool", {
@@ -54,24 +56,27 @@ function CanvasButtons({
           handleToolChange(Tools.Circle);
         }}
       >
-        <img src={circleIcon} alt="circle tool" />
+        <img src={circleIcon} alt="circle tool" 
+            title = "Click 3 to draw cirle"/>
       </button>
 
       {isItemSelected && (
         <>
           <button
-            className="app-handlers__tool app-handler__trash"
+            className="app-handlers__tool"
             onClick={(e) => {
               handleItemActions({ type: "Remove", payLoad: { event: e } });
             }}
+            title = "click delete for deletion"
           >
             <img src={trashIcon} alt="remove item" />
           </button>
           <button
-            className="app-handler__clone"
+            className="app-handlers__tool"
             onClick={() => {
               handleCanvasActions({ type: "Clone" });
             }}
+            title = "click to clone"
           >
             <img src={cloneIcon} alt="clone tool" />
           </button>

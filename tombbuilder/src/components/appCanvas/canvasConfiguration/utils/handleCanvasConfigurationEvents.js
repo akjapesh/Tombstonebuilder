@@ -42,7 +42,8 @@ export const handleCanvasConfiguration=({updateContentLoader,actionType})=>{
     case "gridVisibility":
         updateContentLoader(actionType.target.name, actionType.target.checked);
         break;
-       
+    default:
+           break;
            
   }
 //   return {handleInput,handleColor,resetColors,handleCheckbox};
