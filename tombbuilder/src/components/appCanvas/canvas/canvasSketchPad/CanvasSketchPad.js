@@ -14,12 +14,12 @@ function CanvasSketchPad({
   handleItemActions,
   handleKeyDown,
 }) {
-  const ScaledDiv = styled('div', ({$theme}) => ({
-    color: $theme.colors.accent,
+  const ScaledDiv = styled('div', () => ({
+    color: "blue",
     
     ":before":{
        width:"600px",
-       height:"500px",}
+       height:contentLoaderState.height,}
   }));
   return (
     <ScaledDiv
