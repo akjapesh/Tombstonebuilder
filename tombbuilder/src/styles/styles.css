@@ -188,12 +188,10 @@ body {
 .app-canvas:before {
   content: "";
   position: absolute;
-  /* top: 1.5em;
+  top: 1.5em;
   left: 1.5em;
   right: 1.5em;
-  bottom: 5em; */
-  width: 600px;
-  height : 500px;
+  bottom: 5em;
   /* background-image: -webkit-repeating-radial-gradient(
     top center,
     rgba(0, 0, 0, 0.9),
@@ -202,7 +200,7 @@ body {
     transparent 100%
   ); */
   background-image: linear-gradient(to right, grey 1px, transparent 1px),
-  linear-gradient(to bottom, grey 1px, transparent 1px);
+    linear-gradient(to bottom, grey 1px, transparent 1px);
   background-size: 16px 16px;
   transition: all 0.3s ease;
 }
@@ -280,7 +278,6 @@ body {
   transition: opacity 0.3s ease;
 }
 
-
 .app-handlers__tool {
   vertical-align: middle;
   width: 20px;
@@ -290,7 +287,7 @@ body {
   transition: opacity 0.3s ease;
 }
 .app-handler__clone,
-.app-handler__trash{
+.app-handler__trash {
   width: 20px;
   height: 20px;
   cursor: pointer;
@@ -367,7 +364,7 @@ body {
   padding: 0;
   color: #fff;
   outline: 0;
-  margin :0;
+  margin: 0;
 }
 
 .app-config_inline input:focus {

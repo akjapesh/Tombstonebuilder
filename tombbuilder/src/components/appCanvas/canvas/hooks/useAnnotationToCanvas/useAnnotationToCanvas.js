@@ -1,6 +1,6 @@
 import { useCallback } from "react";
 
-export const useAnnotationToCanvas = ({sketchRef}) => {
+export const useAnnotationToCanvas = ({ sketchRef }) => {
   const handleAnnotationToCanvas = useCallback(
     (newAnnotationArray) => {
       const canvas = sketchRef.current && sketchRef.current._fc;
@@ -20,7 +20,7 @@ export const useAnnotationToCanvas = ({sketchRef}) => {
       }
     },
     [sketchRef]
-  ); 
+  );
 
   return {
     handleAnnotationToCanvas,

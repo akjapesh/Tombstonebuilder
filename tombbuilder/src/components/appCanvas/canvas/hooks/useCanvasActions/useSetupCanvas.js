@@ -1,5 +1,6 @@
 import { useEffect } from "react";
 import tools from "third-parts/react-sketch/src/tools";
+import { shiftValueByOffset } from "utils/shiftValueByOffset";
 import { centerAlign } from "../../utils/centerAlign";
 
 export const useSetupCanvas = ({
@@ -51,14 +52,15 @@ export const useSetupCanvas = ({
           type: "SetCoords",
           payLoad: { target: item.target },
         });
+        return item;
       },
 
-      "object:added": (item) =>
-        (item.target = handleItemActions({
+      "object:added": (item) => {
+        return (item.target = handleItemActions({
           type: "Add",
           payLoad: { target: item.target },
-        })),
-
+        }));
+      },
       "object:moving": (item) => {
         item.target = handleItemActions({
           type: "Add",

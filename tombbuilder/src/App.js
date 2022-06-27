@@ -2,6 +2,8 @@
 
 //utils
 import { annotationsToCode } from "./utils/annotationsToCode";
+import { handleShareCodeAnnotation } from "utils/handleSharedCodeAnnotation";
+import { handleShareCode } from "utils/handleShareCode";
 
 //hooks
 import { useEffect, useState, useCallback } from "react";
@@ -18,22 +20,7 @@ import Header from "./components/header/Header";
 import "./styles/styles.css";
 
 export default function App() {
-  const { updateAnnotationHandler, annotation } = useAnnotation(() => {
-    try {
-      const urlSearchParams = new URLSearchParams(window.location.search);
-      const base64AnnotationsString = urlSearchParams.get("data");
-      if (!base64AnnotationsString) return [];
-
-      const stringifiedAnnotations = atob(base64AnnotationsString);
-      const parsedAnnotations = JSON.parse(stringifiedAnnotations);
-      console.log("parsedAnnotations: ", parsedAnnotations);
-      return parsedAnnotations;
-    } catch (error) {
-      console.error("Got corrupt data");
-    } finally {
-      return [];
-    }
-  });
+  const { updateAnnotationHandler, annotation } = useAnnotation();
 
   const { updateContentLoader, contentLoaderState } = useContentLoader([]);
 
@@ -46,28 +33,23 @@ export default function App() {
     setCode(newLiveCode);
   }, [annotation, contentLoaderState]);
 
-  const handleShareCode = (event) => {
-    event.preventDefault();
-    const nextUrl = `http://localhost:3000/?data=${btoa(
-      JSON.stringify(annotation)
-    )}`;
-    window.history.replaceState({}, "", nextUrl);
-  };
-
   const [sketchRef, setSketchRef] = useState(null);
-
-  const handleUpdateSketchRef = useCallback((newRef) => {
-    setSketchRef(newRef);
-  }, []);
-
   const { handleAnnotationToCanvas } = useAnnotationToCanvas({ sketchRef });
+  const handleUpdateSketchRef = useCallback(
+    async (newRef) => {
+      setSketchRef(newRef);
+      const initialValue = await handleShareCodeAnnotation();
+      handleAnnotationToCanvas(initialValue);
+    },
+    [handleAnnotationToCanvas]
+  );
 
   return (
     <div className="App">
       <div className="container">
         <Header />
         <AppEditor
-          handleShareCode={handleShareCode}
+          handleShareCode={(e) => handleShareCode(e, annotation)}
           handleAnnotationToCanvas={handleAnnotationToCanvas}
           annotation={annotation}
           contentLoaderState={contentLoaderState}
