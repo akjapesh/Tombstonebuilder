@@ -35,7 +35,8 @@ function CanvasButtons({
         })}
         disabled={true}
       >
-        <img src={selectIcon} alt="select tool" />
+        <img src={selectIcon} alt="select tool" 
+        title = "Press 1 for selection"/>
       </button>
       <button
         className={classnames("app-handlers__tool", {
@@ -45,7 +46,8 @@ function CanvasButtons({
           handleToolChange(Tools.Rectangle);
         }}
       >
-        <img src={rectIcon} alt="rect tool" />
+        <img src={rectIcon} alt="rect tool" 
+        title = "Press 2 for rectangle"/>
       </button>
       <button
         className={classnames("app-handlers__tool", {
@@ -55,7 +57,8 @@ function CanvasButtons({
           handleToolChange(Tools.Circle);
         }}
       >
-        <img src={circleIcon} alt="circle tool" />
+        <img src={circleIcon} alt="circle tool" 
+        title = "Press 3 for circle"/>
       </button>
 
       {isItemSelected && (
@@ -63,10 +66,12 @@ function CanvasButtons({
         <button
           className="app-handlers__tool"
           onClick={handleRemoveItemFromKeyboard}>
-          <img src={trashIcon} alt="remove item" />
+          <img src={trashIcon} alt="remove item" 
+          title = "Press delete button for deleting"/>
         </button>
         <button className="app-handlers__tool" onClick={handleCloneItem}>
-          <img src={cloneIcon} alt="clone tool" />
+          <img src={cloneIcon} alt="clone tool" 
+        title = "Clone button" />
         </button>
         <ModalExample>
           <CanvasItemConfiguration

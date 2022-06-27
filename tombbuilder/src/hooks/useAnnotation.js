@@ -4,6 +4,7 @@ import { useState, useCallback } from "react";
 export const useAnnotation = (initialValue) => {
   const [annotation, setAnnotation] = useState(initialValue);
   console.log("annotation", annotation);
+  console.log("initial value", initialValue);
 
   const updateAnnotationHandler = useCallback((item) => {
     setAnnotation(item);
