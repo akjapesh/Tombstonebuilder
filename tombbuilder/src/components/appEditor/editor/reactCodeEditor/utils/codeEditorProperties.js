@@ -7,8 +7,8 @@ export const CODE_EDITOR_PROPERTIES = {
   showPrintMargin: true,
   showGutter: true,
   highlightActiveLine: true,
-  height: "800px",
-  width: "700px",
+  height: "500px",
+  width: "600px",
   setOptions: {
     enableBasicAutocompletion: true,
     enableLiveAutocompletion: true,
