@@ -7,7 +7,7 @@ import { annotationsToCode } from "./utils/annotationsToCode";
 import { useEffect, useState, useCallback } from "react";
 import { useAnnotation } from "./hooks/useAnnotation";
 import { useContentLoader } from "./hooks/useContentLoader";
-import { useAnnotationToCanvas } from "./components/canvas/hooks/useAnnotationToCanvas/useAnnotationToCanvas";
+import { useAnnotationToCanvas } from "./components/appCanvas/canvas/hooks/useAnnotationToCanvas/useAnnotationToCanvas";
 
 //Components
 import AppEditor from "./components/appEditor/AppEditor";
@@ -34,23 +34,6 @@ export default function App() {
       return [];
     }
   });
-
-  // const getAnnotationFromUrl = () => {
-  //   try {
-  //     const urlSearchParams = new URLSearchParams(window.location.search);
-  //     const base64AnnotationsString = urlSearchParams.get("data");
-  //     if (!base64AnnotationsString) return [];
-
-  //     const stringifiedAnnotations = atob(base64AnnotationsString);
-  //     const parsedAnnotations = JSON.parse(stringifiedAnnotations);
-
-  //     return parsedAnnotations;
-  //   } catch (error) {
-  //     console.error("Got corrupt data");
-  //   } finally {
-  //     return [];
-  //   }
-  // };
 
   const { updateContentLoader, contentLoaderState } = useContentLoader([]);
 
