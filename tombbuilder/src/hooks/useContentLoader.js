@@ -10,6 +10,7 @@ export const useContentLoader = () => {
     speed: 2,
   });
   const updateContentLoader = useCallback((item, value) => {
+    console.log("update this:", item, value);
     setContentLoader((prevState) => ({ ...prevState, [item]: value }));
   }, []);
 

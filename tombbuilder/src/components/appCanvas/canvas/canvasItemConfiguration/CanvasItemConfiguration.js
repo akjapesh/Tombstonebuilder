@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useCallback } from "react";
 // import { Input } from "baseui/input";
 import { numberFixed } from "utils/handleFixingNumbers";
 function CanvasItemConfiguration({

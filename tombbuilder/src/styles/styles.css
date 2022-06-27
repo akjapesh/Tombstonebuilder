@@ -83,8 +83,9 @@ body {
 }
 
 .copy-to-clipboard {
-  float: right;
-  font-size: 0.8em;
+  /* float: right; */
+  align-items: center;
+  font-size: 1em;
   color: var(--color-grey-light);
   cursor: pointer;
   line-height: 1.6;
@@ -133,8 +134,9 @@ body {
 }
 
 .app-editor__language-selector {
+  text-align: center;
   background: var(--color-grey);
-  padding: 0.7em 1em 0 1em;
+  padding: 0.7em 1em 0.7em 1em;
   margin-left: -1.2em;
   margin-right: -1.2em;
   margin-bottom: -1.2em;
@@ -191,7 +193,7 @@ body {
   right: 1.5em;
   bottom: 5em; */
   width: 600px;
-  height: 500px;
+  height : 500px;
   /* background-image: -webkit-repeating-radial-gradient(
     top center,
     rgba(0, 0, 0, 0.9),
@@ -200,7 +202,7 @@ body {
     transparent 100%
   ); */
   background-image: linear-gradient(to right, grey 1px, transparent 1px),
-    linear-gradient(to bottom, grey 1px, transparent 1px);
+  linear-gradient(to bottom, grey 1px, transparent 1px);
   background-size: 16px 16px;
   transition: all 0.3s ease;
 }
@@ -278,18 +280,19 @@ body {
   transition: opacity 0.3s ease;
 }
 
+
 .app-handlers__tool {
   vertical-align: middle;
-  /* width: 20px;
-  height: 20px; */
+  width: 20px;
+  height: 20px;
   cursor: pointer;
   opacity: 0.4;
   transition: opacity 0.3s ease;
 }
 .app-handler__clone,
-.app-handler__trash {
-  width: 30px;
-  height: 30px;
+.app-handler__trash{
+  width: 20px;
+  height: 20px;
   cursor: pointer;
   opacity: 0.4;
   transition: opacity 0.3s ease;
@@ -364,7 +367,12 @@ body {
   padding: 0;
   color: #fff;
   outline: 0;
-  margin: 0;
+  margin :0;
+}
+
+.app-config_inline input:focus {
+  background: none;
+  box-shadow: 0 0 0 2px #2f3134;
 }
 
 .app-config_inline label {
@@ -372,7 +380,7 @@ body {
   right: 0.5em;
   top: 0.7em;
   color: var(--color-grey-light);
-  z-index: 2;
+  z-index: 0;
   font-size: 0.9em;
 }
 
