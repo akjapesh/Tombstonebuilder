@@ -25,6 +25,7 @@ export const annotationsToCode = ({ annotation, contentLoaderState }) => {
       {...props} 
     >
     `;
+
   annotation.forEach((a) => {
     const height = numberFixed(a.height * a.scaleY);
 

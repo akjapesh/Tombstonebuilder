@@ -1,22 +1,15 @@
-import { useState, useCallback } from "react";
-// import useSharedAnotation from "./useSharedAnotation";
+import { useState, useCallback, useEffect } from "react";
+import { handleShareCodeAnnotation } from "utils/handleSharedCodeAnnotation";
 
-export const useAnnotation = (initialValue) => {
-  const [annotation, setAnnotation] = useState(initialValue);
-  console.log("annotation", annotation);
+export const useAnnotation = () => {
+  const [annotation, setAnnotation] = useState([]);
 
   const updateAnnotationHandler = useCallback((item) => {
     setAnnotation(item);
-    console.log("hii");
-  }, []);
-  const onAnnotationChangeHandler = useCallback((onAnnotationChange) => {
-    onAnnotationChange();
-    console.log("hii");
   }, []);
 
   return {
     updateAnnotationHandler,
     annotation,
-    onAnnotationChangeHandler,
   };
 };
