@@ -17,6 +17,7 @@ function CanvasConfiguration({ updateContentLoader, contentLoaderState }) {
             value={contentLoaderState.width}
             onChange={(e)=>handleCanvasConfiguration({updateContentLoader,actionType:e})}
             max="600"
+            min="50"
           />
           <label htmlFor="width">width (in px)</label>
         </p>
@@ -29,6 +30,7 @@ function CanvasConfiguration({ updateContentLoader, contentLoaderState }) {
             value={contentLoaderState.height}
             onChange={(e)=>handleCanvasConfiguration({updateContentLoader,actionType:e})}
             max="500"
+            min="50"
           />
           <label htmlFor="height">height (in px)</label>
         </p>
@@ -73,6 +75,7 @@ function CanvasConfiguration({ updateContentLoader, contentLoaderState }) {
             name="speed"
             value={contentLoaderState.speed}
             max="20"
+            
             onChange={(e)=>handleCanvasConfiguration({updateContentLoader,actionType:e})}
           />
           <label htmlFor="speed">speed (in s)</label>

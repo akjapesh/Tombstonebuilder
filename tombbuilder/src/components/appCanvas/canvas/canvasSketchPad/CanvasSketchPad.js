@@ -15,27 +15,27 @@ function CanvasSketchPad({
   handleKeyDown,
 }) {
   const ScaledDiv = styled('div', () => ({
-    color: "blue",
+    color: "red",
     
     ":before":{
-       width:"600px",
-       height:contentLoaderState.height,}
+       width:`${contentLoaderState.width}px`,
+       height:`${contentLoaderState.height}px`,}
   }));
   return (
-    <ScaledDiv
-    // <div
+    // <ScaledDiv
+    <div
       className={classnames("app-canvas", {
         "app-canvas__draw": tool === "rectangle" || tool === "circle",
         "app-canvas__grid-visibility-off": !contentLoaderState.gridVisibility,
       })}
       key="canvas"
       style={{
-        "::before": {
-          width: contentLoaderState.width,
-          height: contentLoaderState.height,
+        "&:before": {
+          width: `${contentLoaderState.width}px`,
+          height: `${contentLoaderState.height}px`,
         },
       }}
-    >Hello world
+    >
       {children}
 
       <CanvasSketchField
@@ -51,8 +51,8 @@ function CanvasSketchPad({
         activeItemCoords={activeItemCoords}
         handleKeyDown={handleKeyDown}
       />
-      {/* </div> */}
-    </ScaledDiv>
+       </div> 
+    // {/* </ScaledDiv> */}
   );
 }
 
