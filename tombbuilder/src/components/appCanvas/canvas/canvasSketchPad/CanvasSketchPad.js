@@ -1,6 +1,7 @@
 import CanvasButtons from "./canvasButtons/CanvasButtons";
 import CanvasSketchField from "./canvasSketchField/CanvasSketchField";
 import classnames from "classnames";
+import { styled } from "baseui";
 
 function CanvasSketchPad({
   children,
@@ -13,7 +14,16 @@ function CanvasSketchPad({
   handleItemActions,
   handleKeyDown,
 }) {
+  const ScaledDiv = styled("div", () => ({
+    color: "red",
+
+    ":before": {
+      width: `${contentLoaderState.width}px`,
+      height: `${contentLoaderState.height}px`,
+    },
+  }));
   return (
+    // <ScaledDiv
     <div
       className={classnames("app-canvas", {
         "app-canvas__draw": tool === "rectangle" || tool === "circle",
@@ -21,9 +31,9 @@ function CanvasSketchPad({
       })}
       key="canvas"
       style={{
-        "::before": {
-          width: contentLoaderState.width,
-          height: contentLoaderState.height,
+        "&:before": {
+          width: `${contentLoaderState.width}px`,
+          height: `${contentLoaderState.height}px`,
         },
       }}
     >
@@ -43,6 +53,7 @@ function CanvasSketchPad({
         handleKeyDown={handleKeyDown}
       />
     </div>
+    // {/* </ScaledDiv> */}
   );
 }
 

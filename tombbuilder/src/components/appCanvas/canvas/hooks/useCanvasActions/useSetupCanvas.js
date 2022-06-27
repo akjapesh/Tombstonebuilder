@@ -48,23 +48,14 @@ export const useSetupCanvas = ({
       },
 
       "object:modified": (item) => {
-        console.log("pop", item.target);
-
-        // item.target.set("width", shiftValueByOffset(item.target.width));
-        item.target.set("height", shiftValueByOffset(item.target.height));
-
         handleActiveItemActions({
           type: "SetCoords",
           payLoad: { target: item.target },
         });
-        item.target.set("height", 16);
-        console.log("peep", item.target);
         return item;
       },
 
       "object:added": (item) => {
-        item.target.set("width", shiftValueByOffset(item.target.width));
-        item.target.set("height", shiftValueByOffset(item.target.height));
         return (item.target = handleItemActions({
           type: "Add",
           payLoad: { target: item.target },
