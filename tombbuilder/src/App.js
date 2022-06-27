@@ -34,18 +34,15 @@ export default function App() {
   }, [annotation, contentLoaderState]);
 
   const [sketchRef, setSketchRef] = useState(null);
-
-  const handleUpdateSketchRef = useCallback((newRef) => {
-    setSketchRef(newRef);
-  }, []);
-
   const { handleAnnotationToCanvas } = useAnnotationToCanvas({ sketchRef });
-
-  useEffect(async () => {
-    const initialValue = await handleShareCodeAnnotation();
-    console.log(initialValue);
-    // handleAnnotationToCanvas(initialValue);
-  }, []);
+  const handleUpdateSketchRef = useCallback(
+    async (newRef) => {
+      setSketchRef(newRef);
+      const initialValue = await handleShareCodeAnnotation();
+      handleAnnotationToCanvas(initialValue);
+    },
+    [handleAnnotationToCanvas]
+  );
 
   return (
     <div className="App">
