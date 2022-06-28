@@ -45,6 +45,7 @@ function Canvas({
     handleToolChange,
     handleItemActions,
   });
+
   useSetupCanvas({
     sketchRef,
     updateAnnotationHandler,

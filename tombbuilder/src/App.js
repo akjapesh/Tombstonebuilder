@@ -30,15 +30,20 @@ export default function App() {
     const newLiveCode =
       annotationsToCode({ annotation, contentLoaderState }) +
       `\n render(<MyLoader/>)`;
+
     setCode(newLiveCode);
   }, [annotation, contentLoaderState]);
 
   const [sketchRef, setSketchRef] = useState(null);
+
   const { handleAnnotationToCanvas } = useAnnotationToCanvas({ sketchRef });
+
   const handleUpdateSketchRef = useCallback(
     async (newRef) => {
       setSketchRef(newRef);
+
       const initialValue = await handleShareCodeAnnotation();
+
       handleAnnotationToCanvas(initialValue);
     },
     [handleAnnotationToCanvas]
@@ -53,6 +58,7 @@ export default function App() {
           handleAnnotationToCanvas={handleAnnotationToCanvas}
           annotation={annotation}
           contentLoaderState={contentLoaderState}
+          updateContentLoader={updateContentLoader}
           code={code}
         />
         <AppCanvas
