@@ -12,7 +12,7 @@ export const handleCodeToContentLoader = ({ code, updateContentLoader }) => {
         if (item.getAttribute("speed")) {
           updateContentLoader(
             "speed",
-            numberFixed(
+            Number(
               item
                 .getAttribute("speed")
                 .substring(1, item.getAttribute("speed").length - 1)

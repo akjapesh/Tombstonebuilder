@@ -1,9 +1,14 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
+
 //utils
 import { handleCanvasConfiguration } from "./utils/handleCanvasConfigurationEvents";
 function CanvasConfiguration({ updateContentLoader, contentLoaderState }) {
+  const [formContentLoader, setFormContentLoader] =
+    useState(contentLoaderState);
   // const {handleInput,handleCheckbox,handleColor,resetColors}=handleCanvasConfiguration({updateContentLoader});
-
+  useEffect(() => {
+    setFormContentLoader(contentLoaderState);
+  }, [contentLoaderState]);
   return (
     <div className="app-config">
       <div className="row">
@@ -13,10 +18,15 @@ function CanvasConfiguration({ updateContentLoader, contentLoaderState }) {
             type="number"
             id="width"
             name="width"
-            defaultValue={contentLoaderState.width}
             onBlur={(e) =>
               handleCanvasConfiguration({ updateContentLoader, actionType: e })
             }
+            value={formContentLoader.width}
+            onChange={(e) => {
+              setFormContentLoader((prevState) => {
+                return { ...prevState, width: e.target.value };
+              });
+            }}
             max="1000"
             min="0"
           />
@@ -28,10 +38,15 @@ function CanvasConfiguration({ updateContentLoader, contentLoaderState }) {
             type="number"
             id="height"
             name="height"
-            defaultValue={contentLoaderState.height}
             onBlur={(e) =>
               handleCanvasConfiguration({ updateContentLoader, actionType: e })
             }
+            value={formContentLoader.height}
+            onChange={(e) => {
+              setFormContentLoader((prevState) => {
+                return { ...prevState, height: e.target.value };
+              });
+            }}
             max="1000"
             min="0"
           />
@@ -45,9 +60,9 @@ function CanvasConfiguration({ updateContentLoader, contentLoaderState }) {
           <button
             className="reset-colors"
             name="reset"
-            onClick={(e) =>
-              handleCanvasConfiguration({ updateContentLoader, actionType: e })
-            }
+            onClick={(e) => {
+              handleCanvasConfiguration({ updateContentLoader, actionType: e });
+            }}
           >
             Reset
           </button>
@@ -86,11 +101,17 @@ function CanvasConfiguration({ updateContentLoader, contentLoaderState }) {
             type="number"
             id="speed"
             name="speed"
-            value={contentLoaderState.speed}
+            value={formContentLoader.speed}
             max="20"
-            onChange={(e) =>
-              handleCanvasConfiguration({ updateContentLoader, actionType: e })
-            }
+            onChange={(e) => {
+              setFormContentLoader((prevState) => {
+                return { ...prevState, speed: e.target.value };
+              });
+            }}
+            onBlur={(e) => {
+              handleCanvasConfiguration({ updateContentLoader, actionType: e });
+            }}
+            min="0.1"
           />
           <label htmlFor="speed">speed (in s)</label>
         </p>

@@ -26,6 +26,9 @@ export const handleCanvasConfiguration = ({
     case "reset":
       updateContentLoader("backgroundColor", "#f3f3f3");
       updateContentLoader("foregroundColor", "#ecebeb");
+      updateContentLoader("width", 600);
+      updateContentLoader("height", 500);
+      updateContentLoader("speed", 2);
       break;
     case "gridVisibility":
       updateContentLoader(actionType.target.name, actionType.target.checked);

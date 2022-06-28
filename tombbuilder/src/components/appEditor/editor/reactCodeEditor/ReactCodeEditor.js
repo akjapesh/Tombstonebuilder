@@ -58,7 +58,7 @@ function ReactCodeEditor({
 
       setCode(newCode);
     },
-    [annotation, formatCode],
+    [annotation, formatCode, contentLoaderState],
     200
   );
 

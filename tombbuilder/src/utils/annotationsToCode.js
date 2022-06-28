@@ -32,7 +32,7 @@ export const annotationsToCode = ({ annotation, contentLoaderState }) => {
 
     const width = numberFixed(a.width * a.scaleX);
 
-    if ((height === 0 && width === 0) || a.r === 1) {
+    if ((height === 0 && width === 0) || numberFixed(a.radius) <= 1) {
       return null;
     }
 
