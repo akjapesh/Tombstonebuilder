@@ -13,8 +13,8 @@ function CanvasConfiguration({ updateContentLoader, contentLoaderState }) {
             type="number"
             id="width"
             name="width"
-            value={contentLoaderState.width}
-            onChange={(e) =>
+            defaultValue={contentLoaderState.width}
+            onBlur={(e) =>
               handleCanvasConfiguration({ updateContentLoader, actionType: e })
             }
             max="1000"
@@ -28,8 +28,8 @@ function CanvasConfiguration({ updateContentLoader, contentLoaderState }) {
             type="number"
             id="height"
             name="height"
-            value={contentLoaderState.height}
-            onChange={(e) =>
+            defaultValue={contentLoaderState.height}
+            onBlur={(e) =>
               handleCanvasConfiguration({ updateContentLoader, actionType: e })
             }
             max="1000"
