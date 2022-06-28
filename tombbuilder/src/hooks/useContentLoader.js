@@ -10,6 +10,10 @@ export const useContentLoader = () => {
     speed: 2,
   });
   const updateContentLoader = useCallback((item, value) => {
+    if (item === "height" || item === "width") {
+      value = Math.max(1, value);
+      value = Math.min(1000, value);
+    }
     setContentLoader((prevState) => ({ ...prevState, [item]: value }));
   }, []);
 
