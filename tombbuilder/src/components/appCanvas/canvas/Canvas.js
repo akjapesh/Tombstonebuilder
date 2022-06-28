@@ -56,7 +56,14 @@ function Canvas({
   });
 
   return (
-    <>
+    <div
+      onMouseLeave={() => {
+        document.removeEventListener("keydown", handleKeyDown, false);
+      }}
+      onMouseEnter={() => {
+        document.addEventListener("keydown", handleKeyDown, false);
+      }}
+    >
       <CanvasSketchPad
         children={children}
         contentLoaderState={contentLoaderState}
@@ -67,8 +74,9 @@ function Canvas({
         activeItemCoords={activeItemCoords}
         handleItemActions={handleItemActions}
         handleKeyDown={handleKeyDown}
+        onMouseEnter={() => {}}
       />
-    </>
+    </div>
   );
 }
 export default Canvas;
