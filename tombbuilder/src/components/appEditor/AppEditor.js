@@ -7,6 +7,7 @@ function AppEditor({
   handleAnnotationToCanvas,
   annotation,
   contentLoaderState,
+  updateContentLoader,
   code,
 }) {
   return (
@@ -21,6 +22,7 @@ function AppEditor({
           handleAnnotationToCanvas={handleAnnotationToCanvas}
           annotation={annotation}
           contentLoaderState={contentLoaderState}
+          updateContentLoader={updateContentLoader}
         />
         <div className="app-editor__language-selector">
           <CopyToClipboard

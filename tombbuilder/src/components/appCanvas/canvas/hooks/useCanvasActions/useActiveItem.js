@@ -12,7 +12,6 @@ export const useActiveItem = () => {
 
   const handleActiveItemActions = useCallback(
     ({ type, payLoad }) => {
-      console.log("oookkkk",type, payLoad);
       switch (type) {
         case "SetCoords":
           const { target } = payLoad;
@@ -27,7 +26,7 @@ export const useActiveItem = () => {
 
           target.set("left", left);
           target.set("top", top);
-        
+
           if (type === "circle") {
             target.set("radius", radius);
             return setActiveItemCoords({ radius, left, top, type });

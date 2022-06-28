@@ -7,6 +7,7 @@ import AceEditor from "react-ace";
 import { codeToAnnotations } from "./utils/codeToAnnotations";
 import { formatCode } from "./utils/formatCode";
 import { annotationsToCode } from "utils/annotationsToCode";
+import { handleCodeToContentLoader } from "./utils/handleCodeToContentLoader";
 
 //hooks
 
@@ -25,6 +26,7 @@ import "ace-builds/src-noconflict/ext-language_tools";
 import "ace-builds/src-noconflict/mode-json";
 
 function ReactCodeEditor({
+  updateContentLoader,
   annotation,
   contentLoaderState,
   handleAnnotationToCanvas,
@@ -37,9 +39,11 @@ function ReactCodeEditor({
   };
 
   const handleOnBlur = () => {
-    const formattedValue = formatCode({ code });
+    const formattedValue = formatCode({ code, printWidth: 200 }); //for content Loader
     const newAnnotationArray = codeToAnnotations({ code: formattedValue });
+    handleCodeToContentLoader({ code: formattedValue, updateContentLoader });
     handleAnnotationToCanvas(newAnnotationArray);
+    console.log(newAnnotationArray);
   };
 
   useDebouncedEffect(
