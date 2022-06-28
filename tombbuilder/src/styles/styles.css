@@ -199,8 +199,8 @@ body {
     transparent 1px,
     transparent 100%
   ); */
-  background-image: linear-gradient(to right, grey 1px, transparent 1px),
-    linear-gradient(to bottom, grey 1px, transparent 1px);
+  background-image: linear-gradient(to right, rgb(0,0,0,0.1) 1px, transparent 1px),
+    linear-gradient(to bottom, rgb(0,0,0,0.1) 1px, transparent 1px);
   background-size: 16px 16px;
   transition: all 0.3s ease;
 }
