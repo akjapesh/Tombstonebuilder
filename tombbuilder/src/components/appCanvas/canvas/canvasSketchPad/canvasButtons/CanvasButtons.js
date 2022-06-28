@@ -32,7 +32,9 @@ function CanvasButtons({
         className={classnames("app-handlers__tool", {
           "app-handlers__active": tool === "select",
         })}
-        disabled={true}
+        onClick={() => {
+          handleToolChange(Tools.Select);
+        }}
       >
         <img src={selectIcon} alt="select tool" 
             title = "click 1 for selection"/>
