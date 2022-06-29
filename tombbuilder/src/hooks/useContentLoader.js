@@ -16,9 +16,12 @@ export const useContentLoader = () => {
     }
     setContentLoader((prevState) => ({ ...prevState, [item]: value }));
   }, []);
-
+  const resetContentLoader = useCallback((newState) => {
+    setContentLoader(newState);
+  }, []);
   return {
     updateContentLoader,
     contentLoaderState,
+    resetContentLoader,
   };
 };

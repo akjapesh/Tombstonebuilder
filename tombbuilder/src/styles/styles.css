@@ -120,7 +120,7 @@ body {
   transition: all 0.2s ease;
 }
 
-.app-mode button span {
+.app-mode button span a {
   color: #aaa;
   font-size: 0.6em;
   position: relative;
@@ -199,8 +199,12 @@ body {
     transparent 1px,
     transparent 100%
   ); */
-  background-image: linear-gradient(to right, rgb(0,0,0,0.1) 1px, transparent 1px),
-    linear-gradient(to bottom, rgb(0,0,0,0.1) 1px, transparent 1px);
+  background-image: linear-gradient(
+      to right,
+      rgb(0, 0, 0, 0.1) 1px,
+      transparent 1px
+    ),
+    linear-gradient(to bottom, rgb(0, 0, 0, 0.1) 1px, transparent 1px);
   background-size: 16px 16px;
   transition: all 0.3s ease;
 }
@@ -506,6 +510,7 @@ body {
   background: none;
   border: 0;
   outline: 0;
+  padding: 10px;
   color: var(--color-grey-light);
   position: absolute;
   right: 0;
