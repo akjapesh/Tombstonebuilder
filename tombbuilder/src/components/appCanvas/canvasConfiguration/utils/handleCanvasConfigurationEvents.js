@@ -2,8 +2,6 @@ export const handleCanvasConfiguration = ({
   updateContentLoader,
   actionType,
 }) => {
-  // console.log(actionType.target);
-
   switch (actionType.target.name) {
     case "width":
     case "height":

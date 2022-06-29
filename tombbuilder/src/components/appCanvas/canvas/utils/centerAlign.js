@@ -29,7 +29,6 @@ export const centerAlign = (sketchRef) => {
     center.down =
       shiftValueByOffset(numberFixed(target.top)) +
       shiftValueByOffset(numberFixed(target.height));
-    console.log(center);
     return center;
   };
 
