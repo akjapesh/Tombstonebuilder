@@ -296,8 +296,8 @@ body {
 }
 
 .app-handlers__tool img {
-  width: 100%;
-  height: auto;
+  width: 20px;
+  height: 20px;
 }
 
 .app-handler__trash,
