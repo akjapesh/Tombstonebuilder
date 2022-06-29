@@ -55,18 +55,7 @@ function CanvasConfiguration({ updateContentLoader, contentLoaderState }) {
       </div>
 
       <div className="row">
-        <p className="app-config_caption">
-          Colors{" "}
-          <button
-            className="reset-colors"
-            name="reset"
-            onClick={(e) => {
-              handleCanvasConfiguration({ updateContentLoader, actionType: e });
-            }}
-          >
-            Reset
-          </button>
-        </p>
+        <p className="app-config_caption">Colors </p>
 
         <p className="app-config_inline">
           <input
@@ -92,6 +81,21 @@ function CanvasConfiguration({ updateContentLoader, contentLoaderState }) {
             }
           />
           <label htmlFor="foregroundColor">Foreground color</label>
+        </p>
+        <p className="app-config_inline">
+          <button
+            style={{
+              color: "#AAAAAA",
+              margin: "auto",
+              cursor: "pointer",
+            }}
+            name="reset"
+            onClick={(e) => {
+              handleCanvasConfiguration({ updateContentLoader, actionType: e });
+            }}
+          >
+            Restore default
+          </button>
         </p>
       </div>
       <div className="row">

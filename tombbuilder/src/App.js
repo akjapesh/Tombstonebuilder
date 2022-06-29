@@ -4,7 +4,7 @@
 import { annotationsToCode } from "./utils/annotationsToCode";
 import { handleShareCodeAnnotation } from "utils/handleSharedCodeAnnotation";
 import { handleShareCode } from "utils/handleShareCode";
-
+import { handleShareCodeContentLoaderState } from "utils/handleSharedCodeContentLoader";
 //hooks
 import { useEffect, useState, useCallback } from "react";
 import { useAnnotation } from "./hooks/useAnnotation";
@@ -22,7 +22,8 @@ import "./styles/styles.css";
 export default function App() {
   const { updateAnnotationHandler, annotation } = useAnnotation();
 
-  const { updateContentLoader, contentLoaderState } = useContentLoader([]);
+  const { updateContentLoader, contentLoaderState, resetContentLoader } =
+    useContentLoader([]);
 
   const [code, setCode] = useState(" ");
 
@@ -43,10 +44,12 @@ export default function App() {
       setSketchRef(newRef);
 
       const initialValue = await handleShareCodeAnnotation();
-
       handleAnnotationToCanvas(initialValue);
+      const initialLoaderState = await handleShareCodeContentLoaderState();
+
+      resetContentLoader(initialLoaderState);
     },
-    [handleAnnotationToCanvas]
+    [handleAnnotationToCanvas, resetContentLoader]
   );
 
   return (
@@ -54,7 +57,9 @@ export default function App() {
       <div className="container">
         <Header />
         <AppEditor
-          handleShareCode={(e) => handleShareCode(e, annotation)}
+          handleShareCode={(e) =>
+            handleShareCode(e, { annotation, contentLoaderState })
+          }
           handleAnnotationToCanvas={handleAnnotationToCanvas}
           annotation={annotation}
           contentLoaderState={contentLoaderState}

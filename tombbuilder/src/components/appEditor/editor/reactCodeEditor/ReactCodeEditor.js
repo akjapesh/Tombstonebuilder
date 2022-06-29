@@ -43,7 +43,6 @@ function ReactCodeEditor({
     const newAnnotationArray = codeToAnnotations({ code: formattedValue });
     handleCodeToContentLoader({ code: formattedValue, updateContentLoader });
     handleAnnotationToCanvas(newAnnotationArray);
-    console.log(newAnnotationArray);
   };
 
   useDebouncedEffect(
