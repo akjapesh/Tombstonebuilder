@@ -1,14 +1,16 @@
+//utils
+import { handleShareCode } from "utils/handleShareCode";
+import { annotationsToCode } from "utils/annotationsToCode";
+
 //Components
 import { CopyToClipboard } from "react-copy-to-clipboard";
 import Editor from "./editor/Editor";
 
 function AppEditor({
-  handleShareCode,
   handleAnnotationToCanvas,
   annotation,
   contentLoaderState,
   updateContentLoader,
-  code,
 }) {
   return (
     <div className="app-column">
@@ -24,7 +26,13 @@ function AppEditor({
               alert("Link Copied");
             }}
           >
-            <button onClick={handleShareCode}>Share</button>
+            <button
+              onClick={(e) =>
+                handleShareCode(e, { annotation, contentLoaderState })
+              }
+            >
+              Share
+            </button>
           </CopyToClipboard>
           <a href={window.location.origin} style={{ color: "#aaaaaa" }}>
             <span>Reset App</span>
@@ -38,7 +46,10 @@ function AppEditor({
         />
         <div className="app-editor__language-selector">
           <CopyToClipboard
-            text={code}
+            text={
+              annotationsToCode({ annotation, contentLoaderState }) +
+              `\n render(<MyLoader/>)`
+            }
             onCopy={() => {
               alert("Code Copied");
             }}
