@@ -1,12 +1,12 @@
 /* eslint-disable react/no-direct-mutation-state */
 
 //utils
-import { annotationsToCode } from "./utils/annotationsToCode";
+
 import { handleShareCodeAnnotation } from "utils/handleSharedCodeAnnotation";
-import { handleShareCode } from "utils/handleShareCode";
 import { handleShareCodeContentLoaderState } from "utils/handleSharedCodeContentLoader";
+
 //hooks
-import { useEffect, useState, useCallback } from "react";
+import { useState, useCallback } from "react";
 import { useAnnotation } from "./hooks/useAnnotation";
 import { useContentLoader } from "./hooks/useContentLoader";
 import { useAnnotationToCanvas } from "./components/appCanvas/canvas/hooks/useAnnotationToCanvas/useAnnotationToCanvas";
@@ -24,16 +24,6 @@ export default function App() {
 
   const { updateContentLoader, contentLoaderState, resetContentLoader } =
     useContentLoader([]);
-
-  const [code, setCode] = useState(" ");
-
-  useEffect(() => {
-    const newLiveCode =
-      annotationsToCode({ annotation, contentLoaderState }) +
-      `\n render(<MyLoader/>)`;
-
-    setCode(newLiveCode);
-  }, [annotation, contentLoaderState]);
 
   const [sketchRef, setSketchRef] = useState(null);
 
@@ -57,17 +47,13 @@ export default function App() {
       <div className="container">
         <Header />
         <AppEditor
-          handleShareCode={(e) =>
-            handleShareCode(e, { annotation, contentLoaderState })
-          }
           handleAnnotationToCanvas={handleAnnotationToCanvas}
           annotation={annotation}
           contentLoaderState={contentLoaderState}
           updateContentLoader={updateContentLoader}
-          code={code}
         />
         <AppCanvas
-          code={code}
+          annotation={annotation}
           updateAnnotationHandler={updateAnnotationHandler}
           contentLoaderState={contentLoaderState}
           handleUpdateSketchRef={handleUpdateSketchRef}

@@ -9,7 +9,7 @@ export function codeToAnnotations({ code }) {
     const annotationObject = {};
     const item = createNode(element);
     if (item !== null) {
-      if (element.includes("<rect ")) {
+      if (element.includes("<rect ") || element.includes("<Rect ")) {
         annotationObject.type = "rect";
 
         annotationObject.left = shiftValueByOffset(
@@ -35,7 +35,7 @@ export function codeToAnnotations({ code }) {
         annotationObject.rx = item.getAttribute("rx");
         if (annotationObject.width === 0 || annotationObject.height === 0)
           return null;
-      } else if (element.includes("<circle ")) {
+      } else if (element.includes("<circle ") || element.includes("<Circle ")) {
         annotationObject.type = "circle";
 
         annotationObject.left = shiftValueByOffset(
