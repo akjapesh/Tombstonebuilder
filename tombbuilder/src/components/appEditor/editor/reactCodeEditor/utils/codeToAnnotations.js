@@ -7,7 +7,9 @@ export function codeToAnnotations({ code }) {
   const codeArray = code.split("\n");
   const annotationArray = codeArray.map((element) => {
     const annotationObject = {};
+
     const item = createNode(element);
+
     if (item !== null) {
       if (element.includes("<rect ") || element.includes("<Rect ")) {
         annotationObject.type = "rect";

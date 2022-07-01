@@ -5,7 +5,11 @@ const createNode = (html) =>
 export const handleCodeToContentLoader = ({ code, updateContentLoader }) => {
   if (!code) return [];
   const codeArray = code.split("\n");
+
   const temp = codeArray.map((element) => {
+    if (element.includes("return"))
+      element = element.substring(element.search("return") + 6);
+    console.log(element);
     const item = createNode(element);
     if (item !== null) {
       if (element.includes("<ContentLoader ")) {

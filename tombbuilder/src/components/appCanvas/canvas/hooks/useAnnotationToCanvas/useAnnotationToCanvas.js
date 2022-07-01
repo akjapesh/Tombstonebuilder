@@ -5,6 +5,7 @@ export const useAnnotationToCanvas = ({ sketchRef }) => {
     (newAnnotationArray) => {
       const canvas = sketchRef.current && sketchRef.current._fc;
       sketchRef.current.clear();
+      console.log(sketchRef.current.clear());
       if (canvas) {
         newAnnotationArray.forEach((a) => {
           let draw;

@@ -8,22 +8,18 @@ export const annotationsToCode = ({ annotation, contentLoaderState }) => {
   if (annotation.length === 0) {
     return `
     const MyLoader = (props) => {
-      return (
-      <div> 
-        </div>)}
+      return <div></div>}
     `;
   }
   let code = `
   const MyLoader = (props) => {
-    return (
-    <ContentLoader 
+    return (<ContentLoader 
       speed={${speed}}
       width={${width}}
       height={${height}}
       viewBox="0 0 ${width} ${height}"
       backgroundColor="${backgroundColor}"
       foregroundColor="${foregroundColor}"
-      {...props} 
     >
     `;
 
@@ -61,7 +57,6 @@ export const annotationsToCode = ({ annotation, contentLoaderState }) => {
   });
   code += `
           </ContentLoader>
-          
           )
         }
        

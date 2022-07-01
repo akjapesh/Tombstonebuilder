@@ -39,8 +39,9 @@ function ReactCodeEditor({
   };
 
   const handleOnBlur = () => {
-    const formattedValue = formatCode({ code, printWidth: 200 }); //for content Loader
+    const formattedValue = formatCode({ code, printWidth: 150 }); //for content Loader
     const newAnnotationArray = codeToAnnotations({ code: formattedValue });
+    console.log(newAnnotationArray);
     handleCodeToContentLoader({ code: formattedValue, updateContentLoader });
     handleAnnotationToCanvas(newAnnotationArray);
   };
