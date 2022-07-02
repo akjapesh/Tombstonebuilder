@@ -2,35 +2,37 @@ import { fabric } from "fabric";
 import { numberFixed } from "utils/handleFixingNumbers";
 import { shiftValueByOffset } from "utils/shiftValueByOffset";
 
-export const centerAlign = (sketchRef) => {
-  const calculateCenter = (target) => {
-    const center = {
-      centerX: 0,
-      centerY: 0,
-      left: 0,
-      right: 0,
-      top: 0,
-      down: 0,
-    };
-    const newTop = shiftValueByOffset(numberFixed(target.top));
-    const newLeft = shiftValueByOffset(numberFixed(target.left));
-    const newHeight = shiftValueByOffset(numberFixed(target.height));
-    const newWidth = shiftValueByOffset(numberFixed(target.width));
-
-    center.centerY = newTop + newHeight / 2;
-    center.centerX = newLeft + newWidth / 2;
-    center.centerX = numberFixed(center.centerX);
-    center.centerY = numberFixed(center.centerY);
-    center.left = shiftValueByOffset(numberFixed(target.left));
-    center.right =
-      shiftValueByOffset(numberFixed(target.left)) +
-      shiftValueByOffset(numberFixed(target.width));
-    center.top = shiftValueByOffset(numberFixed(target.top));
-    center.down =
-      shiftValueByOffset(numberFixed(target.top)) +
-      shiftValueByOffset(numberFixed(target.height));
-    return center;
+export const calculateCenter = (target) => {
+  const center = {
+    centerX: 0,
+    centerY: 0,
+    left: 0,
+    right: 0,
+    top: 0,
+    down: 0,
   };
+  const newTop = shiftValueByOffset(numberFixed(target.top));
+  const newLeft = shiftValueByOffset(numberFixed(target.left));
+  const newHeight = shiftValueByOffset(numberFixed(target.height));
+  const newWidth = shiftValueByOffset(numberFixed(target.width));
+
+  center.centerY = newTop + newHeight / 2;
+  center.centerX = newLeft + newWidth / 2;
+  center.centerX = numberFixed(center.centerX);
+  center.centerY = numberFixed(center.centerY);
+  center.left = shiftValueByOffset(numberFixed(target.left));
+  center.right =
+    shiftValueByOffset(numberFixed(target.left)) +
+    shiftValueByOffset(numberFixed(target.width));
+  center.top = shiftValueByOffset(numberFixed(target.top));
+  center.down =
+    shiftValueByOffset(numberFixed(target.top)) +
+    shiftValueByOffset(numberFixed(target.height));
+  return center;
+};
+
+export const centerAlign = (sketchRef) => {
+  
 
   const clearCenterAlignLines = () => {
     sketchRef.current._fc._objects.forEach((o) => {
