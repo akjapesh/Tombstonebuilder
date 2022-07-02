@@ -7,15 +7,15 @@ import ReactCodeEditor from "./reactCodeEditor/ReactCodeEditor";
 function Editor({
   annotation,
   contentLoaderState,
-  handleAnnotationToCanvas,
+  onCanvasAction,
   updateContentLoader,
 }) {
   return (
     <div>
       <ReactCodeEditor
         updateContentLoader={updateContentLoader}
-        handleAnnotationToCanvas={handleAnnotationToCanvas}
         annotation={annotation}
+        onCanvasAction={onCanvasAction}
         contentLoaderState={contentLoaderState}
       />
     </div>

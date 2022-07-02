@@ -24,12 +24,13 @@ import "ace-builds/src-noconflict/mode-javascript";
 import "ace-builds/src-noconflict/theme-monokai";
 import "ace-builds/src-noconflict/ext-language_tools";
 import "ace-builds/src-noconflict/mode-json";
+import { ACTION_TYPES } from "hooks/useCanvasSketch";
 
 function ReactCodeEditor({
   updateContentLoader,
   annotation,
   contentLoaderState,
-  handleAnnotationToCanvas,
+  onCanvasAction,
 }) {
   const [code, setCode] = useState("");
 
@@ -41,11 +42,17 @@ function ReactCodeEditor({
   const handleOnBlur = () => {
     const formattedValue = formatCode({ code, printWidth: 150 }); //for content Loader
     const newAnnotationArray = codeToAnnotations({ code: formattedValue });
-    console.log(newAnnotationArray);
+
     handleCodeToContentLoader({ code: formattedValue, updateContentLoader });
-    handleAnnotationToCanvas(newAnnotationArray);
+    onCanvasAction({
+      type: ACTION_TYPES.REDRAW_CANVAS,
+      payload: { annotations: newAnnotationArray },
+    });
   };
 
+  // This is a derived state
+  // Don't sync it via annotation, contentLoaderState
+  // Derive it in memo
   useDebouncedEffect(
     () => {
       const codeGenerated =

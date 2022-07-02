@@ -20,10 +20,12 @@ export const useSetKeyEvents = ({
     handleItemActions
   );
 
+  // This should be a hook
   const { handleCanvasActions } = handleActions(sketchRef);
 
   const handleKeyDown = useCallback(
     (event) => {
+      // early return if the work is done
       if (
         (event.metaKey || event.ctrlKey) &&
         event.shiftKey &&
@@ -31,6 +33,7 @@ export const useSetKeyEvents = ({
       ) {
         handleCanvasActions({ type: "Redo" });
       } else if ((event.metaKey || event.ctrlKey) && !event.shiftKey) {
+        // Remove this map, keep a switch-case instead
         const actionsByKeyCode = {
           [KEY_CODES.CUT]: () => {
             handleCanvasActions({ type: "Cut" });
@@ -47,6 +50,7 @@ export const useSetKeyEvents = ({
         };
         actionsByKeyCode[event.keyCode]?.(event);
       } else {
+        // no need of these wrapper functions after switch
         const handleSelect = () => {
           handleToolChange(Tools.Select);
         };

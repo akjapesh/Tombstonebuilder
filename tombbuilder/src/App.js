@@ -1,5 +1,7 @@
 /* eslint-disable react/no-direct-mutation-state */
 
+import { useEffect } from "react";
+
 //utils
 
 import { handleShareCodeAnnotation } from "utils/handleSharedCodeAnnotation";
@@ -18,37 +20,40 @@ import Header from "./components/header/Header";
 
 //styles
 import "./styles/styles.css";
+import {
+  useCanvasSketch,
+  ACTION_TYPES as CANVAS_ACTION_TYPES,
+} from "hooks/useCanvasSketch";
 
 export default function App() {
   const { updateAnnotationHandler, annotation } = useAnnotation();
 
   const { updateContentLoader, contentLoaderState, resetContentLoader } =
+    // Unnecessary argument
     useContentLoader([]);
 
-  const [sketchRef, setSketchRef] = useState(null);
+  const { sketchRef, onAction: onCanvasAction } = useCanvasSketch();
 
-  const { handleAnnotationToCanvas } = useAnnotationToCanvas({ sketchRef });
+  useEffect(async () => {
+    if (!sketchRef) return;
 
-  const handleUpdateSketchRef = useCallback(
-    async (newRef) => {
-      setSketchRef(newRef);
+    const initialAnnotations = await handleShareCodeAnnotation();
+    onCanvasAction({
+      type: CANVAS_ACTION_TYPES.REDRAW_CANVAS,
+      payload: { annotations: initialAnnotations },
+    });
 
-      const initialValue = await handleShareCodeAnnotation();
-      handleAnnotationToCanvas(initialValue);
-      const initialLoaderState = await handleShareCodeContentLoaderState();
-
-      resetContentLoader(initialLoaderState);
-    },
-    [handleAnnotationToCanvas, resetContentLoader]
-  );
+    const initialLoaderState = await handleShareCodeContentLoaderState();
+    resetContentLoader(initialLoaderState);
+  }, [sketchRef, onCanvasAction, resetContentLoader]);
 
   return (
     <div className="App">
       <div className="container">
         <Header />
         <AppEditor
-          handleAnnotationToCanvas={handleAnnotationToCanvas}
           annotation={annotation}
+          onCanvasAction={onCanvasAction}
           contentLoaderState={contentLoaderState}
           updateContentLoader={updateContentLoader}
         />
