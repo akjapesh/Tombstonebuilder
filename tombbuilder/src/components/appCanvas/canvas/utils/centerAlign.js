@@ -31,24 +31,26 @@ export const calculateCenter = (target) => {
   return center;
 };
 
-export const centerAlign = (sketchRef) => {
+
+export const clearCenterAlignLines = (sketchRef) => {
+  sketchRef.current._fc._objects.forEach((o) => {
+    if (
+      o.type === "line" ||
+      (o.type === "circle" && numberFixed(o.radius) <= 1) ||
+      (o.type === "rect" &&
+        (numberFixed(o.height) ===0|| numberFixed(o.width)===0))
+    ) {
+      sketchRef.current._fc.remove(o);
+    }
+  });
+};
+
   
 
-  const clearCenterAlignLines = () => {
-    sketchRef.current._fc._objects.forEach((o) => {
-      if (
-        o.type === "line" ||
-        (o.type === "circle" && numberFixed(o.radius) <= 1) ||
-        (o.type === "rect" &&
-          (numberFixed(o.height) || numberFixed(o.width)) === 0)
-      ) {
-        sketchRef.current._fc.remove(o);
-      }
-    });
-  };
+  
 
-  const connectCenterAlignLine = (target) => {
-    clearCenterAlignLines();
+export  const connectCenterAlignLine = (sketchRef,target) => {
+    clearCenterAlignLines(sketchRef);
     const targetCenter = calculateCenter(target);
     sketchRef.current._fc._objects.forEach((o) => {
       if (o !== target && o.type !== "line") {
@@ -178,8 +180,5 @@ export const centerAlign = (sketchRef) => {
     });
   };
 
-  return {
-    clearCenterAlignLines,
-    connectCenterAlignLine,
-  };
-};
+
+
