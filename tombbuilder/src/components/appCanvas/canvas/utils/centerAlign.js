@@ -180,5 +180,11 @@ export  const connectCenterAlignLine = (sketchRef,target) => {
     });
   };
 
-
+export const tester=(target)=>{
+  const tc=calculateCenter(target);
+  return new fabric.Line(
+    [tc.top,tc.left,tc.right,tc.bottom],
+    {stroke:"red"}
+  )
+}
 
