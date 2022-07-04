@@ -60,7 +60,7 @@ export const centerAlign = (sketchRef) => {
                 anotherShapeCenter.centerX,
                 anotherShapeCenter.centerY,
               ],
-              { stroke: "red" }
+              { stroke: "#184dc9", strokeDashArray: [5, 5] }
             )
           );
         } else if (targetCenter.centerY === anotherShapeCenter.centerY) {
@@ -72,7 +72,7 @@ export const centerAlign = (sketchRef) => {
                 anotherShapeCenter.centerX,
                 anotherShapeCenter.centerY,
               ],
-              { stroke: "red" }
+              { stroke: "#184dc9", strokeDashArray: [5, 5] }
             )
           );
         } else if (targetCenter.top === anotherShapeCenter.top) {
@@ -84,7 +84,7 @@ export const centerAlign = (sketchRef) => {
                 anotherShapeCenter.centerX,
                 anotherShapeCenter.top,
               ],
-              { stroke: "red" }
+              { stroke: "#184dc9", strokeDashArray: [5, 5] }
             )
           );
         } else if (targetCenter.left === anotherShapeCenter.left) {
@@ -96,7 +96,7 @@ export const centerAlign = (sketchRef) => {
                 anotherShapeCenter.left,
                 anotherShapeCenter.centerY,
               ],
-              { stroke: "red" }
+              { stroke: "#184dc9", strokeDashArray: [5, 5] }
             )
           );
         } else if (targetCenter.down === anotherShapeCenter.down) {
@@ -108,7 +108,7 @@ export const centerAlign = (sketchRef) => {
                 anotherShapeCenter.centerX,
                 anotherShapeCenter.down,
               ],
-              { stroke: "red" }
+              { stroke: "#184dc9", strokeDashArray: [5, 5] }
             )
           );
         } else if (targetCenter.right === anotherShapeCenter.right) {
@@ -120,7 +120,7 @@ export const centerAlign = (sketchRef) => {
                 anotherShapeCenter.right,
                 anotherShapeCenter.centerY,
               ],
-              { stroke: "red" }
+              { stroke: "#184dc9", strokeDashArray: [5, 5] }
             )
           );
         } else if (targetCenter.top === anotherShapeCenter.down) {
@@ -132,7 +132,7 @@ export const centerAlign = (sketchRef) => {
                 anotherShapeCenter.centerX,
                 anotherShapeCenter.down,
               ],
-              { stroke: "red" }
+              { stroke: "#184dc9", strokeDashArray: [5, 5] }
             )
           );
         } else if (targetCenter.down === anotherShapeCenter.top) {
@@ -144,7 +144,7 @@ export const centerAlign = (sketchRef) => {
                 anotherShapeCenter.centerX,
                 anotherShapeCenter.top,
               ],
-              { stroke: "red" }
+              { stroke: "#184dc9", strokeDashArray: [5, 5] }
             )
           );
         } else if (targetCenter.left === anotherShapeCenter.right) {
@@ -156,7 +156,7 @@ export const centerAlign = (sketchRef) => {
                 anotherShapeCenter.right,
                 anotherShapeCenter.centerY,
               ],
-              { stroke: "red" }
+              { stroke: "#184dc9", strokeDashArray: [5, 5] }
             )
           );
         } else if (targetCenter.right === anotherShapeCenter.left) {
@@ -168,7 +168,7 @@ export const centerAlign = (sketchRef) => {
                 anotherShapeCenter.left,
                 anotherShapeCenter.centerY,
               ],
-              { stroke: "red" }
+              { stroke: "#184dc9", strokeDashArray: [5, 5] }
             )
           );
         }
