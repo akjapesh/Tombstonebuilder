@@ -38,7 +38,7 @@ Thanks goes to these wonderful people ([emoji key](https://allcontributors.org/d
 <!-- prettier-ignore-start -->
 <!-- markdownlint-disable -->
 - Abhinav Japesh 
-- 
+
 - Sanyam Shrivastav
 
 - Soham patel
