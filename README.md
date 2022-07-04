@@ -14,7 +14,7 @@
 
 ## Features
 
-# Canvas:	
+### Canvas:	
 
 - Drawing, selection, movement and resizing of shapes on Canvas
 - Generates corresponding JSX code for content loader
@@ -26,7 +26,7 @@
 - Can change grid visibility (on/off)
 
 
-# Code-editor:
+### Code-editor:
 
 - Supports real time rendering via editor code
 - Generates link to share your custom-content loader to others
