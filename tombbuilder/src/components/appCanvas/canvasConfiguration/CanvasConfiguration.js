@@ -12,10 +12,11 @@ import { Checkbox, STYLE_TYPE } from "baseui/checkbox";
 function CanvasConfiguration({ updateContentLoader, contentLoaderState }) {
   const [formContentLoader, setFormContentLoader] =
     useState(contentLoaderState);
-  // const {handleInput,handleCheckbox,handleColor,resetColors}=handleCanvasConfiguration({updateContentLoader});
+
   useEffect(() => {
     setFormContentLoader(contentLoaderState);
   }, [contentLoaderState]);
+
   return (
     <ThemeProvider
       theme={createTheme(darkThemePrimitives, {
@@ -82,9 +83,9 @@ function CanvasConfiguration({ updateContentLoader, contentLoaderState }) {
         <div className="row">
           <p className="app-config_caption">Colors </p>
 
-          <p className="app-config_inline">
+          <p className="app-config_inline app-config_inline_color">
             <Input
-              size={SIZE.compact}
+              size={SIZE.large}
               type="color"
               id="backgroundColor"
               name="backgroundColor"

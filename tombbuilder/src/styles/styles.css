@@ -359,7 +359,6 @@ body {
   border: 1px solid var(--color-silver);
   background: var(--color-grey);
   border-radius: 3px;
-  padding: 0.5em;
   position: relative;
 }
 
@@ -369,8 +368,6 @@ body {
   font: inherit;
   padding: 0;
   color: #fff;
-  outline: 0;
-  margin: 0;
 }
 
 .app-config_inline input:focus {
@@ -399,13 +396,9 @@ body {
 
 .app-config input[type="color"] {
   border: 0;
-  width: 31px;
-  height: 31px;
+  width: 39px;
+  height: 39px;
   border-radius: 3px;
-  margin-right: 1em;
-  margin-top: -0.4em;
-  margin-bottom: -0.4em;
-  margin-left: -0.3em;
 }
 
 .app-editor_item-editor {
@@ -419,7 +412,7 @@ body {
 .app-editor_item-editor .row {
   display: flex;
   flex-wrap: wrap;
-  justify-content: space-between;
+  justify-content: center;
 }
 
 .app-editor_item-editor p {
@@ -433,13 +426,14 @@ body {
 }
 
 .app-config input[type="checkbox"] {
-  height: auto;
-  width: auto;
+  height: 39px;
+  width: 39px;
   margin-right: 1em;
   margin-bottom: 1em;
 }
 
 .app-config .toggle {
+  margin-top: 7px;
   display: inline-flex;
   align-items: center;
   line-height: 1;
