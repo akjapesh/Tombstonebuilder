@@ -38,7 +38,7 @@ export const centerAlign = (sketchRef) => {
         o.type === "line" ||
         (o.type === "circle" && numberFixed(o.radius) <= 1) ||
         (o.type === "rect" &&
-          (numberFixed(o.height) || numberFixed(o.width)) === 0)
+          (numberFixed(o.height) === 0 || numberFixed(o.width) === 0))
       ) {
         sketchRef.current._fc.remove(o);
       }

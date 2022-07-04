@@ -24,11 +24,14 @@ export const annotationsToCode = ({ annotation, contentLoaderState }) => {
     `;
 
   annotation.forEach((a) => {
-    const height = numberFixed(a.height * a.scaleY);
+    const height = shiftValueByOffset(numberFixed(a.height * a.scaleY));
 
-    const width = numberFixed(a.width * a.scaleX);
-
-    if ((height === 0 && width === 0) || numberFixed(a.radius) <= 1) {
+    const width = shiftValueByOffset(numberFixed(a.width * a.scaleX));
+    if (
+      height === 0 ||
+      width === 0 ||
+      shiftValueByOffset(numberFixed(a.radius) <= 1)
+    ) {
       return null;
     }
 
