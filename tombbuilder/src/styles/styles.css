@@ -178,7 +178,7 @@ body {
   position: relative;
   min-height: 8em;
   transition: all 0.3s ease;
-  overflow: scroll;
+  overflow: hidden;
   background: #fff;
   padding: 1.5em;
   border-radius: var(--border-radius);
@@ -215,7 +215,7 @@ body {
   left: 1.5em;
   right: 1.5em;
   bottom: 4em;
-  overflow: scroll;
+  overflow: hidden;
   opacity: 0.1;
   transition: all 0.3s ease;
 }

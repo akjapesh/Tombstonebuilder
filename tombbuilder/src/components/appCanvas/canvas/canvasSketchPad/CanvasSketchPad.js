@@ -30,12 +30,6 @@ function CanvasSketchPad({
         "app-canvas__grid-visibility-off": !contentLoaderState.gridVisibility,
       })}
       key="canvas"
-      style={{
-        "&:before": {
-          width: `${contentLoaderState.width}px`,
-          height: `${contentLoaderState.height}px`,
-        },
-      }}
     >
       {children}
 
