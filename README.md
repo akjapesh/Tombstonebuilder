@@ -1,6 +1,6 @@
 <p align="center">
   <a href="https://tombstonebuilder.netlify.app//">
-    <img width="800px" align="center" src="https://user-images.githubusercontent.com/4838076/115597774-8e0ccc00-a2d1-11eb-853d-f24cfe9d4fea.png" title="Tombstone Builder" />
+    <img width="800px" align="center" src="(https://github.com/akjapesh/Tombstonebuilder/blob/main/images/tombstone.png)" title="Tombstone Builder" />
   </a>
 </p>
 
