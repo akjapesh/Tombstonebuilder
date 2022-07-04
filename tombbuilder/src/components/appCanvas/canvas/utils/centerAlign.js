@@ -1,4 +1,4 @@
-import { fabric } from "fabric";
+import { Line } from "fabric";
 import { numberFixed } from "utils/handleFixingNumbers";
 import { shiftValueByOffset } from "utils/shiftValueByOffset";
 
@@ -31,160 +31,153 @@ export const calculateCenter = (target) => {
   return center;
 };
 
-
 export const clearCenterAlignLines = (sketchRef) => {
   sketchRef.current._fc._objects.forEach((o) => {
     if (
       o.type === "line" ||
       (o.type === "circle" && numberFixed(o.radius) <= 1) ||
       (o.type === "rect" &&
-        (numberFixed(o.height) ===0|| numberFixed(o.width)===0))
+        (numberFixed(o.height) === 0 || numberFixed(o.width) === 0))
     ) {
       sketchRef.current._fc.remove(o);
     }
   });
 };
 
-  
-
-  
-
-export  const connectCenterAlignLine = (sketchRef,target) => {
-    clearCenterAlignLines(sketchRef);
-    const targetCenter = calculateCenter(target);
-    sketchRef.current._fc._objects.forEach((o) => {
-      if (o !== target && o.type !== "line") {
-        const anotherShapeCenter = calculateCenter(o);
-        if (targetCenter.centerX === anotherShapeCenter.centerX) {
-          sketchRef.current._fc.add(
-            new fabric.Line(
-              [
-                targetCenter.centerX,
-                targetCenter.centerY,
-                anotherShapeCenter.centerX,
-                anotherShapeCenter.centerY,
-              ],
-              { stroke: "red" }
-            )
-          );
-        } else if (targetCenter.centerY === anotherShapeCenter.centerY) {
-          sketchRef.current._fc.add(
-            new fabric.Line(
-              [
-                targetCenter.centerX,
-                targetCenter.centerY,
-                anotherShapeCenter.centerX,
-                anotherShapeCenter.centerY,
-              ],
-              { stroke: "red" }
-            )
-          );
-        } else if (targetCenter.top === anotherShapeCenter.top) {
-          sketchRef.current._fc.add(
-            new fabric.Line(
-              [
-                targetCenter.centerX,
-                targetCenter.top,
-                anotherShapeCenter.centerX,
-                anotherShapeCenter.top,
-              ],
-              { stroke: "red" }
-            )
-          );
-        } else if (targetCenter.left === anotherShapeCenter.left) {
-          sketchRef.current._fc.add(
-            new fabric.Line(
-              [
-                targetCenter.left,
-                targetCenter.centerY,
-                anotherShapeCenter.left,
-                anotherShapeCenter.centerY,
-              ],
-              { stroke: "red" }
-            )
-          );
-        } else if (targetCenter.down === anotherShapeCenter.down) {
-          sketchRef.current._fc.add(
-            new fabric.Line(
-              [
-                targetCenter.centerX,
-                targetCenter.down,
-                anotherShapeCenter.centerX,
-                anotherShapeCenter.down,
-              ],
-              { stroke: "red" }
-            )
-          );
-        } else if (targetCenter.right === anotherShapeCenter.right) {
-          sketchRef.current._fc.add(
-            new fabric.Line(
-              [
-                targetCenter.right,
-                targetCenter.centerY,
-                anotherShapeCenter.right,
-                anotherShapeCenter.centerY,
-              ],
-              { stroke: "red" }
-            )
-          );
-        } else if (targetCenter.top === anotherShapeCenter.down) {
-          sketchRef.current._fc.add(
-            new fabric.Line(
-              [
-                targetCenter.centerX,
-                targetCenter.top,
-                anotherShapeCenter.centerX,
-                anotherShapeCenter.down,
-              ],
-              { stroke: "red" }
-            )
-          );
-        } else if (targetCenter.down === anotherShapeCenter.top) {
-          sketchRef.current._fc.add(
-            new fabric.Line(
-              [
-                targetCenter.centerX,
-                targetCenter.down,
-                anotherShapeCenter.centerX,
-                anotherShapeCenter.top,
-              ],
-              { stroke: "red" }
-            )
-          );
-        } else if (targetCenter.left === anotherShapeCenter.right) {
-          sketchRef.current._fc.add(
-            new fabric.Line(
-              [
-                targetCenter.left,
-                targetCenter.centerY,
-                anotherShapeCenter.right,
-                anotherShapeCenter.centerY,
-              ],
-              { stroke: "red" }
-            )
-          );
-        } else if (targetCenter.right === anotherShapeCenter.left) {
-          sketchRef.current._fc.add(
-            new fabric.Line(
-              [
-                targetCenter.right,
-                targetCenter.centerY,
-                anotherShapeCenter.left,
-                anotherShapeCenter.centerY,
-              ],
-              { stroke: "red" }
-            )
-          );
-        }
+export const connectCenterAlignLine = (sketchRef, target) => {
+  clearCenterAlignLines(sketchRef);
+  const targetCenter = calculateCenter(target);
+  sketchRef.current._fc._objects.forEach((o) => {
+    if (o !== target && o.type !== "line") {
+      const anotherShapeCenter = calculateCenter(o);
+      if (targetCenter.centerX === anotherShapeCenter.centerX) {
+        sketchRef.current._fc.add(
+          new Line(
+            [
+              targetCenter.centerX,
+              targetCenter.centerY,
+              anotherShapeCenter.centerX,
+              anotherShapeCenter.centerY,
+            ],
+            { stroke: "red" }
+          )
+        );
+      } else if (targetCenter.centerY === anotherShapeCenter.centerY) {
+        sketchRef.current._fc.add(
+          new Line(
+            [
+              targetCenter.centerX,
+              targetCenter.centerY,
+              anotherShapeCenter.centerX,
+              anotherShapeCenter.centerY,
+            ],
+            { stroke: "red" }
+          )
+        );
+      } else if (targetCenter.top === anotherShapeCenter.top) {
+        sketchRef.current._fc.add(
+          new Line(
+            [
+              targetCenter.centerX,
+              targetCenter.top,
+              anotherShapeCenter.centerX,
+              anotherShapeCenter.top,
+            ],
+            { stroke: "red" }
+          )
+        );
+      } else if (targetCenter.left === anotherShapeCenter.left) {
+        sketchRef.current._fc.add(
+          new Line(
+            [
+              targetCenter.left,
+              targetCenter.centerY,
+              anotherShapeCenter.left,
+              anotherShapeCenter.centerY,
+            ],
+            { stroke: "red" }
+          )
+        );
+      } else if (targetCenter.down === anotherShapeCenter.down) {
+        sketchRef.current._fc.add(
+          new Line(
+            [
+              targetCenter.centerX,
+              targetCenter.down,
+              anotherShapeCenter.centerX,
+              anotherShapeCenter.down,
+            ],
+            { stroke: "red" }
+          )
+        );
+      } else if (targetCenter.right === anotherShapeCenter.right) {
+        sketchRef.current._fc.add(
+          new Line(
+            [
+              targetCenter.right,
+              targetCenter.centerY,
+              anotherShapeCenter.right,
+              anotherShapeCenter.centerY,
+            ],
+            { stroke: "red" }
+          )
+        );
+      } else if (targetCenter.top === anotherShapeCenter.down) {
+        sketchRef.current._fc.add(
+          new Line(
+            [
+              targetCenter.centerX,
+              targetCenter.top,
+              anotherShapeCenter.centerX,
+              anotherShapeCenter.down,
+            ],
+            { stroke: "red" }
+          )
+        );
+      } else if (targetCenter.down === anotherShapeCenter.top) {
+        sketchRef.current._fc.add(
+          new Line(
+            [
+              targetCenter.centerX,
+              targetCenter.down,
+              anotherShapeCenter.centerX,
+              anotherShapeCenter.top,
+            ],
+            { stroke: "red" }
+          )
+        );
+      } else if (targetCenter.left === anotherShapeCenter.right) {
+        sketchRef.current._fc.add(
+          new Line(
+            [
+              targetCenter.left,
+              targetCenter.centerY,
+              anotherShapeCenter.right,
+              anotherShapeCenter.centerY,
+            ],
+            { stroke: "red" }
+          )
+        );
+      } else if (targetCenter.right === anotherShapeCenter.left) {
+        sketchRef.current._fc.add(
+          new Line(
+            [
+              targetCenter.right,
+              targetCenter.centerY,
+              anotherShapeCenter.left,
+              anotherShapeCenter.centerY,
+            ],
+            { stroke: "red" }
+          )
+        );
       }
-    });
-  };
+    }
+  });
+};
 
-export const tester=(target)=>{
-  const tc=calculateCenter(target);
-  return new fabric.Line(
-    [tc.top,tc.left,tc.right,tc.bottom],
-    {stroke:"red"}
-  )
-}
-
+export const tester = (target) => {
+  const tc = calculateCenter(target);
+  return new Line([tc.top, tc.left, tc.right, tc.bottom], {
+    stroke: "red",
+  });
+};
