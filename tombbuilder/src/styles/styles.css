@@ -290,6 +290,7 @@ body {
   opacity: 0.4;
   transition: opacity 0.3s ease;
 }
+
 .app-handler__clone,
 .app-handler__trash {
   width: 20px;
@@ -318,6 +319,7 @@ body {
 }
 
 .app-handlers__tool.app-handlers__active {
+  background: none;
   opacity: 1;
 }
 

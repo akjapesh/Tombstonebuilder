@@ -5,6 +5,7 @@ import { annotationsToCode } from "utils/annotationsToCode";
 //Components
 import { CopyToClipboard } from "react-copy-to-clipboard";
 import Editor from "./editor/Editor";
+import { Button } from "baseui/button";
 
 function AppEditor({
   handleAnnotationToCanvas,
@@ -16,7 +17,7 @@ function AppEditor({
     <div className="app-column">
       <div className="app-editor">
         <div className="app-mode">
-          <button className="active">Editor</button>
+          <Button className="active">Editor</Button>
 
           <CopyToClipboard
             text={`${window.location.origin}/?data=${btoa(
@@ -26,17 +27,19 @@ function AppEditor({
               alert("Link Copied");
             }}
           >
-            <button
+            <Button
               onClick={(e) =>
                 handleShareCode(e, { annotation, contentLoaderState })
               }
             >
               Share
-            </button>
+            </Button>
           </CopyToClipboard>
-          <a href={window.location.origin} style={{ color: "#aaaaaa" }}>
-            <span>Reset App</span>
-          </a>
+          <Button>
+            <a href={window.location.origin} style={{ color: "#aaaaaa" }}>
+              <span>Reset</span>
+            </a>
+          </Button>
         </div>
         <Editor
           handleAnnotationToCanvas={handleAnnotationToCanvas}

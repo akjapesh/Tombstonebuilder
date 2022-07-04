@@ -40,6 +40,7 @@ export const useSetupCanvas = ({
           type: "SetCoords",
           payLoad: { target: item.selected[0] },
         });
+        clearCenterAlignLines();
       },
 
       "selection:cleared": () => {
