@@ -10,7 +10,7 @@
 
 ## Introduction
 
-**[react-content-loader](https://github.com/danilowoz/react-content-loader) it is a SVG component to create placeholder loading, like Facebook cards loading or also known as skeleton UI.** So using this [online tool](https://tombstonebuilder.netlify.app/) you will be able to create your own loader easily. You just need to draw using the canvas and get the snippet ready to be exported for ReactJS:
+**[React-content-loader](https://github.com/danilowoz/react-content-loader) it is a SVG component to create placeholder loading, like Facebook cards loading or also known as skeleton UI.** So using this [online tool](https://tombstonebuilder.netlify.app/) you will be able to create your own loader easily. You just need to draw using the canvas and get the snippet ready to be exported for ReactJS:
 
 
 
@@ -32,7 +32,6 @@ You will also see any lint errors in the console.
 
 ## Contributors ✨
 
-Thanks goes to these wonderful people :
 
 <!-- ALL-CONTRIBUTORS-LIST:START - Do not remove or modify this section -->
 <!-- prettier-ignore-start -->
