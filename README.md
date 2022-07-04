@@ -35,7 +35,7 @@
 ## Workflow
 
 <p align="center">
-    <img width="800px" align="center" src="https://github.com/akjapesh/Tombstonebuilder/blob/main/images/tombstone.png" title="canvas App" />
+    <img width="800px" align="center" src="https://github.com/akjapesh/Tombstonebuilder/blob/main/images/appCanvas.png" title="canvas App" />
   </a>
 </p>
 <p align="center">
