@@ -17,11 +17,13 @@ import CanvasConfiguration from "./canvasConfiguration/CanvasConfiguration";
 function AppCanvas({
   updateAnnotationHandler,
   contentLoaderState,
-  handleUpdateSketchRef,
   updateContentLoader,
   annotation,
+  onCanvasAction,
 }) {
   const [code, setCode] = useState("");
+  // This is just a derived version of annotation and contentLoaderState
+  // So we should not sync it but instead derive it in useMemo
   useEffect(() => {
     const newLiveCode =
       annotationsToCode({ annotation, contentLoaderState }) +
@@ -35,7 +37,7 @@ function AppCanvas({
         <Canvas
           updateAnnotationHandler={updateAnnotationHandler}
           contentLoaderState={contentLoaderState}
-          handleUpdateSketchRef={handleUpdateSketchRef}
+          onCanvasAction={onCanvasAction}
         >
           <div className="wrapper_div">
             <LivePreview

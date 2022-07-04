@@ -1,5 +1,5 @@
 // Libraries
-import React, { useRef, useEffect } from "react";
+import React, { useRef, useEffect, useCallback } from "react";
 
 //utils
 import { handleActions } from "./utils/handleActions";
@@ -13,20 +13,26 @@ import { useToolState } from "./hooks/useToolState/useToolState";
 
 //components
 import CanvasSketchPad from "./canvasSketchPad/CanvasSketchPad";
+import { ACTION_TYPES } from "hooks/useCanvasSketch";
 
 function Canvas({
   children,
   updateAnnotationHandler,
   contentLoaderState,
   handleUpdateSketchRef,
+  onCanvasAction,
 }) {
   const { tool, handleToolChange } = useToolState();
 
   const sketchRef = useRef(null);
+  const initialiseSketchRef = useCallback((ref) => {
+    sketchRef.current = ref;
 
-  useEffect(() => {
-    handleUpdateSketchRef(sketchRef);
-  }, [sketchRef, handleUpdateSketchRef]);
+    onCanvasAction({
+      type: ACTION_TYPES.INITIALISE_SKETCH_REF,
+      payload: { sketchRef: ref },
+    });
+  }, []);
 
   const { handleActiveItemActions, activeItemCoords } = useActiveItem();
 
@@ -57,9 +63,11 @@ function Canvas({
 
   return (
     <div
+      // A little bit hacky
       onMouseLeave={() => {
         document.removeEventListener("keydown", handleKeyDown, false);
       }}
+      // A little bit hacky
       onMouseEnter={() => {
         document.addEventListener("keydown", handleKeyDown, false);
       }}
@@ -67,13 +75,14 @@ function Canvas({
       <CanvasSketchPad
         children={children}
         contentLoaderState={contentLoaderState}
-        sketchRef={sketchRef}
+        sketchRef={initialiseSketchRef}
         tool={tool}
         handleCanvasActions={handleCanvasActions}
         handleToolChange={handleToolChange}
         activeItemCoords={activeItemCoords}
         handleItemActions={handleItemActions}
         handleKeyDown={handleKeyDown}
+        // Remove this
         onMouseEnter={() => {}}
       />
     </div>

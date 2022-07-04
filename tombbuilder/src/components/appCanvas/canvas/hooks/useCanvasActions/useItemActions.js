@@ -1,22 +1,27 @@
+// Reactive code - declarative
+// JS Code - imperative
+
+// What you want to achieve - How is taken care of by framework
+// React: setState({ }) + (state, props) => JSX
+
+// useItemActions
+// What: My item is moved - tell canvas to move itself
+
 export const useItemActions = ({
-  sketchRef,
   handleActiveItemActions,
   activeItemCoords,
+  onCanvasAction,
 }) => {
   const handleItemActions = (action) => {
     const { type, payLoad } = action;
     switch (type) {
       case "Move":
         let { key, value } = payLoad;
-        const canvas = sketchRef.current && sketchRef.current._fc;
+
         if (isNaN(value)) value = 0;
-        if (canvas && canvas.getActiveObject()) {
-          const selection = canvas.getActiveObject();
-          selection.set(key, value);
-          selection.setCoords();
-          canvas.requestRenderAll();
-          handleActiveItemActions({ type: "Move", payLoad: { key, value } });
-        }
+
+        onCanvasAction({ type: "MOVE_ACTIVE_ITEM", payload: {} });
+        handleActiveItemActions({ type: "Move", payLoad: { key, value } });
         break;
       case "Remove":
         const { event } = payLoad;

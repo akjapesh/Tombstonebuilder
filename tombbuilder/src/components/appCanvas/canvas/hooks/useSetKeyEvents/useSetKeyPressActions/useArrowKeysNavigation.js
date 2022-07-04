@@ -1,11 +1,17 @@
 import { useCallback } from "react";
 
+// Should be imported as constants/keyCodes not utils/keyCodes
 import KEY_CODES from "../../../utils/keyCodes";
 
 export const SHIFTING_BY_OFFSET = 16;
 
+// const getRightBoundary = (canvasDimensions, activeItem)
+// getBottomBoundary
+
 export const useArrowKeysNavigation = (
   activeItemCoords,
+  // can be renamed to canvasDimensions
+  // and its shape should be { width, height }
   contentLoaderState,
   handleItemActions
 ) => {
@@ -15,8 +21,10 @@ export const useArrowKeysNavigation = (
       const rightSideBoundary =
         contentLoaderState.width -
         Number(
+          // width will be only for rect
           activeItemCoords.width
             ? activeItemCoords.width
+            // otherwise the case of circle
             : 2 * activeItemCoords.radius
         );
       const bottomSideBoundary =

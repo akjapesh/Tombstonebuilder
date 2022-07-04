@@ -7,7 +7,7 @@ import { CopyToClipboard } from "react-copy-to-clipboard";
 import Editor from "./editor/Editor";
 
 function AppEditor({
-  handleAnnotationToCanvas,
+  onCanvasAction,
   annotation,
   contentLoaderState,
   updateContentLoader,
@@ -39,8 +39,8 @@ function AppEditor({
           </a>
         </div>
         <Editor
-          handleAnnotationToCanvas={handleAnnotationToCanvas}
           annotation={annotation}
+          onCanvasAction={onCanvasAction}
           contentLoaderState={contentLoaderState}
           updateContentLoader={updateContentLoader}
         />

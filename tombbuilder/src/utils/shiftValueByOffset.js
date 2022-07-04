@@ -1,5 +1,8 @@
+// constants/shiftOffset.js
+// Run Prettier on this file
 import { SHIFTING_BY_OFFSET } from "components/appCanvas/canvas/hooks/useSetKeyEvents/useSetKeyPressActions/useArrowKeysNavigation"; 
 import { numberFixed } from "./handleFixingNumbers"; 
+// Add line breaks appropriately
 export const shiftValueByOffset = (value) => 
 { 
   value = numberFixed(value+0.1); 

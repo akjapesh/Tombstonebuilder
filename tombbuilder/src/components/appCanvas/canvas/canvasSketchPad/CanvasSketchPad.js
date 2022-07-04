@@ -14,6 +14,7 @@ function CanvasSketchPad({
   handleItemActions,
   handleKeyDown,
 }) {
+  // Remove this unused code
   const ScaledDiv = styled("div", () => ({
     color: "red",
 

@@ -1,3 +1,4 @@
+// can be clubbed in a global useCanvasActions
 export const handleActions = (sketchRef) => {
   const handleCanvasActions = ({ type }) => {
     switch (type) {

@@ -1,3 +1,7 @@
+// Delete this file
+// Move DEFAULT_CONTENT_LOADER_STATE to a common constant file
+// That will be used in util and useContentLoader hook
+
 const DEFAULT_CONTENT_LOADER_STATE = {
   width: 600,
   height: 500,
