@@ -1,37 +1,48 @@
-## Welcome to GitHub Pages
+<p align="center">
+  <a href="https://tombstonebuilder.netlify.app//">
+    <img width="800px" align="center" src="https://user-images.githubusercontent.com/4838076/115597774-8e0ccc00-a2d1-11eb-853d-f24cfe9d4fea.png" title="Tombstone Builder" />
+  </a>
+</p>
 
-You can use the [editor on GitHub](https://github.com/akjapesh/Tombstonebuilder/edit/sanyam/README.md) to maintain and preview the content for your website in Markdown files.
+<p align="center">
+  <a href="https://tombstonebuilder.netlify.app/">tombstonebuilder.netlify.app</a>
+</p>
 
-Whenever you commit to this repository, GitHub Pages will run [Jekyll](https://jekyllrb.com/) to rebuild the pages in your site, from the content in your Markdown files.
+## Introduction
 
-### Markdown
+**[react-content-loader](https://github.com/danilowoz/react-content-loader) it is a SVG component to create placeholder loading, like Facebook cards loading or also known as skeleton UI.** So using this [online tool](https://tombstonebuilder.netlify.app/) you will be able to create your own loader easily. You just need to draw using the canvas and get the snippet ready to be exported for ReactJS:
 
-Markdown is a lightweight and easy-to-use syntax for styling your writing. It includes conventions for
 
-```markdown
-Syntax highlighted code block
 
-# Header 1
-## Header 2
-### Header 3
 
-- Bulleted
-- List
 
-1. Numbered
-2. List
+## Development
 
-**Bold** and _Italic_ and `Code` text
+### Available Scripts
 
-[Link](url) and ![Image](src)
-```
+This project was bootstrapped with [Create React App](https://github.com/facebookincubator/create-react-app), so in the project directory, you can run:
 
-For more details see [Basic writing and formatting syntax](https://docs.github.com/en/github/writing-on-github/getting-started-with-writing-and-formatting-on-github/basic-writing-and-formatting-syntax).
+#### `npm install && npm run dev`
 
-### Jekyll Themes
+Runs the app in the development mode.<br>
+Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
 
-Your Pages site will use the layout and styles from the Jekyll theme you have selected in your [repository settings](https://github.com/akjapesh/Tombstonebuilder/settings/pages). The name of this theme is saved in the Jekyll `_config.yml` configuration file.
+The page will reload if you make edits.<br>
+You will also see any lint errors in the console.
 
-### Support or Contact
+## Contributors ✨
 
-Having trouble with Pages? Check out our [documentation](https://docs.github.com/categories/github-pages-basics/) or [contact support](https://support.github.com/contact) and we’ll help you sort it out.
+Thanks goes to these wonderful people ([emoji key](https://allcontributors.org/docs/en/emoji-key)):
+
+<!-- ALL-CONTRIBUTORS-LIST:START - Do not remove or modify this section -->
+<!-- prettier-ignore-start -->
+<!-- markdownlint-disable -->
+-Abhinav Japesh
+-Sanyam Shrivastav
+-Soham patel
+<!-- markdownlint-restore -->
+<!-- prettier-ignore-end -->
+
+<!-- ALL-CONTRIBUTORS-LIST:END -->
+
+This project follows the [all-contributors](https://github.com/all-contributors/all-contributors) specification. Contributions of any kind welcome!
