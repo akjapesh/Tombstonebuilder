@@ -361,6 +361,12 @@ body {
   border-radius: 3px;
   position: relative;
 }
+.app-config_inline button {
+  width: 180px;
+  height: 39px;
+  color: #fff;
+  font: inherit;
+}
 
 .app-config_inline input {
   background: none;
@@ -430,61 +436,6 @@ body {
   width: 39px;
   margin-right: 1em;
   margin-bottom: 1em;
-}
-
-.app-config .toggle {
-  margin-top: 7px;
-  display: inline-flex;
-  align-items: center;
-  line-height: 1;
-  cursor: pointer;
-  top: -0.1em;
-  position: relative;
-}
-
-.app-config .toggle-input {
-  display: none;
-}
-
-.app-config .toggle-check {
-  margin-right: 0.75em;
-  position: relative;
-  margin-top: 0.2em;
-}
-
-.app-config .toggle-check:before {
-  content: "";
-  display: block;
-  position: relative;
-  width: 2.2rem;
-  height: 1.45rem;
-  border-radius: 1rem;
-  background: #f8f8f8;
-  cursor: pointer;
-  background: var(--color-silver);
-  transition: all 0.3s ease;
-}
-
-.app-config .toggle-check:after {
-  content: "";
-  display: block;
-  background: #fff;
-  box-shadow: 0 2px 6px 0 rgba(0, 0, 0, 0.02);
-  width: 1.15rem;
-  height: 1.15rem;
-  border-radius: 1.2rem;
-  position: absolute;
-  left: 0.15rem;
-  top: 0.15rem;
-  transition: all 0.3s ease;
-}
-
-.app-config .toggle-check.checked:before {
-  box-shadow: inset 0 0 0 18px var(--color-brand);
-}
-
-.app-config .toggle-check.checked:after {
-  left: calc(100% - 1.15rem - 0.15rem);
 }
 
 .app-config .app-config__guideline {

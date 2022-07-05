@@ -5,7 +5,21 @@ export const annotationsToCode = ({ annotation, contentLoaderState }) => {
   const { speed, width, height, backgroundColor, foregroundColor } =
     contentLoaderState;
 
-  if (annotation.length === 0) {
+  const newAnnotationArray = annotation.filter((a) => {
+    const height = shiftValueByOffset(numberFixed(a.height * a.scaleY));
+
+    const width = shiftValueByOffset(numberFixed(a.width * a.scaleX));
+    if (
+      height === 0 ||
+      width === 0 ||
+      shiftValueByOffset(numberFixed(a.radius) <= 1)
+    ) {
+      return false;
+    }
+    return true;
+  });
+
+  if (newAnnotationArray.length === 0) {
     return `
     const MyLoader = (props) => {
       return <div></div>}
@@ -23,7 +37,7 @@ export const annotationsToCode = ({ annotation, contentLoaderState }) => {
     >
     `;
 
-  annotation.forEach((a) => {
+  newAnnotationArray.forEach((a) => {
     const height = shiftValueByOffset(numberFixed(a.height * a.scaleY));
 
     const width = shiftValueByOffset(numberFixed(a.width * a.scaleX));

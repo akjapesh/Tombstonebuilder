@@ -1,7 +1,6 @@
 import { fabric } from "fabric";
 import { numberFixed } from "utils/handleFixingNumbers";
 import { shiftValueByOffset } from "utils/shiftValueByOffset";
-
 export const centerAlign = (sketchRef) => {
   const calculateCenter = (target) => {
     const center = {
@@ -14,43 +13,42 @@ export const centerAlign = (sketchRef) => {
     };
     const newTop = shiftValueByOffset(numberFixed(target.top));
     const newLeft = shiftValueByOffset(numberFixed(target.left));
-    const newHeight = shiftValueByOffset(numberFixed(target.height));
-    const newWidth = shiftValueByOffset(numberFixed(target.width));
-
+    const newHeight = shiftValueByOffset(
+      numberFixed(target.height * target.scaleY)
+    );
+    const newWidth = shiftValueByOffset(
+      numberFixed(target.width * target.scaleX)
+    );
     center.centerY = newTop + newHeight / 2;
     center.centerX = newLeft + newWidth / 2;
     center.centerX = numberFixed(center.centerX);
     center.centerY = numberFixed(center.centerY);
-    center.left = shiftValueByOffset(numberFixed(target.left));
-    center.right =
-      shiftValueByOffset(numberFixed(target.left)) +
-      shiftValueByOffset(numberFixed(target.width));
-    center.top = shiftValueByOffset(numberFixed(target.top));
-    center.down =
-      shiftValueByOffset(numberFixed(target.top)) +
-      shiftValueByOffset(numberFixed(target.height));
+    center.left = newLeft;
+    center.right = newLeft + newWidth;
+    center.top = newTop;
+    center.down = newTop + newHeight;
     return center;
   };
-
   const clearCenterAlignLines = () => {
-    sketchRef.current._fc._objects.forEach((o) => {
-      if (
+    const removals = sketchRef.current._fc._objects.filter(
+      (o) =>
         o.type === "line" ||
         (o.type === "circle" && numberFixed(o.radius) <= 1) ||
         (o.type === "rect" &&
           (numberFixed(o.height) === 0 || numberFixed(o.width) === 0))
-      ) {
-        sketchRef.current._fc.remove(o);
-      }
-    });
+    );
+    console.log(sketchRef.current._fc._objects);
+    for (let i in removals) {
+      sketchRef.current._fc.remove(removals[i]);
+    }
   };
-
   const connectCenterAlignLine = (target) => {
     clearCenterAlignLines();
     const targetCenter = calculateCenter(target);
-    sketchRef.current._fc._objects.forEach((o) => {
+    sketchRef.current._fc.toJSON().objects.forEach((o) => {
       if (o !== target && o.type !== "line") {
         const anotherShapeCenter = calculateCenter(o);
+        console.log(targetCenter, anotherShapeCenter);
         if (targetCenter.centerX === anotherShapeCenter.centerX) {
           sketchRef.current._fc.add(
             new fabric.Line(
@@ -60,7 +58,7 @@ export const centerAlign = (sketchRef) => {
                 anotherShapeCenter.centerX,
                 anotherShapeCenter.centerY,
               ],
-              { stroke: "#184dc9", strokeDashArray: [5, 5] }
+              { stroke: "#184DC9", strokeDashArray: [5, 5] }
             )
           );
         } else if (targetCenter.centerY === anotherShapeCenter.centerY) {
@@ -72,7 +70,7 @@ export const centerAlign = (sketchRef) => {
                 anotherShapeCenter.centerX,
                 anotherShapeCenter.centerY,
               ],
-              { stroke: "#184dc9", strokeDashArray: [5, 5] }
+              { stroke: "#184DC9", strokeDashArray: [5, 5] }
             )
           );
         } else if (targetCenter.top === anotherShapeCenter.top) {
@@ -84,7 +82,7 @@ export const centerAlign = (sketchRef) => {
                 anotherShapeCenter.centerX,
                 anotherShapeCenter.top,
               ],
-              { stroke: "#184dc9", strokeDashArray: [5, 5] }
+              { stroke: "#184DC9", strokeDashArray: [5, 5] }
             )
           );
         } else if (targetCenter.left === anotherShapeCenter.left) {
@@ -96,7 +94,7 @@ export const centerAlign = (sketchRef) => {
                 anotherShapeCenter.left,
                 anotherShapeCenter.centerY,
               ],
-              { stroke: "#184dc9", strokeDashArray: [5, 5] }
+              { stroke: "#184DC9", strokeDashArray: [5, 5] }
             )
           );
         } else if (targetCenter.down === anotherShapeCenter.down) {
@@ -108,7 +106,7 @@ export const centerAlign = (sketchRef) => {
                 anotherShapeCenter.centerX,
                 anotherShapeCenter.down,
               ],
-              { stroke: "#184dc9", strokeDashArray: [5, 5] }
+              { stroke: "#184DC9", strokeDashArray: [5, 5] }
             )
           );
         } else if (targetCenter.right === anotherShapeCenter.right) {
@@ -120,7 +118,7 @@ export const centerAlign = (sketchRef) => {
                 anotherShapeCenter.right,
                 anotherShapeCenter.centerY,
               ],
-              { stroke: "#184dc9", strokeDashArray: [5, 5] }
+              { stroke: "#184DC9", strokeDashArray: [5, 5] }
             )
           );
         } else if (targetCenter.top === anotherShapeCenter.down) {
@@ -132,7 +130,7 @@ export const centerAlign = (sketchRef) => {
                 anotherShapeCenter.centerX,
                 anotherShapeCenter.down,
               ],
-              { stroke: "#184dc9", strokeDashArray: [5, 5] }
+              { stroke: "#184DC9", strokeDashArray: [5, 5] }
             )
           );
         } else if (targetCenter.down === anotherShapeCenter.top) {
@@ -144,7 +142,7 @@ export const centerAlign = (sketchRef) => {
                 anotherShapeCenter.centerX,
                 anotherShapeCenter.top,
               ],
-              { stroke: "#184dc9", strokeDashArray: [5, 5] }
+              { stroke: "#184DC9", strokeDashArray: [5, 5] }
             )
           );
         } else if (targetCenter.left === anotherShapeCenter.right) {
@@ -156,7 +154,7 @@ export const centerAlign = (sketchRef) => {
                 anotherShapeCenter.right,
                 anotherShapeCenter.centerY,
               ],
-              { stroke: "#184dc9", strokeDashArray: [5, 5] }
+              { stroke: "#184DC9", strokeDashArray: [5, 5] }
             )
           );
         } else if (targetCenter.right === anotherShapeCenter.left) {
@@ -168,14 +166,13 @@ export const centerAlign = (sketchRef) => {
                 anotherShapeCenter.left,
                 anotherShapeCenter.centerY,
               ],
-              { stroke: "#184dc9", strokeDashArray: [5, 5] }
+              { stroke: "#184DC9", strokeDashArray: [5, 5] }
             )
           );
         }
       }
     });
   };
-
   return {
     clearCenterAlignLines,
     connectCenterAlignLine,

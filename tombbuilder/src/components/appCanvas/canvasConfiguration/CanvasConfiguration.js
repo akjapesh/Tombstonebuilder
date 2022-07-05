@@ -5,7 +5,7 @@ import { ThemeProvider, createTheme, darkThemePrimitives } from "baseui";
 import { handleCanvasConfiguration } from "./utils/handleCanvasConfigurationEvents";
 
 //components
-import { Button, SIZE } from "baseui/button";
+import { Button, SIZE, KIND } from "baseui/button";
 import { Input } from "baseui/input";
 import { Checkbox, STYLE_TYPE } from "baseui/checkbox";
 
@@ -25,6 +25,8 @@ function CanvasConfiguration({ updateContentLoader, contentLoaderState }) {
           inputFillActive: "#2F3134",
           inputBorder: "#2F3134",
           inputBorderActive: "#2F3134",
+          buttonPrimaryText: "#FFFFFF",
+          tickBorder: "#333333",
         },
       })}
     >
@@ -120,11 +122,7 @@ function CanvasConfiguration({ updateContentLoader, contentLoaderState }) {
             <Button
               colors={"#AAAAAA"}
               size={SIZE.compact}
-              style={{
-                color: "#AAAAAA",
-                margin: "auto",
-                cursor: "pointer",
-              }}
+              kind={KIND.secondary}
               name="reset"
               onClick={(e) => {
                 handleCanvasConfiguration({
@@ -163,7 +161,7 @@ function CanvasConfiguration({ updateContentLoader, contentLoaderState }) {
             <label htmlFor="speed">speed (in s)</label>
           </p>
 
-          <label htmlFor="gridVisibility" className="toggle">
+          <label htmlFor="gridVisibility">
             <Checkbox
               className="toggle-input"
               name="gridVisibility"
