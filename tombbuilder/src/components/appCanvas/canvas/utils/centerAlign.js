@@ -37,7 +37,7 @@ const clearCenterAlignLines = (sketchRef) => {
       (o.type === "rect" &&
         (numberFixed(o.height) === 0 || numberFixed(o.width) === 0))
   );
-  console.log(sketchRef.current._fc._objects);
+
   for (let i in removals) {
     sketchRef.current._fc.remove(removals[i]);
   }
@@ -48,7 +48,7 @@ const connectCenterAlignLine = (sketchRef, target) => {
   sketchRef.current._fc.toJSON().objects.forEach((o) => {
     if (o !== target && o.type !== "line") {
       const anotherShapeCenter = calculateCenter(o);
-      console.log(targetCenter, anotherShapeCenter);
+
       if (targetCenter.centerX === anotherShapeCenter.centerX) {
         sketchRef.current._fc.add(
           new fabric.Line(
