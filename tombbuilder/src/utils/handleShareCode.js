@@ -4,9 +4,9 @@ export const handleShareCode = async (
 ) => {
   const { REACT_APP_BITLY_ACCESS_TOKEN } = process.env;
   event.preventDefault();
-  const nextUrl = `${window.location.hostname}/?data=${btoa(
-    JSON.stringify(annotation)
-  )}&canvas=${btoa(JSON.stringify(contentLoaderState))}`;
+  const nextUrl = `/?data=${btoa(JSON.stringify(annotation))}&canvas=${btoa(
+    JSON.stringify(contentLoaderState)
+  )}`;
   window.history.replaceState({}, "", nextUrl);
   try {
     const res = await fetch("https://api-ssl.bitly.com/v4/shorten", {
