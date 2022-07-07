@@ -1,37 +1,81 @@
-## Welcome to GitHub Pages
+<p align="center">
+  <a href="https://tombstonebuilder.netlify.app//">
+    <img width="800px" align="center" src="https://github.com/akjapesh/Tombstonebuilder/blob/main/images/tombstone.png" title="Tombstone Builder" />
+  </a>
+</p>
 
-You can use the [editor on GitHub](https://github.com/akjapesh/Tombstonebuilder/edit/sanyam/README.md) to maintain and preview the content for your website in Markdown files.
+<p align="center">
+  <a href="https://tombstonebuilder.netlify.app/">tombstonebuilder.netlify.app</a>
+</p>
 
-Whenever you commit to this repository, GitHub Pages will run [Jekyll](https://jekyllrb.com/) to rebuild the pages in your site, from the content in your Markdown files.
+## Introduction
 
-### Markdown
+**[React-content-loader](https://github.com/danilowoz/react-content-loader) it is a SVG component to create placeholder loading, like Facebook cards loading or also known as skeleton UI.** So using this [online tool](https://tombstonebuilder.netlify.app/) you will be able to create your own loader easily. You just need to draw using the canvas and get the snippet ready to be exported for ReactJS:
 
-Markdown is a lightweight and easy-to-use syntax for styling your writing. It includes conventions for
+## Features
 
-```markdown
-Syntax highlighted code block
+### Canvas:	
 
-# Header 1
-## Header 2
-### Header 3
+- Drawing, selection, movement and resizing of shapes on Canvas
+- Generates corresponding JSX code for content loader
+- Can customize selected items configurations through input
+- Supports keyboard events like undo/redo, delete, cut-copy-paste, arrow-key movement, selection of tools, multiple selection
+- Multiple selection of shapes with clipboard events
+- Center and edge alignment
+- Supports Grid feature snap-to-grid (movement on grid)
+- Can change grid visibility (on/off)
 
-- Bulleted
-- List
 
-1. Numbered
-2. List
+### Code-editor:
 
-**Bold** and _Italic_ and `Code` text
+- Supports real time rendering via editor code
+- Generates link to share your custom-content loader to others
+- Copy of corresponding code to clipboard
 
-[Link](url) and ![Image](src)
-```
+## Workflow
 
-For more details see [Basic writing and formatting syntax](https://docs.github.com/en/github/writing-on-github/getting-started-with-writing-and-formatting-on-github/basic-writing-and-formatting-syntax).
+<p align="center">
+    <img width="800px" align="center" src="https://github.com/akjapesh/Tombstonebuilder/blob/main/images/appCanvas.png" title="canvas App" />
+  </a>
+</p>
+<p align="center">
+    <img width="800px" align="center" src="https://github.com/akjapesh/Tombstonebuilder/blob/main/images/config.png" title="configuration" />
+  </a>
+</p>
+<p align="center">
+    <img width="800px" align="center" src="https://github.com/akjapesh/Tombstonebuilder/blob/main/images/keyEvents.png" title="keybindings" />
+  </a>
+</p>
 
-### Jekyll Themes
 
-Your Pages site will use the layout and styles from the Jekyll theme you have selected in your [repository settings](https://github.com/akjapesh/Tombstonebuilder/settings/pages). The name of this theme is saved in the Jekyll `_config.yml` configuration file.
 
-### Support or Contact
 
-Having trouble with Pages? Check out our [documentation](https://docs.github.com/categories/github-pages-basics/) or [contact support](https://support.github.com/contact) and we’ll help you sort it out.
+## Development
+
+### Available Scripts
+
+This project was bootstrapped with [Create React App](https://github.com/facebookincubator/create-react-app), so in the project directory, you can run:
+
+#### `npm install && npm run dev`
+
+Runs the app in the development mode.<br>
+Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+
+The page will reload if you make edits.<br>
+You will also see any lint errors in the console.
+
+## Contributors ✨
+
+
+<!-- ALL-CONTRIBUTORS-LIST:START - Do not remove or modify this section -->
+<!-- prettier-ignore-start -->
+<!-- markdownlint-disable -->
+- Abhinav Japesh 
+
+- Sanyam Shrivastav
+
+- Soham patel
+<!-- markdownlint-restore -->
+<!-- prettier-ignore-end -->
+
+<!-- ALL-CONTRIBUTORS-LIST:END -->
