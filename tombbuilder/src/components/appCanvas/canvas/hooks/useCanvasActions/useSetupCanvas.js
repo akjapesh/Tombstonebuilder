@@ -40,13 +40,13 @@ export const useSetupCanvas = ({
           type: "SetCoords",
           payLoad: { target: item.selected[0] },
         });
-        clearCenterAlignLines();
+        clearCenterAlignLines(sketchRef);
         updateAnnotationHandler([...sketchRef.current._fc.toJSON().objects]);
       },
 
       "selection:cleared": () => {
         handleActiveItemActions({ type: "Reset" });
-        clearCenterAlignLines();
+        clearCenterAlignLines(sketchRef);
         updateAnnotationHandler([...sketchRef.current._fc.toJSON().objects]);
       },
 
