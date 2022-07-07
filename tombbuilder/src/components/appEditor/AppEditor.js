@@ -18,23 +18,14 @@ function AppEditor({
       <div className="app-editor">
         <div className="app-mode">
           <Button className="active">Editor</Button>
-
-          <CopyToClipboard
-            text={`${window.location.origin}/?data=${btoa(
-              JSON.stringify(annotation)
-            )}&canvas=${btoa(JSON.stringify(contentLoaderState))}`}
-            onCopy={() => {
-              alert("Link Copied");
+          <Button
+            onClick={(e) => {
+              handleShareCode(e, { annotation, contentLoaderState });
+              alert("code copied");
             }}
           >
-            <Button
-              onClick={(e) =>
-                handleShareCode(e, { annotation, contentLoaderState })
-              }
-            >
-              Share
-            </Button>
-          </CopyToClipboard>
+            Share
+          </Button>
           <Button>
             <a href={window.location.origin} style={{ color: "#aaaaaa" }}>
               <span>Reset</span>
