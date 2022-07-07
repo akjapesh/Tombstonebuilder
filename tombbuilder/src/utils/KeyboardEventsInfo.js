@@ -1,7 +1,7 @@
 /* eslint-disable import/no-anonymous-default-export */
 
 
-let command_control_KeyPrefix = "Shift"; // control key
+let command_control_KeyPrefix = "Control"; // control key
 let backspace_delete_keyPrefix = "backspace";  //backspcae key
 if (navigator.platform.indexOf("Mac") === 0 || navigator.platform === "iPhone")
 {
