@@ -83,12 +83,13 @@ body {
 }
 
 .copy-to-clipboard {
-  /* float: right; */
+  float: right;
   align-items: center;
   font-size: 1em;
   color: var(--color-grey-light);
   cursor: pointer;
   line-height: 1.6;
+  padding: 10px;
 }
 
 .copy-to-clipboard:active {
@@ -606,4 +607,26 @@ input[type="number"] {
   align-items: center;
   display: flex;
   justify-content: center;
+}
+
+#save-to-local  
+{
+  height: 30px;
+  width: 100px;
+  border-radius: 5px;
+  font-size: medium;
+  background-color: var(--color-grey-light);
+  cursor: pointer; 
+  margin-left: 10px;
+  margin-right: 10px;
+}
+
+#revert
+{
+  height: 30px;
+  width: 100px;
+  border-radius: 5px;
+  font-size: medium;
+  background-color: var(--color-grey-light);
+  cursor: pointer; 
 }

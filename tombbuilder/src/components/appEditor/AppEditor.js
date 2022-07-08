@@ -6,13 +6,17 @@ import { annotationsToCode } from "utils/annotationsToCode";
 import { CopyToClipboard } from "react-copy-to-clipboard";
 import Editor from "./editor/Editor";
 import { Button } from "baseui/button";
+import { useState } from "react";
+
 
 function AppEditor({
   handleAnnotationToCanvas,
   annotation,
   contentLoaderState,
+  handleUpdateSketchRef,
   updateContentLoader,
 }) {
+  const [localName,setLocalName] = useState(null);
   return (
     <div className="app-column">
       <div className="app-editor">
@@ -40,14 +44,6 @@ function AppEditor({
               <span>Reset</span>
             </a>
           </Button>
-        </div>
-        <Editor
-          handleAnnotationToCanvas={handleAnnotationToCanvas}
-          annotation={annotation}
-          contentLoaderState={contentLoaderState}
-          updateContentLoader={updateContentLoader}
-        />
-        <div className="app-editor__language-selector">
           <CopyToClipboard
             text={
               annotationsToCode({ annotation, contentLoaderState }) +
@@ -60,8 +56,35 @@ function AppEditor({
             <span className="copy-to-clipboard">Copy to clipboard</span>
           </CopyToClipboard>
         </div>
+        <Editor
+          handleAnnotationToCanvas={handleAnnotationToCanvas}
+          annotation={annotation}
+          contentLoaderState={contentLoaderState}
+          updateContentLoader={updateContentLoader}
+        />
+        <div className="app-editor__language-selector">
+          <input onChange={
+            (e)=>{setLocalName(e.target.value)}
+            }></input>
+        <button onClick={
+            ()=>{
+              localStorage.setItem('current_name',JSON.stringify(localName));
+              localStorage.setItem('annotation', JSON.stringify(annotation));
+              localStorage.setItem('codeContentLoader',JSON.stringify(contentLoaderState));
+          }} id="save-to-local">
+            Save to Local
+          </button>
+          <button id="revert" onClick={
+            ()=>{
+            handleUpdateSketchRef(null);
+            }
+          }>
+            Revert
+          </button>
+        </div>
       </div>
     </div>
+    
   );
 }
 

@@ -10,6 +10,12 @@ export const handleShareCodeContentLoaderState = async () => {
   let returnContentLoaderState = DEFAULT_CONTENT_LOADER_STATE;
 
   try {
+    if(localStorage.getItem('codeContentLoader'))
+    {
+      returnContentLoaderState = JSON.parse(localStorage.getItem('codeContentLoader'));
+    }
+    else
+    {
     const urlSearchParams = await new URLSearchParams(window.location.search);
     const base64ContentLoaderStatesString = await urlSearchParams.get("canvas");
     if (
@@ -24,6 +30,7 @@ export const handleShareCodeContentLoaderState = async () => {
       stringifiedContentLoaderStates
     );
     returnContentLoaderState = parsedContentLoaderStates;
+    }
   } catch (error) {
     console.error("Got corrupt data");
     return DEFAULT_CONTENT_LOADER_STATE;

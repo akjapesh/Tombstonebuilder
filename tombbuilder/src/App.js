@@ -50,6 +50,7 @@ export default function App() {
           handleAnnotationToCanvas={handleAnnotationToCanvas}
           annotation={annotation}
           contentLoaderState={contentLoaderState}
+          handleUpdateSketchRef={handleUpdateSketchRef}
           updateContentLoader={updateContentLoader}
         />
         <AppCanvas

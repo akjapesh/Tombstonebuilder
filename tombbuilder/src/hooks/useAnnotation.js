@@ -1,5 +1,4 @@
-import { useState, useCallback, useEffect } from "react";
-import { handleShareCodeAnnotation } from "utils/handleSharedCodeAnnotation";
+import { useState, useCallback } from "react";
 
 export const useAnnotation = () => {
   const [annotation, setAnnotation] = useState([]);
