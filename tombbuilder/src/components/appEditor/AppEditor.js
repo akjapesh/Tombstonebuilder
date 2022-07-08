@@ -6,6 +6,10 @@ import { annotationsToCode } from "utils/annotationsToCode";
 import { CopyToClipboard } from "react-copy-to-clipboard";
 import Editor from "./editor/Editor";
 import { Button } from "baseui/button";
+import Check from "baseui/icon/check";
+import DeleteAlt from "baseui/icon/delete-alt";
+import { useSnackbar } from "baseui/snackbar";
+//styles
 
 function AppEditor({
   handleAnnotationToCanvas,
@@ -13,19 +17,33 @@ function AppEditor({
   contentLoaderState,
   updateContentLoader,
 }) {
+  const { enqueue } = useSnackbar();
+
   return (
     <div className="app-column">
       <div className="app-editor">
         <div className="app-mode">
           <Button className="active">Editor</Button>
+
           <Button
-            onClick={(e) => {
-              handleShareCode(e, { annotation, contentLoaderState });
-              alert("code copied");
+            onClick={async (e) => {
+              const res = await handleShareCode(e, {
+                annotation,
+                contentLoaderState,
+              });
+              enqueue({
+                message: `${res}`,
+                startEnhancer: ({ size }) => {
+                  if (res === "Copied to clipboard")
+                    return <Check size={size} />;
+                  else return <DeleteAlt size={size} />;
+                },
+              });
             }}
           >
             Share
           </Button>
+
           <Button>
             <a href={window.location.origin} style={{ color: "#aaaaaa" }}>
               <span>Reset</span>

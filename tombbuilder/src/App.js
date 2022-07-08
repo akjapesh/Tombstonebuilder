@@ -15,7 +15,7 @@ import { useAnnotationToCanvas } from "./components/appCanvas/canvas/hooks/useAn
 import AppEditor from "./components/appEditor/AppEditor";
 import AppCanvas from "./components/appCanvas/AppCanvas";
 import Header from "./components/header/Header";
-
+import { SnackbarProvider } from "baseui/snackbar";
 //styles
 import "./styles/styles.css";
 
@@ -43,23 +43,25 @@ export default function App() {
   );
 
   return (
-    <div className="App">
-      <div className="container">
-        <Header />
-        <AppEditor
-          handleAnnotationToCanvas={handleAnnotationToCanvas}
-          annotation={annotation}
-          contentLoaderState={contentLoaderState}
-          updateContentLoader={updateContentLoader}
-        />
-        <AppCanvas
-          annotation={annotation}
-          updateAnnotationHandler={updateAnnotationHandler}
-          contentLoaderState={contentLoaderState}
-          handleUpdateSketchRef={handleUpdateSketchRef}
-          updateContentLoader={updateContentLoader}
-        />
+    <SnackbarProvider>
+      <div className="App">
+        <div className="container">
+          <Header />
+          <AppEditor
+            handleAnnotationToCanvas={handleAnnotationToCanvas}
+            annotation={annotation}
+            contentLoaderState={contentLoaderState}
+            updateContentLoader={updateContentLoader}
+          />
+          <AppCanvas
+            annotation={annotation}
+            updateAnnotationHandler={updateAnnotationHandler}
+            contentLoaderState={contentLoaderState}
+            handleUpdateSketchRef={handleUpdateSketchRef}
+            updateContentLoader={updateContentLoader}
+          />
+        </div>
       </div>
-    </div>
+    </SnackbarProvider>
   );
 }
