@@ -26,13 +26,17 @@ function AppEditor({
           <Button className="active">Editor</Button>
 
           <Button
-            onClick={async (e) => {
-              const res = await handleShareCode(e, {
+            onClick={async (event) => {
+              event.preventDefault();
+
+              const res = await handleShareCode({
                 annotation,
                 contentLoaderState,
               });
+
               enqueue({
                 message: `${res}`,
+
                 startEnhancer: ({ size }) => {
                   if (res === "Copied to clipboard")
                     return <Check size={size} />;
@@ -63,7 +67,10 @@ function AppEditor({
               `\n render(<MyLoader/>)`
             }
             onCopy={() => {
-              alert("Code Copied");
+              enqueue({
+                message: `Code copied to clipboard`,
+                startEnhancer: ({ size }) => <Check size={size} />,
+              });
             }}
           >
             <span className="copy-to-clipboard">Copy to clipboard</span>

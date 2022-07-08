@@ -1,10 +1,5 @@
-export const handleShareCode = async (
-  event,
-  { annotation, contentLoaderState }
-) => {
+export const handleShareCode = async ({ annotation, contentLoaderState }) => {
   const { REACT_APP_BITLY_ACCESS_TOKEN } = process.env;
-
-  event.preventDefault();
 
   const nextUrl = `/?data=${btoa(JSON.stringify(annotation))}&canvas=${btoa(
     JSON.stringify(contentLoaderState)
