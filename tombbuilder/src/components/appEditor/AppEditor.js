@@ -2,17 +2,47 @@
 import { handleShareCode } from "utils/handleShareCode";
 import { annotationsToCode } from "utils/annotationsToCode";
 
-//Components
 import { CopyToClipboard } from "react-copy-to-clipboard";
 import Editor from "./editor/Editor";
-import { Button } from "baseui/button";
+import { Button,SIZE } from "baseui/button";
+import {Input} from "baseui/input"
+import {Select} from "baseui/select"
+import { useSaveTombstone } from "./editor/reactCodeEditor/hooks/useSaveTombstone";
+import { useLoadTombstone } from "./editor/reactCodeEditor/hooks/useLoadTombstone";
+//imports
+import { useState,useEffect } from "react";
+
+
 
 function AppEditor({
   handleAnnotationToCanvas,
   annotation,
   contentLoaderState,
   updateContentLoader,
+  resetContentLoader,
+  updateAnnotationHandler
 }) {
+  const [tombstoneName,settombstoneName]=useState("new tombstone");
+  const [tombstoneToLoad,setTombstoneToLoad]=useState()
+  const {mutate}=useSaveTombstone();
+
+  const handleAddTombstone=()=>{
+    const tombstone={tombstoneName,contentLoaderState,annotation}
+    mutate(tombstone);
+    alert(`"${tombstoneName}" saved successfully!! `)
+  }
+
+  const handleLoadTombstone=()=>{
+    if(data){
+      const newData=data?.data.filter((e)=>(e.id===Number(tombstoneToLoad)));
+      settombstoneName(newData[0].tombstoneName);
+      resetContentLoader(newData[0].contentLoaderState);
+      updateAnnotationHandler(newData[0].annotation);
+      handleAnnotationToCanvas(newData[0].annotation);
+    }
+    
+  }
+  const {data}=useLoadTombstone();
   return (
     <div className="app-column">
       <div className="app-editor">
@@ -40,6 +70,21 @@ function AppEditor({
               <span>Reset</span>
             </a>
           </Button>
+          <Button onClick={handleAddTombstone}>
+            Save
+          </Button>
+          <Button onClick={handleLoadTombstone}>
+            Load
+          </Button>
+          <select name="loadAs" value={contentLoaderState.tombstoneName} onChange={((e)=>setTombstoneToLoad(e.target.value))}>
+            <option>Select Tombstone</option>
+            {
+              data?.data.map((e,key)=>{
+                return <option key={key} value={e.id}>{e.tombstoneName} </option>
+              })
+            }
+          </select>
+          <Input size="SIZE.compact" name="saveAs" value={tombstoneName} onChange={(e)=>settombstoneName(e.target.value)}></Input>
         </div>
         <Editor
           handleAnnotationToCanvas={handleAnnotationToCanvas}

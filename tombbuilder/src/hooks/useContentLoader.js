@@ -19,9 +19,13 @@ export const useContentLoader = () => {
   const resetContentLoader = useCallback((newState) => {
     setContentLoader(newState);
   }, []);
+  const loadContentLoader=useCallback((item)=>{
+    setContentLoader(item);
+  },[]);
   return {
     updateContentLoader,
     contentLoaderState,
     resetContentLoader,
+    loadContentLoader,
   };
 };
