@@ -1,4 +1,5 @@
 import React from "react";
+import KeyboardInfo from "./KeyboardInfo";
 
 function Header() {
   return (
@@ -9,7 +10,9 @@ function Header() {
         </h1>
         <h2>Build your custom content loader</h2>
       </div>
-      <div className="app-header__aside"></div>
+      <div className="app-header__aside">
+        <KeyboardInfo/>
+      </div>
     </div>
   );
 }
