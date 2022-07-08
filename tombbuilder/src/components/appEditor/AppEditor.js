@@ -16,7 +16,7 @@ function AppEditor({
   handleUpdateSketchRef,
   updateContentLoader,
 }) {
-  const [localName,setLocalName] = useState(null);
+  // const [localName,setLocalName] = useState(null);
   return (
     <div className="app-column">
       <div className="app-editor">
@@ -63,12 +63,12 @@ function AppEditor({
           updateContentLoader={updateContentLoader}
         />
         <div className="app-editor__language-selector">
-          <input onChange={
+          {/* <input onChange={
             (e)=>{setLocalName(e.target.value)}
-            }></input>
+            }></input> */}
         <button onClick={
             ()=>{
-              localStorage.setItem('current_name',JSON.stringify(localName));
+              // localStorage.setItem('current_name',JSON.stringify(localName));
               localStorage.setItem('annotation', JSON.stringify(annotation));
               localStorage.setItem('codeContentLoader',JSON.stringify(contentLoaderState));
           }} id="save-to-local">

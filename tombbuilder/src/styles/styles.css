@@ -575,26 +575,26 @@ input[type="number"] {
   position: absolute;
 }
 
-#Keyboard-Events {
+.Keyboard-Events {
   display: flex;
   justify-content: space-between;
 
 }
 
-#Key-Command{
+.Key-Command{
   padding-right: 100px;
 }
 
-#Space-Between-Keys{
+.Space-Between-Keys{
   padding: 0px 4px; 
   font-weight: bolder;
 }
 
-#Key-Icons{
+.Key-Icons{
   display: flex;
 }
 
-#key {
+.key {
   height: 30px;
   width: 90px;
   text-align: center;

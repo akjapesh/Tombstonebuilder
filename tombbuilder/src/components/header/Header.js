@@ -1,5 +1,5 @@
 import React from "react";
-import KeyboardInfo from "./KeyboardInfo";
+import KeyboardInfo from "./keyboardEventsInfo";
 
 function Header() {
   return (
