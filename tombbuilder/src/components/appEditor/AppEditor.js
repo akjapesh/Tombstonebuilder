@@ -22,20 +22,20 @@ function AppEditor({
   resetContentLoader,
   updateAnnotationHandler
 }) {
-  const [nameOfTombstone,setNameOfTombstone]=useState("new tombstone");
+  const [tombstoneName,settombstoneName]=useState("new tombstone");
   const [tombstoneToLoad,setTombstoneToLoad]=useState()
   const {mutate}=useSaveTombstone();
 
   const handleAddTombstone=()=>{
-    const tombstone={nameOfTombstone,contentLoaderState,annotation}
+    const tombstone={tombstoneName,contentLoaderState,annotation}
     mutate(tombstone);
-    alert(`"${nameOfTombstone}" saved, refresh to view in dropdown!! `)
+    alert(`"${tombstoneName}" saved successfully!! `)
   }
 
   const handleLoadTombstone=()=>{
     if(data){
       const newData=data?.data.filter((e)=>(e.id===Number(tombstoneToLoad)));
-      setNameOfTombstone(newData[0].nameOfTombstone);
+      settombstoneName(newData[0].tombstoneName);
       resetContentLoader(newData[0].contentLoaderState);
       updateAnnotationHandler(newData[0].annotation);
       handleAnnotationToCanvas(newData[0].annotation);
@@ -76,15 +76,15 @@ function AppEditor({
           <Button onClick={handleLoadTombstone}>
             Load
           </Button>
-          <select name="loadAs" value={contentLoaderState.nameOfTombstone} onChange={((e)=>setTombstoneToLoad(e.target.value))}>
+          <select name="loadAs" value={contentLoaderState.tombstoneName} onChange={((e)=>setTombstoneToLoad(e.target.value))}>
             <option>Select Tombstone</option>
             {
               data?.data.map((e,key)=>{
-                return <option key={key} value={e.id}>{e.nameOfTombstone} </option>
+                return <option key={key} value={e.id}>{e.tombstoneName} </option>
               })
             }
           </select>
-          <Input size="SIZE.compact" name="saveAs" value={nameOfTombstone} onChange={(e)=>setNameOfTombstone(e.target.value)}></Input>
+          <Input size="SIZE.compact" name="saveAs" value={tombstoneName} onChange={(e)=>settombstoneName(e.target.value)}></Input>
         </div>
         <Editor
           handleAnnotationToCanvas={handleAnnotationToCanvas}

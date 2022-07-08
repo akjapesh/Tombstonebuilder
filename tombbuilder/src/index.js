@@ -11,13 +11,15 @@ import { QueryClientProvider, QueryClient} from "react-query";
 const engine = new Styletron();
 const queryClient=new QueryClient();
 ReactDOM.render(
-  <QueryClientProvider client={queryClient}>
+  
   <React.StrictMode>
+    <QueryClientProvider client={queryClient}>
     <StyletronProvider value={engine}>
       <BaseProvider theme={LightTheme}>
         <App />
       </BaseProvider>
     </StyletronProvider>
-  </React.StrictMode></QueryClientProvider>,
+    </QueryClientProvider>
+  </React.StrictMode>,
   document.getElementById("root")
 );
