@@ -51,7 +51,7 @@ export default function App() {
           annotation={annotation}
           contentLoaderState={contentLoaderState}
           updateContentLoader={updateContentLoader}
-          loadContentLoader={loadContentLoader}
+          resetContentLoader={resetContentLoader}
           updateAnnotationHandler={updateAnnotationHandler}
         />
         <AppCanvas

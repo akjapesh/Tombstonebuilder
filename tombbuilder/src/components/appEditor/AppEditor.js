@@ -7,63 +7,42 @@ import Editor from "./editor/Editor";
 import { Button,SIZE } from "baseui/button";
 import {Input} from "baseui/input"
 import {Select} from "baseui/select"
-// import { Option } from "baseui/op";
+import { useSaveTombstone } from "./editor/reactCodeEditor/hooks/useSaveTombstone";
+import { useLoadTombstone } from "./editor/reactCodeEditor/hooks/useLoadTombstone";
 //imports
-import {useMutation,useQuery} from "react-query";
-import axios from "axios";
 import { useState,useEffect } from "react";
 
-const addTombstone=(tombstone)=>{
-  return axios.post("http://localhost:4000/tombstone",tombstone);
-}
-const useAddTombstone=()=>{
-  return useMutation(addTombstone);
-}
-// const fetchTombstone=tombstoneId=>{
-//   return axios.get(`http://localhost:4000/tombstone/${tombstoneId}`)
-// }
-const fetchTombstone=()=>{
-return axios.get("http://localhost:4000/tombstone")
-}
-// const useTombstoneData=(tombstoneId)=>{
-//   return useQuery(['tombstone',tombstoneId],()=>fetchTombstone(tombstoneId))
-// }
-const useTombstoneData=()=>{
-  return useQuery('tombstone',fetchTombstone);
-}
+
+
 function AppEditor({
   handleAnnotationToCanvas,
   annotation,
   contentLoaderState,
   updateContentLoader,
-  loadContentLoader,
+  resetContentLoader,
   updateAnnotationHandler
 }) {
   const [nameOfTombstone,setNameOfTombstone]=useState("new tombstone");
   const [tombstoneToLoad,setTombstoneToLoad]=useState()
-  const {mutate}=useAddTombstone();
+  const {mutate}=useSaveTombstone();
+
   const handleAddTombstone=()=>{
     const tombstone={nameOfTombstone,contentLoaderState,annotation}
     mutate(tombstone);
+    alert(`"${nameOfTombstone}" saved, refresh to view in dropdown!! `)
   }
 
   const handleLoadTombstone=()=>{
     if(data){
-      // console.log("yes");
       const newData=data?.data.filter((e)=>(e.id===Number(tombstoneToLoad)));
-      // console.log(newData[0],tombstoneToLoad)
       setNameOfTombstone(newData[0].nameOfTombstone);
-      loadContentLoader(newData[0].contentLoaderState);
+      resetContentLoader(newData[0].contentLoaderState);
       updateAnnotationHandler(newData[0].annotation);
+      handleAnnotationToCanvas(newData[0].annotation);
     }
     
   }
-  // const {isLoading,data,isError,error,refetch}=useTombstoneData(nameOfTombstone);
-  const {data}=useTombstoneData();
-  // if(data)console.log("data=",data);
-  // useEffect(() => {
-  //   console.log("data=",data?.data);
-  // }, [data?.data]);
+  const {data}=useLoadTombstone();
   return (
     <div className="app-column">
       <div className="app-editor">
