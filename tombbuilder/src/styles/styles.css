@@ -83,12 +83,13 @@ body {
 }
 
 .copy-to-clipboard {
-  /* float: right; */
+  float: right;
   align-items: center;
   font-size: 1em;
   color: var(--color-grey-light);
   cursor: pointer;
   line-height: 1.6;
+  padding: 10px;
 }
 
 .copy-to-clipboard:active {
@@ -572,4 +573,60 @@ input[type="number"] {
 
 .wrapper_div {
   position: absolute;
+}
+
+.Keyboard-Events {
+  display: flex;
+  justify-content: space-between;
+
+}
+
+.Key-Command{
+  padding-right: 100px;
+}
+
+.Space-Between-Keys{
+  padding: 0px 4px; 
+  font-weight: bolder;
+}
+
+.Key-Icons{
+  display: flex;
+}
+
+.key {
+  height: 30px;
+  width: 90px;
+  text-align: center;
+  font-size: 12px;
+  font-weight: bold;
+  padding: .5em;
+  background: #ccc;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  align-items: center;
+  display: flex;
+  justify-content: center;
+}
+
+#save-to-local  
+{
+  height: 30px;
+  width: 100px;
+  border-radius: 5px;
+  font-size: medium;
+  background-color: var(--color-grey-light);
+  cursor: pointer; 
+  margin-left: 10px;
+  margin-right: 10px;
+}
+
+#revert
+{
+  height: 30px;
+  width: 100px;
+  border-radius: 5px;
+  font-size: medium;
+  background-color: var(--color-grey-light);
+  cursor: pointer; 
 }
