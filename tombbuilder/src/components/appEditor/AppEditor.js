@@ -6,6 +6,10 @@ import { annotationsToCode } from "utils/annotationsToCode";
 import { CopyToClipboard } from "react-copy-to-clipboard";
 import Editor from "./editor/Editor";
 import { Button } from "baseui/button";
+import Check from "baseui/icon/check";
+import DeleteAlt from "baseui/icon/delete-alt";
+import { useSnackbar } from "baseui/snackbar";
+//styles
 
 function AppEditor({
   handleAnnotationToCanvas,
@@ -13,28 +17,37 @@ function AppEditor({
   contentLoaderState,
   updateContentLoader,
 }) {
+  const { enqueue } = useSnackbar();
+
   return (
     <div className="app-column">
       <div className="app-editor">
         <div className="app-mode">
           <Button className="active">Editor</Button>
 
-          <CopyToClipboard
-            text={`${window.location.origin}/?data=${btoa(
-              JSON.stringify(annotation)
-            )}&canvas=${btoa(JSON.stringify(contentLoaderState))}`}
-            onCopy={() => {
-              alert("Link Copied");
+          <Button
+            onClick={async (event) => {
+              event.preventDefault();
+
+              const res = await handleShareCode({
+                annotation,
+                contentLoaderState,
+              });
+
+              enqueue({
+                message: `${res}`,
+
+                startEnhancer: ({ size }) => {
+                  if (res === "Copied to clipboard")
+                    return <Check size={size} />;
+                  else return <DeleteAlt size={size} />;
+                },
+              });
             }}
           >
-            <Button
-              onClick={(e) =>
-                handleShareCode(e, { annotation, contentLoaderState })
-              }
-            >
-              Share
-            </Button>
-          </CopyToClipboard>
+            Share
+          </Button>
+
           <Button>
             <a href={window.location.origin} style={{ color: "#aaaaaa" }}>
               <span>Reset</span>
@@ -54,7 +67,10 @@ function AppEditor({
               `\n render(<MyLoader/>)`
             }
             onCopy={() => {
-              alert("Code Copied");
+              enqueue({
+                message: `Code copied to clipboard`,
+                startEnhancer: ({ size }) => <Check size={size} />,
+              });
             }}
           >
             <span className="copy-to-clipboard">Copy to clipboard</span>
